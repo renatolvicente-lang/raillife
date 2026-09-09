@@ -84,3 +84,29 @@ Os **Prepared Statements** ajudam a evitar esse problema ao separar a instruçã
 > **O que é PreparedStatement e para que serve?** GUJ. Disponível em: <https://www.guj.com.br/t/o-que-e-preparedstatement-e-para-que-serve/86774/>.
 
 ---
+
+# Em quais situações o PDO pode ser uma boa escolha?
+
+O **PDO (PHP Data Objects)** é uma excelente escolha quando você está desenvolvendo aplicações em PHP que precisam interagir com bancos de dados relacionais de forma segura, flexível e profissional.
+
+## Projetos de médio e grande porte com Programação Orientada a Objetos (POO)
+
+O PDO é totalmente orientado a objetos. Se o seu sistema está sendo construído utilizando o paradigma de **POO**, frameworks próprios ou padrões de projeto, como **MVC**, o PDO se integra perfeitamente à estrutura do código.
+
+Isso permite organizar a manipulação de dados em classes e métodos mais limpos e organizados.
+
+## Aplicações que dependem de transações robustas
+
+Se o seu sistema realiza operações complexas nas quais várias tabelas precisam ser atualizadas ao mesmo tempo — como em um sistema bancário ou em um e-commerce durante a finalização de uma venda —, o PDO facilita o uso de **transações**.
+
+Os principais métodos utilizados são:
+
+- `beginTransaction()`
+- `commit()`
+- `rollBack()`
+
+Se uma parte da operação falhar, é possível desfazer as alterações realizadas durante a transação, ajudando a manter a consistência dos dados.
+
+### Referência
+
+> **PHP Documentation Group.** `PDO::prepare`. Manual do PHP. Disponível em: <https://www.php.net/manual/pt_BR/pdo.prepare.php>.
