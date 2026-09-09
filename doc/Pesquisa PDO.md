@@ -56,3 +56,31 @@ Porém, o PDO possui também algumas desvantagens. Por exemplo, não efetua a le
 > PALMEIRA, Thiago. **Introdução ao PDO (PHP Data Objects): Aprenda agora!** Disponível em: <https://www.devmedia.com.br/introducao-ao-php-data-objects-pdo/25318>. Acesso em: 9 set. 2026.
 
 ---
+
+# O que são Prepared Statements e por que são importantes?
+
+**Prepared Statements** são uma forma de realizar operações no banco de dados de maneira mais segura, preparando os parâmetros que serão inseridos e evitando ataques como **SQL Injection**.
+
+Sua importância vem do fato de que usuários com más intenções podem tentar realizar ataques diretamente no banco de dados.
+
+Por exemplo, suponha que o comando utilizado no banco de dados seja:
+
+```php
+$sql = "SELECT * FROM usuarios WHERE username = '" . $usuario . "' AND password = '" . $senha . "'";
+```
+
+Um atacante poderia tentar inserir comandos maliciosos, como:
+
+```sql
+SELECT * FROM usuarios WHERE username = '' OR '1'='1' AND password = '123'
+```
+
+Esse tipo de manipulação pode alterar a lógica original da consulta SQL.
+
+Os **Prepared Statements** ajudam a evitar esse problema ao separar a instrução SQL dos valores fornecidos pelo usuário.
+
+### Referência
+
+> **O que é PreparedStatement e para que serve?** GUJ. Disponível em: <https://www.guj.com.br/t/o-que-e-preparedstatement-e-para-que-serve/86774/>.
+
+---
