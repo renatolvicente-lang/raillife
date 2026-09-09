@@ -44,3 +44,15 @@ A conexão é estabelecida criando uma nova instância da classe `PDO`. Ela exig
 > AMORIM, Gunter. **PHP – PDO vs MySQLi**. Disponível em: <https://blog.grancursosonline.com.br/php-pdo-vs-mysqli/>. Acesso em: 9 set. 2026.
 
 ---
+
+## Vantagens e desvantagens de utilizar PDO
+
+A principal vantagem do PDO está no objetivo de fornecer uma biblioteca limpa e consistente, deixando unificadas as características das extensões que acessam os bancos de dados.
+
+Porém, o PDO possui também algumas desvantagens. Por exemplo, não efetua a leitura e tradução das [instruções SQL](https://www.devmedia.com.br/10-instrucoes-sql-para-manipulacao-de-dados/4832); é apenas realizada uma fusão dos métodos enviados para as respectivas extensões.
+
+### Referência
+
+> PALMEIRA, Thiago. **Introdução ao PDO (PHP Data Objects): Aprenda agora!** Disponível em: <https://www.devmedia.com.br/introducao-ao-php-data-objects-pdo/25318>. Acesso em: 9 set. 2026.
+
+---
