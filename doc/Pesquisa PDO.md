@@ -25,3 +25,22 @@ A conexão é estabelecida criando uma nova instância da classe `PDO`. Ela exig
 ### Referência
 
 > PHP DOCUMENTATION GROUP. **PDO: Objetos de Dados do PHP**. Manual do PHP, 2026. Disponível em: <https://www.php.net/manual/pt_BR/book.pdo.php>. Acesso em: 9 set. 2026.
+
+---
+
+## Diferenças entre PDO e MySQLi
+
+| Característica | PDO | MySQLi |
+|---|---|---|
+| **Compatibilidade** | Múltiplos bancos de dados | Apenas MySQL |
+| **Orientação a Objetos** | Totalmente orientado a objetos | Objetos e Procedural |
+| **Segurança (SQL Injection)** | Suporte a prepared statements | Suporte a prepared statements |
+| **Facilidade de Portabilidade** | Alta | Baixa |
+| **Performance** | Similar (para MySQL) | Otimizada para MySQL |
+| **Suporte a Recursos Específicos** | Menor foco em MySQL | Suporte exclusivo ao MySQL |
+
+### Referência
+
+> AMORIM, Gunter. **PHP – PDO vs MySQLi**. Disponível em: <https://blog.grancursosonline.com.br/php-pdo-vs-mysqli/>. Acesso em: 9 set. 2026.
+
+---
