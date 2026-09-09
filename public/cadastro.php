@@ -13,8 +13,29 @@
     <div>
         <form>
             <h1>CADASTRO</h1>
-            <label for=""></label>
+            <label for="">Nome completo:</label>
+            <br>
             <input type="text" placeholder="Digite seu nome completo"> 
+            <br>
+            <br>
+            <label for="">E-mail:</label>
+            <br>
+            <input type="email" placeholder="Digite seu E-mail"> 
+            <br>
+            <br>
+            <label for="">CPF:</label>
+            <br>
+            <input type="number" placeholder="Digite seu CPF"> 
+            <br>
+            <br>
+            <label for="">Área de atuação:</label>
+            <br>
+            <input type="email" placeholder="Digite a área em que atua">
+            <br>
+            <br>
+            <label for="">E-mail:</label>
+            <br>
+            <input type="email" placeholder="Digite seu E-mail"> 
 
         </form>
     </div>
