@@ -6,8 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    <script>
-        window.location.href="public/cadastro.html";
-    </script>
+   
 </body>
 </html>
