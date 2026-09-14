@@ -1,0 +1,55 @@
+CREATE  DATABASE raillife;
+use raillife;
+
+CREATE TABLE usuarios (
+    
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(100) NOT NULL,
+  email VARCHAR(100) NOT NULL,
+  senha VARCHAR(100) NOT NULL,
+  cpf VARCHAR(11) NOT NULL,
+  atuacao VARCHAR(100) NOT NULL,
+  endereco VARCHAR(100) NOT NULL,
+  cidade VARCHAR(100) NOT NULL,
+  cep VARCHAR(8) NOT NULL,
+  nascimento DATE NOT NULL
+);
+CREATE TABLE rotas(
+
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(100) NOT NULL,
+  origem VARCHAR(100) NOT NULL,
+  destino VARCHAR(100) NOT NULL,
+  distancia INT NOT NULL
+);
+
+
+CREATE TABLE sensores(
+    
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(100) NOT NULL,
+  tipo VARCHAR(100) NOT NULL,
+  localizacao VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE trens (
+    
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(100) NOT NULL,
+  modelo VARCHAR(100) NOT NULL,
+  capacidade INT NOT NULL,
+  ano_fabricacao INT NOT NULL,
+  id_rotas INT NOT NULL,
+  FOREIGN KEY (id_rotas) REFERENCES rotas(id)
+);
+
+
+CREATE TABLE relatorios (
+    
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  titulo VARCHAR(100) NOT NULL,
+  descricao TEXT NOT NULL,
+  data_criacao DATE NOT NULL,
+  id_usuarios INT NOT NULL,
+  FOREIGN KEY (id_usuarios) REFERENCES usuarios(id)
+);
