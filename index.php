@@ -19,5 +19,7 @@
                 <a href="#">Cadastro</a>
             </nav>
     </header>
+
+    <img src="assets/Mockup_RAILLIFE-removebg-preview.png" alt="#" class="fixa">
 </body>
 </html>

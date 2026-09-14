@@ -44,3 +44,8 @@ body{
     background-color: #19aa93;
     border-radius: 5px;
 }
+.fixa{
+    position: fixed;
+    width: 1500px;
+    bottom: 0px;
+}
