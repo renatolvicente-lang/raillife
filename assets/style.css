@@ -32,7 +32,7 @@ body{
     text-decoration: none;
     color: #111;
     font-size: 24px;
-    padding: 5cap 30px;
+    padding: 5px 30px;
 }
 .nav_apresentacao a::after {
     content: "";
