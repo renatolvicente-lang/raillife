@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/style.css">
     <title>Cadastro</title>
 </head>
 <body>
@@ -56,9 +57,8 @@
             <br>
             <label for="">Data de Nascimeto:</label>
             <br>
-            <input type="number" placeholder="Digite sua data de nascimeto">
-
-
+            <input type="date" placeholder="Digite sua data de nascimeto">
+            
         </form>
     </div>
 </main>
