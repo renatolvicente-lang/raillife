@@ -9,36 +9,38 @@
 
 <body>
 
-    <header class="header">
+    <header class="login-header">
         <img src="../assets/logo.png" alt="Logo do site">
     </header>
 
-    <main class="pagina-usuario">
+    <main class="login-pagina">
 
-        <section class="formulario-container">
+        <section class="login-formulario">
 
             <h2>LOGIN</h2>
 
             <form method="POST">
 
-                <div class="campo">
+                <div class="login-campo">
                     <label for="email">Email:</label>
-                    <input 
-                        type="email" 
-                        id="email" 
-                        name="email" 
-                        placeholder="Ex.: user@gmail.com" 
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Ex.: user@gmail.com"
                         required
                     >
                 </div>
 
-                <div class="campo">
+                <div class="login-campo">
                     <label for="senha">Senha:</label>
-                    <input 
-                        type="password" 
-                        id="senha" 
-                        name="senha" 
-                        placeholder="*************" 
+
+                    <input
+                        type="password"
+                        id="senha"
+                        name="senha"
+                        placeholder="*************"
                         required
                     >
                 </div>
@@ -49,9 +51,13 @@
 
         </section>
 
-        <a href="../index.php" class="voltar">← Voltar</a>
-
     </main>
+
+    <img
+        class="fixa"
+        src="../assets/detalhe_pagina.png"
+        alt="Detalhe da página"
+    >
 
 </body>
 </html>
