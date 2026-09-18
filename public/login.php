@@ -4,44 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LOGIN</title>
-    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="../assets/style.css">
 </head>
 
 <body>
 
-<header class="header">
+    <header class="header">
         <img src="../assets/logo.png" alt="Logo do site">
+    </header>
 
-</header>
+    <main class="pagina-usuario">
 
-<main class="pagina-usuario">
+        <section class="formulario-container">
 
-    <section class="formulario-container">
+            <h2>LOGIN</h2>
 
-        <h2>LOGIN</h2>
-        <p class="subtitulo">Acesse sua conta</p>
+            <form method="POST">
 
-        <form method="POST">
+                <div class="campo">
+                    <label for="email">Email:</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        placeholder="Ex.: user@gmail.com" 
+                        required
+                    >
+                </div>
 
-            <div class="campo">
-                <input type="email" id="email" name="email" placeholder="Email" required>
-            </div>
+                <div class="campo">
+                    <label for="senha">Senha:</label>
+                    <input 
+                        type="password" 
+                        id="senha" 
+                        name="senha" 
+                        placeholder="*************" 
+                        required
+                    >
+                </div>
 
-            <div class="campo">
-                <input type="password" id="senha" name="senha" placeholder="Senha" required>
-            </div>
+                <button type="submit">Conectar</button>
 
-            <button type="submit">ENTRAR</button>
+            </form>
 
-        </form>
+        </section>
 
-    </section>
+        <a href="../index.php" class="voltar">← Voltar</a>
 
-
-
-    <a href="../index.php" class="voltar">← Voltar</a>
-
-</main>
+    </main>
 
 </body>
 </html>
