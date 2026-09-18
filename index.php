@@ -36,11 +36,12 @@
                 organizada em um painel de controle.
             </p>
         </div>
-        <div class="card_apresentacao">
-            <img src="" alt="">
-        </div>
+        
     </main>
 
-    <img src="assets/Mockup_RAILLIFE-removebg-preview.png" alt="#" class="fixa">
+    <img src="assets/detalhe_pagina.png" alt="#" class="fixa">
+    <footer class="ft_apresentacao">
+        <p>©Direitos Reservados</p>
+    </footer>
 </body>
 </html>
