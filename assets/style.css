@@ -2,6 +2,70 @@ body{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #c2dfe0;
 }
+
+/* Página de apresentação*/
+.mn_apresentacao{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+.card_apresentacao{
+    width: 500px;
+    min-height: 280px;
+
+    background-color: #f8f9fa;
+
+    border: 10px solid #d9d9d9;
+    border-radius: 25px;
+
+    padding: 20px 35px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+
+    font-family: Arial, sans-serif;
+}
+.card_apresentacao h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 400;
+}
+
+.card_apresentacao h2 {
+    margin: 0 0 25px;
+
+    color: #ff6b00;
+
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.card_apresentacao p {
+    margin: 0 auto;
+
+    max-width: 370px;
+
+    color: #171717;
+
+    font-size: 16px;
+    line-height: 1.35;
+
+    text-align: justify;
+}
+
+
+.linha {
+    width: 143px;
+    height: 4px;
+
+    background-color: #16b39b;
+
+    margin: 4px auto 13px;
+
+    border-radius: 2px;
+}
 .hd_apresentacao{
     position: relative;
     width: 80%;

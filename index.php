@@ -20,6 +20,27 @@
             </nav>
     </header>
 
+    <main class="mn_apresentacao">
+        <div class="card_apresentacao">
+            <h1>RAILLIFE</h1>
+
+            <div class="linha"></div>
+
+            <h2>Monitoramento inteligente em tempo real</h2>
+
+            <p>
+                Nosso sistema foi desenvolvido para facilitar o
+                monitoramento e o gerenciamento de informações de uma
+                operação ferroviária. Através de sensores IoT, os dados
+                são coletados em tempo real e apresentados de forma
+                organizada em um painel de controle.
+            </p>
+        </div>
+        <div class="card_apresentacao">
+            <img src="" alt="">
+        </div>
+    </main>
+
     <img src="assets/Mockup_RAILLIFE-removebg-preview.png" alt="#" class="fixa">
 </body>
 </html>
