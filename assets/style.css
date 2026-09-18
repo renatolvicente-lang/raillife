@@ -126,6 +126,7 @@ body{
 }
 
 /*Página de login*/
+
 .login-header {
     width: 100%;
     height: 190px;
@@ -210,5 +211,94 @@ body{
 }
 
 .login-formulario button:hover {
+    background-color: #096f51;
+}
+
+/*Página de cadastro*/
+
+.cadastro-header {
+    width: 100%;
+    height: 190px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 15px;
+}
+
+.cadastro-header img {
+    width: 290px;
+    height: auto;
+}
+
+.cadastro-pagina {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.cadastro-formulario {
+    width: 350px;
+    min-height: 300px;
+    background-color: #f8f9fa;
+    border: 6px solid #e3e7e8;
+    border-radius: 30px;
+    padding: 15px 52px 18px;
+    position: relative;
+    z-index: 2;
+}
+
+.cadastro-formulario h2 {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 400;
+    color: #000;
+    margin: 0 0 20px 0;
+}
+
+.cadastro-campo {
+    width: 100%;
+    margin-bottom: 14px;
+}
+
+.cadastro-campo label {
+    display: block;
+    font-size: 16px;
+    color: #000;
+    margin-bottom: 4px;
+}
+
+.cadastro-campo input {
+    width: 100%;
+    height: 38px;
+    padding: 0 10px;
+    border: 1px solid #ff805f;
+    border-radius: 20px;
+    background-color: white;
+    font-size: 16px;
+    outline: none;
+}
+
+.cadastro-campo input:focus {
+    border-color: #ff6800;
+}
+
+.cadastro-campo input::placeholder {
+    color: #555;
+}
+
+.cadastro-formulario button {
+    width: 100%;
+    height: 49px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 25px;
+    background-color: #0b805d;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.cadastro-formulario button:hover {
     background-color: #096f51;
 }
