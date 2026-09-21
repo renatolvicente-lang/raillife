@@ -1,20 +1,18 @@
 <?php
 require_once('../infra/conn.php');
 
-$nome = $_POST['nome'];
-$email = $_POST['email'];
-$CPF = $_POST['CPF'];
-$area_atuacao = $_POST['area_atuacao'];
-$endereco = $_POST['endereco'];
-$cidade = $_POST['cidade'];
-$CEP = $_POST['CEP'];
-$data_nascimento = $_POST['data_nascimento'];
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $nome = $_POST['nome'];
+    $email = $_POST['email'];
+    $CPF = $_POST['CPF'];
+    $area_atuacao = $_POST['area_atuacao'];
+    $endereco = $_POST['endereco'];
+    $cidade = $_POST['cidade'];
+    $CEP = $_POST['CEP'];
+    $data_nascimento = $_POST['data_nascimento'];
 
-if ($conn->connect_error) {
-    die("Falha na conexão: " . $conn->connect_error);
-} else {
 
-    if ($_SERVER['REQUEST_METHOD'] == "POST") {
+
         $sql = "INSERT INTO usuarios (nome, email, CPF, area_atuacao, endereco, cidade, CEP, data_nascimento) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         $comando = $conn->prepare($sql);
@@ -25,8 +23,8 @@ if ($conn->connect_error) {
 
 
         header("Location: ../public/login.php");
-    }
-
+            exit;
+    
 }
 
 ?>
@@ -74,14 +72,14 @@ if ($conn->connect_error) {
                     <div class="cadastro-campo">
                         <label for="">CPF:</label>
                         <br>
-                        <input type="number" name="CPF" placeholder="Digite seu CPF">
+                        <input type="text" name="CPF" placeholder="Digite seu CPF">
                     </div>
                     <br>
                     <br>
                     <div class="cadastro-campo">
                         <label for="">Área de atuação:</label>
                         <br>
-                        <input type="email" name="area_atuacao" placeholder="Digite a área em que atua">
+                        <input type="text" name="area_atuacao" placeholder="Digite a área em que atua">
                     </div>
                     <br>
                     <br>
@@ -102,7 +100,7 @@ if ($conn->connect_error) {
                     <div class="cadastro-campo">
                         <label for="">CEP:</label>
                         <br>
-                        <input type="number" name="CEP" placeholder="Digite seu Código de Endereçamento Postal">
+                        <input type="text" name="CEP" placeholder="Digite seu Código de Endereçamento Postal">
                     </div>
                     <br>
                     <br>
