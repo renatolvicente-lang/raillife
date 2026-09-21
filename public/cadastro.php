@@ -10,20 +10,27 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $CEP = $_POST['CEP'];
     $data_nascimento = $_POST['data_nascimento'];
 
+    $cpf_limpo = preg_replace('/\D/', '', $CPF);
+    $quantidade_digitos_cpf = strlen($cpf_limpo);
 
+    if ($quantidade_digitos_cpf > 11) {
+        echo "Erro: o CPF passou de 11 dígitos";
+        exit;
+    } elseif ($quantidade_digitos_cpf < 11) {
+        echo "Erro: o CPF não tem 11 dígitos";
+        exit;
+    }
 
-        $sql = "INSERT INTO usuarios (nome, email, CPF, endereco, cidade, CEP, data_nascimento) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO usuarios (nome, email, CPF, endereco, cidade, CEP, data_nascimento) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-        $comando = $conn->prepare($sql);
+    $comando = $conn->prepare($sql);
 
-        $comando->bind_param("ssssssss", $nome, $email, $CPF, $endereco, $cidade, $CEP, $data_nascimento);
+    $comando->bind_param("sssssss", $nome, $email, $CPF, $endereco, $cidade, $CEP, $data_nascimento);
 
-        $comando->execute();
+    $comando->execute();
 
-
-        header("Location: ../public/login.php");
-            exit;
-    
+    header("Location: ../public/login.php");
+    exit;
 }
 
 ?>
