@@ -31,6 +31,7 @@ body{
 
     font-family: Arial, sans-serif;
 }
+
 .card_apresentacao h1 {
     margin: 0;
     font-size: 28px;
@@ -302,3 +303,67 @@ body{
 .cadastro-formulario button:hover {
     background-color: #096f51;
 }
+
+/* Página de sensores */
+.card_lista{
+    min-width: 1000px;
+    min-height: 280px;
+
+    background-color: #f8f9fa;
+
+    border: 10px solid #d9d9d9;
+    border-radius: 25px;
+
+    padding: 20px 35px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+.lista{
+    min-width: 1000px;
+    min-height: 280px;
+
+    background-color: #cccccc;
+
+    border: 10px solid #a0a0a0;
+    border-radius: 25px;
+
+    padding: 20px 35px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+.item_lista{
+    min-width: 900px;
+    min-height: 50px;
+
+    background-color: #ffffff;
+
+    border: 3px solid #ff5e00;
+    border-radius: 25px;
+
+    padding: 20px 35px;
+    margin-bottom: 10px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: space-between;
+    display: flex;
+}
+
