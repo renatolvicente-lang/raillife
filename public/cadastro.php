@@ -1,3 +1,34 @@
+<?php
+    require_once('../infra/conn.php'); 
+    
+    $nome = $_POST['nome'];
+    $email = $_POST['email'];
+    $CPF = $_POST['CPF'];
+    $area_atuacao = $_POST['area_atuacao'];
+    $endereco = $_POST['endereco'];
+    $cidade = $_POST['cidade'];
+    $CEP = $_POST['CEP'];
+    $data_nascimento = $_POST['data_nascimento'];
+
+    if($conn -> connect_error){
+        die("Falha na conexão: ". $conn -> connect_error);
+    }else{
+    $sql = "INSERT INTO usuarios (nome, email, CPF, area_atuacao, endereco, cidade, CEP, data_nascimento) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    
+    $comando = $conn -> prepare($sql);
+
+    $comando -> bind_param("ssssssss", $nome, $email, $CPF, $area_atuacao, $endereco, $cidade, $CEP, $data_nascimento);
+
+    $comando -> execute();
+
+    
+    header("Location: ../public/login.php");
+    
+    }
+    ?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
