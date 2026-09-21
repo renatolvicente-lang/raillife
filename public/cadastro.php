@@ -32,17 +32,23 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     $comando = $conn->prepare($sql);
 
-    $comando->bind_param("sssssss", $nome, $email, $CPF, $endereco, $cidade, $CEP, $data_nascimento);
+    $comando->bind_param(
+        "sssssss",
+        $nome,
+        $email,
+        $CPF,
+        $endereco,
+        $cidade,
+        $CEP,
+        $data_nascimento
+    );
 
     $comando->execute();
 
     header("Location: ../public/login.php");
     exit;
 }
-
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -63,72 +69,59 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     </header>
 
     <main class="cadastro-pagina">
+
         <section class="cadastro-formulario">
-                <div class="container_titulo">
+
+            <div class="container_titulo">
                 <h2>CADASTRO</h2>
+            </div>
+
+            <form class="grid" method="POST">
+
+                <div class="cadastro-campo campo-nome">
+                    <label for="nome">Nome completo:</label>
+                    <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo">
                 </div>
 
-                <form class="grid" method="POST">
-                    <div class="cadastro-campo">
-                        <label for="">Nome completo:</label>
-                        <br>
-                        <input type="text" name="nome" placeholder="Digite seu nome completo">
-                    </div>
-                    <br>
-                    <br>
-                    <div class="cadastro-campo">
-                        <label for="">E-mail:</label>
-                        <br>
-                        <input type="email" name="email" placeholder="Digite seu E-mail">
-                    </div>
-                    <br>
-                    <br>
-                    <div class="cadastro-campo">
-                        <label for="">CPF:</label>
-                        <br>
-                        <input type="text" name="CPF" placeholder="Digite seu CPF">
-                    </div>
-                    <br>
-                    <br>
-                    <div class="cadastro-campo">
-                        <label for="">Endereço:</label>
-                        <br>
-                        <input type="text" name="endereco" placeholder="Digite seu endereço">
-                    </div>
-                    <br>
+                <div class="cadastro-campo campo-email">
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" name="email" placeholder="Digite seu E-mail">
+                </div>
 
-                    </div>
+                <div class="cadastro-campo campo-cpf">
+                    <label for="CPF">CPF:</label>
+                    <input type="text" id="CPF" name="CPF" placeholder="Digite seu CPF">
+                </div>
 
-                    <br>
-                    <div class="cadastro-campo">
-                        <label for="">Cidade:</label>
-                        <br>
-                        <input type="text" name="cidade" placeholder="Digite sua cidade">
-                    </div>
-                    <br>
-                    <br>
-                    <div class="cadastro-campo">
-                        <label for="">CEP:</label>
-                        <br>
-                        <input type="text" name="CEP" placeholder="Digite seu Código de Endereçamento Postal">
-                    </div>
-                    <br>
-                    <br>
-                    <div class="cadastro-campo">
-                        <label for="">Data de Nascimeto:</label>
-                        <br>
-                        <input type="date" name="data_nascimento" placeholder="Digite sua data de nascimeto">
-                        <br>
-                        <br>
-                        
-                    </div>
-                    
+                <div class="cadastro-campo campo-endereco">
+                    <label for="endereco">Endereço:</label>
+                    <input type="text" id="endereco" name="endereco" placeholder="Digite seu endereço">
+                </div>
+
+                <div class="cadastro-campo campo-cidade">
+                    <label for="cidade">Cidade:</label>
+                    <input type="text" id="cidade" name="cidade" placeholder="Digite sua cidade">
+                </div>
+
+                <div class="cadastro-campo campo-cep">
+                    <label for="CEP">CEP:</label>
+                    <input type="text" id="CEP" name="CEP" placeholder="Digite seu Código de Endereçamento Postal">
+                </div>
+
+                <div class="cadastro-campo campo-data">
+                    <label for="data_nascimento">Data de Nascimento:</label>
+                    <input type="date" id="data_nascimento" name="data_nascimento" placeholder="Digite sua data de nascimento">
+                </div>
+
                 <button type="submit">Cadastrar</button>
-                </form>
+
+            </form>
+
         </section>
+
     </main>
 
-    <img class="fixa" src="../assets/detalhe_pagina.png" alt="Detalhe da página">
+    <img class="fixa" src="../assets/detalhe-listras-removebg-preview.png" alt="Detalhe da página">
 
     <footer></footer>
 
