@@ -302,3 +302,23 @@ body{
 .cadastro-formulario button:hover {
     background-color: #096f51;
 }
+
+.container_titulo {
+    text-align: center;
+    margin-bottom: 
+}
+
+.container_esquerda {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.container_direita {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+

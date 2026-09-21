@@ -51,9 +51,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <main class="cadastro-pagina">
         <section class="cadastro-formulario">
             <form>
+                <div class="container_titulo">
                 <h2>CADASTRO</h2>
+                </div>
 
                 <form method="POST">
+
+                    <div class="container_esquerda">
+
                     <div class="cadastro-campo">
                         <label for="">Nome completo:</label>
                         <br>
@@ -81,6 +86,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         <input type="text" name="endereco" placeholder="Digite seu endereço">
                     </div>
                     <br>
+
+                    </div>
+
+                    <div class="container_direita">
+
                     <br>
                     <div class="cadastro-campo">
                         <label for="">Cidade:</label>
@@ -102,9 +112,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         <input type="date" name="data_nascimento" placeholder="Digite sua data de nascimeto">
                         <br>
                         <br>
-                        <button type="submit">Cadastrar</button>
-
+                        
                     </div>
+
+                </div>
+                <button type="submit">Cadastrar</button>
                 </form>
         </section>
     </main>
