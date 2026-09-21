@@ -5,7 +5,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $nome = $_POST['nome'];
     $email = $_POST['email'];
     $CPF = $_POST['CPF'];
-    $area_atuacao = $_POST['area_atuacao'];
     $endereco = $_POST['endereco'];
     $cidade = $_POST['cidade'];
     $CEP = $_POST['CEP'];
@@ -13,11 +12,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 
 
-        $sql = "INSERT INTO usuarios (nome, email, CPF, area_atuacao, endereco, cidade, CEP, data_nascimento) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO usuarios (nome, email, CPF, endereco, cidade, CEP, data_nascimento) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         $comando = $conn->prepare($sql);
 
-        $comando->bind_param("ssssssss", $nome, $email, $CPF, $area_atuacao, $endereco, $cidade, $CEP, $data_nascimento);
+        $comando->bind_param("ssssssss", $nome, $email, $CPF, $endereco, $cidade, $CEP, $data_nascimento);
 
         $comando->execute();
 
@@ -73,13 +72,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         <label for="">CPF:</label>
                         <br>
                         <input type="text" name="CPF" placeholder="Digite seu CPF">
-                    </div>
-                    <br>
-                    <br>
-                    <div class="cadastro-campo">
-                        <label for="">Área de atuação:</label>
-                        <br>
-                        <input type="text" name="area_atuacao" placeholder="Digite a área em que atua">
                     </div>
                     <br>
                     <br>
