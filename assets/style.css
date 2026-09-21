@@ -61,12 +61,12 @@ body{
 
 
 .linha {
-    width: 143px;
+    width: 160px;
     height: 4px;
 
     background-color: #16b39b;
 
-    margin: 4px auto 13px;
+    margin: 4px auto 34px;
 
     border-radius: 2px;
 }

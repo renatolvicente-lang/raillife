@@ -1,3 +1,28 @@
+<?php
+
+include "../infra/conn.php";
+
+if($_SERVER["REQUEST_METHOD"] === "POST"){
+    $nome = $_POST[""];
+    $email = $_POST["email"];
+    $senha = $_POST["senha"];
+    
+    $sql = "SELECT * FROM usuarios WHERE email = '$email' AND senha = '$senha'";
+
+    $resultado = $conn -> query($sql);
+
+    if(mysqli_num_rows($resultado)> 0 ){
+        $_SESSION["usuario"] = $nome;
+        header("Location: home.php");
+    }else{
+        echo "O usuario não existe";
+    }
+}
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -22,9 +47,15 @@
             <form method="POST">
 
                 <div class="login-campo">
+                    <label for="nome">Nome: </label>
+
+                    <input type="text" name="nome" id="nome" placeholder="nome completo" required>
+                </div>
+
+                <div class="login-campo">
                     <label for="email">Email:</label>
 
-                    <input type="email"id="email" name="email" placeholder="Ex.: user@gmail.com" required>
+                    <input type="email" id="email" name="email" placeholder="Ex.: user@gmail.com" required>
 
                 </div>
 
@@ -35,6 +66,8 @@
                 </div>
 
                 <button type="submit">Conectar</button>
+
+                <h6></h6>
 
             </form>
 

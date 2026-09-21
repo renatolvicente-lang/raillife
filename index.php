@@ -15,8 +15,8 @@
                 <img src="assets/logo.png" alt="" class="img_apresentacao">
             </div>
             <nav class="nav_apresentacao">
-                <a href="#">Login</a>
-                <a href="#">Cadastro</a>
+                <a href="public/login.php" onclick="selectTab(this)">Login</a>
+                <a href="public/cadastro.php" onclick="selectTab(this)">Cadastro</a>
             </nav>
     </header>
 
@@ -39,7 +39,7 @@
         
     </main>
 
-    <img src="assets/detalhe_pagina.png" alt="#" class="fixa">
+    <img src="assets/detalhe-listras-removebg-preview.png" alt="#" class="fixa">
     <footer class="ft_apresentacao">
         <p>©Direitos Reservados</p>
     </footer>
