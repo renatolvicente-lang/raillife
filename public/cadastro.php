@@ -10,20 +10,34 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $CEP = $_POST['CEP'];
     $data_nascimento = $_POST['data_nascimento'];
 
+    $cpf_limpo = preg_replace('/\D/', '', $CPF);
+    $quantidade_digitos_cpf = strlen($cpf_limpo);
 
+    if ($quantidade_digitos_cpf > 11) {
+        exit;
+    } elseif ($quantidade_digitos_cpf < 11) {
+        exit;
+    }
 
-        $sql = "INSERT INTO usuarios (nome, email, CPF, endereco, cidade, CEP, data_nascimento) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $cep_limpo = preg_replace('/\D/', '', $CEP);
+    $quantidade_digitos_cep = strlen($cep_limpo);
 
-        $comando = $conn->prepare($sql);
+    if ($quantidade_digitos_cep > 8) {
+        exit;
+    } elseif ($quantidade_digitos_cep < 8) {
+        exit;
+    }
 
-        $comando->bind_param("ssssssss", $nome, $email, $CPF, $endereco, $cidade, $CEP, $data_nascimento);
+    $sql = "INSERT INTO usuarios (nome, email, CPF, endereco, cidade, CEP, data_nascimento) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-        $comando->execute();
+    $comando = $conn->prepare($sql);
 
+    $comando->bind_param("sssssss", $nome, $email, $CPF, $endereco, $cidade, $CEP, $data_nascimento);
 
-        header("Location: ../public/login.php");
-            exit;
-    
+    $comando->execute();
+
+    header("Location: ../public/login.php");
+    exit;
 }
 
 ?>
@@ -50,10 +64,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     <main class="cadastro-pagina">
         <section class="cadastro-formulario">
-            <form>
+                <div class="container_titulo">
                 <h2>CADASTRO</h2>
+                </div>
 
                 <form method="POST">
+
+                    <div class="container_esquerda">
+
                     <div class="cadastro-campo">
                         <label for="">Nome completo:</label>
                         <br>
@@ -81,6 +99,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         <input type="text" name="endereco" placeholder="Digite seu endereço">
                     </div>
                     <br>
+
+                    </div>
+
+                    <div class="container_direita">
+
                     <br>
                     <div class="cadastro-campo">
                         <label for="">Cidade:</label>
@@ -102,9 +125,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         <input type="date" name="data_nascimento" placeholder="Digite sua data de nascimeto">
                         <br>
                         <br>
-                        <button type="submit">Cadastrar</button>
-
+                        
                     </div>
+
+                </div>
+                <button type="submit">Cadastrar</button>
                 </form>
         </section>
     </main>

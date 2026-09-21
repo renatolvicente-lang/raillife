@@ -67,6 +67,8 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
 
                 <button type="submit">Conectar</button>
 
+                <h6></h6>
+
             </form>
 
         </section>
