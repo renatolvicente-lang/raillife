@@ -57,7 +57,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     <main class="cadastro-pagina">
         <section class="cadastro-formulario">
-            <form>
                 <div class="container_titulo">
                 <h2>CADASTRO</h2>
                 </div>
