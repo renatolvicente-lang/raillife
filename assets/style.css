@@ -113,7 +113,7 @@ body{
     border-radius: 5px;
 }
 .fixa{
-    position:relative fixed;
+    position: fixed;
     width: 900px;
     bottom: 0px;
 }
@@ -245,6 +245,7 @@ body{
     padding: 15px 52px 18px;
     position: relative;
     z-index: 2;
+    box-shadow: 0 100px 100px rgba(0, 0, 0, 0.1);
 }
 
 .cadastro-formulario h2 {
@@ -255,36 +256,6 @@ body{
     margin: 0 0 20px 0;
 }
 
-.cadastro-campo {
-    width: 100%;
-    margin-bottom: 14px;
-}
-
-.cadastro-campo label {
-    display: block;
-    font-size: 16px;
-    color: #000;
-    margin-bottom: 4px;
-}
-
-.cadastro-campo input {
-    width: 100%;
-    height: 38px;
-    padding: 0 10px;
-    border: 1px solid #ff805f;
-    border-radius: 20px;
-    background-color: white;
-    font-size: 16px;
-    outline: none;
-}
-
-.cadastro-campo input:focus {
-    border-color: #ff6800;
-}
-
-.cadastro-campo input::placeholder {
-    color: #555;
-}
 
 .cadastro-formulario button {
     width: 100%;
@@ -303,22 +274,51 @@ body{
     background-color: #096f51;
 }
 
-.container_titulo {
-    text-align: center;
-    margin-bottom: 
+.grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Força exatamente 2 colunas iguais */
+    gap: 15px 30px; /* Espaço vertical de 15px e horizontal de 30px entre os campos */
+    width: 100%;
 }
 
-.container_esquerda {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 20px;
-}
+        .cadastro-campo {
+            display: flex;
+            
+        }
 
-.container_direita {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 20px;
+        .cadastro-campo label {
+            font-size: 14px;
+            color: #333333;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .cadastro-campo input {
+            width: 100%;
+            height: 42px;
+            border: 1.5px solid #f88c42; /* Borda Laranja pastel */
+            border-radius: 21px;
+            padding: 0 18px;
+            font-size: 14.5px;
+            color: #222;
+            background-color: #ffffff;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .cadastro-campo input::placeholder {
+            color: #444444;
+            font-size: 14px;
+        }
+
+        .cadastro-campo input:focus {
+            border-color: #e26912;
+            box-shadow: 0 0 0 2px rgba(247, 104, 28, 0.15);
+        }
+
+.cadastro-formulario, .card {
+    width: 90%;
+    max-width: 850px;
+    margin: 0 auto;
 }
 

@@ -68,18 +68,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <h2>CADASTRO</h2>
                 </div>
 
-                <form method="POST">
-
-                    <div class="container_esquerda">
-
+                <form class="grid" method="POST">
                     <div class="cadastro-campo">
                         <label for="">Nome completo:</label>
                         <br>
                         <input type="text" name="nome" placeholder="Digite seu nome completo">
-                    </div>
+                    
                     <br>
                     <br>
-                    <div class="cadastro-campo">
+                    
                         <label for="">E-mail:</label>
                         <br>
                         <input type="email" name="email" placeholder="Digite seu E-mail">
@@ -101,8 +98,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     <br>
 
                     </div>
-
-                    <div class="container_direita">
 
                     <br>
                     <div class="cadastro-campo">
@@ -127,8 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         <br>
                         
                     </div>
-
-                </div>
+                    
                 <button type="submit">Cadastrar</button>
                 </form>
         </section>
