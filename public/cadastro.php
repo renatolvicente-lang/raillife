@@ -14,10 +14,17 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $quantidade_digitos_cpf = strlen($cpf_limpo);
 
     if ($quantidade_digitos_cpf > 11) {
-        echo "Erro: o CPF passou de 11 dígitos";
         exit;
     } elseif ($quantidade_digitos_cpf < 11) {
-        echo "Erro: o CPF não tem 11 dígitos";
+        exit;
+    }
+
+    $cep_limpo = preg_replace('/\D/', '', $CEP);
+    $quantidade_digitos_cep = strlen($cep_limpo);
+
+    if ($quantidade_digitos_cep > 8) {
+        exit;
+    } elseif ($quantidade_digitos_cep < 8) {
         exit;
     }
 
