@@ -28,18 +28,21 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LOGIN</title>
     <link rel="stylesheet" href="../assets/style.css">
+    <title>Cadastro</title>
 </head>
 
 <body>
 
-    <header class="login-header">
-        <img src="../assets/logo.png" alt="Logo do site">
+    <header class="cadastro-header">
+        <nav>
+            <img src="../assets/logo.png" alt="Logo do site">
+        </nav>
     </header>
 
     <main class="login-pagina">
@@ -79,7 +82,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
 
     </main>
 
-    <img class="fixa" src="../assets/detalhe_pagina.png" alt="Detalhe da página">
+    <img class="fixa" src="../assets/detalhe-listras-removebg-preview.png" alt="Detalhe da página">
 
 </body>
 </html>
