@@ -2,6 +2,10 @@
 
 include "../infra/conn.php";
 
+session_start();
+
+//Sem prepared Statement
+
 if($_SERVER["REQUEST_METHOD"] === "POST"){
     $nome = $_POST[""];
     $email = $_POST["email"];
