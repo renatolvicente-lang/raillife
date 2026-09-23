@@ -22,6 +22,7 @@ body{
     padding: 20px 35px;
 
     font-family: Arial, sans-serif;
+    display: flex;
 }
 
 .card_apresentacao h1 {
@@ -119,7 +120,8 @@ body{
 }
 
 .trem{
-        width: 400px;
+       
+        width: 500px;
         
     }
 
