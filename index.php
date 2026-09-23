@@ -22,8 +22,9 @@
 
     <main class="mn_apresentacao">
         <div class="card_apresentacao">
-            <div class="grid">
-            <h1>RAILLIFE</h1>
+            
+        <div>
+        
     
             <br>
 
@@ -38,10 +39,9 @@
                 são coletados em tempo real e apresentados de forma
                 organizada em um painel de controle.
             </h5>
+        </div>
             
             <img src="assets/trem.png" alt="trem" class="trem">
-
-            </div>
 
             
 

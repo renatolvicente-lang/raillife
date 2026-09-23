@@ -53,6 +53,7 @@ body{
     padding: 20px 35px;
 
     font-family: Arial, sans-serif;
+    display: flex;
 }
 
 .card_apresentacao h1 {
@@ -150,6 +151,18 @@ body{
 }
 
 /*Página de login*/
+<<<<<<< HEAD
+=======
+=======
+.trem{
+       
+        width: 500px;
+        
+    }
+
+/Página de login/
+>>>>>>> 94630fdc64c542bf9773604b6af6ae7da454d8de
+>>>>>>> 2970857c336643e7b0bdae2bb55a0b903ba3b28a
 
 .login-header {
     width: 100%;
