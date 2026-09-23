@@ -31,6 +31,7 @@ body{
 
     font-family: Arial, sans-serif;
 }
+
 .card_apresentacao h1 {
     margin: 0;
     font-size: 28px;
@@ -61,12 +62,12 @@ body{
 
 
 .linha {
-    width: 143px;
+    width: 160px;
     height: 4px;
 
     background-color: #16b39b;
 
-    margin: 4px auto 13px;
+    margin: 4px auto 34px;
 
     border-radius: 2px;
 }
@@ -113,7 +114,7 @@ body{
     border-radius: 5px;
 }
 .fixa{
-    position:relative fixed;
+    position: fixed;
     width: 900px;
     bottom: 0px;
 }
@@ -125,7 +126,7 @@ body{
     text-align: center;
 }
 
-/*Página de login*/
+/Página de login/
 
 .login-header {
     width: 100%;
@@ -214,11 +215,11 @@ body{
     background-color: #096f51;
 }
 
-/*Página de cadastro*/
+/* Página de cadastro */
 
 .cadastro-header {
     width: 100%;
-    height: 190px;
+    height: 115px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -226,7 +227,7 @@ body{
 }
 
 .cadastro-header img {
-    width: 290px;
+    width: 205px;
     height: auto;
 }
 
@@ -237,68 +238,123 @@ body{
 }
 
 .cadastro-formulario {
-    width: 350px;
-    min-height: 300px;
+    width: 860px;
+    min-height: 460px;
     background-color: #f8f9fa;
     border: 6px solid #e3e7e8;
     border-radius: 30px;
-    padding: 15px 52px 18px;
+    padding: 25px 0 18px;
     position: relative;
     z-index: 2;
+    box-shadow: 0 100px 100px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
 }
 
 .cadastro-formulario h2 {
     text-align: center;
-    font-size: 30px;
-    font-weight: 400;
+    font-size: 36px;
+    font-weight: 700;
     color: #000;
-    margin: 0 0 20px 0;
+    margin: 0 0 22px 0;
+}
+
+.grid {
+    width: 722px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 55px;
+    row-gap: 13px;
+}
+
+/* Organização dos campos */
+
+.campo-nome {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.campo-email {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.campo-cpf {
+    grid-column: 1;
+    grid-row: 3;
+}
+
+.campo-data {
+    grid-column: 1;
+    grid-row: 4;
+}
+
+.campo-cep {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.campo-endereco {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.campo-cidade {
+    grid-column: 2;
+    grid-row: 3;
 }
 
 .cadastro-campo {
     width: 100%;
-    margin-bottom: 14px;
+    display: flex;
+    flex-direction: column;
 }
 
 .cadastro-campo label {
-    display: block;
-    font-size: 16px;
-    color: #000;
-    margin-bottom: 4px;
+    font-size: 14px;
+    color: #333333;
+    margin-bottom: 5px;
+    font-weight: 500;
 }
 
 .cadastro-campo input {
     width: 100%;
-    height: 38px;
+    height: 40px;
+    box-sizing: border-box;
+    border: 1.5px solid #f88c42;
+    border-radius: 21px;
     padding: 0 10px;
-    border: 1px solid #ff805f;
-    border-radius: 20px;
-    background-color: white;
     font-size: 16px;
+    color: #222;
+    background-color: #ffffff;
     outline: none;
-}
-
-.cadastro-campo input:focus {
-    border-color: #ff6800;
+    transition: all 0.2s ease;
 }
 
 .cadastro-campo input::placeholder {
-    color: #555;
+    color: #444444;
+    font-size: 16px;
+}
+
+.cadastro-campo input:focus {
+    border-color: #e26912;
+    box-shadow: 0 0 0 2px rgba(247, 104, 28, 0.15);
 }
 
 .cadastro-formulario button {
-    width: 100%;
-    height: 49px;
+    grid-column: 1 / 3;
+    justify-self: center;
+    width: 290px;
+    height: 43px;
     margin-top: 5px;
     border: none;
     border-radius: 25px;
-    background-color: #0b805d;
+    background-color: #19aa93;
     color: white;
     font-size: 16px;
-    font-weight: bold;
     cursor: pointer;
 }
 
 .cadastro-formulario button:hover {
-    background-color: #096f51;
+    background-color: #329b63;
 }
