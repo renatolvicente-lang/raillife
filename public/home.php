@@ -1,28 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HOME</title>
+    <title>RailLife - Sensores</title>
     <link rel="stylesheet" href="../assets/style.css">
 </head>
 
 <body>
 
-<header>
-    <nav>
+    <header class="hd_home">
 
-</nav>
-</header>
+        <div class="logo_home">
+            <img src="../assets/logo.png" alt="logo site">
+        </div>
 
-<main>
+        <nav class="nav_home">
+            <a href="#" class="active">Sensores</a>
+            <a href="#">Trens</a>
+            <a href="#">Relatorios</a>
+            <a href="#">Rotas</a>
+            <a href="#">ADM</a>
+        </nav>
 
-</main>
+        <button class="menu_btn_home">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
 
-<footer>
-    
-</footer>
-    
+    </header>
+
+    <main id="mn_home">
+        <section>
+
+        </section>
+        <section>
+
+        </section>
+    </main>
 </body>
-
 </html>

@@ -2,6 +2,37 @@ body{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #c2dfe0;
 }
+/* Página Home*/
+
+.hd_home{
+    width: 92%;
+    height: 84px;
+    margin: 22px auto 35px;
+    
+    background: #f8f9fa;
+    
+    border: 5px solid #e1e1e1;
+    border-radius: 25px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    padding: 0 15px;
+}
+.logo_home img{
+    width: 250px;
+}
+.nav_home{
+    color: #000;
+    text-decoration: none;
+    padding: 20px;
+}
+#mn_home{
+    width: 1100px;
+    margin: auto;
+    background-color: white;
+}
 
 /* Página de apresentação*/
 .mn_apresentacao{
@@ -126,7 +157,7 @@ body{
     text-align: center;
 }
 
-/Página de login/
+/*Página de login*/
 
 .login-header {
     width: 100%;
