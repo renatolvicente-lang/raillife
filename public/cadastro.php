@@ -113,6 +113,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     <input type="date" id="data_nascimento" name="data_nascimento" placeholder="Digite sua data de nascimento">
                 </div>
 
+                <div class="cadastro-campo campo-senha">
+                    <label for="senha">Senha:</label>
+                    <input type="password" id="senha" name="senha" placeholder="Digite sua senha">
+                </div>
+
                 <button type="submit">Cadastrar</button>
 
             </form>
@@ -121,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     </main>
 
-    <img class="fixa" src="../assets/detalhe-listras-removebg-preview.png" alt="Detalhe da página">
+    <img class="fixa" src="../assets/listras vermelho e cinza.png" alt="Detalhe da página">
 
     <footer></footer>
 

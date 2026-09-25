@@ -2,7 +2,7 @@
 
 $host = "localhost";
 $user = "root";
-$password = "root";
+$password = "";
 $database = "raillife";
 $conn = new mysqli($host, $user, $password, $database);
 
