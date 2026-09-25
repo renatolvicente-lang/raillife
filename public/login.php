@@ -4,10 +4,11 @@ include "../infra/conn.php";
 
 session_start();
 
-//Sem prepared Statement
+
 
 if($_SERVER["REQUEST_METHOD"] === "POST"){
-    $nome = $_POST[""];
+    //Sem prepared Statement
+   /* $nome = $_POST[""];
     $email = $_POST["email"];
     $senha = $_POST["senha"];
     
@@ -20,6 +21,32 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         header("Location: home.php");
     }else{
         echo "O usuario não existe";
+    }*/
+    //com prepared
+    
+    $nome = $_POST["nome"];
+    $email = $_POST["email"];
+    $senha = $_POST["senha"];
+    
+    $sql = "SELECT * FROM usuarios WHERE email = ? AND senha = ?";
+    
+    if($stmt = $conn ->prepare($sql)){
+        $stmt->bind_param("ss", $email, $senha);
+    
+        $stmt->execute();
+
+        $resultado = $stmt->get_result();
+
+        if($resultado->num_rows > 0){
+            $_SESSION['usuario'] = $nome;
+            header("Location: home.php");
+            exit();
+        }else{
+            echo "Usuario não existe";
+        }
+        $stmt->close();
+    }else{
+        echo "erro na preparação da consulta". $conn->error;
     }
 }
 
