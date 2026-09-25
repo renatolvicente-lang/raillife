@@ -17,19 +17,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
 
     $cep_limpo = preg_replace('/\D/', '', $CEP);
-    $quantidade_digitos_cep = strlen($cep_limpo);
-
-    if ($quantidade_digitos_cep > 8) {
-        exit;
-    } elseif ($quantidade_digitos_cep < 8) {
-        exit;
+    if (strlen($cep_limpo) !== 8) {
+        exit("CEP inválido");
     }
 
     $sql = "INSERT INTO usuarios (nome, email, senha, CPF, endereco, cidade, CEP, data_nascimento) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
     $comando = $conn->prepare($sql);
 
-    $comando->bind_param("sssssss",$nome, $email, $senha, $CPF, $endereco, $cidade, $CEP, $data_nascimento);
+    $comando->bind_param("ssssssss",$nome, $email, $senha, $CPF, $endereco, $cidade, $CEP, $data_nascimento);
     $comando->execute();
 
     header("Location: ../public/login.php");
