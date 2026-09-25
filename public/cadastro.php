@@ -32,17 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     $comando = $conn->prepare($sql);
 
-    $comando->bind_param(
-        "sssssss",
-        $nome,
-        $email,
-        $CPF,
-        $endereco,
-        $cidade,
-        $CEP,
-        $data_nascimento
-    );
-
+    $comando->bind_param("sssssss",$nome, $email, $CPF, $endereco, $cidade, $CEP, $data_nascimento);
     $comando->execute();
 
     header("Location: ../public/login.php");
