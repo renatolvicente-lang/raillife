@@ -31,7 +31,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     $sql = "SELECT * FROM usuarios WHERE email = ? AND senha = ?";
     
     if($stmt = $conn ->prepare($sql)){
-        $stmt->bind_param("sss", $nome, $email, $senha);
+        $stmt->bind_param("ss", $email, $senha);
     
         $stmt->execute();
 
