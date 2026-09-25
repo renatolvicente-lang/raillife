@@ -62,19 +62,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 <body>
 
-    <header class="cadastro-header">
-        <nav>
-            <img src="../assets/logo.png" alt="Logo do site">
-        </nav>
-    </header>
+   <header><div></div></header>
 
     <main class="cadastro-pagina">
-
+        <div class="container_titulo">
+                <img src="../assets/Mockup_RAILLIFE-removebg-preview.png" alt="Logo do site">
+        </div>
         <section class="cadastro-formulario">
 
-            <div class="container_titulo">
-                <h2>CADASTRO</h2>
-            </div>
+           
 
             <form class="grid" method="POST">
 
@@ -126,7 +122,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     </main>
 
-    <img class="fixa" src="../assets/listras vermelho e cinza.png" alt="Detalhe da página">
+    <img class="fixa" src="../assets/listras vermelho e cinza.png">
+    <img class="fixa2" src="../assets/listras vermelho e cinza.png">
 
     <footer></footer>
 
