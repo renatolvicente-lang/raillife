@@ -12,7 +12,7 @@ CREATE TABLE usuarios (
   endereco VARCHAR(100) NOT NULL,
   cidade VARCHAR(100) NOT NULL,
   cep VARCHAR(8) NOT NULL,
-  nascimento DATE NOT NULL
+  data_nascimento DATE NOT NULL
 );
 CREATE TABLE rotas(
 

@@ -3,6 +3,7 @@ require_once('../infra/conn.php');
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $nome = $_POST['nome'];
+    $senha = $_POST['senha'];
     $email = $_POST['email'];
     $CPF = $_POST['CPF'];
     $endereco = $_POST['endereco'];
@@ -28,11 +29,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         exit;
     }
 
-    $sql = "INSERT INTO usuarios (nome, email, CPF, endereco, cidade, CEP, data_nascimento) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO usuarios (nome, email, senha, CPF, endereco, cidade, CEP, data_nascimento) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
     $comando = $conn->prepare($sql);
 
-    $comando->bind_param("sssssss",$nome, $email, $CPF, $endereco, $cidade, $CEP, $data_nascimento);
+    $comando->bind_param("sssssss",$nome, $email, $senha, $CPF, $endereco, $cidade, $CEP, $data_nascimento);
     $comando->execute();
 
     header("Location: ../public/login.php");
