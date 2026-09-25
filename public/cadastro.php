@@ -12,12 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $data_nascimento = $_POST['data_nascimento'];
 
     $cpf_limpo = preg_replace('/\D/', '', $CPF);
-    $quantidade_digitos_cpf = strlen($cpf_limpo);
-
-    if ($quantidade_digitos_cpf > 11) {
-        exit;
-    } elseif ($quantidade_digitos_cpf < 11) {
-        exit;
+    if (strlen($cpf_limpo) !== 11) {
+        exit("CPF inválido");
     }
 
     $cep_limpo = preg_replace('/\D/', '', $CEP);
