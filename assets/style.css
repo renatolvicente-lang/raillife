@@ -156,14 +156,12 @@ body{
     
 }
 .fixa{
-    position: relative;
     bottom: 0;
     left: 0;
     width: 40%;
 }
 
 .fixa2{
-    position: relative;
     top: 0;
     right: 0;
     width: 40%;
@@ -304,7 +302,7 @@ header {
     background-color: #f8f9fa;
     border-radius: 0 8px 8px 8px;
     padding: 25px 0 18px;
-    position: relative;
+    
     z-index: 2;
     box-shadow: 0 100px 100px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
@@ -362,6 +360,11 @@ header {
 .campo-cidade {
     grid-column: 2;
     grid-row: 3;
+}
+
+.campo-senha {
+    grid-column: 2;
+    grid-row: 4;
 }
 
 .cadastro-campo {

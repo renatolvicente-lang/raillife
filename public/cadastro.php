@@ -1,5 +1,5 @@
 <?php
-include '../infra/conn.php';
+require_once('../infra/conn.php');
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $nome = $_POST['nome'];
@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
    <header class="hd_home">
 
         <div class="logo_home">
-            <img src="../assets/Mockup_RAILLIFE-removebg-preview.png" alt="logo site">
+            <img src="../assets/logo.png" alt="logo site">
         </div>
 
         <nav class="nav_home">
@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     <main class="cadastro-pagina">
         <div class="container_titulo">
-                <img src="../assets/Mockup_RAILLIFE-removebg-preview.png" alt="Logo do site">
+                <img src="../assets/logo.png" alt="logo site">
         </div>
         <section class="cadastro-formulario">
 
