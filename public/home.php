@@ -12,15 +12,15 @@
     <header class="hd_home">
 
         <div class="logo_home">
-            <img src="../assets/logo.png" alt="logo site">
+            <img src="../assets/Mockup_RAILLIFE-removebg-preview.png" alt="logo site">
         </div>
 
         <nav class="nav_home">
-            <a href="#" class="active">Sensores</a>
+            <a href="#" class="ativado">Inicio</a>
+            <a href="#" >Sensores</a>
             <a href="#">Trens</a>
             <a href="#">Relatorios</a>
             <a href="#">Rotas</a>
-            <a href="#">ADM</a>
         </nav>
 
         <button class="menu_btn_home">
@@ -31,12 +31,28 @@
 
     </header>
 
-    <main id="mn_home">
-        <section>
-            
+    <main class="mn_home">
+        <section class="">
+            <h1>Dashboard RAILLIFE</h1>
+            <p>acompanhe os principais dados da operação.</p>
+            <div class="hm_flex">
+                <div class='hm_card trens_ativos'>
+
+                </div>
+
+                <div class = "hm_card sensores">
+
+                </div>
+                <div class = "hm_card rotas_ativas">
+
+                </div>
+                <div class="hm_card relatorios">
+
+                </div>
+            </div>
         </section>
         <section>
-
+            <div></div>
         </section>
     </main>
 </body>

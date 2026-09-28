@@ -1,8 +1,9 @@
 <?php
-require_once('../infra/conn.php');
+include '../infra/conn.php';
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $nome = $_POST['nome'];
+    $senha = $_POST['senha'];
     $email = $_POST['email'];
     $CPF = $_POST['CPF'];
     $endereco = $_POST['endereco'];
@@ -11,28 +12,20 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $data_nascimento = $_POST['data_nascimento'];
 
     $cpf_limpo = preg_replace('/\D/', '', $CPF);
-    $quantidade_digitos_cpf = strlen($cpf_limpo);
-
-    if ($quantidade_digitos_cpf > 11) {
-        exit;
-    } elseif ($quantidade_digitos_cpf < 11) {
-        exit;
+    if (strlen($cpf_limpo) !== 11) {
+        exit("CPF inválido");
     }
 
     $cep_limpo = preg_replace('/\D/', '', $CEP);
-    $quantidade_digitos_cep = strlen($cep_limpo);
-
-    if ($quantidade_digitos_cep > 8) {
-        exit;
-    } elseif ($quantidade_digitos_cep < 8) {
-        exit;
+    if (strlen($cep_limpo) !== 8) {
+        exit("CEP inválido");
     }
 
-    $sql = "INSERT INTO usuarios (nome, email, CPF, endereco, cidade, CEP, data_nascimento) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO usuarios (nome, email, senha, CPF, endereco, cidade, CEP, data_nascimento) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
     $comando = $conn->prepare($sql);
 
-    $comando->bind_param("sssssss",$nome, $email, $CPF, $endereco, $cidade, $CEP, $data_nascimento);
+    $comando->bind_param("ssssssss",$nome, $email, $senha, $CPF, $endereco, $cidade, $CEP, $data_nascimento);
     $comando->execute();
 
     header("Location: ../public/login.php");
@@ -52,19 +45,35 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 <body>
 
-    <header class="cadastro-header">
-        <nav>
-            <img src="../assets/logo.png" alt="Logo do site">
+   <header class="hd_home">
+
+        <div class="logo_home">
+            <img src="../assets/Mockup_RAILLIFE-removebg-preview.png" alt="logo site">
+        </div>
+
+        <nav class="nav_home">
+            <a href="#" class="ativado">Inicio</a>
+            <a href="#" >Sensores</a>
+            <a href="#">Trens</a>
+            <a href="#">Relatorios</a>
+            <a href="#">Rotas</a>
         </nav>
+
+        <button class="menu_btn_home">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
     </header>
 
     <main class="cadastro-pagina">
-
+        <div class="container_titulo">
+                <img src="../assets/Mockup_RAILLIFE-removebg-preview.png" alt="Logo do site">
+        </div>
         <section class="cadastro-formulario">
 
-            <div class="container_titulo">
-                <h2>CADASTRO</h2>
-            </div>
+           
 
             <form class="grid" method="POST">
 
@@ -116,7 +125,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     </main>
 
-    <img class="fixa" src="../assets/listras vermelho e cinza.png" alt="Detalhe da página">
+    <img class="fixa" src="../assets/listras vermelho e cinza.png">
+    <img class="fixa2" src="../assets/listras vermelho e cinza.png">
 
     <footer></footer>
 
