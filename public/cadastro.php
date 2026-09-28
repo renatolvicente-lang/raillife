@@ -1,5 +1,5 @@
 <?php
-require_once('../infra/conn.php');
+include '../infra/conn.php';
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $nome = $_POST['nome'];
