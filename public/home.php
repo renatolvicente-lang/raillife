@@ -12,7 +12,7 @@
     <header class="hd_home">
 
         <div class="logo_home">
-            <img src="../assets/Mockup_RAILLIFE-removebg-preview.png" alt="logo site">
+            <img src="../assets/logo.png" alt="logo site">
         </div>
 
         <nav class="nav_home">
@@ -34,7 +34,7 @@
     <main class="mn_home">
         <section class="">
             <h1>Dashboard RAILLIFE</h1>
-            <p>acompanhe os principais dados da operação.</p>
+            <p>Acompanhe os principais dados da operação.</p>
             <div class="hm_flex">
                 <div class='hm_card trens_ativos'>
 
