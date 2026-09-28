@@ -52,9 +52,10 @@ body{
     padding: 30px;
 }
 .card_apresentacao{
-    max-width: 2000px;
+    max-width: 1535px;
     min-height: 500px;
 
+    border-radius: 20px;
     background-color: #f8f9fa;
     box-shadow: 0 50px 50px rgba(0, 0, 0, 0.1);
    
@@ -66,7 +67,7 @@ body{
 
 .card_apresentacao h1 {
     margin: 0;
-    font-size: 28px;
+    font-size: xxx-large;
     font-weight: 400;
 }
 

@@ -28,7 +28,7 @@
     
             <br>
 
-            <h1>Monitoramento inteligente em tempo real</h1>
+            <h1><b>Monitoramento inteligente em tempo real</b></h1>
 
             <br>
 
