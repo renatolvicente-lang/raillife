@@ -45,7 +45,27 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 <body>
 
-   <header><div></div></header>
+   <header class="hd_home">
+
+        <div class="logo_home">
+            <img src="../assets/Mockup_RAILLIFE-removebg-preview.png" alt="logo site">
+        </div>
+
+        <nav class="nav_home">
+            <a href="#" class="ativado">Inicio</a>
+            <a href="#" >Sensores</a>
+            <a href="#">Trens</a>
+            <a href="#">Relatorios</a>
+            <a href="#">Rotas</a>
+        </nav>
+
+        <button class="menu_btn_home">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+    </header>
 
     <main class="cadastro-pagina">
         <div class="container_titulo">

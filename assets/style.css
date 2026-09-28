@@ -155,14 +155,14 @@ body{
     
 }
 .fixa{
-    position: absolute;
+    position: relative;
     bottom: 0;
     left: 0;
     width: 40%;
 }
 
 .fixa2{
-    position: absolute;
+    position: relative;
     top: 0;
     right: 0;
     width: 40%;
@@ -274,7 +274,7 @@ header {
 }
 .container_titulo {
     width: 250px;
-    border-radius: 6px;
+    border-radius: 8px 8px 0 0;
     background-color: #f8f9fa;
     display: flex;
     justify-content: center;
@@ -298,7 +298,7 @@ header {
     width: 840px;
     min-height: 418px;
     background-color: #f8f9fa;
-    border-radius: 6px;
+    border-radius: 0 8px 8px 8px;
     padding: 25px 0 18px;
     position: relative;
     z-index: 2;
@@ -413,5 +413,10 @@ header {
 
 .cadastro-formulario button:hover {
     background-color: #a12a2a;
+    width: 350px;
+    transition: width 0.5s ease;
 }
+
+
+
 
