@@ -45,7 +45,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 <body>
 
-   <header><div></div></header>
+   <header>
+    <div>
+        <nav>
+            
+        </nav>
+   </div>
+    </header>
 
     <main class="cadastro-pagina">
         <div class="container_titulo">
