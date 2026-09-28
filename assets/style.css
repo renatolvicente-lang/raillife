@@ -442,9 +442,19 @@ header {
     grid-row: 3;
 }
 
-.campo-submit {
+.login-formulario button {
     grid-column: 1;
     grid-row: 4;
+    justify-self: center;
+    width: 290px;
+    height: 43px;
+    margin-top: 5px;
+    border: none;
+    background-color: #c23232;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
 }
 
 
