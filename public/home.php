@@ -52,7 +52,15 @@
             </div>
         </section>
         <section>
-            <div></div>
+            <div class="status_trem">
+
+            </div>
+            <div class="status_sensores">
+
+            </div>
+            <div class="atividades">
+
+            </div>
         </section>
     </main>
 </body>
