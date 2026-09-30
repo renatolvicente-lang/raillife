@@ -1,3 +1,15 @@
+<?php
+
+    include("../infra/conn.php");
+
+    $result = $conn->query("SELECT * FROM usuarios");
+
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,7 +75,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    
+                    <?php while($linha  = $result->fetch_assoc()){?>
+                        
+                    <?php }?>
                 </tbody>
             </table>
 
