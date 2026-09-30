@@ -479,4 +479,10 @@ header {
     cursor: pointer;
 }
 
+.flex{
+    display: flex;
+}
 
+.padding{
+
+}
