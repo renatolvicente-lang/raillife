@@ -66,19 +66,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <body>
 
-    <header class="cadastro-header">
+    <header class="login-header">
         <nav class="nav-login">
-            <img src="../assets/Logo.png" alt="Logo do site">
         </nav>
     </header>
 
     <main class="login-pagina">
 
         <section class="login-formulario">
-
+        <div class="login-logo">
+        <img src="../assets/Logo.png" alt="Logo do site">
+        </div>
 
             <form class="grid" method="POST">
-
+            
                 <div class="login-campo campo-nome">
                     <label for="nome">Nome: </label>
                     <input type="text" name="nome" id="nome" placeholder="nome completo" required>
