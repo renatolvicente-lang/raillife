@@ -55,3 +55,5 @@ CREATE TABLE relatorios (
   id_usuarios INT NOT NULL,
   FOREIGN KEY (id_usuarios) REFERENCES usuarios(id)
 );
+
+INSERT INTO usuarios VALUES ('adm','adm@gmail','');
