@@ -34,7 +34,7 @@
     </header>
     
         <main class="mn_apresentacao">
-        <div class="card_apresentacao">
+        <div class="card_apresentacao_sensores">
          
         <div>
         <div class="flex">
@@ -52,7 +52,7 @@
 
         <div>
 
-        <table>
+        <table  class="tabela">
                 <thead>
                     <tr>
                         <th>ID</th>

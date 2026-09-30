@@ -496,3 +496,45 @@ header {
 .padding{
 
 }
+
+.tabela {
+  width: 1460px;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  border-radius: 50px;
+  border-radius: 20px;
+}
+
+.tabela th, 
+.tabela td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd; 
+}
+
+.tabela tr {
+  background-color: #d30e0e;
+  color: white;
+  border-radius: 50px 50px 0 0;
+}
+
+.tabela thead {
+  background-color: #d30e0e;
+  color: white;
+  border-radius: 50px 50px 0 0;
+}
+
+
+
+
+
+
+.card_apresentacao_sensores{
+    width: 1535px;
+    height: 500px;
+    border-radius: 20px;
+    background-color: #f8f9fa;
+    padding: 35px 35px;
+    font-family: Arial, sans-serif;
+    display: flex;
+}
