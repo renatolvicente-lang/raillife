@@ -57,8 +57,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         }
     }
 
-    //Validação de idade
-    if(empty)
+    //Validação de cidade
+        if(empty($cidade)){
+            $erro = "O campo cidade é obrigatório.";
+        } elseif (mb_strlen($cidade) < 3){
+            $erro = "O campo cidade deve ter no mínimo 3 caracteres.";
+        } elseif(!preg_match("/^[a-zA-ZÀ-ÿ\s-]+$/", $cidade)){
+            $erro = "O campo cidade deve conter apenas letras, hífens e espaços.";
+        }
 
     if ($erro == "") {
     $sql = "INSERT INTO usuarios (nome, email, senha, CPF, endereco, cidade, CEP, data_nascimento) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
