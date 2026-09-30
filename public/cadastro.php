@@ -15,8 +15,32 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     $cpf_limpo = preg_replace('/\D/', '', $CPF);
 
+    //Validação do nome
+     if(empty($nome)){
+        $erro = "O campo nome é obrigatório.";
+        } elseif (mb_strlen($nome) < 5){
+            $erro = "O campo nome deve ter no mínimo 5 caracteres.";
+        }elseif(!preg_match("/^[a-zA-ZÀ-ÿ\s]+$/", $nome)){
+            $erro = "O campo nome deve conter apenas letras e espaços.";
+        }else{
+            $partes_nome = explode(" ", $nome);
+            $partes_nome = array_filter($partes_nome);
 
-    // Validação do CPF
+            if (count($partes_nome) < 2) {
+                $erro = "O campo nome deve conter nome e sobrenome.";
+            }
+        }
+
+        //Validação do email
+        if(empty($email)){
+            $erro = "O campo email é obrigatório.";
+        } elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+            $erro = "O campo email é inválido.";
+        } elseif (strpos($email," ") !== false){
+            $erro = "O campo email não pode conter espaços.";
+        }
+
+        // Validação do CPF
     if (strlen($cpf_limpo) !== 11) {
         $erro = "CPF inválido";
     }
@@ -32,6 +56,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $erro = "CEP inválido";
         }
     }
+
+    //Validação de cidade
+        if(empty($cidade)){
+            $erro = "O campo cidade é obrigatório.";
+        } elseif (mb_strlen($cidade) < 3){
+            $erro = "O campo cidade deve ter no mínimo 3 caracteres.";
+        } elseif(!preg_match("/^[a-zA-ZÀ-ÿ\s-]+$/", $cidade)){
+            $erro = "O campo cidade deve conter apenas letras, hífens e espaços.";
+        }
 
     if ($erro == "") {
     $sql = "INSERT INTO usuarios (nome, email, senha, CPF, endereco, cidade, CEP, data_nascimento) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
