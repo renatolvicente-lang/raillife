@@ -50,7 +50,8 @@
          
         <div>
         <div class="flex">
-            <div>
+            <div class="espaco"></div>
+            <div class="escrita_sensor">
                 <h1>Lista de sensores:</h1>
             </div>
 
