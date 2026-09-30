@@ -34,7 +34,7 @@
     </header>
     
         <main class="mn_apresentacao">
-        <div class="card_apresentacao_sensores">
+        <div class="card_sensores">
          
         <div>
         <div class="flex">
@@ -46,7 +46,7 @@
                 </div>
 
                     <div>
-                        <h2>Novo sensor:</h2>
+                        <button type="button" class="btn btn-danger">Novo sensor</button>
                     </div>
         </div>
 
@@ -55,11 +55,11 @@
         <table  class="tabela">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th class="tb_id">ID</th>
                         <th>Rota</th>
                         <th>Tipo</th>
                         <th>Data de Cadastro</th>
-                        <th>Ações</th>
+                        <th class="tb_acoes">Ações</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -494,7 +494,7 @@ header {
 }
 
 .padding{
-
+    width: 1000px;
 }
 
 .tabela {
@@ -518,10 +518,12 @@ header {
   border-radius: 50px 50px 0 0;
 }
 
-.tabela thead {
-  background-color: #d30e0e;
-  color: white;
-  border-radius: 50px 50px 0 0;
+.tb_id {
+  border-radius: 20px 0 0 0;
+}
+
+.tb_acoes {
+  border-radius: 0 20px 0 0;
 }
 
 
@@ -529,7 +531,7 @@ header {
 
 
 
-.card_apresentacao_sensores{
+.card_sensores{
     width: 1535px;
     height: 500px;
     border-radius: 20px;
