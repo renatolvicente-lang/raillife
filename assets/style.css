@@ -464,20 +464,6 @@ header {
 
 }
 
-.campo-nome  {
-    grid-column: 1;
-    grid-row: 1;
-}
-.campo-email {
-    grid-column: 1;
-    grid-row: 2;
-}
-
-.campo-senha{
-    grid-column: 1;
-    grid-row: 3;
-}
-
 .login-formulario button {
     grid-column: 1;
     grid-row: 4;
