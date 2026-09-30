@@ -1,6 +1,8 @@
 <?php
 require_once('../infra/conn.php');
 
+$erro = "";
+
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $nome = $_POST['nome'];
     $senha = $_POST['senha'];
@@ -12,15 +14,26 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $data_nascimento = $_POST['data_nascimento'];
 
     $cpf_limpo = preg_replace('/\D/', '', $CPF);
+
+
+    // Validação do CPF
     if (strlen($cpf_limpo) !== 11) {
-        exit("CPF inválido");
+        $erro = "CPF inválido";
     }
 
     $cep_limpo = preg_replace('/\D/', '', $CEP);
     if (strlen($cep_limpo) !== 8) {
-        exit("CEP inválido");
+        $erro = "CEP inválido";
     }
 
+    // Validação do CEP
+    if ($erro == "") {
+        if (strlen($cep_limpo) !== 8) {
+            $erro = "CEP inválido";
+        }
+    }
+
+    if ($erro == "") {
     $sql = "INSERT INTO usuarios (nome, email, senha, CPF, endereco, cidade, CEP, data_nascimento) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
     $comando = $conn->prepare($sql);
@@ -30,6 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     header("Location: ../public/login.php");
     exit;
+    }
 }
 ?>
 
@@ -75,43 +89,47 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </div>
         <section class="cadastro-formulario">
 
-           
+           <?php if ($erro != ""){ ?>
+        <div class="mensagem-erro">
+            <?php echo $erro; ?>
+        </div>
+    <?php } ?>
 
             <form class="grid" method="POST">
 
                 <div class="cadastro-campo campo-nome">
                     <label for="nome">Nome completo:</label>
-                    <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo">
+                    <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" value="<?php echo htmlspecialchars($nome ?? '');?>">
                 </div>
 
                 <div class="cadastro-campo campo-email">
                     <label for="email">E-mail:</label>
-                    <input type="email" id="email" name="email" placeholder="Digite seu E-mail">
+                    <input type="email" id="email" name="email" placeholder="Digite seu E-mail" value="<?php echo htmlspecialchars($email ?? ''); ?>">
                 </div>
 
                 <div class="cadastro-campo campo-cpf">
                     <label for="CPF">CPF:</label>
-                    <input type="text" id="CPF" name="CPF" placeholder="Digite seu CPF">
+                    <input type="text" id="CPF" name="CPF" placeholder="Digite seu CPF" value="<?php echo htmlspecialchars($CPF ?? ''); ?>">
                 </div>
 
                 <div class="cadastro-campo campo-endereco">
                     <label for="endereco">Endereço:</label>
-                    <input type="text" id="endereco" name="endereco" placeholder="Digite seu endereço">
+                    <input type="text" id="endereco" name="endereco" placeholder="Digite seu endereço" value="<?php echo htmlspecialchars($endereco ?? ''); ?>">
                 </div>
 
                 <div class="cadastro-campo campo-cidade">
                     <label for="cidade">Cidade:</label>
-                    <input type="text" id="cidade" name="cidade" placeholder="Digite sua cidade">
+                    <input type="text" id="cidade" name="cidade" placeholder="Digite sua cidade" value="<?php echo htmlspecialchars($cidade ?? ''); ?>">
                 </div>
 
                 <div class="cadastro-campo campo-cep">
                     <label for="CEP">CEP:</label>
-                    <input type="text" id="CEP" name="CEP" placeholder="Digite seu Código de Endereçamento Postal">
+                    <input type="text" id="CEP" name="CEP" placeholder="Digite seu Código de Endereçamento Postal" value="<?php echo htmlspecialchars($CEP ?? ''); ?>">
                 </div>
 
                 <div class="cadastro-campo campo-data">
                     <label for="data_nascimento">Data de Nascimento:</label>
-                    <input type="date" id="data_nascimento" name="data_nascimento" placeholder="Digite sua data de nascimento">
+                    <input type="date" id="data_nascimento" name="data_nascimento" placeholder="Digite sua data de nascimento" value="<?php echo htmlspecialchars($data_nascimento ?? ''); ?>">
                 </div>
 
                 <div class="cadastro-campo campo-senha">
