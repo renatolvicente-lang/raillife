@@ -39,6 +39,7 @@ body{
     padding: 50px;
     margin: auto;
     background-color: rgba(255, 255, 255, 0.356);
+
 }
 .hm_flex{
     display: flex;
@@ -51,9 +52,17 @@ body{
     padding: 20px;
     border-radius: 20px 20px 0 0;
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.11);
+
 }
 
 /* Página de apresentação*/
+
+.trem{
+    width: 540px;
+    height: 500px;
+    border-radius: 20px;
+}
+
 .mn_apresentacao{
     width: min(100%, 1800px);
     display: flex;
@@ -61,6 +70,8 @@ body{
     justify-content: center;
     align-items: center;
     padding: 30px;
+    z-index: 2;
+    position: relative;
 }
 .card_apresentacao{
     max-width: 1535px;
@@ -70,7 +81,7 @@ body{
     background-color: #f8f9fa;
     box-shadow: 0 50px 50px rgba(0, 0, 0, 0.1);
    
-    padding: 20px 35px;
+    padding: 35px 35px;
 
     font-family: Arial, sans-serif;
     display: flex;
