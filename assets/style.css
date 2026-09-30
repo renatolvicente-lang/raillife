@@ -8,7 +8,8 @@ body{
     width: 92%;
     height: 84px;
     margin: 22px auto 35px;
-    
+    position: relative;
+    z-index: 2;
     background: #f8f9fa;
     
     
@@ -160,6 +161,8 @@ body{
     bottom: 0;
     left: 0;
     width: 40%;
+    position: absolute;
+    z-index: 1;
 }
 
 .fixa2{
@@ -167,6 +170,8 @@ body{
     right: 0;
     width: 40%;
     rotate: 180deg;
+    position: absolute;
+    z-index: 1;
 }
 
 .ft_apresentacao{
@@ -295,6 +300,8 @@ header {
 .cadastro-pagina {
     width: 50%;
     margin: auto;
+    position: relative;
+    z-index: 2;
 }
 
 .cadastro-formulario {

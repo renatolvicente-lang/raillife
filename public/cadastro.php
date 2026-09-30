@@ -45,6 +45,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 <body>
 
+    <img class="fixa2" src="../assets/listras vermelho e cinza.png">
+
    <header class="hd_home">
 
         <div class="logo_home">
@@ -125,10 +127,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     </main>
 
-    <img class="fixa" src="../assets/listras vermelho e cinza.png">
-    <img class="fixa2" src="../assets/listras vermelho e cinza.png">
 
     <footer></footer>
+
+   <img class="fixa" src="../assets/listras vermelho e cinza.png">
 
 </body>
 
