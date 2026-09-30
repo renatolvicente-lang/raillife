@@ -15,6 +15,21 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     $cpf_limpo = preg_replace('/\D/', '', $CPF);
 
+    //Validação do nome
+     if(empty($nome)){
+        $erro = "O campo nome é obrigatório.";
+        } elseif (mb_strlen($nome) < 5){
+            $erro = "O campo nome deve ter no mínimo 5 caracteres.";
+        }elseif(!preg_match("/^[a-zA-ZÀ-ÿ\s]+$/", $nome)){
+            $erro = "O campo nome deve conter apenas letras e espaços.";
+        }else{
+            $partes_nome = explode(" ", $nome);
+            $partes_nome = array_filter($partes_nome);
+
+            if (count($partes_nome) < 2) {
+                $erro = "O campo nome deve conter nome e sobrenome.";
+            }
+        }
 
     // Validação do CPF
     if (strlen($cpf_limpo) !== 11) {
