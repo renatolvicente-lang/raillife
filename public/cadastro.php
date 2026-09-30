@@ -108,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <a href="#">Rotas</a>
         </nav>
 
-        <button class="menu_btn_home">
+        <button class="menu_btn_home" img src="../assets/menu button.png">
             <span></span>
             <span></span>
             <span></span>
