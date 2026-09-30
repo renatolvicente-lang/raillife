@@ -31,7 +31,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             }
         }
 
-    // Validação do CPF
+        //Validação do email
+        if(empty($email)){
+            $erro = "O campo email é obrigatório.";
+        } elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+            $erro = "O campo email é inválido.";
+        } elseif (strpos($email," ") !== false){
+            $erro = "O campo email não pode conter espaços.";
+        }
+
+        // Validação do CPF
     if (strlen($cpf_limpo) !== 11) {
         $erro = "CPF inválido";
     }
@@ -47,6 +56,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $erro = "CEP inválido";
         }
     }
+
+    //Validação de idade
+    if(empty)
 
     if ($erro == "") {
     $sql = "INSERT INTO usuarios (nome, email, senha, CPF, endereco, cidade, CEP, data_nascimento) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
