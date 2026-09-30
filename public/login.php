@@ -66,9 +66,26 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <body>
 
-    <header class="login-header">
-        <nav class="nav-login">
+    <header class="hd_home">
+
+        <div class="logo_home">
+            <img src="../assets/logo.png" alt="logo site">
+        </div>
+
+        <nav class="nav_home">
+            <a href="#" class="ativado">Inicio</a>
+            <a href="#" >Sensores</a>
+            <a href="#">Trens</a>
+            <a href="#">Relatorios</a>
+            <a href="#">Rotas</a>
         </nav>
+
+        <button class="menu_btn_home">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
     </header>
 
     <main class="login-pagina">

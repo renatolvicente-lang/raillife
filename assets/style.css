@@ -7,7 +7,7 @@ body{
 .hd_home{
     width: 92%;
     height: 84px;
-    margin: 22px auto 35px;
+    margin: 22px auto 70px;
     position: relative;
     z-index: 2;
     background: #f8f9fa;
@@ -213,6 +213,7 @@ body{
     padding: 15px 52px 18px;
     position: relative;
     z-index: 2;
+    height: 500px;
 }
 
 .login-formulario h2 {
