@@ -57,6 +57,10 @@ body{
 
 /* Página de apresentação*/
 
+.escrita_inicial{
+
+}
+
 .trem{
     width: 540px;
     height: 500px;
@@ -91,15 +95,6 @@ body{
     margin: 0;
     font-size: xxx-large;
     font-weight: 400;
-}
-
-.card_apresentacao h2 {
-    margin: 0 0 25px;
-
-    color: #ff6b00;
-
-    font-size: 16px;
-    font-weight: bold;
 }
 
 .card_apresentacao p {
