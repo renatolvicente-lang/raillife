@@ -494,7 +494,7 @@ header {
 }
 
 .padding{
-    width: 1000px;
+    width: 981px;
 }
 
 .tabela {
@@ -526,10 +526,13 @@ header {
   border-radius: 0 20px 0 0;
 }
 
+.escrita_sensor{
+    height: 50px;
+}
 
-
-
-
+.espaco{
+    width: 20px;
+}
 
 .card_sensores{
     width: 1535px;
