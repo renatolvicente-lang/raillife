@@ -34,7 +34,7 @@ body{
     font-weight: bolder;
 }
 .mn_home{
-    max-width: 1100px;
+    max-width: 1300px;
     border-radius: 50px 50px 0 0;
     padding: 50px;
     margin: auto;
@@ -43,7 +43,7 @@ body{
 }
 .hm_flex{
     display: flex;
-    padding: 20px;
+    padding: 30px;
 }
 .hm_card{
     background-color: white;
@@ -54,7 +54,17 @@ body{
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.11);
 
 }
-
+.hm_status{
+    background-color: white;
+    width: 350px;
+    margin: auto;
+    padding: 25px;
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.11);
+}
+#icon_trem{
+    width: 40px;
+}
 /* Página de apresentação*/
 
 .trem{

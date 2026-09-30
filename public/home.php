@@ -17,7 +17,7 @@
 
         <nav class="nav_home">
             <a href="#" class="ativado">Inicio</a>
-            <a href="#" >Sensores</a>
+            <a href="#"  >Sensores</a>
             <a href="#">Trens</a>
             <a href="#">Relatorios</a>
             <a href="#">Rotas</a>
@@ -37,29 +37,53 @@
             <p>Acompanhe os principais dados da operação.</p>
             <div class="hm_flex">
                 <div class='hm_card trens_ativos'>
-
+                    <div>
+                        <img src="../assets/icon_trem.png" alt="" id = "icon_trem">
+                    </div>
+                    <div>
+                        <div class=""><h3>Trens Ativos</h3></div>
+                        <div class=""></div>
+                    </div>
                 </div>
 
                 <div class = "hm_card sensores">
-
+                    <div>
+                        <img src="../assets/sensor_icon.png" alt="" id = "icon_trem">
+                    </div>
+                    <div>
+                        <div class=""><h3>Sensores Ativos</h3></div>
+                        <div class=""></div>
+                    </div>
                 </div>
                 <div class = "hm_card rotas_ativas">
-
+                    <div>
+                        <img src="../assets/rotas_icon.png" alt="" id = "icon_trem">
+                    </div>
+                    <div>
+                        <div class=""><h3>Rotas Ativas</h3></div>
+                        <div class=""></div>
+                    </div>
                 </div>
                 <div class="hm_card relatorios">
-
+                    <div>
+                        <img src="../assets/relatorios_icon.png" alt="" id = "icon_trem">
+                    </div>
+                    <div>
+                        <div class=""><h3>Relatórios</h3></div>
+                        <div class=""></div>
+                    </div>
                 </div>
             </div>
+            
         </section>
         <section>
-            <div class="status_trem">
-
-            </div>
-            <div class="status_sensores">
-
-            </div>
-            <div class="atividades">
-
+            <div class="hm_flex">
+                <div class="hm_status status_trem">
+                </div>
+                <div class="hm_status status_sensores">
+                </div>
+                <div class="hm_status atividades">
+                </div>
             </div>
         </section>
     </main>
