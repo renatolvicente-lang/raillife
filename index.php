@@ -44,17 +44,18 @@
     
             <br>
 
-            <h1><b>Monitoramento inteligente em tempo real</b></h1>
+            <h2><b>Monitoramento inteligente em tempo real</b></h2>
 
             <br>
-
-            <h5>
+                <div class="escrita_inicial">
+            <h3>
                 Nosso sistema foi desenvolvido para facilitar o
                 monitoramento e o gerenciamento de informações de uma
                 operação ferroviária. Através de sensores IoT, os dados
                 são coletados em tempo real e apresentados de forma
                 organizada em um painel de controle.
-            </h5>
+            </h3>
+                </div>
         </div>
             
             <img src="assets/trem.png" alt="trem" class="trem">

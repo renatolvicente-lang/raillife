@@ -67,6 +67,10 @@ body{
 }
 /* Página de apresentação*/
 
+.escrita_inicial{
+
+}
+
 .trem{
     width: 540px;
     height: 500px;
@@ -101,15 +105,6 @@ body{
     margin: 0;
     font-size: xxx-large;
     font-weight: 400;
-}
-
-.card_apresentacao h2 {
-    margin: 0 0 25px;
-
-    color: #ff6b00;
-
-    font-size: 16px;
-    font-weight: bold;
 }
 
 .card_apresentacao p {
@@ -477,20 +472,6 @@ header {
     overflow-clip-margin: content-box;
     overflow: clip;
 
-}
-
-.campo-nome  {
-    grid-column: 1;
-    grid-row: 1;
-}
-.campo-email {
-    grid-column: 1;
-    grid-row: 2;
-}
-
-.campo-senha{
-    grid-column: 1;
-    grid-row: 3;
 }
 
 .login-formulario button {
