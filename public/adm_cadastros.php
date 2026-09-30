@@ -19,7 +19,7 @@
 
         <nav class="nav_home">
             <a href="#">Inicio</a>
-            <a href="#" >Sensores</a>
+            <a href="#" class="ativado">Sensores</a>
             <a href="#">Trens</a>
             <a href="#">Relatorios</a>
             <a href="#">Rotas</a>
@@ -35,12 +35,46 @@
     
         <main class="mn_apresentacao">
         <div class="card_apresentacao">
-            
+         
         <div>
-        
-        
+        <div class="flex">
+            <div>
+                <h1>Lista de sensores:</h1>
+            </div>
+
+                <div class="padding">
+                </div>
+
+                    <div>
+                        <h2>Novo sensor:</h2>
+                    </div>
+        </div>
+
+        <div>
+
+        <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Rota</th>
+                        <th>Tipo</th>
+                        <th>Data de Cadastro</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+
 
         </div>
+
+        </div>
+
+        </div>
+
+        
         
     </main>
 
