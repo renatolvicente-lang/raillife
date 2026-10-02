@@ -59,7 +59,7 @@
                 </div>
 
                     <div>
-                        <button type="button" class="btn btn-danger">Novo sensor</button>
+                        <a href="login.php"><button type="button" class="btn btn-danger">Novo sensor</button></a>
                     </div>
         </div>
 
@@ -69,6 +69,7 @@
                 <thead>
                     <tr>
                         <th class="tb_id">ID</th>
+                        <th>nome</th>
                         <th>Rota</th>
                         <th>Tipo</th>
                         <th>Data de Cadastro</th>
@@ -77,7 +78,36 @@
                 </thead>
                 <tbody>
                     <?php while($linha  = $result->fetch_assoc()){?>
-                        
+                        <tr>
+                            <td>
+                                <?php $linha["id"];?>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <?php $linha["nome"];?>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <?php $linha["localizacao"];?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <?php $linha["tipo"];?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <?php $linha["data_instalacao"]?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Editar</td>
+                        </tr>
                     <?php }?>
                 </tbody>
             </table>
