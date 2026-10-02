@@ -62,7 +62,7 @@ body{
     border-radius: 20px 20px 0 0;
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.11);
 }
-#icon_trem{
+.icon_trem{
     width: 40px;
 }
 /* Página de apresentação*/

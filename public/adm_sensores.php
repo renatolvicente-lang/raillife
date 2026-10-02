@@ -58,7 +58,7 @@
                 </div>
 
                     <div>
-                        <a href="login.php"><button type="button" class="btn btn-danger">Novo sensor</button></a>
+                        <a href="sensores.php"><button type="button" class="btn btn-danger">Novo sensor</button></a>
                     </div>
         </div>
 

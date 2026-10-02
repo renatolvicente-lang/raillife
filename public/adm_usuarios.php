@@ -50,17 +50,19 @@
         <div>
         <div class="flex">
             <div class="espaco"></div>
-            <div class="escrita_sensor">
-                <h1>Lista de sensores:</h1>
-            </div>
-
-                <div class="padding">
+                
+                <div class="escrita_sensor">
+                    <h1>Lista de Usuários:</h1>
                 </div>
 
-                    <div>
-                        <a href="login.php"><button type="button" class="btn btn-danger">Novo sensor</button></a>
-                    </div>
+                <div class="padding">
+            </div>
+            
+            <div>
+                <a href="cadastro.php"><button type="button" class="btn btn-danger">Novo Usuario</button></a>
+            </div>
         </div>
+        <p>Gerencie os usuários do sistema, edite informações ou remova acessos.</p>
 
         <div>
 
@@ -69,9 +71,9 @@
                     <tr>
                         <th class="tb_id">ID</th>
                         <th>nome</th>
-                        <th>Rota</th>
-                        <th>Tipo</th>
-                        <th>Data de Cadastro</th>
+                        <th>Email</th>
+                        <th>Atuação</th>
+                        <th>CPF</th>
                         <th class="tb_acoes">Ações</th>
                     </tr>
                 </thead>
@@ -87,15 +89,15 @@
                             </td>
                         
                             <td>
-                                <?php echo $linha["localizacao"];?>
+                                <?php echo $linha["email"];?>
                             </td>
                         
                             <td>
-                                <?php echo $linha["tipo"];?>
+                                <?php echo $linha["atuacao"];?>
                             </td>
                       
                             <td>
-                                <?php echo $linha["data_instalacao"]?>
+                                <?php echo $linha["cpf"]?>
                             </td>
                        
                             <td>
