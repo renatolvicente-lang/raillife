@@ -2,8 +2,7 @@
 
     include("../infra/conn.php");
 
-    $result = $conn->query("SELECT * FROM usuarios");
-
+    $result = $conn->query("SELECT * FROM sensores");
 
 ?>
 
@@ -80,33 +79,29 @@
                     <?php while($linha  = $result->fetch_assoc()){?>
                         <tr>
                             <td>
-                                <?php $linha["id"];?>
+                                <?php echo $linha["id"];?>
                             </td>
-                        </tr>
-
-                        <tr>
+                        
                             <td>
-                                <?php $linha["nome"];?>
+                                <?php echo $linha["nome"];?>
                             </td>
-                        </tr>
-
-                        <tr>
+                        
                             <td>
-                                <?php $linha["localizacao"];?>
+                                <?php echo $linha["localizacao"];?>
                             </td>
-                        </tr>
-                        <tr>
+                        
                             <td>
-                                <?php $linha["tipo"];?>
+                                <?php echo $linha["tipo"];?>
                             </td>
-                        </tr>
-                        <tr>
+                      
                             <td>
-                                <?php $linha["data_instalacao"]?>
+                                <?php echo $linha["data_instalacao"]?>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>Editar</td>
+                       
+                            <td>
+                                <a href="editar_sensor.php?id=<?php echo $linha["id"]?>">Editar</a>
+                                <a href="excluir_sensor.php?id=<?php echo $linha["id"]?>">Excluir</a>
+                            </td>
                         </tr>
                     <?php }?>
                 </tbody>
