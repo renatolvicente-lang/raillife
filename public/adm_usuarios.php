@@ -101,7 +101,7 @@
                             </td>
                        
                             <td>
-                                <a href="editar_sensor.php?id=<?php echo $linha["id"]?>">Editar</a>
+                                <a href="cadastro.php?id=<?php echo $linha["id"]?>" >Editar</a>
                                 <a href="excluir_sensor.php?id=<?php echo $linha["id"]?>">Excluir</a>
                             </td>
                         </tr>
@@ -115,7 +115,6 @@
         </div>
 
         </div>
-
         
         
     </main>
@@ -123,6 +122,6 @@
     <footer></footer>
 
    <img class="fixa" src="../assets/listras vermelho e cinza.png">
-
+    <script src="../scripts/popup_up.js"></script>
 </body>
 </html>

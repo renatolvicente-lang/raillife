@@ -99,7 +99,7 @@
                             </td>
                        
                             <td>
-                                <a href="editar_sensor.php?id=<?php echo $linha["id"]?>">Editar</a>
+                                <button id="btnAbrir">Editar</button>
                                 <a href="excluir_sensor.php?id=<?php echo $linha["id"]?>">Excluir</a>
                             </td>
                         </tr>
@@ -113,7 +113,58 @@
         </div>
 
         </div>
+        <!--  -->
+        <div class="overlay" id="overlay">
 
+        <!-- Popup -->
+        <div class="popup">
+
+            <div class="icone">
+                📡
+            </div>
+
+            <h1>Adicionar Sensor</h1>
+
+            <form>
+
+                <div class="form-grid">
+
+                    <div class="campo">
+                        <label>Nome:</label>
+                        <input type="text" placeholder="Ex.: Sensor Norte">
+                    </div>
+
+                    <div class="campo">
+                        <label>Tipo:</label>
+                        <input type="text" placeholder="Ex.: Temperatura">
+                    </div>
+
+                    <div class="campo">
+                        <label>Rota:</label>
+                        <input type="text" placeholder="Ex.: Trilho do Norte">
+                    </div>
+
+                    <div class="campo">
+                        <label>Status:</label>
+                        <input type="text" placeholder="Ex.: Para instalação">
+                    </div>
+
+                    <div class="campo">
+                        <label>Data de instalação:</label>
+                        <input type="text" placeholder="Ex.: 19/01/2009">
+                    </div>
+
+                </div>
+
+                <button class="btnAdicionar" type="submit">
+                    Adicionar
+                </button>
+
+            </form>
+
+        </div>
+    </div>
+        
         
         
     </main>
@@ -121,6 +172,6 @@
     <footer></footer>
 
    <img class="fixa" src="../assets/listras vermelho e cinza.png">
-
+    <script src="../scripts/popup_up.js"></script>
 </body>
 </html>
