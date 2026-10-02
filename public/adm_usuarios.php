@@ -122,6 +122,5 @@
     <footer></footer>
 
    <img class="fixa" src="../assets/listras vermelho e cinza.png">
-    <script src="../scripts/popup_up.js"></script>
 </body>
 </html>
