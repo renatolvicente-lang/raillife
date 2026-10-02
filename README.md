@@ -12,8 +12,14 @@ O RAILLIFE é um projeto Ferroramas para gerenciamento ferroviário, com sistema
 ## Tarefas iniciais
 
  * [x] Atualização do README.md
- * [ ] Refatoração da tela de cadastro
- * [ ] Refatoração da tela de login
+ * [x] Refatoração da tela de cadastro
+ * [x] Refatoração da tela de login
+ * [x] Frontend da tela de cadastro
+ * [x] Frontend da tela de login
+ * [x] Backend da tela de cadastro
+ * [x] Backend da tela de login
+ * [ ] Frontend da tela de gerenciamento de usuários
+ * [ ] Backend da tela de gerenciamento de usuários
 
 ## Contribuições 
 
