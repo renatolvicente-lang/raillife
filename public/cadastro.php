@@ -4,6 +4,11 @@ require_once('../infra/conn.php');
 $erro = "";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    //Verificando se tem um id na url
+    $id = $_GET['id'] ?? null;
+
+    $usuario = null;
+    
     $nome = $_POST['nome'];
     $senha = $_POST['senha'];
     $email = $_POST['email'];
@@ -14,6 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $data_nascimento = $_POST['data_nascimento'];
 
     $cpf_limpo = preg_replace('/\D/', '', $CPF);
+
+    
+
 
     //Validação do nome
      if(empty($nome)){
@@ -66,16 +74,25 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $erro = "O campo cidade deve conter apenas letras, hífens e espaços.";
         }
 
-    if ($erro == "") {
-    $sql = "INSERT INTO usuarios (nome, email, senha, CPF, endereco, cidade, CEP, data_nascimento) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    if($id){
+        $sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ?, cpf = ?, endereco = ?, cidade = ?, CEP = ?, data_nascimento = ?";
 
-    $comando = $conn->prepare($sql);
+        $stmt = $conn->prepare($sql);
 
-    $comando->bind_param("ssssssss",$nome, $email, $senha, $CPF, $endereco, $cidade, $CEP, $data_nascimento);
-    $comando->execute();
+        $stmt ->bind_param('ssssssss',$nome, $email, $senha, $CPF, $endereco, $cidade, $CEP, $data_nascimento);
+        $stmt ->execute();
+    }else{  
+        if ($erro == "") {
+        $sql = "INSERT INTO usuarios (nome, email, senha, CPF, endereco, cidade, CEP, data_nascimento) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-    header("Location: ../public/login.php");
-    exit;
+        $comando = $conn->prepare($sql);
+
+        $comando->bind_param("ssssssss",$nome, $email, $senha, $CPF, $endereco, $cidade, $CEP, $data_nascimento);
+        $comando->execute();
+
+        header("Location: ../public/login.php");
+        exit;
+        }
     }
 }
 ?>
