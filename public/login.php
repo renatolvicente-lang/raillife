@@ -95,7 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <img src="../assets/Logo.png" alt="Logo do site">
         </div>
 
-            <form class="grid" method="POST">
+            <form method="POST">
             
                 <div class="login-campo campo-nome">
                     <label for="nome">Nome: </label>
@@ -111,15 +111,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                 <div class="login-campo campo-senha">
                     <label for="senha">Senha:</label>
-
                     <input type="password" id="senha" name="senha" placeholder="*************" required>
                 </div>
 
-                <button type="submit">Conectar</button>
-
-                <h6></h6>
-
             </form>
+
+            <button type="submit">Conectar</button>
 
         </section>
 
