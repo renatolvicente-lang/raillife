@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         }
 
     if($id){
-        $sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ?, cpf = ?, endereco = ?, cidade = ?, CEP = ?, data_nascimento = ?";
+        $sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ?, cpf = ?, endereco = ?, cidade = ?, CEP = ?, data_nascimento = ? WHERE id = $id"; ;
 
         $stmt = $conn->prepare($sql);
 
@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $comando->bind_param("ssssssss",$nome, $email, $senha, $CPF, $endereco, $cidade, $CEP, $data_nascimento);
         $comando->execute();
 
-        header("Location: ../public/login.php");
+        header("Location: ../public/adm_usuarios.php");
         exit;
         }
     }

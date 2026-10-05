@@ -102,7 +102,7 @@
                        
                             <td>
                                 <a href="cadastro.php?id=<?php echo $linha["id"]?>" >Editar</a>
-                                <a href="excluir_sensor.php?id=<?php echo $linha["id"]?>" onclick="return confirm('tem certeza que deseja apagar esse usuário?')">Excluir</a>
+                                <a href="excluir_usuarios.php?id=<?php echo $linha["id"]?>" onclick="return confirm('tem certeza que deseja apagar esse usuário?')">Excluir</a>
                             </td>
                         </tr>
                     <?php }?>
