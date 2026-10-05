@@ -1,5 +1,6 @@
 <?php
-
+ session_start();
+    
     include("../infra/conn.php");
 
     $result = $conn->query("SELECT * FROM sensores");
@@ -29,9 +30,9 @@
         </div>
 
         <nav class="nav_home">
-            <a href="#">Inicio</a>
-            <a href="#" class="ativado">Sensores</a>
-            <a href="#">Trens</a>
+            <a href="../index.php">Inicio</a>
+            <a href="adm_sensores.php">Sensores</a>
+            <a href="adm_trens.php" class="ativado">Trens</a>
             <a href="#">Relatorios</a>
             <a href="#">Rotas</a>
         </nav>
