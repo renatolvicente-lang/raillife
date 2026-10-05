@@ -230,6 +230,11 @@ body{
     position: relative;
     z-index: 2;
     height: 500px;
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .login-formulario h2 {

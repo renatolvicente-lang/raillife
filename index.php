@@ -21,9 +21,9 @@
         </div>
 
         <nav class="nav_home">
-            <a href="#" class="ativado">Inicio</a>
-            <a href="#" >Sensores</a>
-            <a href="#">Trens</a>
+            <a href="index.php" class="ativado">Inicio</a>
+            <a href="public/adm_sensores.php" >Sensores</a>
+            <a href="public/adm_trens.php">Trens</a>
             <a href="#">Relatorios</a>
             <a href="#">Rotas</a>
         </nav>
@@ -66,7 +66,11 @@
         
     </main>
 
-    <footer></footer>
+    <footer>
+
+
+    
+    </footer>
 
    <img class="fixa" src="assets/listras vermelho e cinza.png">
 
