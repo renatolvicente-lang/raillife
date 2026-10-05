@@ -51,6 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         // Validação do CPF
     if (strlen($cpf_limpo) !== 11) {
         $erro = "CPF inválido";
+    }elseif (preg_match('/(\d)\1{10}/', $cpf)) {
+        $erro = "CPF inválido";
     }
 
     $cep_limpo = preg_replace('/\D/', '', $CEP);
@@ -74,6 +76,20 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $erro = "O campo cidade deve conter apenas letras, hífens e espaços.";
         }
 
+        if(empty($senha)){
+            $erro = "O campo senha é obrigatório.";
+        } else if (strlen($senha) < 8) {
+            $erro = "A senha deve ter no mínimo 8 caracteres.";
+        } elseif (!preg_match('/[A-Z]/', $senha)) {
+            $erro = "A senha deve conter pelo menos uma letra maiúscula.";
+        } elseif (!preg_match('/[a-z]/', $senha)) {
+            $erro = "A senha deve conter pelo menos uma letra minúscula.";
+        } elseif (!preg_match('/[0-9]/', $senha)) {
+            $erro = "A senha deve conter pelo menos um número.";
+        } elseif (!preg_match('/[\W_]/', $senha)) {
+            $erro = "A senha deve conter pelo menos um caractere especial.";
+        }
+
     if($id){
         $sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ?, cpf = ?, endereco = ?, cidade = ?, CEP = ?, data_nascimento = ? WHERE id = $id"; ;
 
@@ -81,6 +97,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         $stmt ->bind_param('ssssssss',$nome, $email, $senha, $CPF, $endereco, $cidade, $CEP, $data_nascimento);
         $stmt ->execute();
+         header("Location: ../public/adm_usuarios.php");
+         exit();
     }else{  
         if ($erro == "") {
         $sql = "INSERT INTO usuarios (nome, email, senha, CPF, endereco, cidade, CEP, data_nascimento) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -91,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $comando->execute();
 
         header("Location: ../public/adm_usuarios.php");
-        exit;
+        exit();
         }
     }
 }
