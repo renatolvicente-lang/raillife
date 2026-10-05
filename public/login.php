@@ -38,9 +38,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $resultado = $stmt->get_result();
 
         if ($resultado->num_rows > 0) {
-            $_SESSION['usuario'] = $nome;
-            header("Location: home.php");
-            exit();
+            $usuario = $resultado->fetch_assoc();
+            $_SESSION['usuario'] = $usuario=["nome"];
+            $_SESSION['atuacao'] = $usuario["atuacao"];
+            //redireciona para a página certa baseada na área de atuação
+            if($usuario["atuacao"] == "adm") {
+                header("Location: adm_usuarios.php");
+                exit();
+            }else{
+                header("Location: home.php");
+                exit();
+            }
+            
         } else {
             echo "Usuario não existe";
         }
