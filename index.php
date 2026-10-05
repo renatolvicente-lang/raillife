@@ -66,7 +66,11 @@
         
     </main>
 
-    <footer></footer>
+    <footer>
+
+
+    
+    </footer>
 
    <img class="fixa" src="assets/listras vermelho e cinza.png">
 

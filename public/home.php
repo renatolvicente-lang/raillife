@@ -9,6 +9,8 @@
 
 <body>
 
+<img class="fixa2" src="../assets/listras vermelho e cinza.png">
+
     <header class="hd_home">
 
         <div class="logo_home">
@@ -86,6 +88,9 @@
                 </div>
             </div>
         </section>
+
+   <img class="fixa" src="../assets/listras vermelho e cinza.png">
+
     </main>
 </body>
 </html>
