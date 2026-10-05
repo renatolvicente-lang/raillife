@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $comando->bind_param("ssssssss",$nome, $email, $senha, $CPF, $endereco, $cidade, $CEP, $data_nascimento);
         $comando->execute();
 
-        header("Location: ../public/login.php");
+        header("Location: ../public/adm_usuarios.php");
         exit;
         }
     }
