@@ -123,9 +123,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <input type="password" id="senha" name="senha" placeholder="*************" required>
                 </div>
 
+                <button type="submit">Conectar</button>
             </form>
 
-            <button type="submit">Conectar</button>
 
         </section>
 
