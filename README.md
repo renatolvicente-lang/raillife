@@ -29,7 +29,7 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
     <tr>
         <td>
             <a href="" title="">
-            <img src="" alt="">Img Arthur Roeder</img><br>
+            <img src="assets/aurudo roeder.png" alt="">Img Arthur Roeder</img><br>
             <sub>
                 <b> Arthur Roeder</b>
             </sub>
@@ -37,7 +37,7 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
         </td>
         <td>
             <a href="" title="">
-            <img src="" alt="">Img Gustavo Fenske</img><br>
+            <img src="assets/gugupro fenske.png" alt="">Img Gustavo Fenske</img><br>
             <sub>
                 <b>Gustavo Fenske</b>
             </sub>
@@ -45,15 +45,15 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
         </td>
         <td>
             <a href="" title="">
-            <img src="" alt="">Img Matheus Lima</img><br>
+            <img src="assets/menino cafeh.jpg" alt="">Img Mateus Lima</img><br>
             <sub>
-                <b>Matheus Lima</b>
+                <b>Mateus Lima</b>
             </sub>
             </a>
         </td>
         <td>
             <a href="" title="">
-            <img src="" alt="">Img Renato Lorenzo</img><br>
+            <img src="assets/renataum.png" alt="">Img Renato Lorenzo</img><br>
             <sub>
                 <b>Renato Lorenzo</b>
             </sub>
