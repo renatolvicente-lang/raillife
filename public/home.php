@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="../assets/style.css">
 </head>
 
-<body>
-
 <img class="fixa2" src="../assets/listras vermelho e cinza.png">
+
+<body>
 
     <header class="hd_home">
 
@@ -89,8 +89,9 @@
             </div>
         </section>
 
+    </main>
+
    <img class="fixa" src="../assets/listras vermelho e cinza.png">
 
-    </main>
 </body>
 </html>
