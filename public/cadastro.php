@@ -96,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         $stmt = $conn->prepare($sql);
 
-        $stmt ->bind_param('ssssssss',$nome, $email, $senha, $CPF, $endereco, $cidade, $CEP, $data_nascimento, $area_atuacao);
+        $stmt ->bind_param('sssssssss',$nome, $email, $senha, $CPF, $endereco, $cidade, $CEP, $data_nascimento, $area_atuacao);
         $stmt ->execute();
          header("Location: ../public/adm_usuarios.php");
          exit();
@@ -210,8 +210,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     <label for="atuacao">Área de atuação:</label>
                     <select id="atuacao" name="atuacao">
                         <option value="">Selecione sua área de atuação</option>
-                        <option value="<?php echo htmlspecialchars($atuacao ?? ''); ?>">ADM</option>
-                        <option value="<?php echo htmlspecialchars($atuacao ?? ''); ?>">Usuário Comum</option>
+                        <option value="ADM" <?php echo (isset($area_atuacao) && $area_atuacao === 'ADM') ? 'selected' : ''; ?>>ADM</option>
+                        <option value="Usuário Comum" <?php echo (isset($area_atuacao) && $area_atuacao === 'Usuário Comum') ? 'selected' : ''; ?>>Usuário Comum</option>
                     </select>
                 </div>
 
