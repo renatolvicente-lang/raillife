@@ -39,18 +39,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         if ($resultado->num_rows > 0) {
             $usuario = $resultado->fetch_assoc();
-            $_SESSION['usuario'] = $usuario=["nome"];
-            $_SESSION['atuacao'] = $usuario["atuacao"];
-            //redireciona para a página certa baseada na área de atuação
-            if($usuario["atuacao"] == "adm") {
-                header("Location: adm_usuarios.php");
-                exit();
-            }else{
-                header("Location: home.php");
-                exit();
-            }
             
-        } else {
+            if(password_verify($senha, $usuario["senha"])){
+
+                $_SESSION['id'] = $usuario=["id"];   
+                $_SESSION['usuario'] = $usuario=["nome"];
+                $_SESSION['atuacao'] = $usuario["atuacao"];
+                
+
+                if($usuario["atuacao"] == "adm") {
+                    header("Location: adm_usuarios.php");
+                    exit();
+                }else{
+                    header("Location: home.php");
+                    exit();
+                }
+            }
+            //redireciona para a página certa baseada na área de atuação
+            
+        }else {
             echo "Usuario não existe";
         }
         $stmt->close();
@@ -123,9 +130,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <input type="password" id="senha" name="senha" placeholder="*************" required>
                 </div>
 
+                <button type="submit">Conectar</button>
             </form>
 
-            <button type="submit">Conectar</button>
 
         </section>
 

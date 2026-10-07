@@ -1,6 +1,6 @@
 <?php
 require_once('../infra/conn.php');
-
+include 'validar_cpf.php';
 $erro = "";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -51,9 +51,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         // Validação do CPF
     if (strlen($cpf_limpo) !== 11) {
-        $erro = "CPF inválido";
+        $erro = "CPF inválido 1";
     }elseif (preg_match('/(\d)\1{10}/', $cpf_limpo)) {
-        $erro = "CPF inválido";
+        $erro = "CPF inválido 2";
+    } else {
+        
+        if (!validarcpf($cpf_limpo)) {
+            $erro = "CPF inválido 3";
+        }
     }
 
     $cep_limpo = preg_replace('/\D/', '', $CEP);
@@ -92,15 +97,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $erro = "A senha deve conter pelo menos um caractere especial.";
         } else {
             $senha = password_hash($senha, PASSWORD_DEFAULT);
-            
+
         }
 
     if($id){
-        $sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ?, cpf = ?, endereco = ?, cidade = ?, CEP = ?, data_nascimento = ?, atuacao = ? WHERE id = $id"; ;
+        $sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ?, cpf = ?, endereco = ?, cidade = ?, CEP = ?, data_nascimento = ?, atuacao = ? WHERE id = ?"; ;
 
         $stmt = $conn->prepare($sql);
 
-        $stmt ->bind_param('sssssssss',$nome, $email, $senha, $CPF, $endereco, $cidade, $CEP, $data_nascimento, $area_atuacao);
+        $stmt ->bind_param('sssssssssi',$nome, $email, $senha, $CPF, $endereco, $cidade, $CEP, $data_nascimento, $area_atuacao, $id);
         $stmt ->execute();
          header("Location: ../public/adm_usuarios.php");
          exit();
