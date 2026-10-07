@@ -17,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $cidade = $_POST['cidade'];
     $CEP = $_POST['CEP'];
     $data_nascimento = $_POST['data_nascimento'];
+    $area_atuacao = $_POST['atuacao'];
 
     $cpf_limpo = preg_replace('/\D/', '', $CPF);
 
@@ -51,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         // Validação do CPF
     if (strlen($cpf_limpo) !== 11) {
         $erro = "CPF inválido";
-    }elseif (preg_match('/(\d)\1{10}/', $cpf)) {
+    }elseif (preg_match('/(\d)\1{10}/', $cpf_limpo)) {
         $erro = "CPF inválido";
     }
 
@@ -76,6 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $erro = "O campo cidade deve conter apenas letras, hífens e espaços.";
         }
 
+    //validação de senha
         if(empty($senha)){
             $erro = "O campo senha é obrigatório.";
         } else if (strlen($senha) < 8) {
@@ -88,24 +90,27 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $erro = "A senha deve conter pelo menos um número.";
         } elseif (!preg_match('/[\W_]/', $senha)) {
             $erro = "A senha deve conter pelo menos um caractere especial.";
+        } else {
+            $senha = password_hash($senha, PASSWORD_DEFAULT);
+            
         }
 
     if($id){
-        $sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ?, cpf = ?, endereco = ?, cidade = ?, CEP = ?, data_nascimento = ? WHERE id = $id"; ;
+        $sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ?, cpf = ?, endereco = ?, cidade = ?, CEP = ?, data_nascimento = ?, atuacao = ? WHERE id = $id"; ;
 
         $stmt = $conn->prepare($sql);
 
-        $stmt ->bind_param('ssssssss',$nome, $email, $senha, $CPF, $endereco, $cidade, $CEP, $data_nascimento);
+        $stmt ->bind_param('sssssssss',$nome, $email, $senha, $CPF, $endereco, $cidade, $CEP, $data_nascimento, $area_atuacao);
         $stmt ->execute();
          header("Location: ../public/adm_usuarios.php");
          exit();
     }else{  
         if ($erro == "") {
-        $sql = "INSERT INTO usuarios (nome, email, senha, CPF, endereco, cidade, CEP, data_nascimento) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO usuarios (nome, email, senha, CPF, endereco, cidade, CEP, data_nascimento, atuacao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         $comando = $conn->prepare($sql);
 
-        $comando->bind_param("ssssssss",$nome, $email, $senha, $CPF, $endereco, $cidade, $CEP, $data_nascimento);
+        $comando->bind_param("sssssssss",$nome, $email, $senha, $CPF, $endereco, $cidade, $CEP, $data_nascimento, $area_atuacao);
         $comando->execute();
 
         header("Location: ../public/adm_usuarios.php");
@@ -203,6 +208,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <div class="cadastro-campo campo-senha">
                     <label for="senha">Senha:</label>
                     <input type="password" id="senha" name="senha" placeholder="Digite sua senha">
+                </div>
+
+                <div class="cadastro-campo campo-atuacao">
+                    <label for="atuacao">Área de atuação:</label>
+                    <select id="atuacao" name="atuacao">
+                        <option value="">Selecione sua área de atuação</option>
+                        <option value="ADM" <?php echo (isset($area_atuacao) && $area_atuacao === 'ADM') ? 'selected' : ''; ?>>ADM</option>
+                        <option value="Usuário Comum" <?php echo (isset($area_atuacao) && $area_atuacao === 'Usuário Comum') ? 'selected' : ''; ?>>Usuário Comum</option>
+                    </select>
                 </div>
 
                 <button type="submit">Cadastrar</button>
