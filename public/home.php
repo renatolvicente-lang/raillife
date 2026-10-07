@@ -28,9 +28,7 @@
         </nav>
 
         <button class="menu_btn_home">
-            <span></span>
-            <span></span>
-            <span></span>
+            <img src="../assets/botão.png" alt="Menu">
         </button>
 
     </header>

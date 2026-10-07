@@ -695,3 +695,15 @@ header {
     
 
 }
+
+.menu_btn_home{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    width: -60px;
+}
+.menu_btn_home img{
+    width: 60px;
+    height: 60px;
+    
+}
