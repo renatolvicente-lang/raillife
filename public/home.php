@@ -1,3 +1,9 @@
+<?php
+session_start();
+
+include ("../infra/conn.php");
+
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
