@@ -77,6 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $erro = "O campo cidade deve conter apenas letras, hífens e espaços.";
         }
 
+    //validação de senha
         if(empty($senha)){
             $erro = "O campo senha é obrigatório.";
         } else if (strlen($senha) < 8) {
@@ -89,6 +90,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $erro = "A senha deve conter pelo menos um número.";
         } elseif (!preg_match('/[\W_]/', $senha)) {
             $erro = "A senha deve conter pelo menos um caractere especial.";
+        } else {
+            $senha = password_hash($senha, PASSWORD_DEFAULT);
+            
         }
 
     if($id){
