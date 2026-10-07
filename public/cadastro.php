@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $id = $_GET['id'] ?? null;
 
     $usuario = null;
-    
+
     $nome = $_POST['nome'];
     $senha = $_POST['senha'];
     $email = $_POST['email'];
@@ -23,41 +23,41 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     $cpf_limpo = preg_replace('/\D/', '', $CPF);
 
-    
+
 
 
     //Validação do nome
-     if(empty($nome)){
+    if (empty($nome)) {
         $erro = "O campo nome é obrigatório.";
-        } elseif (mb_strlen($nome) < 5){
-            $erro = "O campo nome deve ter no mínimo 5 caracteres.";
-        }elseif(!preg_match("/^[a-zA-ZÀ-ÿ\s]+$/", $nome)){
-            $erro = "O campo nome deve conter apenas letras e espaços.";
-        }else{
-            $partes_nome = explode(" ", $nome);
-            $partes_nome = array_filter($partes_nome);
+    } elseif (mb_strlen($nome) < 5) {
+        $erro = "O campo nome deve ter no mínimo 5 caracteres.";
+    } elseif (!preg_match("/^[a-zA-ZÀ-ÿ\s]+$/", $nome)) {
+        $erro = "O campo nome deve conter apenas letras e espaços.";
+    } else {
+        $partes_nome = explode(" ", $nome);
+        $partes_nome = array_filter($partes_nome);
 
-            if (count($partes_nome) < 2) {
-                $erro = "O campo nome deve conter nome e sobrenome.";
-            }
+        if (count($partes_nome) < 2) {
+            $erro = "O campo nome deve conter nome e sobrenome.";
         }
+    }
 
-        //Validação do email
-        if(empty($email)){
-            $erro = "O campo email é obrigatório.";
-        } elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-            $erro = "O campo email é inválido.";
-        } elseif (strpos($email," ") !== false){
-            $erro = "O campo email não pode conter espaços.";
-        }
+    //Validação do email
+    if (empty($email)) {
+        $erro = "O campo email é obrigatório.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $erro = "O campo email é inválido.";
+    } elseif (strpos($email, " ") !== false) {
+        $erro = "O campo email não pode conter espaços.";
+    }
 
-        // Validação do CPF
+    // Validação do CPF
     if (strlen($cpf_limpo) !== 11) {
         $erro = "CPF inválido 1";
-    }elseif (preg_match('/(\d)\1{10}/', $cpf_limpo)) {
+    } elseif (preg_match('/(\d)\1{10}/', $cpf_limpo)) {
         $erro = "CPF inválido 2";
     } else {
-        
+
         if (!validarCPF($cpf_limpo)) {
             $erro = "CPF inválido 3";
         }
@@ -75,53 +75,61 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         }
     }
 
+    //validação de endereço
+    if (empty($endereco)) {
+        $erro = "O campo endereço é obrigatório.";
+    } elseif (mb_strlen($endereco) < 5) {
+        $erro = "O campo endereço deve ter pelo menos 5 caracteres.";
+    }
+    
     //Validação de cidade
-        if(empty($cidade)){
-            $erro = "O campo cidade é obrigatório.";
-        } elseif (mb_strlen($cidade) < 3){
-            $erro = "O campo cidade deve ter no mínimo 3 caracteres.";
-        } elseif(!preg_match("/^[a-zA-ZÀ-ÿ\s-]+$/", $cidade)){
-            $erro = "O campo cidade deve conter apenas letras, hífens e espaços.";
-        }
+    if (empty($cidade)) {
+        $erro = "O campo cidade é obrigatório.";
+    } elseif (mb_strlen($cidade) < 3) {
+        $erro = "O campo cidade deve ter no mínimo 3 caracteres.";
+    } elseif (!preg_match("/^[a-zA-ZÀ-ÿ\s-]+$/", $cidade)) {
+        $erro = "O campo cidade deve conter apenas letras, hífens e espaços.";
+    }
 
     //validação de senha
-        if(empty($senha)){
-            $erro = "O campo senha é obrigatório.";
-        } else if (strlen($senha) < 8) {
-            $erro = "A senha deve ter no mínimo 8 caracteres.";
-        } elseif (!preg_match('/[A-Z]/', $senha)) {
-            $erro = "A senha deve conter pelo menos uma letra maiúscula.";
-        } elseif (!preg_match('/[a-z]/', $senha)) {
-            $erro = "A senha deve conter pelo menos uma letra minúscula.";
-        } elseif (!preg_match('/[0-9]/', $senha)) {
-            $erro = "A senha deve conter pelo menos um número.";
-        } elseif (!preg_match('/[\W_]/', $senha)) {
-            $erro = "A senha deve conter pelo menos um caractere especial.";
-        } else {
-            $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
+    if (empty($senha)) {
+        $erro = "O campo senha é obrigatório.";
+    } else if (strlen($senha) < 8) {
+        $erro = "A senha deve ter no mínimo 8 caracteres.";
+    } elseif (!preg_match('/[A-Z]/', $senha)) {
+        $erro = "A senha deve conter pelo menos uma letra maiúscula.";
+    } elseif (!preg_match('/[a-z]/', $senha)) {
+        $erro = "A senha deve conter pelo menos uma letra minúscula.";
+    } elseif (!preg_match('/[0-9]/', $senha)) {
+        $erro = "A senha deve conter pelo menos um número.";
+    } elseif (!preg_match('/[\W_]/', $senha)) {
+        $erro = "A senha deve conter pelo menos um caractere especial.";
+    } else {
+        $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
 
-        }
+    }
 
-    if($id){
-        $sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ?, cpf = ?, endereco = ?, cidade = ?, CEP = ?, data_nascimento = ?, atuacao = ? WHERE id = ?"; ;
+    if ($id) {
+        $sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ?, cpf = ?, endereco = ?, cidade = ?, CEP = ?, data_nascimento = ?, atuacao = ? WHERE id = ?";
+        ;
 
         $stmt = $conn->prepare($sql);
 
-        $stmt ->bind_param('sssssssssi',$nome, $email, $senhaHash, $CPF, $endereco, $cidade, $CEP, $data_nascimento, $area_atuacao, $id);
-        $stmt ->execute();
-         header("Location: ../public/adm_usuarios.php");
-         exit();
-    }else{  
-        if ($erro == "") {
-        $sql = "INSERT INTO usuarios (nome, email, senha, CPF, endereco, cidade, CEP, data_nascimento, atuacao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-        $comando = $conn->prepare($sql);
-
-        $comando->bind_param("sssssssss",$nome, $email, $senhaHash, $CPF, $endereco, $cidade, $CEP, $data_nascimento, $area_atuacao);
-        $comando->execute();
-
+        $stmt->bind_param('sssssssssi', $nome, $email, $senhaHash, $CPF, $endereco, $cidade, $CEP, $data_nascimento, $area_atuacao, $id);
+        $stmt->execute();
         header("Location: ../public/adm_usuarios.php");
         exit();
+    } else {
+        if ($erro == "") {
+            $sql = "INSERT INTO usuarios (nome, email, senha, CPF, endereco, cidade, CEP, data_nascimento, atuacao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+            $comando = $conn->prepare($sql);
+
+            $comando->bind_param("sssssssss", $nome, $email, $senhaHash, $CPF, $endereco, $cidade, $CEP, $data_nascimento, $area_atuacao);
+            $comando->execute();
+
+            header("Location: ../public/adm_usuarios.php");
+            exit();
         }
     }
 }
@@ -141,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     <img class="fixa2" src="../assets/listras vermelho e cinza.png">
 
-   <header class="hd_home">
+    <header class="hd_home">
 
         <div class="logo_home">
             <img src="../assets/logo.png" alt="logo site">
@@ -149,7 +157,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         <nav class="nav_home">
             <a href="#" class="ativado">Inicio</a>
-            <a href="#" >Sensores</a>
+            <a href="#">Sensores</a>
             <a href="#">Trens</a>
             <a href="#">Relatorios</a>
             <a href="#">Rotas</a>
@@ -165,51 +173,59 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     <main class="cadastro-pagina">
         <div class="container_titulo">
-                <img src="../assets/logo.png" alt="logo site">
+            <img src="../assets/logo.png" alt="logo site">
         </div>
         <section class="cadastro-formulario">
 
-           <?php if ($erro != ""){ ?>
-        <div class="mensagem-erro">
-            <?php echo $erro; ?>
-        </div>
-    <?php } ?>
+            <?php if ($erro != "") { ?>
+                <div class="mensagem-erro">
+                    <?php echo $erro; ?>
+                </div>
+            <?php } ?>
 
             <form class="grid" method="POST">
 
                 <div class="cadastro-campo campo-nome">
                     <label for="nome">Nome completo:</label>
-                    <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" value="<?php echo htmlspecialchars($nome ?? '');?>">
+                    <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo"
+                        value="<?php echo htmlspecialchars($nome ?? ''); ?>">
                 </div>
 
                 <div class="cadastro-campo campo-email">
                     <label for="email">E-mail:</label>
-                    <input type="email" id="email" name="email" placeholder="Digite seu E-mail" value="<?php echo htmlspecialchars($email ?? ''); ?>">
+                    <input type="email" id="email" name="email" placeholder="Digite seu E-mail"
+                        value="<?php echo htmlspecialchars($email ?? ''); ?>">
                 </div>
 
                 <div class="cadastro-campo campo-cpf">
                     <label for="CPF">CPF:</label>
-                    <input type="text" id="CPF" name="CPF" placeholder="Digite seu CPF" value="<?php echo htmlspecialchars($CPF ?? ''); ?>">
+                    <input type="text" id="CPF" name="CPF" placeholder="Digite seu CPF"
+                        value="<?php echo htmlspecialchars($CPF ?? ''); ?>">
                 </div>
 
                 <div class="cadastro-campo campo-endereco">
                     <label for="endereco">Endereço:</label>
-                    <input type="text" id="endereco" name="endereco" placeholder="Digite seu endereço" value="<?php echo htmlspecialchars($endereco ?? ''); ?>">
+                    <input type="text" id="endereco" name="endereco" placeholder="Digite seu endereço"
+                        value="<?php echo htmlspecialchars($endereco ?? ''); ?>">
                 </div>
 
                 <div class="cadastro-campo campo-cidade">
                     <label for="cidade">Cidade:</label>
-                    <input type="text" id="cidade" name="cidade" placeholder="Digite sua cidade" value="<?php echo htmlspecialchars($cidade ?? ''); ?>">
+                    <input type="text" id="cidade" name="cidade" placeholder="Digite sua cidade"
+                        value="<?php echo htmlspecialchars($cidade ?? ''); ?>">
                 </div>
 
                 <div class="cadastro-campo campo-cep">
                     <label for="CEP">CEP:</label>
-                    <input type="text" id="CEP" name="CEP" placeholder="Digite seu Código de Endereçamento Postal" value="<?php echo htmlspecialchars($CEP ?? ''); ?>">
+                    <input type="text" id="CEP" name="CEP" placeholder="Digite seu Código de Endereçamento Postal"
+                        value="<?php echo htmlspecialchars($CEP ?? ''); ?>">
                 </div>
 
                 <div class="cadastro-campo campo-data">
                     <label for="data_nascimento">Data de Nascimento:</label>
-                    <input type="date" id="data_nascimento" name="data_nascimento" placeholder="Digite sua data de nascimento" value="<?php echo htmlspecialchars($data_nascimento ?? ''); ?>">
+                    <input type="date" id="data_nascimento" name="data_nascimento"
+                        placeholder="Digite sua data de nascimento"
+                        value="<?php echo htmlspecialchars($data_nascimento ?? ''); ?>">
                 </div>
 
                 <div class="cadastro-campo campo-senha">
@@ -220,7 +236,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <div class="cadastro-campo campo-atuacao">
                     <label for="atuacao">Área de atuação:</label>
                     <select id="atuacao" name="atuacao"">
-                     <option value="Usuário Comum" <?php echo (isset($area_atuacao) && $area_atuacao === 'Usuário Comum') ? 'selected' : ''; ?>>Usuário Comum</option>
+                     <option value=" Usuário Comum" <?php echo (isset($area_atuacao) && $area_atuacao === 'Usuário Comum') ? 'selected' : ''; ?>>Usuário Comum</option>
                         <option value="ADM" <?php echo (isset($area_atuacao) && $area_atuacao === 'ADM') ? 'selected' : ''; ?>>ADM</option>
                     </select>
                 </div>
@@ -236,7 +252,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     <footer></footer>
 
-   <img class="fixa" src="../assets/listras vermelho e cinza.png">
+    <img class="fixa" src="../assets/listras vermelho e cinza.png">
 
 </body>
 
