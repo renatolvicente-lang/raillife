@@ -1,6 +1,7 @@
 <?php
 
     include("../infra/conn.php");
+    session_start();
 
     $result = $conn->query("SELECT * FROM sensores");
 
