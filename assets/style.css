@@ -415,6 +415,11 @@ header {
     grid-row: 4;
 }
 
+.campo-atuacao {
+    grid-column: 1;
+    grid-row: 5;
+}
+
 .cadastro-campo {
     width: 100%;
     display: flex;
@@ -440,6 +445,12 @@ header {
     background-color: #ffffff;
     outline: none;
     transition: all 0.2s ease;
+}
+
+.cadastro-campo select {
+    border: 1.5px solid #e40613;
+    border-radius: 4px;
+    padding: 10px 10px;
 }
 
 .cadastro-campo input::placeholder {
