@@ -36,7 +36,7 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
         </td>
         <td>
             <a href="https://github.com/GustavoFenske" title="">
-            <img src="assets/gugupro fenske.png" alt=""></img><br>
+            <img src="assets/gugupro fenske.jpg" alt=""></img><br>
             <sub>
                 <b>Gustavo Fenske</b>
             </sub>
