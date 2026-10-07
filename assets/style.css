@@ -450,7 +450,7 @@ header {
 .cadastro-campo select {
     border: 1.5px solid #e40613;
     border-radius: 4px;
-    padding: 10px 12px;
+    padding: 10px 10px;
 }
 
 .cadastro-campo input::placeholder {
