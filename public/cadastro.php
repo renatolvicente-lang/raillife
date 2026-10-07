@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $erro = "CPF inválido 2";
     } else {
         
-        if (!validarcpf($cpf_limpo)) {
+        if (!validarCPF($cpf_limpo)) {
             $erro = "CPF inválido 3";
         }
     }
@@ -96,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         } elseif (!preg_match('/[\W_]/', $senha)) {
             $erro = "A senha deve conter pelo menos um caractere especial.";
         } else {
-            $senha = password_hash($senha, PASSWORD_DEFAULT);
+            $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
 
         }
 
