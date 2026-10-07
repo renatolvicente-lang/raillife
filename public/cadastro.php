@@ -53,9 +53,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         // Validação do CPF
     if (strlen($cpf_limpo) !== 11) {
-        $erro = "CPF inválido";
+        $erro = "CPF inválido 1";
     }elseif (preg_match('/(\d)\1{10}/', $cpf_limpo)) {
-        $erro = "CPF inválido";
+        $erro = "CPF inválido 2";
+    } else {
+        
+        if (!validarCPF($cpf_limpo)) {
+            $erro = "CPF inválido 3";
+        }
     }
 
     $cep_limpo = preg_replace('/\D/', '', $CEP);
@@ -93,16 +98,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         } elseif (!preg_match('/[\W_]/', $senha)) {
             $erro = "A senha deve conter pelo menos um caractere especial.";
         } else {
-            $senha = password_hash($senha, PASSWORD_DEFAULT);
+            $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
 
         }
 
     if($id){
-        $sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ?, cpf = ?, endereco = ?, cidade = ?, CEP = ?, data_nascimento = ?, atuacao = ? WHERE id = $id"; ;
+        $sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ?, cpf = ?, endereco = ?, cidade = ?, CEP = ?, data_nascimento = ?, atuacao = ? WHERE id = ?"; ;
 
         $stmt = $conn->prepare($sql);
 
-        $stmt ->bind_param('sssssssss',$nome, $email, $senha, $CPF, $endereco, $cidade, $CEP, $data_nascimento, $area_atuacao);
+        $stmt ->bind_param('sssssssssi',$nome, $email, $senha, $CPF, $endereco, $cidade, $CEP, $data_nascimento, $area_atuacao, $id);
         $stmt ->execute();
          header("Location: ../public/adm_usuarios.php");
          exit();
@@ -214,10 +219,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
                 <div class="cadastro-campo campo-atuacao">
                     <label for="atuacao">Área de atuação:</label>
-                    <select id="atuacao" name="atuacao">
-                        <option value="">Selecione sua área de atuação</option>
+                    <select id="atuacao" name="atuacao"">
+                     <option value="Usuário Comum" <?php echo (isset($area_atuacao) && $area_atuacao === 'Usuário Comum') ? 'selected' : ''; ?>>Usuário Comum</option>
                         <option value="ADM" <?php echo (isset($area_atuacao) && $area_atuacao === 'ADM') ? 'selected' : ''; ?>>ADM</option>
-                        <option value="Usuário Comum" <?php echo (isset($area_atuacao) && $area_atuacao === 'Usuário Comum') ? 'selected' : ''; ?>>Usuário Comum</option>
                     </select>
                 </div>
 
