@@ -1,6 +1,8 @@
 <?php
 require_once('../infra/conn.php');
-include 'validar_cpf.php';
+session_start();
+
+
 $erro = "";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
