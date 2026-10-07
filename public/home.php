@@ -14,13 +14,15 @@
     <header class="hd_home">
 
         <div class="logo_home">
+            <a href="home.php">
             <img src="../assets/logo.png" alt="logo site">
+            </a>
         </div>
 
         <nav class="nav_home">
-            <a href="#" class="ativado">Inicio</a>
-            <a href="#"  >Sensores</a>
-            <a href="#">Trens</a>
+            <a href="home.php" class="ativado">Inicio</a>
+            <a href="adm_sensores.php">Sensores</a>
+            <a href="adm_trens.php">Trens</a>
             <a href="#">Relatorios</a>
             <a href="#">Rotas</a>
         </nav>
@@ -36,7 +38,7 @@
     <main class="mn_home">
         <section class="">
             <h1>Dashboard RAILLIFE</h1>
-            <p>Acompanhe os principais dados da operação.</p>
+            <p>Acompanhe os principais dados da operação ferroviária em tempo real.</p>
             <div class="hm_flex">
                 <div class='hm_card trens_ativos'>
                     <div>
