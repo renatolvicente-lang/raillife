@@ -28,32 +28,31 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
 <table>
     <tr>
         <td>
-            <a href="" title="">
-            <img src="assets/aurudo roeder.png" alt="">Img Arthur Roeder</img><br>
+            <a href="https://github.com/RoederArt" title="">
+            <img src="assets/aurudo roeder.png" alt=""></img><br>
             <sub>
                 <b> Arthur Roeder</b>
             </sub>
-            </a>
         </td>
         <td>
-            <a href="" title="">
-            <img src="assets/gugupro fenske.png" alt="">Img Gustavo Fenske</img><br>
+            <a href="https://github.com/GustavoFenske" title="">
+            <img src="assets/gugupro fenske.jpg" alt=""></img><br>
             <sub>
                 <b>Gustavo Fenske</b>
             </sub>
             </a>
         </td>
         <td>
-            <a href="" title="">
-            <img src="assets/menino cafeh.jpg" alt="">Img Mateus Lima</img><br>
+            <a href="https://github.com/mateuslima-santos" title="">
+            <img src="assets/menino cafeh.jpg" alt=""></img><br>
             <sub>
                 <b>Mateus Lima</b>
             </sub>
             </a>
         </td>
         <td>
-            <a href="" title="">
-            <img src="assets/renataum.png" alt="">Img Renato Lorenzo</img><br>
+            <a href="https://github.com/renatolvicente-lang" title="">
+            <img src="assets/renataum.png" alt=""></img><br>
             <sub>
                 <b>Renato Lorenzo</b>
             </sub>
