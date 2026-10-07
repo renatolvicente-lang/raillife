@@ -1,5 +1,7 @@
 <?php
 require_once('../infra/conn.php');
+session_start();
+
 
 $erro = "";
 
