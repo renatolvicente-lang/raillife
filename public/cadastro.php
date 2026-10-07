@@ -1,5 +1,6 @@
 <?php
 require_once('../infra/conn.php');
+require_once('validar_cpf.php');
 session_start();
 
 
@@ -81,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     } elseif (mb_strlen($endereco) < 5) {
         $erro = "O campo endereço deve ter pelo menos 5 caracteres.";
     }
-    
+
     //Validação de cidade
     if (empty($cidade)) {
         $erro = "O campo cidade é obrigatório.";
@@ -131,6 +132,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             header("Location: ../public/adm_usuarios.php");
             exit();
         }
+    }
+    if (empty($id) && $erro == "") {
+        $comando = $conn->prepare("SELECT id FROM usuarios WHERE email = ? OR CPF = ?");
+        $comando->bind_param("ss", $email, $CPF);
+        $comando->execute();
+        if ($comando->get_result()->num_rows > 0) {
+            $erro = "E-mail ou CPF já cadastrado.";
+        }
+        header("Location: ../public/adm_usuarios.php");
+        exit();
     }
 }
 ?>
