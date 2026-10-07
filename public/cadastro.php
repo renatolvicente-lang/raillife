@@ -92,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $erro = "A senha deve conter pelo menos um caractere especial.";
         } else {
             $senha = password_hash($senha, PASSWORD_DEFAULT);
-            
+
         }
 
     if($id){
