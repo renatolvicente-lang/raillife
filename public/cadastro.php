@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         $stmt = $conn->prepare($sql);
 
-        $stmt ->bind_param('sssssssssi',$nome, $email, $senha, $CPF, $endereco, $cidade, $CEP, $data_nascimento, $area_atuacao, $id);
+        $stmt ->bind_param('sssssssssi',$nome, $email, $senhaHash, $CPF, $endereco, $cidade, $CEP, $data_nascimento, $area_atuacao, $id);
         $stmt ->execute();
          header("Location: ../public/adm_usuarios.php");
          exit();
@@ -115,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         $comando = $conn->prepare($sql);
 
-        $comando->bind_param("sssssssss",$nome, $email, $senha, $CPF, $endereco, $cidade, $CEP, $data_nascimento, $area_atuacao);
+        $comando->bind_param("sssssssss",$nome, $email, $senhaHash, $CPF, $endereco, $cidade, $CEP, $data_nascimento, $area_atuacao);
         $comando->execute();
 
         header("Location: ../public/adm_usuarios.php");
