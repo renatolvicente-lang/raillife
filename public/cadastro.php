@@ -217,10 +217,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
                 <div class="cadastro-campo campo-atuacao">
                     <label for="atuacao">Área de atuação:</label>
-                    <select id="atuacao" name="atuacao">
-                        <option value="">Selecione sua área de atuação</option>
+                    <select id="atuacao" name="atuacao"">
+                     <option value="Usuário Comum" <?php echo (isset($area_atuacao) && $area_atuacao === 'Usuário Comum') ? 'selected' : ''; ?>>Usuário Comum</option>
                         <option value="ADM" <?php echo (isset($area_atuacao) && $area_atuacao === 'ADM') ? 'selected' : ''; ?>>ADM</option>
-                        <option value="Usuário Comum" <?php echo (isset($area_atuacao) && $area_atuacao === 'Usuário Comum') ? 'selected' : ''; ?>>Usuário Comum</option>
                     </select>
                 </div>
 
