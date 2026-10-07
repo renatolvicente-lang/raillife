@@ -25,11 +25,13 @@
    <header class="hd_home">
 
         <div class="logo_home">
+            <a href="home.php">
             <img src="../assets/logo.png" alt="logo site">
+            </a>
         </div>
 
         <nav class="nav_home">
-            <a href="../index.php">Inicio</a>
+            <a href="home.php">Inicio</a>
             <a href="adm_sensores.php" class="ativado">Sensores</a>
             <a href="adm_trens.php">Trens</a>
             <a href="#">Relatorios</a>
