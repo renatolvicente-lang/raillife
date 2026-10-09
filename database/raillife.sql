@@ -20,7 +20,8 @@ CREATE TABLE rotas(
   nome VARCHAR(100) NOT NULL,
   origem VARCHAR(100) NOT NULL,
   destino VARCHAR(100) NOT NULL,
-  distancia INT NOT NULL
+  distancia INT NOT NULL,
+  tempo TIME NOT NULL
 );
 
 
