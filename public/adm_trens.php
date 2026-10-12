@@ -73,8 +73,7 @@
                         <th class="tb_id">ID</th>
                         <th>nome</th>
                         <th>Rota</th>
-                        <th>Tipo</th>
-                        <th>Data de Cadastro</th>
+                        <th>capacidade</th>
                         <th class="tb_acoes">Ações</th>
                     </tr>
                 </thead>
@@ -90,15 +89,11 @@
                             </td>
                         
                             <td>
-                                <?php echo $linha["localizacao"];?>
+                                <?php echo $linha["id_rota"];?>
                             </td>
                         
                             <td>
-                                <?php echo $linha["tipo"];?>
-                            </td>
-                      
-                            <td>
-                                <?php echo $linha["data_instalacao"]?>
+                                <?php echo $linha["Capacidade"];?>
                             </td>
                        
                             <td>
