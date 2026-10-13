@@ -3,7 +3,7 @@
     
     include("../infra/conn.php");
 
-    $result = $conn->query("SELECT * FROM sensores");
+    $result = $conn->query("SELECT * FROM trens INNER JOIN rotas ON trens.id_rotas = rotas.id INNER JOIN usuarios ON trens.id_usuarios = usuarios.id");
 
 ?>
 
@@ -71,9 +71,9 @@
                 <thead>
                     <tr>
                         <th class="tb_id">ID</th>
-                        <th>nome</th>
                         <th>Rota</th>
-                        <th>capacidade</th>
+                        <th>Nome</th>
+                        <th>Usuario</th>
                         <th class="tb_acoes">Ações</th>
                     </tr>
                 </thead>
@@ -85,15 +85,15 @@
                             </td>
                         
                             <td>
-                                <?php echo $linha["nome"];?>
+                                <?php echo $linha["nome_trens"];?>
                             </td>
                         
                             <td>
-                                <?php echo $linha["id_rota"];?>
+                                <?php echo $linha["nome_rotas"];?>
                             </td>
                         
                             <td>
-                                <?php echo $linha["Capacidade"];?>
+                                <?php echo $linha["nome_usuarios"];?>
                             </td>
                        
                             <td>
