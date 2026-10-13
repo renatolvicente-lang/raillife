@@ -61,7 +61,7 @@
                 </div>
 
                     <div class="btn_trem">
-                        <a href="sensores.php"><button type="button" class="btn btn-danger">Novo trem</button></a>
+                        <a href="cadastro_trens.php"><button type="button" class="btn btn-danger">Novo trem</button></a>
                     </div>
         </div>
 
@@ -110,57 +110,6 @@
 
         </div>
 
-        </div>
-        <!--  -->
-        <div class="overlay" id="overlay">
-
-        <!-- Popup -->
-        <div class="popup">
-
-            <div class="icone">
-                📡
-            </div>
-
-            <h1>Adicionar Trem</h1>
-
-            <form>
-
-                <div class="form-grid">
-
-                    <div class="campo">
-                        <label>Nome:</label>
-                        <input type="text" placeholder="Ex.: Sensor Norte">
-                    </div>
-
-                    <div class="campo">
-                        <label>Tipo:</label>
-                        <input type="text" placeholder="Ex.: Temperatura">
-                    </div>
-
-                    <div class="campo">
-                        <label>Rota:</label>
-                        <input type="text" placeholder="Ex.: Trilho do Norte">
-                    </div>
-
-                    <div class="campo">
-                        <label>Status:</label>
-                        <input type="text" placeholder="Ex.: Para instalação">
-                    </div>
-
-                    <div class="campo">
-                        <label>Data de instalação:</label>
-                        <input type="text" placeholder="Ex.: 19/01/2009">
-                    </div>
-
-                </div>
-
-                <button class="btnAdicionar" type="submit">
-                    Adicionar
-                </button>
-
-            </form>
-
-        </div>
     </div>
         
         
