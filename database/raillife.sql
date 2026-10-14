@@ -8,7 +8,7 @@ CREATE TABLE usuarios (
   email VARCHAR(100) NOT NULL,
   senha VARCHAR(100) NOT NULL,
   cpf VARCHAR(11) NOT NULL,
-  atuacao ENUM('adm', 'comum') NULL,
+  atuacao ENUM('adm', 'comum') NULL DEFAULT ('comum'),
   endereco VARCHAR(100) NOT NULL,
   cidade VARCHAR(100) NOT NULL,
   cep VARCHAR(8) NOT NULL,
@@ -59,3 +59,8 @@ CREATE TABLE relatorios (
   id_usuarios INT NOT NULL,
   FOREIGN KEY (id_usuarios) REFERENCES usuarios(id)
 );
+
+
+INSERT INTO usuarios (´nome´,´email´, ´senha´, ´cpf´, ´atuação´, ´endereço´, ´cidade´, ´cep´, ´data_nascimento´) VALUES ('Renato', 'renato@teste.com', '123456','10412314212', 'adm', 'Rua Santo antonio', 'Joinville', '87216090', '2026-10-14'),
+('Caio', 'caio@teste.com', '123456','10412314212', 'comum', 'Rua Santo antonio', 'Joinville', '87216090', '2026-10-14'),
+('Renato', 'rober@teste.com', '123456','10412314212', 'adm', 'Rua Santo antonio', 'Joinville', '87216090', '2026-10-14');
