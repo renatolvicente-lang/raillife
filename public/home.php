@@ -27,9 +27,11 @@
             <a href="#">Rotas</a>
         </nav>
 
+        <a href="logout.php">
         <button class="menu_btn_home">
             <img src="../assets/botão.png" alt="Menu">
         </button>
+        </a>
 
     </header>
 
