@@ -104,6 +104,6 @@ INSERT INTO usuarios (nome,email, senha, cpf, atuacao, endereco, cidade, cep, da
 ('Roberto Carlos', 'roberto.carlos40@teste.com', '123456', '10412314252', 'adm', 'Rua Santo antonio', 'Joinville', '87216090', '2026-10-14'),
 ('Pedro Carvalho', 'pedro.carvalho40@teste.com', '123456', '10412314252', 'adm', 'Rua Santo antonio', 'Joinville', '87216090', '2026-10-14');
 
-INSERT INTO rotas VALUES(NULL, 'E-5', 'Joinville', 'Curitiba', '02:30:00'),
-(NULL, 'E-7', 'Joinville', 'Criciuma', '03:30:00'),
-(NULL, 'E-4', 'Joinville', 'São Januario', '02:30:00');
+INSERT INTO rotas VALUES(NULL, 'E-5', 'Joinville', 'Curitiba', 500,'02:30:00'),
+(NULL, 'E-7', 'Joinville', 'Criciuma', 600,'03:30:00'),
+(NULL, 'E-4', 'Joinville', 'São Januario', 7000,'02:30:00');
