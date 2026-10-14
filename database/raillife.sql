@@ -17,10 +17,11 @@ CREATE TABLE usuarios (
 CREATE TABLE rotas(
 
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  nome VARCHAR(100) NOT NULL,
+  nome_rotas VARCHAR(100) NOT NULL,
   origem VARCHAR(100) NOT NULL,
   destino VARCHAR(100) NOT NULL,
-  distancia INT NOT NULL
+  distancia INT NOT NULL,
+  tempo TIME NOT NULL
 );
 
 
@@ -38,12 +39,14 @@ CREATE TABLE sensores(
 CREATE TABLE trens (
     
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  nome VARCHAR(100) NOT NULL,
+  nome_trens VARCHAR(100) NOT NULL,
   modelo VARCHAR(100) NOT NULL,
   capacidade INT NOT NULL,
-  ano_fabricacao INT NOT NULL,
+  ano_fabricacao DATE NOT NULL,
   id_rotas INT NOT NULL,
-  FOREIGN KEY (id_rotas) REFERENCES rotas(id)
+  id_usuarios INT NOT NULL,
+  FOREIGN KEY (id_rotas) REFERENCES rotas(id),
+  FOREIGN KEY (id_usuarios) REFERENCES usuarios(id)
 );
 
 
