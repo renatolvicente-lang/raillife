@@ -61,7 +61,7 @@ CREATE TABLE relatorios (
 );
 
 
-INSERT INTO usuarios (nome,email, senha, cpf, atuação, endereço, cidade, cep, data_nascimento) VALUES ('Renato', 'renato@teste.com', '123456','10412314212', 'adm', 'Rua Santo antonio', 'Joinville', '87216090', '2026-10-14'),
+INSERT INTO usuarios (nome,email, senha, cpf, atuacao, endereco, cidade, cep, data_nascimento) VALUES ('Renato', 'renato@teste.com', '123456','10412314212', 'adm', 'Rua Santo antonio', 'Joinville', '87216090', '2026-10-14'),
 ('Caio', 'caio@teste.com', '123456','10412314212', 'comum', 'Rua Santo antonio', 'Joinville', '87216090', '2026-10-14'),
 ('roberto', 'roberto@teste.com', '123456','10412314212', 'adm', 'Rua Santo antonio', 'Joinville', '87216090', '2026-10-14');
 ('Lucas Pereira', 'lucas.pereira4@teste.com', '123456', '10412314216', 'adm', 'Rua Santo antonio', 'Joinville', '87216090', '2026-10-14'),
