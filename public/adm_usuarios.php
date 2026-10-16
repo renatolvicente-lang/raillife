@@ -3,9 +3,10 @@
     include("../infra/conn.php");
     session_start();
 
-    if(!isset($_SESSION["usuario"]) || $_SESSION["cargo"] != "adm"){
-        header("Location: home.php");
-    }
+    // if(!isset($_SESSION["usuario"]) || $_SESSION["cargo"] != "adm"){
+    //     header("Location: home.php");
+    // }
+    
     $result = $conn->query("SELECT * FROM usuarios");
 
 
@@ -107,7 +108,7 @@
                             </td>
                        
                             <td>
-                                <a href="cadastro.php?id=<?php echo $linha["id"]?>" >Editar</a>
+                                <a href="cadastro_usuarios.php?id=<?php echo $linha["id"]?>" >Editar</a>
                                 <a href="excluir_usuarios.php?id=<?php echo $linha["id"]?>" onclick="return confirm('tem certeza que deseja apagar esse usuário?')">Excluir</a>
                             </td>
                         </tr>
