@@ -26,7 +26,7 @@ if ($id && $_SERVER['REQUEST_METHOD'] === 'GET') {
         $cidade = $usuario['cidade'];
         $data_nascimento = $usuario['data_nascimento'];
         $area_atuacao = $usuario['atuacao'];
-        $cep = $usuario['cep'];
+        $CEP = $usuario['cep'];
     } else {
         $erro = "Usuário não encontrado.";
     }
@@ -288,12 +288,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
                 <div class="cadastro-campo campo-atuacao">
                     <label for="atuacao">Área de atuação:</label>
-                    <select id="atuacao" name="atuacao"">
-                     <option value=" comum" <?php echo (isset($area_atuacao) && $area_atuacao === 'comum') ? 'selected' : ''; ?>>Usuário Comum</option>
-                        <option value="adm" <?php echo (isset($area_atuacao) && $area_atuacao === 'adm') ? 'selected' : ''; ?>>ADM</option>
+                    <select id="atuacao" name="atuacao">
+                        <option value="comum" <?php echo ($area_atuacao === 'comum') ? 'selected' : ''; ?>>Usuário Comum</option>
+                        <option value="adm" <?php echo ($area_atuacao === 'adm') ? 'selected' : ''; ?>>ADM</option>
                     </select>
                 </div>
-
                 <button type="submit">
                     <?php echo $id ? 'Salvar Alterações' : 'Cadastrar'; ?>
                 </button>
