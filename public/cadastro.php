@@ -5,9 +5,42 @@ session_start();
 
 
 $erro = "";
+$id = $_GET["id"] ?? null;
+
+$nome = "";
+$email = "";
+$CPF = "";
+$endereco = "";
+$cidade = "";
+$data_nascimento = "";
+$area_atuacao = "";
+
+
+if ($id && $_SERVER['REQUEST_METHOD'] === 'GET') {
+
+    $sql = $conn->prepare("SELECT * FROM usuarios WHERE id = ?");
+    $sql->bind_param("i", $id);
+    $sql->execute();
+    $result = $sql->get_result();
+
+    if ($usuario = $result->fetch_assoc()) {
+        $nome = $usuario['nome'];
+        $email = $usuario['email'];
+        $CPF = $usuario['CPF'];
+        $endereco = $usuario['endereco'];
+        $cidade = $usuario['cidade'];
+        $data_nascimento = $usuario['data_nascimento'];
+        $area_atuacao = $usuario['area_atuacao'];
+    } else {
+        $erro = "Usuário não encontrado.";
+    }
 
 
 
+
+
+
+}
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     //Verificando se tem um id na url
@@ -111,6 +144,21 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     } else {
         $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
 
+    }
+
+    if (empty($erro)) {
+        if ($id) {
+            $stmtCheck = $conn->prepare("SELECT id FROM usuarios WHERE (email = ? OR CPF = ?) AND id != ?");
+            $stmtCheck->bind_param("ssi", $email, $CPF, $id);
+        } else {
+            $stmtCheck = $conn->prepare("SELECT id FROM usuarios WHERE email = ? OR CPF = ?");
+            $stmtCheck->bind_param("ss", $email, $CPF);
+        }
+
+        $stmtCheck->execute();
+        if ($stmtCheck->get_result()->num_rows > 0) {
+            $erro = "E-mail ou CPF já cadastrado por outro usuário.";
+        }
     }
 
     if ($id) {
@@ -250,12 +298,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <div class="cadastro-campo campo-atuacao">
                     <label for="atuacao">Área de atuação:</label>
                     <select id="atuacao" name="atuacao"">
-                     <option value="comum" <?php echo (isset($area_atuacao) && $area_atuacao === 'comum') ? 'selected' : ''; ?>>Usuário Comum</option>
+                     <option value=" comum" <?php echo (isset($area_atuacao) && $area_atuacao === 'comum') ? 'selected' : ''; ?>>Usuário Comum</option>
                         <option value="adm" <?php echo (isset($area_atuacao) && $area_atuacao === 'adm') ? 'selected' : ''; ?>>ADM</option>
                     </select>
                 </div>
 
-                <button type="submit">Cadastrar</button>
+                <button type="submit">
+                    <?php echo $id ? 'Salvar Alterações' : 'Cadastrar'; ?>
+                </button>
 
             </form>
 
