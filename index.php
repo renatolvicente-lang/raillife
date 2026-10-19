@@ -4,12 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="assets/style.css">
     <title>Página de apresentação</title>
 </head>
 <body>
  
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample">
+        <div class="offcanvas-header">
+            <h3 class="offcanvas-title" id="offcanvasExampleLabel"> <img src="./assets/logo.png" alt="logo site"><strong>MENU</strong></h3>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="dropdown mt-3">
+                   <!-- <a href="cadastro.php">cadastrar</a>
+                    <br>
+                    <a href="logout.php">desconectar</a> -->
+            </div>
+        </div>
+    </div>
 
     <img class="fixa2" src="assets/listras vermelho e cinza.png">
 
@@ -32,6 +46,14 @@
             <span></span>
             <span></span>
         </button>
+
+ <div class="margin_header">
+            <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
+        aria-controls="offcanvasExample">
+        <img src="./assets/menu button.png" alt="Menu">
+    </a>
+
+    </div>
 
     </header>
 
@@ -76,6 +98,12 @@
     </footer>
 
    <img class="fixa" src="assets/listras vermelho e cinza.png">
+       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
 
 </body>
 </html>

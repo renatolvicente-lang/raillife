@@ -3,19 +3,43 @@ require_once('../infra/conn.php');
 require_once('validar_cpf.php');
 session_start();
 
-if (!isset($_SESSION['usuarios']) || $_SESSION["atuacao"] != "adm") {
-    header('Location: home.php');
-}
+// if (!isset($_SESSION['usuarios']) || $_SESSION["atuacao"] != "adm") {
+//     header('Location: login.php');
+// }
 
 $erro = "";
+$id = $_GET["id"] ?? null;
+
+
+if ($id && $_SERVER['REQUEST_METHOD'] === 'GET') {
+
+    $sql = $conn->prepare("SELECT * FROM usuarios WHERE id = ?");
+    $sql->bind_param("i", $id);
+    $sql->execute();
+    $result = $sql->get_result();
+
+    if ($usuario = $result->fetch_assoc()) {
+        $nome = $usuario['nome'];
+        $email = $usuario['email'];
+        $CPF = $usuario['cpf'];
+        $endereco = $usuario['endereco'];
+        $cidade = $usuario['cidade'];
+        $data_nascimento = $usuario['data_nascimento'];
+        $area_atuacao = $usuario['atuacao'];
+        $cep = $usuario['cep'];
+    } else {
+        $erro = "Usuário não encontrado.";
+    }
 
 
 
+
+
+
+}
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     //Verificando se tem um id na url
-    $id = $_GET['id'] ?? null;
-
     $usuario = null;
 
     $nome = $_POST['nome'];
@@ -116,19 +140,31 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     }
 
+    if (empty($erro)) {
+        if ($id) {
+            $stmtCheck = $conn->prepare("SELECT id FROM usuarios WHERE (email = ? OR CPF = ?) AND id != ?");
+            $stmtCheck->bind_param("ssi", $email, $CPF, $id);
+        } else {
+            $stmtCheck = $conn->prepare("SELECT id FROM usuarios WHERE email = ? OR CPF = ?");
+            $stmtCheck->bind_param("ss", $email, $CPF);
+        }
+
+        $stmtCheck->execute();
+        if ($stmtCheck->get_result()->num_rows > 0) {
+            $erro = "E-mail ou CPF já cadastrado por outro usuário.";
+        }
+    }
+
     if ($id) {
-        $sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ?, cpf = ?, endereco = ?, cidade = ?, CEP = ?, data_nascimento = ?, atuacao = ? WHERE id = ?";
-        ;
-
+        $sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ?, cpf = ?, endereco = ?, cidade = ?, cep = ?, data_nascimento = ?, atuacao = ? WHERE id = ?";
         $stmt = $conn->prepare($sql);
-
         $stmt->bind_param('sssssssssi', $nome, $email, $senhaHash, $CPF, $endereco, $cidade, $CEP, $data_nascimento, $area_atuacao, $id);
         $stmt->execute();
         header("Location: ../public/adm_usuarios.php");
         exit();
     } else {
         if ($erro == "") {
-            $sql = "INSERT INTO usuarios (nome, email, senha, CPF, endereco, cidade, CEP, data_nascimento, atuacao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO usuarios (nome, email, senha, CPF, endereco, cidade, cep, data_nascimento, atuacao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             $comando = $conn->prepare($sql);
 
@@ -168,6 +204,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     <header class="hd_home">
 
+       <img class="fixa" src="assets/listras vermelho e cinza.png">
+       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+
         <div class="logo_home">
             <img src="../assets/logo.png" alt="logo site">
         </div>
@@ -185,6 +229,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <span></span>
             <span></span>
         </button>
+
+         <div class="margin_header">
+            <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
+        aria-controls="offcanvasExample">
+        <img src="./assets/menu button.png" alt="Menu">
+    </a>
+
+    </div>
 
     </header>
 
@@ -253,12 +305,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <div class="cadastro-campo campo-atuacao">
                     <label for="atuacao">Área de atuação:</label>
                     <select id="atuacao" name="atuacao"">
-                     <option value="comum" <?php echo (isset($area_atuacao) && $area_atuacao === 'comum') ? 'selected' : ''; ?>>Usuário Comum</option>
+                     <option value=" comum" <?php echo (isset($area_atuacao) && $area_atuacao === 'comum') ? 'selected' : ''; ?>>Usuário Comum</option>
                         <option value="adm" <?php echo (isset($area_atuacao) && $area_atuacao === 'adm') ? 'selected' : ''; ?>>ADM</option>
                     </select>
                 </div>
 
-                <button type="submit">Cadastrar</button>
+                <button type="submit">
+                    <?php echo $id ? 'Salvar Alterações' : 'Cadastrar'; ?>
+                </button>
 
             </form>
 
