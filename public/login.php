@@ -6,7 +6,7 @@ session_start();
 
 
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //Sem prepared Statement
     /* $nome = $_POST[""];
      $email = $_POST["email"];
@@ -24,7 +24,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
      }*/
     //com prepared
 
-    $nome = $_POST["nome"];
     $email = $_POST["email"];
     $senha = $_POST["senha"];
 
@@ -112,11 +111,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
 
             <form method="POST">
-            
-                <div class="login-campo campo-nome">
-                    <label for="nome">Nome: </label>
-                    <input type="text" name="nome" id="nome" placeholder="nome completo" required>
-                </div>
 
                 <div class="login-campo campo-email">
                     <label for="email">Email:</label>
