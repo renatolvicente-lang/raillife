@@ -61,7 +61,7 @@
                 </div>
 
                     <div>
-                        <a href="cadastro_sensores.php"><button type="button" class="btn btn-danger" >Novo sensor</button></a>
+                        <a href="sensores.php"><button type="button" class="btn btn-danger">Novo sensor</button></a>
                     </div>
         </div>
 
@@ -102,7 +102,7 @@
                             </td>
                        
                             <td>
-                                <button href = "cadastro_sensores.php" id="btnAbrir">Editar</button>
+                                <button id="btnAbrir">Editar</button>
                                 <a href="excluir_sensor.php?id=<?php echo $linha["id"]?>">Excluir</a>
                             </td>
                         </tr>

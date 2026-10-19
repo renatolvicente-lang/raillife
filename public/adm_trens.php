@@ -97,7 +97,7 @@
                             </td>
                        
                             <td>
-                                <a href="cadastro_trens?id=<?php echo $linha["id"]?>">Editar</a>
+                                <button id="btnAbrir">Editar</button>
                                 <a href="excluir_sensor.php?id=<?php echo $linha["id"]?>">Excluir</a>
                             </td>
                         </tr>

@@ -80,7 +80,7 @@ if(!isset($_SESSION["usuario"])){
                 </div>
                 <div class="hm_card relatorios">
                     <div>
-                        <img src="../assets/relatorios_icon.png" alt="a" class = "icon_trem">
+                        <img src="../assets/relatorios_icon.png" alt="" class = "icon_trem">
                     </div>
                     <div>
                         <div class=""><h3>Relatórios</h3></div>
