@@ -27,10 +27,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $senha = $_POST["senha"];
 
-    $sql = "SELECT * FROM usuarios WHERE email = ? AND senha = ?";
+    $sql = "SELECT * FROM usuarios WHERE email = ?";
 
     if ($stmt = $conn->prepare($sql)) {
-        $stmt->bind_param("ss", $email, $senha);
+        $stmt->bind_param("s", $email);
 
         $stmt->execute();
 
@@ -41,8 +41,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
             if(password_verify($senha, $usuario["senha"])){
 
-                $_SESSION['id'] = $usuario=["id"];   
-                $_SESSION['usuario'] = $usuario=["nome"];
+                $_SESSION['id'] = $usuario["id"];   
+                $_SESSION['usuario'] = $usuario["nome"];
                 $_SESSION['atuacao'] = $usuario["atuacao"];
                 
 

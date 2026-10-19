@@ -65,7 +65,7 @@
                 </div>
 
                     <div>
-                        <a href="sensores.php"><button type="button" class="btn btn-danger">Novo sensor</button></a>
+                        <a href="cadastro_sensores.php"><button type="button" class="btn btn-danger">Novo sensor</button></a>
                     </div>
         </div>
 

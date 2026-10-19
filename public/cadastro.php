@@ -6,6 +6,9 @@ session_start();
 
 $erro = "";
 
+
+
+
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     //Verificando se tem um id na url
     $id = $_GET['id'] ?? null;
@@ -247,8 +250,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <div class="cadastro-campo campo-atuacao">
                     <label for="atuacao">Área de atuação:</label>
                     <select id="atuacao" name="atuacao"">
-                     <option value=" Usuário Comum" <?php echo (isset($area_atuacao) && $area_atuacao === 'Usuário Comum') ? 'selected' : ''; ?>>Usuário Comum</option>
-                        <option value="ADM" <?php echo (isset($area_atuacao) && $area_atuacao === 'ADM') ? 'selected' : ''; ?>>ADM</option>
+                     <option value="comum" <?php echo (isset($area_atuacao) && $area_atuacao === 'comum') ? 'selected' : ''; ?>>Usuário Comum</option>
+                        <option value="adm" <?php echo (isset($area_atuacao) && $area_atuacao === 'adm') ? 'selected' : ''; ?>>ADM</option>
                     </select>
                 </div>
 
