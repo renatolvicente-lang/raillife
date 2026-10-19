@@ -21,7 +21,7 @@
         </div>
 
         <nav class="nav_home">
-            <a href="public/home.php" class="ativado">Inicio</a>
+            <a href="public/home.php" >Inicio</a>
             <a href="public/adm_sensores.php" >Sensores</a>
             <a href="public/adm_trens.php">Trens</a>
             <a href="#">Relatorios</a>
