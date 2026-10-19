@@ -707,3 +707,7 @@ header {
     height: 60px;
     
 }
+
+.margin_header{
+    margin-right: 20px;
+}
