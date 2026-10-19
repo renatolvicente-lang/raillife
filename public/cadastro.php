@@ -3,20 +3,12 @@ require_once('../infra/conn.php');
 require_once('validar_cpf.php');
 session_start();
 
-if (!isset($_SESSION['usuarios']) || $_SESSION["atuacao"] != "adm") {
-    header('Location: login.php');
-}
+// if (!isset($_SESSION['usuarios']) || $_SESSION["atuacao"] != "adm") {
+//     header('Location: login.php');
+// }
 
 $erro = "";
 $id = $_GET["id"] ?? null;
-
-$nome = "";
-$email = "";
-$CPF = "";
-$endereco = "";
-$cidade = "";
-$data_nascimento = "";
-$area_atuacao = "";
 
 
 if ($id && $_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -29,11 +21,12 @@ if ($id && $_SERVER['REQUEST_METHOD'] === 'GET') {
     if ($usuario = $result->fetch_assoc()) {
         $nome = $usuario['nome'];
         $email = $usuario['email'];
-        $CPF = $usuario['CPF'];
+        $CPF = $usuario['cpf'];
         $endereco = $usuario['endereco'];
         $cidade = $usuario['cidade'];
         $data_nascimento = $usuario['data_nascimento'];
-        $area_atuacao = $usuario['area_atuacao'];
+        $area_atuacao = $usuario['atuacao'];
+        $cep = $usuario['cep'];
     } else {
         $erro = "Usuário não encontrado.";
     }
@@ -47,8 +40,6 @@ if ($id && $_SERVER['REQUEST_METHOD'] === 'GET') {
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     //Verificando se tem um id na url
-    $id = $_GET['id'] ?? null;
-
     $usuario = null;
 
     $nome = $_POST['nome'];
@@ -165,18 +156,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
 
     if ($id) {
-        $sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ?, cpf = ?, endereco = ?, cidade = ?, CEP = ?, data_nascimento = ?, atuacao = ? WHERE id = ?";
-        ;
-
+        $sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ?, cpf = ?, endereco = ?, cidade = ?, cep = ?, data_nascimento = ?, atuacao = ? WHERE id = ?";
         $stmt = $conn->prepare($sql);
-
         $stmt->bind_param('sssssssssi', $nome, $email, $senhaHash, $CPF, $endereco, $cidade, $CEP, $data_nascimento, $area_atuacao, $id);
         $stmt->execute();
         header("Location: ../public/adm_usuarios.php");
         exit();
     } else {
         if ($erro == "") {
-            $sql = "INSERT INTO usuarios (nome, email, senha, CPF, endereco, cidade, CEP, data_nascimento, atuacao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO usuarios (nome, email, senha, CPF, endereco, cidade, cep, data_nascimento, atuacao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             $comando = $conn->prepare($sql);
 
