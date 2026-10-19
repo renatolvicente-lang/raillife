@@ -21,7 +21,7 @@
         </div>
 
         <nav class="nav_home">
-            <a href="#" class="ativado">Inicio</a>
+            <a href="#">Inicio</a>
             <a href="#">Sensores</a>
             <a href="#">Trens</a>
             <a href="#">Relatorios</a>
