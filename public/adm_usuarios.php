@@ -3,7 +3,7 @@
     include("../infra/conn.php");
     session_start();
 
-    if(!isset($_SESSION["usuario"]) || $_SESSION["cargo"] != "adm"){
+    if(!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm"){
         header("Location: home.php");
     }
     $result = $conn->query("SELECT * FROM usuarios");

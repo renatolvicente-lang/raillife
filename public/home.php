@@ -3,6 +3,10 @@ session_start();
 
 include("../infra/conn.php");
 
+if(!isset($_SESSION["usuario"])){
+    header("Location: login.php");
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -111,7 +115,11 @@ include("../infra/conn.php");
                 </div>
                 <div class="hm_card relatorios">
                     <div>
+<<<<<<< HEAD
                         <img src="../assets/relatorios_icon.png" alt="a" class="icon_trem">
+=======
+                        <img src="../assets/relatorios_icon.png" alt="" class = "icon_trem">
+>>>>>>> 4c8f5e8c2bd402ac9de75201e48557a5f3abf6ca
                     </div>
                     <div>
                         <div class="">
