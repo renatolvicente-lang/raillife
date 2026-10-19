@@ -3,6 +3,9 @@ require_once('../infra/conn.php');
 require_once('validar_cpf.php');
 session_start();
 
+if (!isset($_SESSION['usuarios']) || $_SESSION["atuacao"] != "adm") {
+    header('Location: home.php');
+}
 
 $erro = "";
 $id = $_GET["id"] ?? null;

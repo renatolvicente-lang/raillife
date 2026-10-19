@@ -3,9 +3,10 @@ session_start();
 
 include("../infra/conn.php");
 
-if(!isset($_SESSION["usuario"])){
-    header("Location: login.php");
-}
+
+//if(!isset($_SESSION["usuario"])){
+//    header("Location: login.php");
+//}
 
 ?>
 <!DOCTYPE html>
@@ -28,24 +29,14 @@ if(!isset($_SESSION["usuario"])){
 
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample">
         <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+            <h3 class="offcanvas-title" id="offcanvasExampleLabel"> <img src="../assets/logo.png" alt="logo site"><strong>MENU</strong></h3>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <div>
-                Some text as placeholder. In real life you can have the elements you have chosen. Like, text,
-                images, lists, etc.
-            </div>
             <div class="dropdown mt-3">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                    data-bs-toggle="dropdown">
-                    Dropdown button
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
+                    <a href="cadastro.php">cadastrar</a>
+                    <br>
+                    <a href="logout.php">desconectar</a>
             </div>
         </div>
     </div>
@@ -67,10 +58,12 @@ if(!isset($_SESSION["usuario"])){
              
         </nav>
 
+        <div class="margin_header">
             <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
         aria-controls="offcanvasExample">
         <img src="../assets/menu button.png" alt="Menu">
     </a>
+    </div>
 
     </header>
 
@@ -115,11 +108,7 @@ if(!isset($_SESSION["usuario"])){
                 </div>
                 <div class="hm_card relatorios">
                     <div>
-<<<<<<< HEAD
                         <img src="../assets/relatorios_icon.png" alt="a" class="icon_trem">
-=======
-                        <img src="../assets/relatorios_icon.png" alt="" class = "icon_trem">
->>>>>>> 4c8f5e8c2bd402ac9de75201e48557a5f3abf6ca
                     </div>
                     <div>
                         <div class="">

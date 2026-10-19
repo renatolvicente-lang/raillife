@@ -1,5 +1,11 @@
 <?php 
+session_start();
+    
+    include("../infra/conn.php");
 
+    if(!isset($_SESSION["usuario"])){
+        header("Location: login.php");
+    }
 
 ?>
 

@@ -4,7 +4,7 @@
     session_start();
 
     if(!isset($_SESSION["usuario"])){
-        header("");
+        header("Location: login.php");
     }
 
     $result = $conn->query("SELECT * FROM sensores");
