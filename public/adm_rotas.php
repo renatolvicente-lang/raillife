@@ -20,7 +20,7 @@
    <header class="hd_home">
 
         <div class="logo_home">
-            <a href="home.php">
+            <a href="index.php">
             <img src="../assets/logo.png" alt="logo site">
             </a>
         </div>
