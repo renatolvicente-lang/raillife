@@ -1,10 +1,12 @@
 <?php
-require_once('../infra/conn.php');
-session_start();
+    include("../infra/conn.php");
+    session_start();
 
-if(!isset($_SESSION['usuario'])){
-    header('Location: login.php');
-}
+    if(!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm"){
+        header("Location: home.php");
+
+    }
+
 
 $erro = "";
 
@@ -12,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     if ($id) {
         $sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ?, cpf = ?, endereco = ?, cidade = ?, CEP = ?, data_nascimento = ?, atuacao = ? WHERE id = ?";
-        ;
+        
 
         $stmt = $conn->prepare($sql);
 
