@@ -81,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
 
-    <header class="hd_home">
+    <header class="hd_home login-header">
 
          <div class="logo_home">
             <a href="../index.php">
