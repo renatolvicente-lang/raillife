@@ -90,6 +90,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
 
         <nav class="nav_home">
+<<<<<<< HEAD
+=======
+            <a href="#" >Inicio</a>
+            <a href="#" >Sensores</a>
+            <a href="#">Trens</a>
+            <a href="#">Relatorios</a>
+            <a href="#">Rotas</a>
+>>>>>>> d1feb2939b1aa8e7971fcbaee4f976b4ab4648cc
         </nav>
 
         <button class="menu_btn_home">
