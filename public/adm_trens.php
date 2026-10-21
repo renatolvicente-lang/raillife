@@ -40,14 +40,8 @@
             <a href="adm_sensores.php">Sensores</a>
             <a href="adm_trens.php" class="ativado">Trens</a>
             <a href="#">Relatorios</a>
-            <a href="#">Rotas</a>
+            <a href="adm_rotas.php">Rotas</a>
         </nav>
-
-        <button class="menu_btn_home">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
 
     </header>
     
