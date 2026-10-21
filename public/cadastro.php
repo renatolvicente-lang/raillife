@@ -231,7 +231,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <a href="adm_sensores.php">Sensores</a>
             <a href="adm_trens.php">Trens</a>
             <a href="#">Relatorios</a>
-            <a href="#">Rotas</a>
+            <a href="adm_rotas.php">Rotas</a>
              
         </nav>
 

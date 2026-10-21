@@ -34,7 +34,7 @@ if(!isset($_SESSION["usuario"])){
         </div>
         <div class="offcanvas-body">
             <div class="dropdown mt-3">
-                    <a href="cadastro.php">cadastrar</a>
+                    <a href="adm_usuarios.php">cadastrar</a>
                     <br>
                     <a href="logout.php">desconectar</a>
             </div>
