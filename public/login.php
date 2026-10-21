@@ -88,14 +88,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
 
         <nav class="nav_home">
-<<<<<<< HEAD
-=======
             <a href="#" >Inicio</a>
             <a href="#" >Sensores</a>
             <a href="#">Trens</a>
             <a href="#">Relatorios</a>
             <a href="#">Rotas</a>
->>>>>>> 9f0c38dd2ddefa0128d995d93f3841a07b0c9c16
         </nav>
 
         <button class="menu_btn_home">
