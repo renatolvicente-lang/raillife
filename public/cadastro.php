@@ -9,7 +9,7 @@ session_start();
 
 $erro = "";
 $id = $_GET["id"] ?? null;
-
+$area_atuacao = "comum"; // Valor padrão para o campo de atuação
 
 if ($id && $_SERVER['REQUEST_METHOD'] === 'GET') {
 
@@ -26,7 +26,7 @@ if ($id && $_SERVER['REQUEST_METHOD'] === 'GET') {
         $cidade = $usuario['cidade'];
         $data_nascimento = $usuario['data_nascimento'];
         $area_atuacao = $usuario['atuacao'];
-        $cep = $usuario['cep'];
+        $CEP = $usuario['cep'];
     } else {
         $erro = "Usuário não encontrado.";
     }
@@ -204,13 +204,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     <header class="hd_home">
 
-       <img class="fixa" src="assets/listras vermelho e cinza.png">
-       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
-        crossorigin="anonymous"></script>
+        <img class="fixa" src="assets/listras vermelho e cinza.png">
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+            integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+            integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+            crossorigin="anonymous"></script>
 
         <div class="logo_home">
             <img src="../assets/logo.png" alt="logo site">
@@ -230,13 +230,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <span></span>
         </button>
 
-         <div class="margin_header">
-            <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
-        aria-controls="offcanvasExample">
-        <img src="./assets/menu button.png" alt="Menu">
-    </a>
+        <div class="margin_header">
+            <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                <img src="./assets/menu button.png" alt="Menu">
+            </a>
 
-    </div>
+        </div>
 
     </header>
 
@@ -304,12 +303,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
                 <div class="cadastro-campo campo-atuacao">
                     <label for="atuacao">Área de atuação:</label>
-                    <select id="atuacao" name="atuacao"">
-                     <option value=" comum" <?php echo (isset($area_atuacao) && $area_atuacao === 'comum') ? 'selected' : ''; ?>>Usuário Comum</option>
-                        <option value="adm" <?php echo (isset($area_atuacao) && $area_atuacao === 'adm') ? 'selected' : ''; ?>>ADM</option>
+                    <select id="atuacao" name="atuacao">
+                        <option value="comum" <?php echo ($area_atuacao === 'comum') ? 'selected' : ''; ?>>Usuário Comum</option>
+                        <option value="adm" <?php echo ($area_atuacao === 'adm') ? 'selected' : ''; ?>>ADM</option>
                     </select>
                 </div>
 
+                
                 <button type="submit">
                     <?php echo $id ? 'Salvar Alterações' : 'Cadastrar'; ?>
                 </button>
