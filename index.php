@@ -38,7 +38,7 @@
             <a href="public/adm_sensores.php" >Sensores</a>
             <a href="public/adm_trens.php">Trens</a>
             <a href="#">Relatorios</a>
-            <a href="public/adm_rotas">Rotas</a>
+            <a href="public/adm_rotas.php">Rotas</a>
         </nav>
 
         <button class="menu_btn_home">

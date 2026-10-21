@@ -70,7 +70,7 @@
                 </div>
 
                     <div>
-                        <a href="sensores.php"><button type="button" class="btn btn-danger">Nova rota</button></a>
+                        <a href="#"><button type="button" class="btn btn-danger">Nova rota</button></a>
                     </div>
         </div>
 
