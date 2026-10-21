@@ -21,7 +21,7 @@ CREATE TABLE rotas(
   origem VARCHAR(100) NOT NULL,
   destino VARCHAR(100) NOT NULL,
   distancia INT NOT NULL,
-  tempo TIME NOT NULL
+  duracao TIME NOT NULL
 );
 
 
