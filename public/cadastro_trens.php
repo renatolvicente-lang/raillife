@@ -1,7 +1,7 @@
 <?php 
-session_start();
     
     include("../infra/conn.php");
+session_start();
 
     if(!isset($_SESSION["usuario"])){
         header("Location: login.php");
@@ -23,15 +23,17 @@ session_start();
     <header class="hd_home">
 
         <div class="logo_home">
+            <a href="../index.php">
             <img src="../assets/logo.png" alt="logo site">
+            </a>
         </div>
 
-        <nav class="nav_home">
-            <a href="#">Inicio</a>
-            <a href="#">Sensores</a>
-            <a href="#">Trens</a>
+       <nav class="nav_home">
+            <a href="home.php" >Inicio</a>
+            <a href="adm_sensores.php" >Sensores</a>
+            <a href="adm_trens.php">Trens</a>
             <a href="#">Relatorios</a>
-            <a href="#">Rotas</a>
+            <a href="adm_rotas.php">Rotas</a>
         </nav>
 
         <button class="menu_btn_home" img src="../assets/menu button.png">

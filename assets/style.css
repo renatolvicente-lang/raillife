@@ -6,6 +6,12 @@ body{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #e9e9e9;
 }
+
+.offcanvas,
+.offcanvas-backdrop {
+    z-index: 1060 !important;
+}
+
 /* Página Home*/
 
 .hd_home{
@@ -201,12 +207,17 @@ body{
 /*Página de login*/
 
 .login-header {
-    width: 100%;
-    height: 190px;
+    width: 92%;
+    height: 84px;
+    margin: 22px auto 40px;
+    position: relative;
+    z-index: 2;
+    background: #f8f9fa;
+    border-radius: 50px;
     display: flex;
-    justify-content: center;
     align-items: center;
-    padding-top: 15px;
+    justify-content: space-between;
+    padding: 5px 0;
 }
 
 .login-header img {
@@ -216,25 +227,30 @@ body{
 
 .login-pagina {
     width: 100%;
+    min-height: calc(880px - 220px);
     display: flex;
     justify-content: center;
+    align-items: center;
+    padding: 20px 0 60px;
+    box-sizing: border-box;
 }
 
 .login-formulario {
     width: 350px;
     min-height: 300px;
     background-color: #f8f9fa;
-    border: 6px solid #e3e7e8;
     border-radius: 15px;
-    padding: 15px 52px 18px;
+    padding: 25px 52px 22px;
     position: relative;
     z-index: 2;
-    height: 500px;
+    height: 400px;
     display: flex;
     justify-content: flex-start;
     align-content: center;
     flex-direction: column;
     align-items: center;
+    margin-top: 10px;
+    box-sizing: border-box;
 }
 
 .login-formulario h2 {
@@ -247,7 +263,7 @@ body{
 
 .login-campo {
     width: 100%;
-    margin-bottom: 14px;
+    margin-bottom: 20px;
 }
 
 .login-campo label {
@@ -282,7 +298,7 @@ body{
 .login-formulario button {
     grid-column: 1 / 3;
     justify-self: center;
-    width: 290px;
+    width: 200px;
     height: 43px;
     margin-top: 5px;
     border: none;
@@ -295,7 +311,7 @@ body{
 
 .login-formulario button:hover {
     background-color: #a12a2a;
-    width: 320px;
+    width: 290px;
     transition: width 0.5s ease;
 }
 
@@ -315,6 +331,11 @@ body{
 }
 
 /* Página de cadastro */
+
+.bd_cad{
+        background-color: #e9e9e9;
+
+}
 
 header {
     height: 120px;
@@ -513,33 +534,60 @@ header {
     width: 981px;
 }
 
+.tabela-wrap {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
 .tabela {
-  width: 1460px;
-  border-collapse: collapse;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
   font-family: Arial, sans-serif;
-  border-radius: 50px;
-  border-radius: 20px;
+  overflow: hidden;
+}
+
+.tabela thead th {
+  background-color: #d30e0e;
+  color: white;
+  padding: 14px 12px;
+  text-align: left;
+  font-weight: 600;
+}
+
+.tabela thead th:first-child {
+  border-top-left-radius: 20px;
+}
+
+.tabela thead th:last-child {
+  border-top-right-radius: 20px;
 }
 
 .tabela th, 
 .tabela td {
   padding: 12px;
   text-align: left;
-  border-bottom: 1px solid #ddd; 
+  border-bottom: 1px solid #ddd;
 }
 
-.tabela tr {
-  background-color: #d30e0e;
-  color: white;
-  border-radius: 50px 50px 0 0;
+.tabela tbody tr {
+  background-color: #ffffff;
+  color: #222;
 }
 
-.tb_id {
-  border-radius: 20px 0 0 0;
+.tabela tbody tr:nth-child(even) {
+  background-color: #f8f8f8;
 }
 
-.tb_acoes {
-  border-radius: 0 20px 0 0;
+.tabela tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 20px;
+}
+
+.tabela tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 20px;
 }
 
 .escrita_sensor{
@@ -702,6 +750,7 @@ header {
     cursor: pointer;
     width: -60px;
 }
+
 .menu_btn_home img{
     width: 60px;
     height: 60px;

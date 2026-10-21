@@ -4,9 +4,9 @@ session_start();
 include("../infra/conn.php");
 
 
-//if(!isset($_SESSION["usuario"])){
-//    header("Location: login.php");
-//}
+if(!isset($_SESSION["usuario"])){
+    header("Location: login.php");
+}
 
 ?>
 <!DOCTYPE html>
@@ -34,7 +34,7 @@ include("../infra/conn.php");
         </div>
         <div class="offcanvas-body">
             <div class="dropdown mt-3">
-                    <a href="cadastro.php">cadastrar</a>
+                    <a href="adm_usuarios.php">cadastrar</a>
                     <br>
                     <a href="logout.php">desconectar</a>
             </div>
@@ -54,7 +54,7 @@ include("../infra/conn.php");
             <a href="adm_sensores.php">Sensores</a>
             <a href="adm_trens.php">Trens</a>
             <a href="#">Relatorios</a>
-            <a href="#">Rotas</a>
+            <a href="adm_rotas.php">Rotas</a>
              
         </nav>
 

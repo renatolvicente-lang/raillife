@@ -25,28 +25,45 @@
     <title>Página do administrador</title>
 </head>
 <body>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample">
+        <div class="offcanvas-header">
+            <h3 class="offcanvas-title" id="offcanvasExampleLabel"> <img src="../assets/logo.png" alt="logo site"><strong>MENU</strong></h3>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="dropdown mt-3">
+                    <a href="cadastro.php">cadastrar</a>
+                    <br>
+                    <a href="logout.php">desconectar</a>
+            </div>
+        </div>
+    </div>
 
 <img class="fixa2" src="../assets/listras vermelho e cinza.png">
 
    <header class="hd_home">
 
         <div class="logo_home">
-            <img src="../assets/logo.png" alt="logo site">
+            <a href="../index.php">
+                <img src="../assets/logo.png" alt="logo site">
+            </a>
         </div>
 
         <nav class="nav_home">
-            <a href="#">Inicio</a>
-            <a href="#">Sensores</a>
-            <a href="#">Trens</a>
+            <a href="home.php">Inicio</a>
+            <a href="adm_sensores.php">Sensores</a>
+            <a href="adm_trens.php">Trens</a>
             <a href="#">Relatorios</a>
-            <a href="#">Rotas</a>
+            <a href="adm_rotas.php" class="ativado">Rotas</a>
+             
         </nav>
 
-        <button class="menu_btn_home">
-            <span>Gerenciamento de cadastros</span>
-            <span>Logout</span>
-            
-        </button>
+        <div class="margin_header">
+            <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
+        aria-controls="offcanvasExample">
+        <img src="../assets/menu button.png" alt="Menu">
+    </a>
+    </div>
 
     </header>
     
@@ -72,15 +89,16 @@
 
         <div>
 
-        <table  class="tabela">
+        <div class="tabela-wrap">
+            <table class="tabela">
                 <thead>
                     <tr>
-                        <th class="tb_id">ID</th>
+                        <th>ID</th>
                         <th>nome</th>
                         <th>Email</th>
                         <th>Atuação</th>
                         <th>CPF</th>
-                        <th class="tb_acoes">Ações</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -114,6 +132,7 @@
                     <?php }?>
                 </tbody>
             </table>
+        </div>
 
 
         </div>
@@ -128,5 +147,15 @@
     <footer></footer>
 
    <img class="fixa" src="../assets/listras vermelho e cinza.png">
+
+   <img class="fixa" src="../assets/listras vermelho e cinza.png">
+    <script src="../scripts/popup_up.js"></script>  
+        <script src="../scripts/popup_up.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
 </body>
 </html>

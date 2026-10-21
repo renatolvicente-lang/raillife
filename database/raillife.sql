@@ -21,7 +21,7 @@ CREATE TABLE rotas(
   origem VARCHAR(100) NOT NULL,
   destino VARCHAR(100) NOT NULL,
   distancia INT NOT NULL,
-  tempo TIME NOT NULL
+  duracao TIME NOT NULL
 );
 
 
@@ -60,6 +60,7 @@ CREATE TABLE relatorios (
   FOREIGN KEY (id_usuarios) REFERENCES usuarios(id)
 );
 
+INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `cpf`, `atuacao`, `endereco`, `cidade`, `cep`, `data_nascimento`) VALUES (NULL, 'admin', 'admin@gmail.com', 'admin1234', '14001484994', 'adm', 'Guia lopes', 'Joinville', '89940823', '2018-10-23');
 
 INSERT INTO usuarios (nome,email, senha, cpf, atuacao, endereco, cidade, cep, data_nascimento) VALUES ('Renato', 'renato@teste.com', '123456','10412314212', 'adm', 'Rua Santo antonio', 'Joinville', '87216090', '2026-10-14'),
 ('Caio', 'caio@teste.com', '123456','10412314212', 'comum', 'Rua Santo antonio', 'Joinville', '87216090', '2026-10-14'),
