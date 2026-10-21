@@ -41,9 +41,9 @@
         <nav class="nav_home">
             <a href="home.php">Inicio</a>
             <a href="adm_sensores.php">Sensores</a>
-            <a href="adm_trens.php" class="ativado">Trens</a>
+            <a href="adm_trens.php">Trens</a>
             <a href="#">Relatorios</a>
-            <a href="adm_rotas.php">Rotas</a>
+            <a href="adm_rotas.php" class="ativado">Rotas</a>
              
         </nav>
 
