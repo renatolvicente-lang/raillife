@@ -200,7 +200,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <title>Cadastro</title>
 </head>
 
-<body>
+<body class="bd_cad">
 
     <img class="fixa2" src="../assets/listras vermelho e cinza.png">
 
