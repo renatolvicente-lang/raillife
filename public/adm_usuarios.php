@@ -89,15 +89,16 @@
 
         <div>
 
-        <table  class="tabela">
+        <div class="tabela-wrap">
+            <table class="tabela">
                 <thead>
                     <tr>
-                        <th class="tb_id">ID</th>
+                        <th>ID</th>
                         <th>nome</th>
                         <th>Email</th>
                         <th>Atuação</th>
                         <th>CPF</th>
-                        <th class="tb_acoes">Ações</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -131,6 +132,7 @@
                     <?php }?>
                 </tbody>
             </table>
+        </div>
 
 
         </div>
