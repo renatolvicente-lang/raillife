@@ -4,6 +4,7 @@
 
     if(!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm"){
         header("Location: home.php");
+        exit();
     }
     $result = $conn->query("SELECT id, nome_rotas, origem, destino, tempo AS duracao FROM rotas");
 
