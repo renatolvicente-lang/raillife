@@ -517,3 +517,137 @@ Alguns pontos merecem destaque:
 
 ---
 
+## 9. Como uma aplicação PHP pode consumir uma API
+
+Consumir uma API significa fazer o PHP atuar como **cliente HTTP**: montar a requisição, enviá-la, verificar o status e decodificar o JSON recebido. As opções mais comuns são:
+
+- **extensão cURL** (`curl_init`, `curl_setopt`, `curl_exec`), a mais flexível e recomendada;
+- **`file_get_contents()`** com um contexto de *stream*, que é simples, mas com menos controle;
+- **bibliotecas** de terceiros que encapsulam o cURL (como o Guzzle) e os SDKs oficiais de cada serviço.
+
+### Exemplo com cURL
+
+A função abaixo chama uma API JSON e devolve o status HTTP e os dados decodificados. O `curl_setopt()` aplica as opções: `CURLOPT_RETURNTRANSFER` faz o cURL retornar o corpo como *string* em vez de imprimi-lo, e passar um *array* em `CURLOPT_POSTFIELDS` codifica o corpo como `multipart/form-data`, enquanto uma *string* usa `application/x-www-form-urlencoded` (PHP DOCUMENTATION GROUP, 2026b). Por isso, para enviar JSON, o corpo é uma *string* gerada por `json_encode()` com o cabeçalho `Content-Type: application/json`.
+
+```php
+<?php
+declare(strict_types=1);
+
+/**
+ * Chama uma API JSON e devolve o status HTTP e os dados decodificados.
+ *
+ * @throws RuntimeException em falha de rede/TLS ou timeout
+ * @throws JsonException    se o corpo da resposta não for JSON válido
+ */
+function chamarApi(string $metodo, string $url, ?array $corpo = null, ?string $token = null): array
+{
+    $cabecalhos = ['Accept: application/json'];
+
+    if ($token !== null) {
+        $cabecalhos[] = 'Authorization: Bearer ' . $token;
+    }
+
+    $opcoes = [
+        CURLOPT_CUSTOMREQUEST  => $metodo,
+        CURLOPT_RETURNTRANSFER => true,  // devolve o corpo como string
+        CURLOPT_CONNECTTIMEOUT => 5,     // segundos para conectar
+        CURLOPT_TIMEOUT        => 10,    // segundos para a chamada inteira
+        CURLOPT_SSL_VERIFYPEER => true,  // verifica o certificado: nunca desative
+    ];
+
+    if ($corpo !== null) {
+        $cabecalhos[] = 'Content-Type: application/json';
+        $opcoes[CURLOPT_POSTFIELDS] = json_encode($corpo, JSON_THROW_ON_ERROR);
+    }
+
+    $opcoes[CURLOPT_HTTPHEADER] = $cabecalhos;
+
+    $ch = curl_init($url);
+    curl_setopt_array($ch, $opcoes);
+    $resposta = curl_exec($ch);
+
+    if ($resposta === false) {
+        throw new RuntimeException('Falha na chamada à API: ' . curl_error($ch));
+    }
+
+    $status = (int) curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+
+    // 204 No Content e respostas vazias não têm corpo para decodificar
+    $dados = $resposta === ''
+        ? null
+        : json_decode($resposta, true, 512, JSON_THROW_ON_ERROR);
+
+    return ['status' => $status, 'dados' => $dados];
+}
+```
+
+### Usando a função (`GET` e `POST`)
+
+```php
+<?php
+$token = getenv('RAILLIFE_API_TOKEN') ?: null; // nunca grave o token no código
+
+try {
+    // GET: consultar um trem
+    $r = chamarApi('GET', 'https://api.raillife.example/v1/trens/42', null, $token);
+
+    if ($r['status'] === 200) {
+        echo 'Trem: ' . $r['dados']['nome'] . PHP_EOL;
+    } elseif ($r['status'] === 404) {
+        echo 'Trem não encontrado.' . PHP_EOL;
+    } elseif (in_array($r['status'], [401, 403], true)) {
+        echo 'Sem autenticação ou sem permissão.' . PHP_EOL;
+    } else {
+        echo 'Erro inesperado: HTTP ' . $r['status'] . PHP_EOL;
+    }
+
+    // POST: enviar uma leitura de sensor
+    $r = chamarApi('POST', 'https://api.raillife.example/v1/sensores/7/leituras', [
+        'valor'   => 68.4,
+        'unidade' => '°C',
+        'lido_em' => date(DATE_ATOM),
+    ], $token);
+
+    echo 'Leitura enviada, status ' . $r['status'] . PHP_EOL;
+} catch (Throwable $e) {
+    error_log('Erro ao consumir a API: ' . $e->getMessage());
+}
+```
+
+### Alternativa simples: `file_get_contents()`
+
+```php
+<?php
+$contexto = stream_context_create([
+    'http' => [
+        'method'        => 'GET',
+        'header'        => "Accept: application/json\r\n",
+        'timeout'       => 10,
+        'ignore_errors' => true, // permite ler o corpo mesmo em respostas 4xx/5xx
+    ],
+]);
+
+$resposta = file_get_contents('https://api.raillife.example/v1/rotas', false, $contexto);
+$rotas    = json_decode($resposta ?: '[]', true);
+```
+
+Essa forma depende da configuração `allow_url_fopen` e oferece menos recursos de tratamento de erro do que o cURL.
+
+### Cuidados ao decodificar JSON no PHP
+
+- O `json_decode()` recebe o parâmetro `associative` (quando `true`, objetos JSON viram *arrays* associativos) e o parâmetro `depth` (profundidade máxima de aninhamento) (PHP DOCUMENTATION GROUP, 2026a).
+- Em caso de falha, ele devolve `null`, o que é **ambíguo** (o JSON pode ser, de fato, `null`). Use a opção `JSON_THROW_ON_ERROR` (disponível desde o PHP 7.3) para receber uma exceção ou `json_last_error()` para investigar (PHP DOCUMENTATION GROUP, 2026a).
+- Inteiros muito grandes podem perder precisão; a opção `JSON_BIGINT_AS_STRING` os preserva como texto (PHP DOCUMENTATION GROUP, 2026a).
+
+### Boas práticas ao consumir APIs
+
+1. **Defina tempos limite** (*timeouts*) para que uma API lenta não trave a aplicação.
+2. **Verifique sempre o código de status** antes de usar os dados.
+3. **Valide a resposta recebida:** desenvolvedores tendem a confiar nos dados de APIs de terceiros mais do que na entrada de usuários, o que enfraquece a segurança. É o risco API10:2023 (*Unsafe Consumption of APIs*) do OWASP (OWASP FOUNDATION, 2023).
+4. **Cuidado com URLs vindas de usuários:** buscar um recurso remoto sem validar a URL abre espaço para *Server-Side Request Forgery* (SSRF), risco API7:2023 (OWASP FOUNDATION, 2023).
+5. **Mantenha o certificado TLS verificado.** A especificação do HTTP exige que o cliente verifique a identidade do servidor em conexões `https` (FIELDING; NOTTINGHAM; RESCHKE, 2022, seç. 4.3.4).
+6. **Guarde segredos fora do código** (variáveis de ambiente, arquivo de configuração fora do repositório).
+7. **Trate falhas e reenvios:** repita apenas requisições idempotentes, com espera crescente, e respeite limites de taxa (`429`).
+
+---
+
