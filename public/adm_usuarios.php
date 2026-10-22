@@ -1,12 +1,11 @@
 <?php
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
     include("../infra/conn.php");
     session_start();
 
-    // if(!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm"){
-    //     header("Location: home.php");
-    // }
+    if(!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm"){
+         header("Location: home.php");
+         exit();
+    }
     $result = $conn->query("SELECT * FROM usuarios");
 
 
