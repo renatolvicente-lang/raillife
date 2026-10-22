@@ -788,3 +788,69 @@ Com uma API como a acima, sistemas diferentes consomem a mesma fonte de dados: o
 
 ---
 
+## 11. Autenticação, autorização e segurança
+
+Uma API expõe lógica de negócio e dados sensíveis, como informações pessoais, e por isso se tornou um alvo frequente de ataques (OWASP FOUNDATION, [s. d.]). A segurança precisa ser projetada desde o início.
+
+### Autenticação × autorização
+
+- **Autenticação** responde a *"quem é você?"*: verifica a identidade do cliente.
+- **Autorização** responde a *"o que você pode fazer?"*: decide se esse cliente já identificado pode executar aquela ação sobre aquele recurso.
+
+Os códigos de status refletem a diferença: `401 Unauthorized` indica falta de credenciais válidas, e `403 Forbidden` indica que o servidor entendeu a requisição e identificou o cliente, mas **recusa** executá-la (FIELDING; NOTTINGHAM; RESCHKE, 2022, seç. 15.5). Exemplo: um operador autenticado pode consultar os trens da sua linha, mas receber `403` ao tentar excluir um trem ou ler dados de outra operadora.
+
+### Mecanismos de autenticação comuns
+
+| Mecanismo | Como funciona | Observações |
+| --- | --- | --- |
+| **Chave de API (*API key*)** | Um segredo identifica a aplicação cliente e é enviado a cada requisição. | Simples; adequado para integração entre servidores. A Stripe, por exemplo, usa chaves de API e exige HTTPS em todas as chamadas (STRIPE, [s. d.]). |
+| **Token de portador (*Bearer*)** | O cliente envia `Authorization: Bearer <token>`. Quem possui o token pode usá-lo, sem provar a posse de uma chave criptográfica. | Os tokens precisam ser protegidos tanto em armazenamento quanto em trânsito (JONES; HARDT, 2012). |
+| **OAuth 2.0** | *Framework* que permite a uma aplicação obter **acesso limitado** a um serviço HTTP, em nome do dono do recurso ou por conta própria (HARDT, 2012). | Evita que o usuário entregue sua senha a terceiros e permite limitar o escopo. |
+| **JWT (*JSON Web Token*)** | Formato compacto, seguro para URLs, para representar *claims* (afirmações) entre duas partes, que podem ser assinadas ou criptografadas (JONES; BRADLEY; SAKIMURA, 2015). | Um JWT apenas **assinado** garante integridade, mas não sigilo: não coloque dados sensíveis no conteúdo. Use validade curta. |
+| **Autenticação HTTP básica** | Usuário e senha em cada requisição. | Só aceitável com HTTPS; prefira tokens. |
+
+O HTTP define o cabeçalho `Authorization` (credenciais do cliente) e o desafio `WWW-Authenticate` (como se autenticar, enviado com o `401`) (FIELDING; NOTTINGHAM; RESCHKE, 2022, seç. 11).
+
+### Riscos mais comuns: OWASP API Security Top 10 (2023)
+
+O projeto OWASP mantém uma lista dos principais riscos de segurança de APIs, usada como guia por desenvolvedores, arquitetos e equipes de segurança (OWASP FOUNDATION, 2023):
+
+| Código | Risco | Em resumo |
+| --- | --- | --- |
+| API1 | *Broken Object Level Authorization* | Falta de verificação, por objeto, se o usuário pode acessar o item pedido (por exemplo, trocar o `id` na URL e ver dados de outro usuário). |
+| API2 | *Broken Authentication* | Mecanismos de autenticação implementados de forma incorreta permitem roubar tokens ou assumir a identidade de outros. |
+| API3 | *Broken Object Property Level Authorization* | Exposição ou alteração indevida de campos de um objeto (excesso de dados e *mass assignment*). |
+| API4 | *Unrestricted Resource Consumption* | Sem limites de uso, a API sofre negação de serviço ou gera custos excessivos. |
+| API5 | *Broken Function Level Authorization* | Falha em separar funções administrativas das comuns. |
+| API6 | *Unrestricted Access to Sensitive Business Flows* | Fluxos de negócio sensíveis expostos a uso automatizado abusivo. |
+| API7 | *Server Side Request Forgery* | A API busca um recurso remoto a partir de uma URL fornecida pelo usuário, sem validá-la. |
+| API8 | *Security Misconfiguration* | Configurações complexas mal feitas ou sem boas práticas. |
+| API9 | *Improper Inventory Management* | Documentação e inventário desatualizados: versões antigas e endpoints de depuração expostos. |
+| API10 | *Unsafe Consumption of APIs* | Confiança excessiva em dados de APIs de terceiros. |
+
+Três dos dez riscos (API1, API3 e API5) são falhas de **autorização** em níveis diferentes: de objeto, de propriedade e de função (OWASP FOUNDATION, 2023). Isso mostra que autenticar não basta.
+
+### Exemplo de falha de autorização por objeto (API1)
+
+```text
+GET /v1/operadores/105/escalas      <- usuário autenticado como operador 105: OK
+GET /v1/operadores/106/escalas      <- mesmo token, outro id: deve retornar 403 (ou 404)
+```
+
+Se a API apenas confere "o token é válido" e devolve os dados de qualquer `id`, ela está vulnerável. A verificação de autorização deve estar em **toda** função que acessa dados a partir de um identificador enviado pelo cliente (OWASP FOUNDATION, 2023).
+
+### Checklist de boas práticas
+
+1. **Use HTTPS sempre** e nunca desative a verificação de certificados no cliente (FIELDING; NOTTINGHAM; RESCHKE, 2022, seç. 4.3.4).
+2. **Não coloque credenciais na URL.** Elas podem vazar em *logs* e históricos (a especificação do HTTP trata a divulgação de informações sensíveis em URIs na seç. 17.9 e desaconselha o formato `usuario:senha` na URL, seç. 4.2.4). Envie-as em cabeçalhos.
+3. **Aplique o princípio do menor privilégio:** cada cliente recebe somente as permissões necessárias.
+4. **Verifique a autorização em cada requisição**, por função e por objeto.
+5. **Valide toda entrada** (tipos, tamanhos, formatos) e use **consultas preparadas** no banco de dados.
+6. **Limite a taxa de requisições** e o tamanho das respostas (paginação), respondendo `429` quando necessário.
+7. **Use tokens de curta duração** e com escopo limitado; guarde segredos fora do repositório.
+8. **Retorne mensagens de erro sem detalhes internos** (sem *stack traces*, nomes de tabelas ou caminhos de arquivos).
+9. **Registre e monitore** acessos e falhas de autenticação.
+10. **Mantenha um inventário** das versões e endpoints publicados e desative os que não são mais usados.
+
+---
+
