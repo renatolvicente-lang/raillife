@@ -45,3 +45,23 @@ No desenvolvimento web, uma API costuma ser um conjunto de recursos de código (
 O RAILLIFE é um sistema de gerenciamento ferroviário com CRUD para trens e sensores e menu com as áreas Trens, Sensores, Rotas e Relatórios. Sua página inicial descreve a coleta de dados de **sensores IoT** em tempo real, apresentados em um painel de controle. Uma API é o componente natural para esse cenário: os sensores enviam leituras para ela, e o painel, relatórios e outros sistemas consultam os dados por ela.
 
 ---
+
+## 1. O que é uma API e qual é sua finalidade
+
+Uma **API** (*Application Programming Interface*, ou Interface de Programação de Aplicações) é um conjunto de funcionalidades e regras que existem dentro de um software e permitem interagir com ele por meio de **outro software**, em vez de por uma interface de usuário voltada a pessoas. Pode ser entendida como um **contrato** entre a aplicação que a oferece e outros programas ou equipamentos que a utilizam (MDN WEB DOCS, 2025).
+
+No desenvolvimento web, uma API costuma ser um conjunto de recursos de código (métodos, propriedades, eventos e URLs) que o desenvolvedor usa para interagir com o navegador, com outros programas ou com serviços de terceiros (MDN WEB DOCS, 2025). Neste trabalho, o foco são as **APIs web**, acessadas por meio do protocolo HTTP.
+
+### Finalidades principais
+
+- **Integração:** sistemas desenvolvidos separadamente (e muitas vezes em linguagens diferentes) trocam dados sem conhecer o código um do outro.
+- **Abstração e encapsulamento:** o HTTP oculta os detalhes de como um serviço é implementado e oferece uma interface uniforme, independente do tipo de recurso. Isso permite que cliente e servidor **evoluam de forma independente** (FIELDING; NOTTINGHAM; RESCHKE, 2022, seç. 1.1).
+- **Reuso:** a mesma regra de negócio atende site, aplicativo móvel, painéis e equipamentos.
+- **Automação:** processos que dependiam de digitação ou conferência manual passam a ser executados por programas.
+
+### Relação com o RAILLIFE
+
+O RAILLIFE é um sistema de gerenciamento ferroviário com CRUD para trens e sensores e menu com as áreas Trens, Sensores, Rotas e Relatórios. Sua página inicial descreve a coleta de dados de **sensores IoT** em tempo real, apresentados em um painel de controle. Uma API é o componente natural para esse cenário: os sensores enviam leituras para ela, e o painel, relatórios e outros sistemas consultam os dados por ela.
+
+---
+
