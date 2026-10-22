@@ -8,40 +8,68 @@ if (!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm") {
 }
 
 $erro = "";
-
 $nome = trim($_POST['nome'] ?? '');
 $origem = trim($_POST['origem'] ?? '');
 $destino = trim($_POST['destino'] ?? '');
 $distancia = $_POST['distancia'] ?? '';
 $duracao = $_POST['duracao'] ?? '';
-$id = $_POST['id'] ?? null;
+$id = null;
+$editando = false;
+$podeSalvar = true;
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    if ($nome === '' || $origem === '' || $destino === '' || $distancia === '' || $duracao === '') {
-        $erro = "Preencha todos os campos para cadastrar a rota.";
-    } elseif (filter_var($distancia, FILTER_VALIDATE_INT) === false || (int) $distancia <= 0) {
-        $erro = "Informe uma distância inteira maior que zero.";
+    if (isset($_POST['id'])) {
+        $id = filter_var($_POST['id'], FILTER_VALIDATE_INT);
+        if ($id === false || $id < 1) {
+            $erro = "Identificador da rota inválido.";
+            $podeSalvar = false;
+        } else {
+            $editando = true;
+        }
     }
 
-    if (empty($erro)) {
-        if ($id) {
-            // Atualizar rota existente
-            $sql = "UPDATE rotas SET nome_rotas = ?, origem = ?, destino = ?, distancia = ?, tempo = ? WHERE id = ?";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param('sssisi', $nome, $origem, $destino, $distancia, $duracao, $id);
-            $stmt->execute();
+    $distanciaInt = filter_var($distancia, FILTER_VALIDATE_INT);
+    if ($erro === '') {
+        if ($nome === '' || $origem === '' || $destino === '' || $distancia === '' || $duracao === '') {
+            $erro = "Preencha todos os campos da rota.";
+        } elseif ($distanciaInt === false || $distanciaInt < 1 || $distanciaInt > 2147483647) {
+            $erro = "Informe uma distância inteira entre 1 e 2.147.483.647 km.";
+        }
+    }
 
-            header("Location: adm_rotas.php");
-            exit();
+    if ($erro === '') {
+        if ($editando) {
+            $stmt = $conn->prepare("UPDATE rotas SET nome_rotas = ?, origem = ?, destino = ?, distancia = ?, tempo = ? WHERE id = ?");
+            $stmt->bind_param('sssisi', $nome, $origem, $destino, $distanciaInt, $duracao, $id);
         } else {
-            // Inserir nova rota
-            $sql = "INSERT INTO rotas (nome_rotas, origem, destino, distancia, tempo) VALUES (?, ?, ?, ?, ?)";
-            $comando = $conn->prepare($sql);
-            $comando->bind_param("sssis", $nome, $origem, $destino, $distancia, $duracao);
-            $comando->execute();
+            $stmt = $conn->prepare("INSERT INTO rotas (nome_rotas, origem, destino, distancia, tempo) VALUES (?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssis", $nome, $origem, $destino, $distanciaInt, $duracao);
+        }
+        $stmt->execute();
+        header("Location: adm_rotas.php");
+        exit();
+    }
+} elseif (isset($_GET['id'])) {
+    $id = filter_var($_GET['id'], FILTER_VALIDATE_INT);
+    if ($id === false || $id < 1) {
+        $erro = "Identificador da rota inválido.";
+        $podeSalvar = false;
+    } else {
+        $editando = true;
+        $stmt = $conn->prepare("SELECT nome_rotas, origem, destino, distancia, tempo FROM rotas WHERE id = ?");
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $rota = $stmt->get_result()->fetch_assoc();
 
-            header("Location: adm_rotas.php");
-            exit();
+        if ($rota === null) {
+            $erro = "Rota não encontrada.";
+            $podeSalvar = false;
+        } else {
+            $nome = $rota['nome_rotas'];
+            $origem = $rota['origem'];
+            $destino = $rota['destino'];
+            $distancia = $rota['distancia'];
+            $duracao = substr($rota['tempo'], 0, 5);
         }
     }
 }
@@ -98,6 +126,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <?php } ?>
 
             <form class="grid" method="POST">
+                <?php if ($editando) { ?>
+                    <input type="hidden" name="id" value="<?php echo (int) $id; ?>">
+                <?php } ?>
 
                 <div class="cadastro-campo">
                     <label for="nome">Nome rotas:</label>
@@ -119,7 +150,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
                 <div class="cadastro-campo">
                     <label for="distancia">Distância (km):</label>
-                    <input type="number" step="1" min="1" id="distancia" name="distancia"
+                    <input type="number" step="1" min="1" max="2147483647" id="distancia" name="distancia"
                         placeholder="Digite a distância da rota"
                         value="<?php echo htmlspecialchars((string) $distancia); ?>" required>
                 </div>
@@ -130,7 +161,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         value="<?php echo htmlspecialchars($duracao); ?>" required>
                 </div>
 
-                <button type="submit">Cadastrar Rota</button>
+                <button type="submit" <?php echo $podeSalvar ? '' : 'disabled'; ?>>
+                    <?php echo $editando ? 'Salvar alterações' : 'Cadastrar Rota'; ?>
+                </button>
 
             </form>
 
