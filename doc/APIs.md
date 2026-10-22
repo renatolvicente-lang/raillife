@@ -89,3 +89,32 @@ sequenceDiagram
 
 ---
 
+## 3. O que são APIs REST
+
+**REST** (*Representational State Transfer*) é um **estilo arquitetural**, e não um protocolo ou produto. Foi definido por Roy Fielding em sua tese de doutorado (FIELDING, 2000), cujo capítulo 5 introduz o estilo para sistemas de hipermídia distribuídos e o relaciona ao projeto da arquitetura da Web moderna. Na tese, um estilo arquitetural é "um conjunto nomeado e coordenado de restrições arquiteturais" (FIELDING, 2000, resumo, tradução nossa).
+
+### Principais restrições do REST
+
+De acordo com o capítulo 5 da tese de Fielding (2000), o estilo é derivado pela adição gradual das seguintes restrições:
+
+| Restrição | Significado prático |
+| --- | --- |
+| **Cliente-servidor** | Interface (cliente) e armazenamento/processamento (servidor) são separados e evoluem de forma independente. |
+| **Sem estado** | Cada requisição contém toda a informação necessária para ser compreendida. |
+| **Cache** | Respostas podem ser marcadas como armazenáveis, reduzindo tráfego e latência. |
+| **Interface uniforme** | Recursos são identificados por URIs, manipulados por representações, as mensagens são autodescritivas e a hipermídia guia o uso da aplicação. |
+| **Sistema em camadas** | Intermediários (proxies, gateways) podem existir sem que cliente e servidor percebam. |
+| **Código sob demanda** *(opcional)* | O servidor pode enviar código executável ao cliente. |
+
+### APIs REST (ou "RESTful") na prática
+
+Uma API REST aplica esses princípios sobre HTTP. Os traços mais comuns são:
+
+- **Orientação a recursos:** a API expõe **substantivos** (trens, sensores, rotas), e não ações. O guia de projeto de APIs do Google enfatiza os recursos (modelo de dados) sobre os métodos executados neles, e recomenda poucos métodos padrão (*Get*, *List*, *Create*, *Update* e *Delete*) em vez de muitas operações customizadas (GOOGLE, [s. d.]).
+- **Uso semântico do HTTP:** o método indica a ação, a URL indica o recurso e o código de status indica o resultado.
+- **Representações em formato aberto**, geralmente JSON.
+
+Cabe uma ressalva: muitas APIs chamadas de "REST" implementam apenas parte das restrições (especialmente a hipermídia). Por isso, o termo costuma ser usado de forma mais ampla do que na tese original. Existem ainda outros estilos de API, como SOAP, GraphQL e gRPC; o guia do Google, por exemplo, trata tanto de APIs REST quanto de RPC/gRPC (GOOGLE, [s. d.]).
+
+---
+
