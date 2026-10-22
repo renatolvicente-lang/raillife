@@ -348,3 +348,44 @@ Os nomes seguem a especificação do HTTP (FIELDING; NOTTINGHAM; RESCHKE, 2022, 
 
 ---
 
+## 6. O que são endpoints
+
+Um **endpoint** é o ponto de acesso a um recurso ou funcionalidade da API: a combinação de uma **URL** com um **método HTTP**. O alvo de uma requisição HTTP é chamado de **recurso** e, na maioria dos casos, é identificado por uma URI (FIELDING; NOTTINGHAM; RESCHKE, 2022, seç. 3.1). Assim, `GET /v1/trens/42` e `DELETE /v1/trens/42` são **dois endpoints** sobre o mesmo recurso.
+
+### Anatomia de uma URL de API
+
+```text
+https://api.raillife.example/v1/trens/42?campos=nome,status
+\___/   \__________________/ \_/ \____/ \_/ \_______________/
+esquema       host        versão coleção  id   query string
+```
+
+- **Esquema:** `https` (comunicação protegida). A porta padrão do `https` é a 443 (FIELDING; NOTTINGHAM; RESCHKE, 2022, seç. 4.2.2).
+- **Host:** servidor da API.
+- **Versão:** `/v1`, para evoluir a API sem quebrar clientes existentes. A API da Stripe, por exemplo, usa espaços de nomes `/v1` e `/v2` (STRIPE, [s. d.]).
+- **Coleção e identificador:** `/trens` é a coleção e `/42` é um item.
+- **Query string:** filtros, paginação, ordenação e seleção de campos.
+
+### Boas práticas de nomeação
+
+- Usar **substantivos** (preferencialmente no plural) para recursos e deixar o verbo para o método HTTP: `POST /trens`, e não `POST /criarTrem`.
+- Representar hierarquias com caminhos: `/sensores/7/leituras`.
+- Usar `GET /trens?status=em_operacao&pagina=2` para filtrar e paginar coleções.
+- Manter padrão consistente de nomes e documentar todos os endpoints. Um inventário atualizado de endpoints e versões também é uma medida de segurança (OWASP FOUNDATION, 2023).
+
+### Exemplo de contrato para o RAILLIFE (hipotético)
+
+| Método e URL | Descrição | Sucesso |
+| --- | --- | :---: |
+| `GET /v1/trens` | Lista trens (com filtros e paginação) | 200 |
+| `GET /v1/trens/{id}` | Detalha um trem | 200 |
+| `POST /v1/trens` | Cadastra um trem | 201 |
+| `PUT /v1/trens/{id}` | Substitui os dados de um trem | 200 |
+| `PATCH /v1/trens/{id}` | Altera parcialmente um trem | 200 |
+| `DELETE /v1/trens/{id}` | Remove um trem | 204 |
+| `GET /v1/sensores` | Lista sensores | 200 |
+| `POST /v1/sensores/{id}/leituras` | Registra uma leitura enviada pelo sensor | 201 |
+| `GET /v1/sensores/{id}/leituras` | Consulta leituras de um sensor | 200 |
+| `GET /v1/rotas` | Lista rotas | 200 |
+
+---
