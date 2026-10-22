@@ -1,61 +1,60 @@
 <?php
-    include("../infra/conn.php");
-    session_start();
+include("../infra/conn.php");
+session_start();
 
-    if(!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm"){
-        header("Location: home.php");
-
-    }
-
+if (!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm") {
+    header("Location: home.php");
+    exit();
+}
 
 $erro = "";
 
+$nome = trim($_POST['nome'] ?? '');
+$origem = trim($_POST['origem'] ?? '');
+$destino = trim($_POST['destino'] ?? '');
+$distancia = $_POST['distancia'] ?? '';
+$duracao = $_POST['duracao'] ?? '';
+$id = $_POST['id'] ?? null;
+
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    if ($nome === '' || $origem === '' || $destino === '' || $distancia === '' || $duracao === '') {
+        $erro = "Preencha todos os campos para cadastrar a rota.";
+    } elseif (filter_var($distancia, FILTER_VALIDATE_INT) === false || (int) $distancia <= 0) {
+        $erro = "Informe uma distância inteira maior que zero.";
+    }
 
-    if ($id) {
-        $sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ?, cpf = ?, endereco = ?, cidade = ?, CEP = ?, data_nascimento = ?, atuacao = ? WHERE id = ?";
-        
+    if (empty($erro)) {
+        if ($id) {
+            // Atualizar rota existente
+            $sql = "UPDATE rotas SET nome_rotas = ?, origem = ?, destino = ?, distancia = ?, tempo = ? WHERE id = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param('sssisi', $nome, $origem, $destino, $distancia, $duracao, $id);
+            $stmt->execute();
 
-        $stmt = $conn->prepare($sql);
-
-        $stmt->bind_param('sssssssssi', $nome, $email, $senhaHash, $CPF, $endereco, $cidade, $CEP, $data_nascimento, $area_atuacao, $id);
-        $stmt->execute();
-        header("Location: ../public/adm_usuarios.php");
-        exit();
-    } else {
-        if ($erro == "") {
-            $sql = "INSERT INTO usuarios (nome, email, senha, CPF, endereco, cidade, CEP, data_nascimento, atuacao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
+            header("Location: adm_rotas.php");
+            exit();
+        } else {
+            // Inserir nova rota
+            $sql = "INSERT INTO rotas (nome_rotas, origem, destino, distancia, tempo) VALUES (?, ?, ?, ?, ?)";
             $comando = $conn->prepare($sql);
-
-            $comando->bind_param("sssssssss", $nome, $email, $senhaHash, $CPF, $endereco, $cidade, $CEP, $data_nascimento, $area_atuacao);
+            $comando->bind_param("sssis", $nome, $origem, $destino, $distancia, $duracao);
             $comando->execute();
 
-            header("Location: ../public/adm_usuarios.php");
+            header("Location: adm_rotas.php");
             exit();
         }
-    }
-    if (empty($id) && $erro == "") {
-        $comando = $conn->prepare("SELECT id FROM usuarios WHERE email = ? OR CPF = ?");
-        $comando->bind_param("ss", $email, $CPF);
-        $comando->execute();
-        if ($comando->get_result()->num_rows > 0) {
-            $erro = "E-mail ou CPF já cadastrado.";
-        }
-        header("Location: ../public/adm_usuarios.php");
-        exit();
     }
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/style.css">
-    <title>Cadastro</title>
+    <title>Cadastro de Rotas</title>
 </head>
 
 <body>
@@ -66,19 +65,19 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         <div class="logo_home">
             <a href="../index.php">
-            <img src="../assets/logo.png" alt="logo site">
+                <img src="../assets/logo.png" alt="logo site">
             </a>
         </div>
 
         <nav class="nav_home">
-            <a href="home.php" >Inicio</a>
-            <a href="adm_sensores.php" >Sensores</a>
+            <a href="home.php">Inicio</a>
+            <a href="adm_sensores.php">Sensores</a>
             <a href="adm_trens.php">Trens</a>
             <a href="#">Relatorios</a>
             <a href="adm_rotas.php">Rotas</a>
         </nav>
 
-        <button class="menu_btn_home" img src="../assets/menu button.png">
+        <button class="menu_btn_home">
             <span></span>
             <span></span>
             <span></span>
@@ -94,42 +93,41 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
             <?php if ($erro != "") { ?>
                 <div class="mensagem-erro">
-                    <?php echo $erro; ?>
+                    <?php echo htmlspecialchars($erro); ?>
                 </div>
             <?php } ?>
 
             <form class="grid" method="POST">
 
-                <div class="cadastro-campo ">
+                <div class="cadastro-campo">
                     <label for="nome">Nome rotas:</label>
                     <input type="text" id="nome" name="nome" placeholder="Digite o nome da rota"
-                        value="<?php echo htmlspecialchars($nome ?? ''); ?>">
+                        value="<?php echo htmlspecialchars($nome); ?>" required>
                 </div>
 
                 <div class="cadastro-campo">
                     <label for="origem">Origem:</label>
                     <input type="text" id="origem" name="origem" placeholder="Digite a origem da rota"
-                        value="<?php echo htmlspecialchars($origem ?? ''); ?>">
-                </div>
-
-                 <div class="cadastro-campo">
-                    <label for="destino">Destino:</label>
-                    <input type="text" id="destino" name="destino" placeholder="Digite o destino da rota"
-                        value="<?php echo htmlspecialchars($destino ?? ''); ?>">
+                        value="<?php echo htmlspecialchars($origem); ?>" required>
                 </div>
 
                 <div class="cadastro-campo">
-                    <label for="distancia">Distância:</label>
-                    <input type="number" id="distancia" name="distancia"
+                    <label for="destino">Destino:</label>
+                    <input type="text" id="destino" name="destino" placeholder="Digite o destino da rota"
+                        value="<?php echo htmlspecialchars($destino); ?>" required>
+                </div>
+
+                <div class="cadastro-campo">
+                    <label for="distancia">Distância (km):</label>
+                    <input type="number" step="1" min="1" id="distancia" name="distancia"
                         placeholder="Digite a distância da rota"
-                        value="<?php echo htmlspecialchars($distancia ?? ''); ?>">
+                        value="<?php echo htmlspecialchars((string) $distancia); ?>" required>
                 </div>
 
                 <div class="cadastro-campo">
                     <label for="duracao">Duração da rota:</label>
                     <input type="time" id="duracao" name="duracao"
-                        placeholder="Digite a duração da rota"
-                        value="<?php echo htmlspecialchars($duracao ?? ''); ?>">
+                        value="<?php echo htmlspecialchars($duracao); ?>" required>
                 </div>
 
                 <button type="submit">Cadastrar Rota</button>
@@ -139,7 +137,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </section>
 
     </main>
-
 
     <footer></footer>
 

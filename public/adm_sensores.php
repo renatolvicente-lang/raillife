@@ -3,8 +3,9 @@
     include("../infra/conn.php");
     session_start();
 
-    if(!isset($_SESSION["usuario"])){
-        header("Location: login.php");
+     if(!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm"){
+         header("Location: home.php");
+         exit();
     }
 
     $result = $conn->query("SELECT * FROM sensores");

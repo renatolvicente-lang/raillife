@@ -5,7 +5,7 @@
     if(!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm"){
         header("Location: home.php");
     }
-    $result = $conn->query("SELECT * FROM usuarios");
+    $result = $conn->query("SELECT id, nome_rotas, origem, destino FROM rotas");
 
 
 ?>
@@ -93,7 +93,15 @@
                     </tr>
                 </thead>
                 <tbody>
-
+                    <?php while ($linha = $result->fetch_assoc()) { ?>
+                        <tr>
+                            <td><?php echo (int) $linha["id"]; ?></td>
+                            <td><?php echo htmlspecialchars($linha["nome_rotas"]); ?></td>
+                            <td><?php echo htmlspecialchars($linha["origem"]); ?></td>
+                            <td><?php echo htmlspecialchars($linha["destino"]); ?></td>
+                            <td></td>
+                        </tr>
+                    <?php } ?>
                 </tbody>
             </table>
 

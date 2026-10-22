@@ -1,19 +1,11 @@
 <?php
 
     
-<<<<<<< HEAD
-include("../infra/conn.php");
-session_start();
-
-    if(!isset($_SESSION["usuario"])){
-        header("Location: login.php");
-=======
  include("../infra/conn.php");
     session_start();
 
     if(!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm"){
         header("Location: home.php");
->>>>>>> 755faf62676ac88584d6260575ccce435d54333c
     }
 
     $result = $conn->query("SELECT * FROM trens INNER JOIN rotas ON trens.id_rotas = rotas.id INNER JOIN usuarios ON trens.id_usuarios = usuarios.id");
