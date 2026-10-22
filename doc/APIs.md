@@ -46,22 +46,46 @@ O RAILLIFE é um sistema de gerenciamento ferroviário com CRUD para trens e sen
 
 ---
 
-## 1. O que é uma API e qual é sua finalidade
+## 2. Como funciona a comunicação entre sistemas por meio de APIs
 
-Uma **API** (*Application Programming Interface*, ou Interface de Programação de Aplicações) é um conjunto de funcionalidades e regras que existem dentro de um software e permitem interagir com ele por meio de **outro software**, em vez de por uma interface de usuário voltada a pessoas. Pode ser entendida como um **contrato** entre a aplicação que a oferece e outros programas ou equipamentos que a utilizam (MDN WEB DOCS, 2025).
+### O modelo cliente-servidor
 
-No desenvolvimento web, uma API costuma ser um conjunto de recursos de código (métodos, propriedades, eventos e URLs) que o desenvolvedor usa para interagir com o navegador, com outros programas ou com serviços de terceiros (MDN WEB DOCS, 2025). Neste trabalho, o foco são as **APIs web**, acessadas por meio do protocolo HTTP.
+O HTTP é um protocolo **cliente-servidor** de requisição e resposta. O cliente monta uma requisição que expressa sua intenção e a envia ao servidor. O servidor interpreta a mensagem em relação ao recurso alvo e responde. O cliente então examina o **código de status** e o conteúdo da resposta para decidir o que fazer em seguida (FIELDING; NOTTINGHAM; RESCHKE, 2022, seç. 1.3).
 
-### Finalidades principais
+Os termos "cliente" e "servidor" descrevem apenas **papéis** em uma conexão: o mesmo programa pode ser cliente em uma conexão e servidor em outra (FIELDING; NOTTINGHAM; RESCHKE, 2022, seç. 3.3). Um sistema PHP que consulta uma API de terceiros é cliente dela e, ao mesmo tempo, pode ser servidor para o navegador do usuário.
 
-- **Integração:** sistemas desenvolvidos separadamente (e muitas vezes em linguagens diferentes) trocam dados sem conhecer o código um do outro.
-- **Abstração e encapsulamento:** o HTTP oculta os detalhes de como um serviço é implementado e oferece uma interface uniforme, independente do tipo de recurso. Isso permite que cliente e servidor **evoluam de forma independente** (FIELDING; NOTTINGHAM; RESCHKE, 2022, seç. 1.1).
-- **Reuso:** a mesma regra de negócio atende site, aplicativo móvel, painéis e equipamentos.
-- **Automação:** processos que dependiam de digitação ou conferência manual passam a ser executados por programas.
+### O fluxo de uma chamada
 
-### Relação com o RAILLIFE
+1. O cliente conhece o **endereço** (URL) e o **contrato** da API (quais recursos, métodos e formatos existem).
+2. Abre-se uma conexão, normalmente TCP, de preferência protegida por TLS (HTTPS) (MDN WEB DOCS, 2026b).
+3. O cliente envia a **requisição** (método, URL, cabeçalhos e, às vezes, um corpo).
+4. O servidor valida, processa (por exemplo, consultando o banco de dados) e envia a **resposta** (código de status, cabeçalhos e, às vezes, um corpo).
+5. O cliente interpreta a resposta e segue sua lógica.
 
-O RAILLIFE é um sistema de gerenciamento ferroviário com CRUD para trens e sensores e menu com as áreas Trens, Sensores, Rotas e Relatórios. Sua página inicial descreve a coleta de dados de **sensores IoT** em tempo real, apresentados em um painel de controle. Uma API é o componente natural para esse cenário: os sensores enviam leituras para ela, e o painel, relatórios e outros sistemas consultam os dados por ela.
+```mermaid
+sequenceDiagram
+    participant S as Sensor IoT
+    participant A as API (PHP)
+    participant B as Banco de dados
+    participant P as Painel web
+
+    S->>A: POST /v1/sensores/7/leituras (JSON)
+    A->>B: grava a leitura
+    B-->>A: confirmação
+    A-->>S: 201 Created
+
+    P->>A: GET /v1/sensores/7/leituras?limite=10
+    A->>B: consulta as últimas leituras
+    B-->>A: registros
+    A-->>P: 200 OK (JSON)
+```
+
+### Características importantes
+
+- **Sem estado (*stateless*):** cada requisição pode ser entendida isoladamente, sem depender das anteriores na mesma conexão (FIELDING; NOTTINGHAM; RESCHKE, 2022, seç. 3.3). Por isso, a API não deve "lembrar" quem é o cliente entre chamadas: ele se identifica a cada requisição (veja a [seção 11](#11-autenticação-autorização-e-segurança)).
+- **Representações, não o recurso em si:** o que trafega é uma **representação** do estado do recurso (por exemplo, um JSON descrevendo um trem), e não o objeto interno do servidor (FIELDING; NOTTINGHAM; RESCHKE, 2022, seç. 3.2).
+- **Intermediários:** entre cliente e servidor podem existir *proxies*, *gateways* e caches, que repassam ou até respondem mensagens (FIELDING; NOTTINGHAM; RESCHKE, 2022, seç. 3.7).
+- **Quem inicia a conversa:** no HTTP, a requisição parte do cliente. Para que o servidor "avise" o cliente existem mecanismos adicionais, como os eventos enviados pelo servidor (*server-sent events*) (MDN WEB DOCS, 2026b) e os *webhooks*, em que um sistema chama uma URL do outro quando algo acontece.
 
 ---
 
