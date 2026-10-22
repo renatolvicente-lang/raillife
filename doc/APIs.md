@@ -389,3 +389,106 @@ esquema       host        versão coleção  id   query string
 | `GET /v1/rotas` | Lista rotas | 200 |
 
 ---
+
+## 7. Troca de dados em JSON
+
+**JSON** (*JavaScript Object Notation*) é um formato de troca de dados **leve, baseado em texto e independente de linguagem**, que define um pequeno conjunto de regras para representar dados estruturados de forma portável (BRAY, 2017). Embora derive do JavaScript, é lido e gerado por praticamente todas as linguagens, incluindo o PHP. Por isso, é o formato mais comum em APIs web. Seu tipo de mídia registrado é `application/json`, informado no cabeçalho `Content-Type`.
+
+### Tipos de dados
+
+O JSON representa tipos primitivos (texto, número, booleano e nulo) e dois tipos estruturados (objeto e *array*) (BRAY, 2017). A tabela mostra como o PHP trata cada um ao decodificar:
+
+| Tipo JSON | Exemplo | Equivalente em PHP |
+| --- | --- | --- |
+| *string* | `"Serra Verde"` | `string` |
+| número | `42`, `68.4` | `int` ou `float` |
+| booleano | `true`, `false` | `bool` |
+| nulo | `null` | `null` |
+| objeto | `{"id": 42}` | objeto (`stdClass`) ou *array* associativo |
+| *array* | `[1, 2, 3]` | *array* |
+
+(PHP DOCUMENTATION GROUP, 2026a.)
+
+### Exemplo 1: um recurso (objeto)
+
+```json
+{
+  "id": 7,
+  "tipo": "temperatura",
+  "localizacao": {
+    "trem_id": 42,
+    "vagao": 3
+  },
+  "ativo": true,
+  "ultima_leitura": {
+    "valor": 68.4,
+    "unidade": "°C",
+    "lido_em": "2026-10-21T21:30:00-03:00"
+  }
+}
+```
+
+### Exemplo 2: uma coleção com paginação (objeto com *array*)
+
+```json
+{
+  "dados": [
+    { "id": 41, "nome": "Locomotiva Planalto", "status": "parado" },
+    { "id": 42, "nome": "Locomotiva Serra Verde", "status": "em_operacao" }
+  ],
+  "paginacao": {
+    "pagina": 1,
+    "por_pagina": 2,
+    "total": 17
+  }
+}
+```
+
+### Exemplo 3: envio de leitura por um sensor (corpo de `POST`)
+
+```json
+{
+  "valor": 68.4,
+  "unidade": "°C",
+  "lido_em": "2026-10-21T21:30:00-03:00"
+}
+```
+
+### Exemplo 4: resposta de erro
+
+Um erro bem projetado combina o **código de status correto** com um corpo que explique o problema:
+
+```json
+{
+  "erro": {
+    "codigo": "validacao_falhou",
+    "mensagem": "Os dados enviados são inválidos.",
+    "detalhes": [
+      { "campo": "capacidade", "problema": "deve ser maior que zero" },
+      { "campo": "rota_id", "problema": "rota inexistente" }
+    ]
+  }
+}
+```
+
+### Regras de sintaxe que causam erros comuns
+
+O JSON é mais rígido que a notação de objetos do JavaScript. Os exemplos abaixo **não são JSON válido**:
+
+```text
+{ 'nome': 'Serra Verde' }        <- aspas simples não são permitidas
+{ nome: "Serra Verde" }          <- os nomes das chaves precisam de aspas duplas
+{ "nome": "Serra Verde", }       <- vírgula sobrando no final
+```
+
+Essas três formas fazem o `json_decode()` do PHP devolver `null` (PHP DOCUMENTATION GROUP, 2026a). O JSON também deve ser codificado em UTF-8 quando trocado entre sistemas, e o `json_decode()` do PHP só funciona com *strings* nessa codificação (PHP DOCUMENTATION GROUP, 2026a).
+
+### Convenções recomendadas
+
+- Datas e horas em formato padronizado (ISO 8601), com fuso horário, como em `2026-10-21T21:30:00-03:00`.
+- Nomes de campos consistentes (por exemplo, `snake_case` em toda a API).
+- Valores ausentes representados com `null`, e não com texto como `"N/A"`.
+- Um envelope estável para coleções (`dados`, `paginacao`), para poder acrescentar campos sem quebrar clientes.
+
+---
+
