@@ -854,3 +854,75 @@ Se a API apenas confere "o token é válido" e devolve os dados de qualquer `id`
 
 ---
 
+## 12. Exemplos de uso de APIs em sistemas empresariais
+
+As APIs são a "cola" entre sistemas corporativos. Os casos a seguir mostram usos reais e cenários típicos.
+
+| Área | Como a API é usada | Fonte / observação |
+| --- | --- | --- |
+| **Pagamentos online** | O sistema da loja cria cobranças, consulta e estorna pagamentos chamando a API de um provedor. A API da Stripe é organizada em torno de REST, com URLs orientadas a recursos, respostas em JSON, códigos de status padrão, autenticação por chave e chamadas obrigatoriamente por HTTPS; ela também oferece chaves de idempotência para repetir requisições com segurança. | Stripe ([s. d.]). |
+| **Pagamentos instantâneos (Pix)** | O Banco Central do Brasil padronizou a **API Pix**, que permite a empresas automatizar a geração de cobranças e a conciliação de pagamentos recebidos junto ao seu prestador de serviços de pagamento, conectando o sistema de vendas ou de gestão ao arranjo Pix. | Banco Central do Brasil ([s. d.]). |
+| **Infraestrutura em nuvem** | Os serviços de nuvem do Google são projetados com um guia comum de APIs orientadas a recursos, usado internamente desde 2014. Equipes de TI automatizam a criação e o gerenciamento de recursos por meio dessas APIs. | Google ([s. d.]). |
+| **Mapas e localização** | Aplicações de logística e de campo combinam a localização do dispositivo com APIs de mapas de terceiros para plotar posições e pontos de interesse. | MDN Web Docs (2025). |
+| **ERP, CRM e financeiro** | Um ERP expõe cadastros (clientes, produtos, pedidos) por API para que o CRM, o e-commerce e o sistema financeiro leiam e atualizem os mesmos dados, evitando digitação duplicada. | Cenário típico. |
+| **E-commerce e marketplaces** | A loja envia estoque e preços a marketplaces e recebe pedidos por API, além de integrar cálculo de frete e emissão de documentos. | Cenário típico. |
+| **IoT e monitoramento industrial/ferroviário** | Sensores e equipamentos enviam leituras (`POST`) a uma API central; painéis e alertas consultam essas leituras (`GET`). É o caso do RAILLIFE. | Seção 10. |
+| **Relatórios e *Business Intelligence*** | Ferramentas de BI consomem APIs para montar painéis com dados de vários sistemas. | Cenário típico. |
+
+### Por que as empresas adotam APIs
+
+- **Integração padronizada:** novos parceiros e sistemas se conectam seguindo um contrato conhecido.
+- **Automação:** processos manuais (conferência de pagamentos, atualização de estoques) são executados por programas.
+- **Escala e reuso:** uma única regra de negócio atende vários canais.
+- **Evolução independente:** equipes alteram seu sistema sem afetar os consumidores, desde que o contrato seja mantido (FIELDING; NOTTINGHAM; RESCHKE, 2022, seç. 1.1).
+- **Novos modelos de negócio:** a própria API pode ser um produto, como ocorre com provedores de pagamento.
+
+> Os cenários marcados como "típico" ilustram padrões amplamente conhecidos de integração e não se baseiam em uma fonte específica.
+
+---
+
+## 13. Conclusão
+
+Uma API é um contrato que permite a sistemas diferentes cooperarem sem conhecer o funcionamento interno uns dos outros. Em APIs web, o protocolo HTTP fornece a base: **métodos** expressam a ação, **URLs** identificam recursos, **códigos de status** informam o resultado, e **JSON** transporta os dados em formato leve e independente de linguagem. O estilo REST organiza esses elementos em torno de recursos e de interações sem estado, o que favorece escalabilidade, reuso e evolução independente.
+
+Para o RAILLIFE, a adoção de uma API traria benefícios diretos: os sensores IoT poderiam enviar leituras a um ponto único, o painel e os relatórios consumiriam as mesmas regras e dados, e integrações futuras (aplicativos, sistemas de parceiros) seriam possíveis sem mexer no banco de dados. Em PHP, isso envolve tanto **consumir** APIs (por exemplo, com cURL e `json_decode`) quanto **publicar** endpoints que respondem em JSON com os códigos de status corretos.
+
+Por fim, a segurança não é opcional. Autenticação, autorização verificada a cada requisição, HTTPS, validação de entradas, limites de uso e inventário de versões estão entre as medidas que respondem aos principais riscos listados pelo OWASP.
+
+---
+
+## Referências
+
+BANCO CENTRAL DO BRASIL. **Manual de Padrões para Iniciação do Pix**. Brasília, DF: Banco Central do Brasil, [s. d.]. Disponível em: https://www.bcb.gov.br/content/estabilidadefinanceira/pix/Regulamento_Pix/II_ManualdePadroesparaIniciacaodoPix.pdf. Acesso em: 21 out. 2026.
+
+BRAY, T. (ed.). **RFC 8259**: the JavaScript Object Notation (JSON) data interchange format. [S. l.]: Internet Engineering Task Force (IETF), 2017. Disponível em: https://www.rfc-editor.org/info/rfc8259. Acesso em: 21 out. 2026.
+
+DUSSEAULT, L.; SNELL, J. **RFC 5789**: PATCH method for HTTP. [S. l.]: Internet Engineering Task Force (IETF), 2010. Disponível em: https://www.rfc-editor.org/info/rfc5789. Acesso em: 21 out. 2026.
+
+FIELDING, R. T. **Architectural styles and the design of network-based software architectures**. 2000. Tese (Doutorado em Information and Computer Science) – University of California, Irvine, 2000. Disponível em: https://ics.uci.edu/~fielding/pubs/dissertation/top.htm. Acesso em: 21 out. 2026.
+
+FIELDING, R.; NOTTINGHAM, M.; RESCHKE, J. (ed.). **RFC 9110**: HTTP semantics. [S. l.]: Internet Engineering Task Force (IETF), 2022. Disponível em: https://www.rfc-editor.org/rfc/rfc9110. Acesso em: 21 out. 2026.
+
+GOOGLE. **API design guide**. [S. l.]: Google Cloud, [s. d.]. Disponível em: https://cloud.google.com/apis/design. Acesso em: 21 out. 2026.
+
+HARDT, D. (ed.). **RFC 6749**: the OAuth 2.0 authorization framework. [S. l.]: Internet Engineering Task Force (IETF), 2012. Disponível em: https://www.rfc-editor.org/rfc/rfc6749. Acesso em: 21 out. 2026.
+
+JONES, M.; BRADLEY, J.; SAKIMURA, N. **RFC 7519**: JSON Web Token (JWT). [S. l.]: Internet Engineering Task Force (IETF), 2015. Disponível em: https://www.rfc-editor.org/rfc/rfc7519. Acesso em: 21 out. 2026.
+
+JONES, M.; HARDT, D. **RFC 6750**: the OAuth 2.0 authorization framework: bearer token usage. [S. l.]: Internet Engineering Task Force (IETF), 2012. Disponível em: https://www.rfc-editor.org/info/rfc6750. Acesso em: 21 out. 2026.
+
+MDN WEB DOCS. **API**. Mountain View: Mozilla, 2025. Glossário. Disponível em: https://developer.mozilla.org/en-US/docs/Glossary/API. Acesso em: 21 out. 2026.
+
+MDN WEB DOCS. **HTTP request methods**. Mountain View: Mozilla, 2026a. Disponível em: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods. Acesso em: 21 out. 2026.
+
+MDN WEB DOCS. **Overview of HTTP**. Mountain View: Mozilla, 2026b. Disponível em: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview. Acesso em: 21 out. 2026.
+
+OWASP FOUNDATION. **OWASP API Security Project**. [S. l.]: OWASP Foundation, [s. d.]. Disponível em: https://owasp.org/projects/api-security-project. Acesso em: 21 out. 2026.
+
+OWASP FOUNDATION. **OWASP API Security Top 10**: 2023. [S. l.]: OWASP Foundation, 2023. Disponível em: https://owasp.org/projects/api-security-project. Acesso em: 21 out. 2026.
+
+PHP DOCUMENTATION GROUP. **json_decode**. In: PHP manual. [S. l.]: The PHP Group, 2026a. Disponível em: https://www.php.net/manual/en/function.json-decode.php. Acesso em: 21 out. 2026.
+
+PHP DOCUMENTATION GROUP. **curl_setopt**. In: PHP manual. [S. l.]: The PHP Group, 2026b. Disponível em: https://www.php.net/manual/en/function.curl-setopt.php. Acesso em: 21 out. 2026.
+
+STRIPE. **API reference**. [S. l.]: Stripe, [s. d.]. Disponível em: https://docs.stripe.com/api. Acesso em: 21 out. 2026.
