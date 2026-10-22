@@ -270,3 +270,81 @@ Existem também `HEAD` (como o `GET`, mas sem o corpo da resposta), `OPTIONS` (d
 
 ---
 
+## 5. Requisições e respostas HTTP
+
+A comunicação HTTP é feita por **mensagens**: as enviadas pelo cliente são **requisições** e as enviadas pelo servidor em resposta são **respostas** (MDN WEB DOCS, 2026b).
+
+### Estrutura da requisição
+
+Uma requisição consiste em (MDN WEB DOCS, 2026b):
+
+1. **Método** HTTP (`GET`, `POST` etc.);
+2. **Caminho do recurso** (a URL sem o que é óbvio pelo contexto, como protocolo e domínio);
+3. **Versão** do protocolo;
+4. **Cabeçalhos** opcionais, com informações adicionais;
+5. **Corpo** (para alguns métodos, como `POST`), com os dados enviados.
+
+```http
+POST /v1/sensores/7/leituras HTTP/1.1
+Host: api.raillife.example
+Authorization: Bearer <token>
+Content-Type: application/json
+Accept: application/json
+
+{"valor": 68.4, "unidade": "°C", "lido_em": "2026-10-21T21:30:00-03:00"}
+```
+
+### Estrutura da resposta
+
+Uma resposta consiste em (MDN WEB DOCS, 2026b):
+
+1. **Versão** do protocolo;
+2. **Código de status**, indicando se a requisição teve sucesso e por quê;
+3. **Mensagem de status**, uma descrição curta e não normativa;
+4. **Cabeçalhos**;
+5. **Corpo** opcional, com o recurso solicitado.
+
+```http
+HTTP/1.1 201 Created
+Content-Type: application/json; charset=utf-8
+Location: /v1/sensores/7/leituras/9021
+
+{"id": 9021, "sensor_id": 7, "valor": 68.4, "unidade": "°C", "lido_em": "2026-10-21T21:30:00-03:00"}
+```
+
+### Cabeçalhos mais usados em APIs
+
+| Cabeçalho | Direção | Função |
+| --- | --- | --- |
+| `Content-Type` | requisição e resposta | Formato do corpo (`application/json`). |
+| `Accept` | requisição | Formatos que o cliente aceita receber. |
+| `Authorization` | requisição | Credenciais do cliente. |
+| `WWW-Authenticate` | resposta | Indica como se autenticar (acompanha o `401`). |
+| `Location` | resposta | URL do recurso criado ou de redirecionamento. |
+| `Allow` | resposta | Métodos aceitos pelo recurso (acompanha o `405`). |
+| `Cache-Control` | resposta | Regras de cache. |
+
+### Códigos de status
+
+Os códigos de status são divididos em classes: **1xx** (informativo), **2xx** (sucesso), **3xx** (redirecionamento), **4xx** (erro do cliente) e **5xx** (erro do servidor) (FIELDING; NOTTINGHAM; RESCHKE, 2022, seç. 15). Os mais usados em APIs:
+
+| Código | Nome | Uso típico |
+| :---: | --- | --- |
+| `200` | OK | Consulta ou atualização bem-sucedida, com corpo. |
+| `201` | Created | Recurso criado (`POST`), normalmente com `Location`. |
+| `204` | No Content | Sucesso sem corpo (`DELETE`, às vezes `PUT`/`PATCH`). |
+| `400` | Bad Request | Requisição malformada (por exemplo, JSON inválido). |
+| `401` | Unauthorized | Falta autenticação válida. |
+| `403` | Forbidden | Identificado, mas sem permissão para esta ação. |
+| `404` | Not Found | Recurso inexistente. |
+| `405` | Method Not Allowed | Método não aceito pelo recurso. |
+| `409` | Conflict | Conflito com o estado atual (por exemplo, duplicidade). |
+| `422` | Unprocessable Content | Sintaxe correta, mas dados semanticamente inválidos. |
+| `429` | Too Many Requests | Limite de requisições excedido. |
+| `500` | Internal Server Error | Falha inesperada no servidor. |
+| `503` | Service Unavailable | Serviço temporariamente indisponível. |
+
+Os nomes seguem a especificação do HTTP (FIELDING; NOTTINGHAM; RESCHKE, 2022, seç. 15) e a lista de códigos documentada pelo MDN (MDN WEB DOCS, 2026a). O `429` é usado, por exemplo, por APIs que limitam a taxa de chamadas, e a recomendação do fornecedor nesse caso é repetir a requisição com espera crescente (*exponential backoff*) (STRIPE, [s. d.]).
+
+---
+
