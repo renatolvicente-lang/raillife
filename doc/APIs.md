@@ -651,3 +651,140 @@ Essa forma depende da configuração `allow_url_fopen` e oferece menos recursos 
 
 ---
 
+## 10. Como uma API pode disponibilizar informações para outros sistemas
+
+Para **expor** dados, o sistema passa a atuar como **servidor de API**: define endpoints, valida as requisições, consulta o banco de dados e responde em JSON com os códigos de status adequados.
+
+### Exemplo mínimo em PHP (didático)
+
+O exemplo implementa o recurso `trens` com `GET` (lista e item), `POST` e `DELETE`. Ele pressupõe uma tabela hipotética `trens(id, nome, status)`, PHP 8 e uma regra de reescrita de URL no servidor que transforme `/v1/trens/42` em `trens.php?id=42`.
+
+```php
+<?php
+declare(strict_types=1);
+
+header('Content-Type: application/json; charset=utf-8');
+
+/** Envia a resposta JSON com o status HTTP indicado e encerra o script. */
+function responder(int $status, ?array $dados = null): void
+{
+    http_response_code($status);
+
+    if ($dados !== null) {
+        echo json_encode($dados, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+    }
+
+    exit;
+}
+
+function erro(int $status, string $mensagem): void
+{
+    responder($status, ['erro' => ['mensagem' => $mensagem]]);
+}
+
+/** Autenticação simples por token (apenas para fins didáticos). */
+function exigirToken(): void
+{
+    $esperado  = getenv('RAILLIFE_API_TOKEN') ?: '';
+    $cabecalho = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
+
+    if (
+        $esperado === ''
+        || !preg_match('/^Bearer\s+(.+)$/i', $cabecalho, $m)
+        || !hash_equals($esperado, $m[1])
+    ) {
+        header('WWW-Authenticate: Bearer');
+        erro(401, 'Credenciais ausentes ou inválidas.');
+    }
+}
+
+exigirToken();
+
+$pdo = new PDO(
+    getenv('DB_DSN'),
+    getenv('DB_USER') ?: null,
+    getenv('DB_PASS') ?: null,
+    [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+);
+
+$metodo = $_SERVER['REQUEST_METHOD'];
+$id     = isset($_GET['id']) ? (int) $_GET['id'] : null;
+
+switch ($metodo) {
+    case 'GET':
+        if ($id === null) {
+            $linhas = $pdo->query('SELECT id, nome, status FROM trens ORDER BY id')
+                          ->fetchAll(PDO::FETCH_ASSOC);
+            responder(200, ['dados' => $linhas]);
+        }
+
+        $stmt = $pdo->prepare('SELECT id, nome, status FROM trens WHERE id = :id');
+        $stmt->execute([':id' => $id]);
+        $trem = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($trem === false) {
+            erro(404, 'Trem não encontrado.');
+        }
+        responder(200, $trem);
+        break;
+
+    case 'POST':
+        try {
+            $entrada = json_decode(file_get_contents('php://input') ?: '', true, 512, JSON_THROW_ON_ERROR);
+        } catch (JsonException $e) {
+            erro(400, 'O corpo da requisição não é um JSON válido.');
+        }
+
+        $nome = is_array($entrada) ? ($entrada['nome'] ?? null) : null;
+
+        if (!is_string($nome) || trim($nome) === '') {
+            erro(422, 'O campo "nome" é obrigatório.');
+        }
+
+        // Consulta preparada: os dados nunca são concatenados ao SQL
+        $stmt = $pdo->prepare('INSERT INTO trens (nome, status) VALUES (:nome, :status)');
+        $stmt->execute([':nome' => trim($nome), ':status' => 'parado']);
+        $novoId = (int) $pdo->lastInsertId();
+
+        header('Location: /v1/trens/' . $novoId);
+        responder(201, ['id' => $novoId, 'nome' => trim($nome), 'status' => 'parado']);
+        break;
+
+    case 'DELETE':
+        if ($id === null) {
+            erro(400, 'Informe o id do trem.');
+        }
+
+        $stmt = $pdo->prepare('DELETE FROM trens WHERE id = :id');
+        $stmt->execute([':id' => $id]);
+
+        if ($stmt->rowCount() === 0) {
+            erro(404, 'Trem não encontrado.');
+        }
+        responder(204);
+        break;
+
+    default:
+        header('Allow: GET, POST, DELETE');
+        erro(405, 'Método não permitido.');
+}
+```
+
+Este código **autentica** o chamador (token), mas ainda **não autoriza** por usuário ou objeto: qualquer portador do token acessa qualquer trem. Em um sistema real, é preciso verificar também *o que* cada chamador pode ver e alterar (veja a [seção 11](#11-autenticação-autorização-e-segurança)).
+
+### Preocupações de quem publica uma API
+
+- **Contrato estável e documentado:** documente endpoints, parâmetros, exemplos e erros (por exemplo, com uma especificação como OpenAPI). A falta de documentação e de inventário de versões leva a versões obsoletas e endpoints de depuração expostos (OWASP FOUNDATION, 2023).
+- **Versionamento** (`/v1`, `/v2`) para evoluir sem quebrar clientes.
+- **Paginação, filtros e limites:** nenhuma listagem deve retornar milhões de registros. Requisições consomem rede, CPU, memória e armazenamento; sem limites, um ataque pode causar negação de serviço ou aumento de custos (OWASP FOUNDATION, 2023).
+- **Resposta mínima:** retorne apenas os campos necessários. Expor propriedades que o chamador não deveria ver é o risco API3:2023 (OWASP FOUNDATION, 2023).
+- **CORS:** quando a API é chamada por páginas de outros domínios, o servidor precisa declarar quais origens são permitidas por meio de cabeçalhos CORS (MDN WEB DOCS, 2026b).
+- **Registro (*logs*) e monitoramento** das chamadas.
+- **HTTPS obrigatório:** o esquema `https` garante autenticação do servidor e proteção de confidencialidade e integridade da comunicação (FIELDING; NOTTINGHAM; RESCHKE, 2022, seç. 4.2.2).
+
+### Cenário no RAILLIFE
+
+Com uma API como a acima, sistemas diferentes consomem a mesma fonte de dados: os **sensores** enviam leituras com `POST`; o **painel** consulta o estado dos trens com `GET`; um **módulo de relatórios** busca o histórico; e um **sistema de terceiros** (por exemplo, de planejamento de rotas) pode ser autorizado a ler dados de rotas, tudo sem acesso direto ao banco de dados.
+
+---
+
