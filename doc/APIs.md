@@ -118,3 +118,155 @@ Cabe uma ressalva: muitas APIs chamadas de "REST" implementam apenas parte das r
 
 ---
 
+## 4. O papel dos métodos HTTP
+
+O HTTP define **métodos de requisição** que indicam o propósito da requisição e o que se espera em caso de sucesso (MDN WEB DOCS, 2026a). Em APIs REST, eles expressam as operações sobre um recurso, de forma análoga ao CRUD:
+
+| Operação CRUD | Método HTTP |
+| --- | --- |
+| *Read* (ler) | `GET` |
+| *Create* (criar) | `POST` |
+| *Update* (atualizar, total) | `PUT` |
+| *Update* (atualizar, parcial) | `PATCH` |
+| *Delete* (remover) | `DELETE` |
+
+### O que cada método faz
+
+- **`GET`**: solicita a **representação** de um recurso. Deve apenas **recuperar dados** e não deve conter corpo na requisição (MDN WEB DOCS, 2026a).
+- **`POST`**: envia uma entidade ao recurso indicado, frequentemente causando mudança de estado ou efeitos colaterais no servidor (MDN WEB DOCS, 2026a). Pede que o recurso alvo processe o conteúdo conforme sua própria semântica, o que o torna o método de uso mais geral. É o usual para **criar** um recurso dentro de uma coleção.
+- **`PUT`**: pede que o estado do recurso alvo seja **criado ou substituído** pelo estado descrito na representação enviada (FIELDING; NOTTINGHAM; RESCHKE, 2022, seç. 9.3.4). É uma substituição **completa**: o que não for enviado pode ser perdido.
+- **`PATCH`**: aplica **modificações parciais** a um recurso. Foi criado porque o `PUT` só permite substituição completa do documento (DUSSEAULT; SNELL, 2010). O formato do corpo do `PATCH` não é fixado pelo método; o servidor pode anunciar os formatos aceitos pelo cabeçalho `Accept-Patch`. O guia do Google recomenda que a operação de atualização padrão suporte atualização parcial e use `PATCH` (GOOGLE, [s. d.]).
+- **`DELETE`**: remove o recurso indicado (MDN WEB DOCS, 2026a).
+
+### Propriedades: seguro, idempotente e armazenável em cache
+
+| Método | Seguro | Idempotente | Cacheável |
+| --- | :---: | :---: | :---: |
+| `GET` | Sim | Sim | Sim |
+| `PUT` | Não | Sim | Não |
+| `DELETE` | Não | Sim | Não |
+| `POST` | Não | Não | Condicional* |
+| `PATCH` | Não | Não | Condicional* |
+
+\* `POST` e `PATCH` só são cacheáveis quando a resposta traz informação explícita de frescor e um cabeçalho `Content-Location` correspondente (MDN WEB DOCS, 2026a).
+
+- **Seguro:** a semântica da requisição é essencialmente de leitura, sem alterar o estado do recurso. Um recurso não pode tratar uma requisição de forma inconsistente com o método usado: quem chama uma URL com `GET` espera que ela evite ações inseguras (FIELDING; NOTTINGHAM; RESCHKE, 2022, seç. 3.1). Por isso, um endpoint como `GET /trens/42/apagar` é um **erro de projeto**.
+- **Idempotente:** enviar a mesma requisição várias vezes tem, no servidor, o mesmo efeito de enviá-la uma única vez (FIELDING; NOTTINGHAM; RESCHKE, 2022, seç. 9.2.2). A idempotência fala do **efeito no servidor**, não da resposta: um segundo `DELETE` pode retornar `404`, mas o estado final continua o mesmo.
+  Essa propriedade importa na prática, pois requisições idempotentes podem ser **repetidas com segurança** após uma falha de conexão (FIELDING; NOTTINGHAM; RESCHKE, 2022, seç. 2.4). Já um `POST` repetido pode criar dois registros. Por isso, APIs de pagamento aceitam uma **chave de idempotência** para tornar `POST` repetíveis sem duplicar a operação (STRIPE, [s. d.]).
+
+### Exemplos com JSON
+
+Os exemplos abaixo mostram cada método aplicado a trens. Os cabeçalhos foram simplificados.
+
+**`GET`: consultar um trem**
+
+```http
+GET /v1/trens/42 HTTP/1.1
+Host: api.raillife.example
+Accept: application/json
+```
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+```
+
+```json
+{
+  "id": 42,
+  "nome": "Locomotiva Serra Verde",
+  "status": "em_operacao",
+  "capacidade": 320,
+  "rota_id": 3,
+  "ativo": true,
+  "ultima_manutencao": "2026-09-30",
+  "observacoes": null
+}
+```
+
+**`POST`: criar um trem**
+
+```http
+POST /v1/trens HTTP/1.1
+Host: api.raillife.example
+Content-Type: application/json
+Authorization: Bearer <token>
+```
+
+```json
+{
+  "nome": "Locomotiva Vale do Itajaí",
+  "capacidade": 280,
+  "rota_id": 3
+}
+```
+
+A resposta usual é `201 Created`, com o cabeçalho `Location` apontando para o novo recurso e, geralmente, a representação criada:
+
+```http
+HTTP/1.1 201 Created
+Location: /v1/trens/43
+Content-Type: application/json; charset=utf-8
+```
+
+```json
+{
+  "id": 43,
+  "nome": "Locomotiva Vale do Itajaí",
+  "status": "parado",
+  "capacidade": 280,
+  "rota_id": 3,
+  "ativo": true,
+  "ultima_manutencao": null,
+  "observacoes": null
+}
+```
+
+**`PUT`: substituir o trem inteiro** (todos os campos são enviados; o que faltar pode ser apagado ou assumir valor padrão)
+
+```http
+PUT /v1/trens/43 HTTP/1.1
+Content-Type: application/json
+```
+
+```json
+{
+  "nome": "Locomotiva Vale do Itajaí II",
+  "status": "parado",
+  "capacidade": 300,
+  "rota_id": 5,
+  "ativo": true,
+  "ultima_manutencao": "2026-10-15",
+  "observacoes": "Revisão completa concluída."
+}
+```
+
+**`PATCH`: alterar apenas o status**
+
+```http
+PATCH /v1/trens/43 HTTP/1.1
+Content-Type: application/json
+```
+
+```json
+{
+  "status": "em_manutencao"
+}
+```
+
+**`DELETE`: remover o trem.** A resposta usual é `204 No Content`, sem corpo:
+
+```http
+DELETE /v1/trens/43 HTTP/1.1
+```
+
+```http
+HTTP/1.1 204 No Content
+```
+
+### Outros métodos
+
+Existem também `HEAD` (como o `GET`, mas sem o corpo da resposta), `OPTIONS` (descreve as opções de comunicação com o recurso), `TRACE` e `CONNECT` (MDN WEB DOCS, 2026a). Se o cliente usar um método que o recurso não aceita, o servidor responde `405 Method Not Allowed` e informa os métodos aceitos no cabeçalho `Allow`.
+
+---
+
