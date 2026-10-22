@@ -492,3 +492,28 @@ Essas três formas fazem o `json_decode()` do PHP devolver `null` (PHP DOCUMENTA
 
 ---
 
+## 8. Diferenças entre uma API e um sistema web tradicional
+
+Ambos usam HTTP e, muitas vezes, o mesmo código no servidor, mas se diferenciam por **quem consome** e **o que entregam**.
+
+Em um sistema web tradicional, o servidor gera **páginas HTML** completas para um **navegador**, que as exibe a uma pessoa. A página inicial do RAILLIFE (`index.php`) é um exemplo: um arquivo PHP que entrega uma página HTML estilizada com Bootstrap. Já uma API entrega **dados** (normalmente JSON) a **outros programas**, que decidem como apresentá-los.
+
+| Aspecto | Sistema web tradicional | API |
+| --- | --- | --- |
+| **Consumidor** | Pessoa, por meio do navegador | Outro software (aplicativo, sensor, sistema, página com JavaScript) |
+| **O que retorna** | HTML (layout + conteúdo misturados) | Dados estruturados (JSON, XML) |
+| **Foco** | Interface e navegação | Contrato de dados e operações |
+| **Operações** | Links e formulários (na prática, `GET` e `POST`) | Todos os métodos HTTP, conforme a operação |
+| **Identificação do usuário** | Em geral, sessão com *cookie* | Credencial enviada a cada requisição (token, chave) |
+| **Erros** | Página de erro para o usuário | Código de status + corpo JSON legível por máquina |
+| **Reuso** | Atende apenas aquela interface | Atende site, aplicativo, IoT e integrações com as mesmas regras |
+| **Acoplamento** | Interface e regras de negócio juntas | Interface separada do *back-end* |
+
+Alguns pontos merecem destaque:
+
+- **Estado e sessões:** o HTTP em si não tem estado, mas os *cookies* permitem criar sessões que compartilham o mesmo contexto entre requisições (MDN WEB DOCS, 2026b). Sistemas web tradicionais costumam depender desse mecanismo. APIs tendem a seguir a restrição "sem estado" do REST, com a credencial acompanhando cada chamada (FIELDING, 2000).
+- **Uma coisa não exclui a outra:** o mesmo servidor pode entregar HTML ao navegador e JSON a uma integração. O HTTP prevê a **negociação de conteúdo** (cabeçalho `Accept`) para escolher a representação mais adequada de um recurso (FIELDING; NOTTINGHAM; RESCHKE, 2022, seç. 12).
+- **Arquiteturas modernas:** ao separar *front-end* e *back-end*, o sistema "tradicional" passa a consumir a própria API, e o *back-end* atende, com as mesmas regras, a web, o celular e os sensores.
+
+---
+
