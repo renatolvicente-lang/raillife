@@ -44,7 +44,6 @@ CREATE TABLE trens (
   capacidade INT NOT NULL,
   ano_fabricacao DATE NOT NULL,
   id_rotas INT NOT NULL,
-  id_usuarios INT NOT NULL,
   FOREIGN KEY (id_rotas) REFERENCES rotas(id)
 );
 

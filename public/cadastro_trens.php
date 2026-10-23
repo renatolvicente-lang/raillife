@@ -8,7 +8,12 @@
         exit();
     }
 
+
     $id = $_GET["id"] ?? null;
+
+    $sql = "SELECT * FROM rotas";
+    $result = $conn->query($sql);
+    
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $nome = $_POST["nome"];
@@ -19,20 +24,20 @@
 
 
         if($id){
-            $sql = "UPDATE trens SET nome_trens=?, modelo=?, capacidade=?, ano_fabricacao=?, id_rotas=?";
+            $sql = "UPDATE trens SET nome_trens=?, modelo=?, capacidade=?, ano_fabricacao=?, id_rotas=? WHERE id = $id";
             $stmt = $conn->prepare($sql);
-            $stmt = bind_param("ssisi", $nome, $modelo, $capacidade, $fabricacao, $rota);
-            $stmt = execute();
+            $stmt-> bind_param("ssisi", $nome, $modelo, $capacidade, $fabricacao, $rota);
+            $stmt->execute();
 
             header("Location: adm_trens.php");
             exit();
             
         }else{
 
-            $sql = "INSERT INTO trens VALUES (?,?,?,?,?)";
+            $sql = "INSERT INTO trens (nome_trens, modelo, capacidade, ano_fabricacao, id_rotas)VALUES (?,?,?,?,?)";
     
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("sisis", $nome,$rota,$fabricacao,$capacidade,$modelo);
+            $stmt->bind_param("ssisi", $nome,$modelo, $capacidade, $fabricacao, $rota);
             $stmt->execute();
     
             header("Location: adm_trens.php");
@@ -90,19 +95,21 @@
                     <input type="text" id="nome" name="nome" placeholder="Nome do trem">
                 </div>
                 <div class="cadastro-campo campo-capacidade">
-                    <label for="capacidade">Capacidade:</label>
+                    <label for="capacidade">Capacidade(Kg):</label>
                     <input type="number" name="capacidade" id="capacidade" placeholder="Capacidade do trem">
                 </div>
                 <div class="cadastro-campo campo-rota">
                     <label for="rota">Rota:</label>
                     <select name="rota" id="rota">
+
                         <?php if($result->num_rows > 0){?>
                             <?php while($linha = $result->fetch_assoc()){?>
-                                <option value='". $linha[id] ."'>
-                                    <?php echo $linha["nome"]?>
+                                <option value="<?php echo $linha["id"]?>">
+                                    <?php echo $linha["nome_rotas"]?>
                                 </option>
                             <?php }?>
                         <?php }else{ echo "<option>Nenhuma rota cadastrada</option>";}?>
+
                     </select>
                 </div>
                 <div class="cadastro-campo campo-modelo">
@@ -110,8 +117,8 @@
                     <input type="text" name="modelo" id="modelo" placeholder="Modelo do trem">
                 </div>
                 <div class="cadastro-campo campo-data">
-                    <label for="data">Data de fabricação:</label>
-                    <input type="date" name="data" id="data">
+                    <label for="fabricacao">Data de fabricação:</label>
+                    <input type="date" name="fabricacao" id="fabricacao">
                 </div>
                 <button type="submit" name="cadastrar">Cadastrar</button>
             </form>
