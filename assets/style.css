@@ -12,6 +12,15 @@ body{
     z-index: 1060 !important;
 }
 
+.offcanvas {
+    border-radius: 28px 0 0 28px;
+}
+
+.offcanvas-header,
+.offcanvas-body {
+    border-radius: inherit;
+}
+
 /* Página Home*/
 
 .hd_home{
@@ -21,24 +30,59 @@ body{
     position: relative;
     z-index: 2;
     background: #f8f9fa;
-    
-    
     border-radius: 50px;
-    
     display: flex;
     align-items: center;
     justify-content: space-between;
-    
-    padding: 5px 0;
+    padding: 5px 20px;
+    box-sizing: border-box;
+}
+.logo_home{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    max-width: 250px;
 }
 .logo_home img{
     width: 250px;
+}
+.nav_home{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    text-align: center;
+    z-index: 1;
 }
 .nav_home a{
     color: #000;
     font-size: 20px;
     text-decoration: none;
-    padding: 20px;
+    padding: 12px 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 90px;
+    text-align: center;
+}
+.margin_header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex: 1;
+    max-width: 250px;
+    margin-right: 0;
+}
+
+.margin_header a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 6px;
 }
 .ativado{
     font-weight: bolder;
@@ -770,5 +814,37 @@ header {
     margin-right: 20px;
 }
 
+.dropdown.mt-3 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 2px solid #d9d9d9;
+}
+
+.dropdown.mt-3 a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 140px;
+    padding: 10px 18px;
+    border-radius: 8px;
+    background-color: #c23232;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    text-align: center;
+}
+
+.dropdown.mt-3 a:hover {
+    background-color: #a12a2a;
+    transform: translateY(-1px);
+}
 
 

@@ -2,10 +2,10 @@
     include("../infra/conn.php");
     // session_start();
 
-    // if(!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm"){
-    //      header("Location: home.php");
-    //      exit();
-    // }
+     if(!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm"){
+          header("Location: home.php");
+          exit();
+    }
     $result = $conn->query("SELECT * FROM usuarios");
 
 
@@ -54,7 +54,7 @@
             <a href="adm_sensores.php">Sensores</a>
             <a href="adm_trens.php">Trens</a>
             <a href="#">Relatorios</a>
-            <a href="adm_rotas.php" class="ativado">Rotas</a>
+            <a href="adm_rotas.php">Rotas</a>
              
         </nav>
 
