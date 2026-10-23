@@ -2,7 +2,7 @@
 require_once('../infra/conn.php');
 session_start();
 
- if(!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] = "adm"){
+ if (!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] == "adm") {
         header("Location: home.php");
          exit();
     }
