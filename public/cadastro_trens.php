@@ -1,13 +1,30 @@
 <?php 
     
     include("../infra/conn.php");
-session_start();
+    session_start();
 
-   if(!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm"){
+   if(!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] = "adm"){
          header("Location: home.php");
          exit();
     }
 
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        $nome = $_POST["nome"];
+        $rota = $_POST["rota"];
+        $fabricacao = $_POST["fabricacao"];
+        $capacidade = $_POST["capacidade"];
+        $modelo = $_POST["modelo"];
+
+
+        $sql = "INSERT INTO trens VALUES (?,?,?,?,?)";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("sssss", $nome,$rota,$fabricacao,$capacidade,$modelo);
+        $stmt->execute();
+
+        header("Location: adm_trens.php");
+        exit();
+    }
 ?>
 
 
@@ -60,6 +77,7 @@ session_start();
                     <label for="modelo">Modelo:</label>
                     <input type="text" name="modelo" id="modelo">
                 </div>
+                
         </form>
         </section>
     </main>
