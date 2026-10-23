@@ -414,19 +414,22 @@ header {
 }
 
 .cadastro-pagina {
-    width: 50%;
-    margin: auto;
+    width: 100%;
+    margin: 0 auto;
     position: relative;
     z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .cadastro-formulario {
-    width: 840px;
+    width: min(840px, calc(100% - 32px));
     min-height: 418px;
     background-color: #f8f9fa;
     border-radius: 0 8px 8px 8px;
     padding: 25px 0 18px;
-    
+    margin: 0 auto;
     z-index: 2;
     box-shadow: 0 100px 100px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
@@ -441,12 +444,13 @@ header {
 }
 
 .grid {
-    width: 722px;
+    width: min(722px, calc(100% - 48px));
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
     column-gap: 55px;
     row-gap: 13px;
+    justify-items: center;
 }
 
 /* Organização dos campos */
@@ -456,50 +460,33 @@ header {
     grid-row: 1;
 }
 
-.campo-email {
-    grid-column: 1;
-    grid-row: 2;
-}
-
-.campo-cpf {
-    grid-column: 1;
-    grid-row: 3;
-}
-
-.campo-data {
-    grid-column: 1;
-    grid-row: 4;
-}
-
-.campo-cep {
+.campo-capacidade {
     grid-column: 2;
     grid-row: 1;
 }
 
-.campo-endereco {
+.campo-rota {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.campo-modelo {
     grid-column: 2;
     grid-row: 2;
 }
 
-.campo-cidade {
-    grid-column: 2;
+.campo-data {
+    grid-column: 1 / 3;
     grid-row: 3;
-}
-
-.campo-senha {
-    grid-column: 2;
-    grid-row: 4;
-}
-
-.campo-atuacao {
-    grid-column: 1;
-    grid-row: 5;
+    width: min(100%, 340px);
+    justify-self: center;
 }
 
 .cadastro-campo {
     width: 100%;
     display: flex;
     flex-direction: column;
+    align-items: stretch;
 }
 
 .cadastro-campo label {
@@ -507,6 +494,9 @@ header {
     color: #333333;
     margin-bottom: 5px;
     font-weight: 500;
+    display: block;
+    text-align: left;
+    width: 100%;
 }
 
 .cadastro-campo input {
@@ -521,12 +511,17 @@ header {
     background-color: #ffffff;
     outline: none;
     transition: all 0.2s ease;
+    margin: 0 auto;
 }
 
 .cadastro-campo select {
+    width: 100%;
+    height: 40px;
+    box-sizing: border-box;
     border: 1.5px solid #e40613;
     border-radius: 4px;
     padding: 10px 10px;
+    background-color: #fff;
 }
 
 .cadastro-campo input::placeholder {

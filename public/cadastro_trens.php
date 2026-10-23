@@ -63,6 +63,11 @@
     </header>
     
     <main class="cadastro-pagina">
+        
+        <div class="container_titulo">
+            <img src="../assets/logo.png" alt="logo site">
+        </div>
+
         <section class="cadastro-formulario">
         <form class="grid" method="POST">
                 <div class="cadastro-campo campo-nome">
