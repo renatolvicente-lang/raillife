@@ -118,15 +118,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 </div>
 
                 <div class="cadastro-campo">
-                    <label for="senha">Senha:</label>
-                    <input type="password" id="senha" name="senha" placeholder="Digite sua senha">
+                    <label for="rota">Rota:</label>
+                    <input type="text" id="rota" name="rota" placeholder="Digite a rota do sensor"
+                        value="<?php echo htmlspecialchars($rota ?? ''); ?>">
                 </div>
 
                 <div class="cadastro-campo">
-                    <label for="atuacao">Área de atuação:</label>
-                    <select id="atuacao" name="atuacao"">
-                     <option value=" Usuário Comum" <?php echo (isset($area_atuacao) && $area_atuacao === 'Usuário Comum') ? 'selected' : ''; ?>>Usuário Comum</option>
-                        <option value="ADM" <?php echo (isset($area_atuacao) && $area_atuacao === 'ADM') ? 'selected' : ''; ?>>ADM</option>
+                    <label for="status">Status:</label>
+                    <select id="status" name="status" placeholder="digite o status do sensor">
+                        <option value="Ativo" <?php echo (isset($status) && $status === 'Ativo') ? 'selected' : ''; ?>>Ativo</option>
+                        <option value="Inativo" <?php echo (isset($status) && $status === 'Inativo') ? 'selected' : ''; ?>>Inativo</option>
                     </select>
                 </div>
 
