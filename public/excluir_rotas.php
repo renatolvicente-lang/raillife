@@ -18,6 +18,11 @@ if(isset($_GET["id"])){
         $sql = "DELETE FROM rotas WHERE id = $id_exclusao";
     
         $conn->query($sql);
+    }else{
+        echo"Erro: Não é possivel excluir você mesmo";
+
+        header("Location: adm_cadastros.php");
+        exit();
     }
 }
 
