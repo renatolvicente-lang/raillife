@@ -9,7 +9,7 @@
         exit();
     }
 
-    $result = $conn->query("SELECT * FROM trens INNER JOIN rotas ON trens.id_rotas = rotas.id");
+    $result = $conn->query("SELECT * FROM trens INNER JOIN rotas ON trens.id_rotas = rotas.id INNER JOIN usuarios ON trens.id_usuarios = usuarios.id");
 
 ?>
 
@@ -94,6 +94,7 @@
                         <th class="tb_id">ID</th>
                         <th>Nome</th>
                         <th>Rota</th>
+                        <th>Usuário</th>
                         <th>Modelo</th>
                         <th>Fabricação</th>
                         <th class="tb_acoes">Ações</th>
@@ -112,6 +113,10 @@
                         
                             <td>
                                 <?php echo $linha["nome_rotas"];?>
+                            </td>
+
+                            <td>
+                                <?php echo $linha["nome_usuarios"];?>
                             </td>
                         
                             <td>

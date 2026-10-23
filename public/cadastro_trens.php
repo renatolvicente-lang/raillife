@@ -121,7 +121,7 @@
                         <?php if($result_usuario->num_rows > 0){?>
                             <?php while($linha = $result_usuario->fetch_assoc()){?>
                                 <option value="<?php echo $linha["id"]?>">
-                                    <?php echo $linha["nome"]?>
+                                    <?php echo $linha["nome_usuarios"]?>
                                 </option>
                             <?php }?>
                         <?php }else{ echo "<option>Nenhuma rota cadastrada</option>";}?>
