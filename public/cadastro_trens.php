@@ -3,17 +3,10 @@
     include("../infra/conn.php");
     session_start();
 
-<<<<<<< HEAD
    //if(!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm"){
         // header("Location: home.php");
       //   exit();
     //}
-=======
-   if(!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] = "adm"){
-         header("Location: home.php");
-         exit();
-    }
->>>>>>> 02c65b5898a8c144af36fd0812a871c954e59a07
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $nome = $_POST["nome"];
