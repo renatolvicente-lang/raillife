@@ -85,7 +85,10 @@
                 <a href="cadastro.php"><button type="button" class="btn btn-danger">Novo Usuario</button></a>
             </div>
         </div>
+        <div class="flex">
+        <div class="espaco"></div>
         <p>Gerencie os usuários do sistema, edite informações ou remova acessos.</p>
+        </div>
 
         <div>
 
