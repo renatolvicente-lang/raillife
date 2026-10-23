@@ -3,10 +3,10 @@
     include("../infra/conn.php");
 session_start();
 
-   if(!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm"){
-         header("Location: home.php");
-         exit();
-    }
+   //if(!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm"){
+        // header("Location: home.php");
+      //   exit();
+    //}
 
 ?>
 
@@ -52,15 +52,31 @@ session_start();
                     <label for="nome">Nome:</label>
                     <input type="text" id="nome" name="nome" placeholder="Nome do trem">
                 </div>
-                <div class="cadastro-campo campo-modelo">
-                    <label for="modelo">Modelo:</label>
-                    <input type="text" name="modelo" id="modelo">
+                <div class="cadastro-campo campo-capacidade">
+                    <label for="capacidade">Capacidade:</label>
+                    <input type="number" name="capacidade" id="capacidade" placeholder="Capacidade do trem">
+                </div>
+                <div class="cadastro-campo campo-rota">
+                    <label for="rota">Rota:</label>
+                    <select name="rota" id="rota">
+                        <?php
+                            $result = $conn->query("SELECT * FROM rotas");
+                            while($row = $result->fetch_assoc()){
+                                echo "<option value='".$row['id']."'>".$row['nome']."</option>";
+                            }
+                        ?>
+                    </select>
                 </div>
                 <div class="cadastro-campo campo-modelo">
                     <label for="modelo">Modelo:</label>
-                    <input type="text" name="modelo" id="modelo">
+                    <input type="text" name="modelo" id="modelo" placeholder="Modelo do trem">
                 </div>
-        </form>
+                <div class="cadastro-campo campo-data">
+                    <label for="data">Data de fabricação:</label>
+                    <input type="date" name="data" id="data">
+                </div>
+                <button type="submit" name="cadastrar">Cadastrar</button>
+            </form>
         </section>
     </main>
 
