@@ -10,15 +10,11 @@ session_start();
 
 
 if(isset($_GET["id"])){
-    $id_exclusao = $_GET["id"];
-    $id_sessao = $_SESSION["id"];
 
-    if($id_exclusao != $id_sessao){
-
-        $sql = "DELETE FROM rotas WHERE id = $id_exclusao";
-    
-        $conn->query($sql);
-    }
+        $sql = "DELETE FROM rotas WHERE id = ?";
+        $comando = $conn->prepare($sql);
+        $comando->bind_param("i", $_GET["id"]);
+        $comando->execute();
 }
 
 
