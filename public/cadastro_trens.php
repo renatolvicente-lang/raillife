@@ -14,19 +14,21 @@
     $sql = "SELECT * FROM rotas";
     $result = $conn->query($sql);
     
+    $result_usuario = $conn->query("SELECT * FROM usuarios");
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $nome = $_POST["nome"];
         $rota = $_POST["rota"];
+        $usuario = $_POST["usuario"];
         $fabricacao = $_POST["fabricacao"];
         $capacidade = $_POST["capacidade"];
         $modelo = $_POST["modelo"];
 
 
         if($id){
-            $sql = "UPDATE trens SET nome_trens=?, modelo=?, capacidade=?, ano_fabricacao=?, id_rotas=? WHERE id = $id";
+            $sql = "UPDATE trens SET nome_trens=?, modelo=?, capacidade=?, ano_fabricacao=?, id_rotas=? , id_usuarios=? WHERE id = $id";
             $stmt = $conn->prepare($sql);
-            $stmt-> bind_param("ssisi", $nome, $modelo, $capacidade, $fabricacao, $rota);
+            $stmt-> bind_param("ssisii", $nome, $modelo, $capacidade, $fabricacao, $rota, $usuario);
             $stmt->execute();
 
             header("Location: adm_trens.php");
@@ -34,10 +36,10 @@
             
         }else{
 
-            $sql = "INSERT INTO trens (nome_trens, modelo, capacidade, ano_fabricacao, id_rotas)VALUES (?,?,?,?,?)";
+            $sql = "INSERT INTO trens (nome_trens, modelo, capacidade, ano_fabricacao, id_rotas, id_usuarios)VALUES (?,?,?,?,?)";
     
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("ssisi", $nome,$modelo, $capacidade, $fabricacao, $rota);
+            $stmt->bind_param("ssisii", $nome,$modelo, $capacidade, $fabricacao, $rota, $usuario);
             $stmt->execute();
     
             header("Location: adm_trens.php");
@@ -106,6 +108,20 @@
                             <?php while($linha = $result->fetch_assoc()){?>
                                 <option value="<?php echo $linha["id"]?>">
                                     <?php echo $linha["nome_rotas"]?>
+                                </option>
+                            <?php }?>
+                        <?php }else{ echo "<option>Nenhuma rota cadastrada</option>";}?>
+
+                    </select>
+                </div>
+                <div class="cadastro-campo campo-usuario">
+                    <label for="usuario">Usuário:</label>
+                    <select name="usuario" id="usuario">
+
+                        <?php if($result_usuario->num_rows > 0){?>
+                            <?php while($linha = $result_usuario->fetch_assoc()){?>
+                                <option value="<?php echo $linha["id"]?>">
+                                    <?php echo $linha["nome"]?>
                                 </option>
                             <?php }?>
                         <?php }else{ echo "<option>Nenhuma rota cadastrada</option>";}?>
