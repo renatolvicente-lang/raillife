@@ -1,13 +1,37 @@
 <?php 
     
     include("../infra/conn.php");
-session_start();
+    session_start();
 
+<<<<<<< HEAD
    //if(!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm"){
         // header("Location: home.php");
       //   exit();
     //}
+=======
+   if(!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] = "adm"){
+         header("Location: home.php");
+         exit();
+    }
+>>>>>>> 02c65b5898a8c144af36fd0812a871c954e59a07
 
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        $nome = $_POST["nome"];
+        $rota = $_POST["rota"];
+        $fabricacao = $_POST["fabricacao"];
+        $capacidade = $_POST["capacidade"];
+        $modelo = $_POST["modelo"];
+
+
+        $sql = "INSERT INTO trens VALUES (?,?,?,?,?)";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("sssss", $nome,$rota,$fabricacao,$capacidade,$modelo);
+        $stmt->execute();
+
+        header("Location: adm_trens.php");
+        exit();
+    }
 ?>
 
 
@@ -77,6 +101,8 @@ session_start();
                 </div>
                 <button type="submit" name="cadastrar">Cadastrar</button>
             </form>
+                
+        </form>
         </section>
     </main>
 
