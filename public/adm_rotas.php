@@ -75,17 +75,18 @@
                 <h1>Lista de rotas:</h1>
             </div>
 
-                <div class="padding3">
+                <div class="padding2">
                 </div>
 
-                    <div>
+                    <div class="btn_trem">
                         <a href="cadastro_rotas.php"><button type="button" class="btn btn-danger">Nova rota</button></a>
                     </div>
         </div>
 
         <div>
 
-        <table  class="tabela">
+        <div class="tabela-wrap">
+            <table class="tabela">
                 <thead>
                     <tr>
                         <th class="tb_id">ID</th>
@@ -113,6 +114,7 @@
                     <?php } ?>
                 </tbody>
             </table>
+        </div>
 
 
         </div>
