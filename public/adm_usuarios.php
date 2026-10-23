@@ -6,6 +6,17 @@
     //      header("Location: home.php");
     //      exit();
     // }
+    function formatarCpf($cpf)
+    {
+        $cpf = preg_replace('/\D/', '', (string) $cpf);
+
+        if (strlen($cpf) !== 11) {
+            return $cpf;
+        }
+
+        return substr($cpf, 0, 3) . '.' . substr($cpf, 3, 3) . '.' . substr($cpf, 6, 3) . '-' . substr($cpf, 9, 2);
+    }
+
     $result = $conn->query("SELECT * FROM usuarios");
 
 
@@ -32,7 +43,7 @@
         </div>
         <div class="offcanvas-body">
             <div class="dropdown mt-3">
-                    <a href="cadastro.php">cadastrar</a>
+                    <a href="cadastro_usuarios.php">cadastrar</a>
                     <br>
                     <a href="logout.php">desconectar</a>
             </div>
@@ -82,7 +93,7 @@
             </div>
             
             <div>
-                <a href="cadastro.php"><button type="button" class="btn btn-danger">Novo Usuario</button></a>
+                <a href="cadastro_usuarios.php"><button type="button" class="btn btn-danger">Novo Usuario</button></a>
             </div>
         </div>
         <div class="flex">
@@ -124,11 +135,11 @@
                             </td>
                       
                             <td>
-                                <?php echo $linha["cpf"]?>
+                                <?php echo formatarCpf($linha["cpf"]); ?>
                             </td>
                        
                             <td>
-                                <a href="cadastro.php?id=<?php echo $linha["id"]?>" >Editar</a>
+                                <a href="cadastro_usuarios.php?id=<?php echo $linha["id"]?>" >Editar</a>
                                 <a href="excluir_usuarios.php?id=<?php echo $linha["id"]?>" onclick="return confirm('tem certeza que deseja apagar esse usuário?')">Excluir</a>
                             </td>
                         </tr>

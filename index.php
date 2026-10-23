@@ -18,7 +18,7 @@
         </div>
         <div class="offcanvas-body">
             <div class="dropdown mt-3">
-                   <!-- <a href="cadastro.php">cadastrar</a>
+                   <!-- <a href="public/cadastro_usuarios.php">cadastrar</a>
                     <br>
                     <a href="logout.php">desconectar</a> -->
             </div>
