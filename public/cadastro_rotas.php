@@ -161,9 +161,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         value="<?php echo htmlspecialchars($duracao); ?>" required>
                 </div>
 
-                <button type="submit" <?php echo $podeSalvar ? '' : 'disabled'; ?>>
-                    <?php echo $editando ? 'Salvar alterações' : 'Cadastrar Rota'; ?>
+                <button type="submit">
+                    <?php echo $id ? 'Salvar Alterações' : 'Cadastrar'; ?>
                 </button>
+
 
             </form>
 
