@@ -27,8 +27,9 @@ body{
     width: 92%;
     height: 84px;
     margin: 22px auto 70px;
-    position: relative;
-    z-index: 2;
+    position: sticky;
+    top: 22px;
+    z-index: 20;
     background: #f8f9fa;
     border-radius: 50px;
     display: flex;
@@ -36,6 +37,7 @@ body{
     justify-content: space-between;
     padding: 5px 20px;
     box-sizing: border-box;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
 }
 .logo_home{
     display: flex;
@@ -227,8 +229,9 @@ body{
     bottom: 0;
     left: 0;
     width: 40%;
-    position: absolute;
+    position: fixed;
     z-index: 1;
+    pointer-events: none;
 }
 
 .fixa2{
@@ -236,8 +239,9 @@ body{
     right: 0;
     width: 40%;
     rotate: 180deg;
-    position: absolute;
+    position: fixed;
     z-index: 1;
+    pointer-events: none;
 }
 
 .ft_apresentacao{
@@ -633,6 +637,29 @@ header {
   background-color: #f8f8f8;
 }
 
+.tabela td a {
+  display: inline-block;
+  padding: 8px 14px;
+  margin-right: 8px;
+  border-radius: 8px;
+  background-color: #c23232;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.tabela td a:last-child {
+  margin-right: 0;
+}
+
+.tabela td a:hover {
+  background-color: #a12a2a;
+  text-decoration: none;
+  color: #fff;
+}
+
 .tabela tbody tr:last-child td:first-child {
   border-bottom-left-radius: 20px;
 }
@@ -792,9 +819,21 @@ header {
 
 .padding2{
     width: 1070px;
+}
 
-    
+.btn_trem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
+.btn_trem a {
+    display: inline-flex;
+    text-decoration: none;
+}
+
+.btn_trem .btn {
+    margin: 0;
 }
 
 .menu_btn_home{
