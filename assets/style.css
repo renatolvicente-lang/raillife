@@ -42,6 +42,13 @@ body{
 }
 .ativado{
     font-weight: bolder;
+    color: #c23232 !important;
+    text-decoration: underline;
+}
+
+.nav_home a.ativado,
+.nav_apresentacao a.ativado {
+    color: #c23232 !important;
 }
 .mn_home{
     max-width: 1300px;
@@ -760,3 +767,6 @@ header {
 .margin_header{
     margin-right: 20px;
 }
+
+
+
