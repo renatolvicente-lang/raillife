@@ -12,6 +12,17 @@ $erro = "";
 $id = $_GET["id"] ?? null;
 $area_atuacao = "comum"; // Valor padrão para o campo de atuação
 
+function formatarCpf($cpf)
+{
+    $cpf = preg_replace('/\D/', '', (string) $cpf);
+
+    if (strlen($cpf) !== 11) {
+        return $cpf;
+    }
+
+    return substr($cpf, 0, 3) . '.' . substr($cpf, 3, 3) . '.' . substr($cpf, 6, 3) . '-' . substr($cpf, 9, 2);
+}
+
 if ($id && $_SERVER['REQUEST_METHOD'] === 'GET') {
 
     $sql = $conn->prepare("SELECT * FROM usuarios WHERE id = ?");
@@ -22,12 +33,12 @@ if ($id && $_SERVER['REQUEST_METHOD'] === 'GET') {
     if ($usuario = $result->fetch_assoc()) {
         $nome = $usuario['nome'];
         $email = $usuario['email'];
-        $CPF = $usuario['cpf'];
+        $CPF = preg_replace('/\D/', '', $usuario['cpf']);
         $endereco = $usuario['endereco'];
         $cidade = $usuario['cidade'];
         $data_nascimento = $usuario['data_nascimento'];
         $area_atuacao = $usuario['atuacao'];
-        $CEP = $usuario['cep'];
+        $CEP = preg_replace('/\D/', '', $usuario['cep']);
     } else {
         $erro = "Usuário não encontrado.";
     }
@@ -46,14 +57,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $nome = $_POST['nome'];
     $senha = $_POST['senha'];
     $email = $_POST['email'];
-    $CPF = $_POST['CPF'];
+    $CPF = preg_replace('/\D/', '', $_POST['CPF']);
     $endereco = $_POST['endereco'];
     $cidade = $_POST['cidade'];
-    $CEP = $_POST['CEP'];
+    $CEP = preg_replace('/\D/', '', $_POST['CEP']);
     $data_nascimento = $_POST['data_nascimento'];
     $area_atuacao = $_POST['atuacao'];
 
-    $cpf_limpo = preg_replace('/\D/', '', $CPF);
+    $cpf_limpo = $CPF;
 
 
 
@@ -172,7 +183,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $comando->bind_param("sssssssss", $nome, $email, $senhaHash, $CPF, $endereco, $cidade, $CEP, $data_nascimento, $area_atuacao);
             $comando->execute();
 
-            header("Location: ../public/adm_usuarios.php");
+            header("Location: adm_usuarios.php");
             exit();
         }
     }
@@ -183,7 +194,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         if ($comando->get_result()->num_rows > 0) {
             $erro = "E-mail ou CPF já cadastrado.";
         }
-        header("Location: ../public/adm_usuarios.php");
+        header("Location: adm_usuarios.php");
         exit();
     }
 }
@@ -212,7 +223,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </div>
         <div class="offcanvas-body">
             <div class="dropdown mt-3">
-                    <a href="cadastro.php">cadastrar</a>
+                    <a href="cadastro_usuarios.php">cadastrar</a>
                     <br>
                     <a href="logout.php">desconectar</a>
             </div>
