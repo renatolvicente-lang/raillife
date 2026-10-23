@@ -606,13 +606,15 @@ header {
 }
 
 .card_sensores{
-    width: 1535px;
-    height: 500px;
+    width: min(100%, 1535px);
+    min-height: 500px;
     border-radius: 20px;
     background-color: #f8f9fa;
     padding: 35px 35px;
     font-family: Arial, sans-serif;
-    display: flex;
+    display: block;
+    box-sizing: border-box;
+    margin: 0 auto;
 }
 /*Adm_usuarios*/
 
