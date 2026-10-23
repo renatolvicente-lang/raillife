@@ -2,8 +2,8 @@
     include("../infra/conn.php");
     session_start();
 
-    if(!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm"){
-        header("Location: home.php");
+    if (!isset($_SESSION["usuario"])) {
+        header("Location: login.php");
         exit();
     }
     $result = $conn->query("SELECT id, nome_rotas, origem, destino, tempo AS duracao FROM rotas");
@@ -79,7 +79,7 @@
                 </div>
 
                     <div class="btn_trem">
-                        <a href="Rotas.php"><button type="button" class="btn btn-danger">Nova rota</button></a>
+                        <a href="cadastro_rotas.php"><button type="button" class="btn btn-danger">Nova rota</button></a>
                     </div>
         </div>
 
@@ -106,8 +106,9 @@
                             <td><?php echo htmlspecialchars($linha["destino"]); ?></td>
                             <td><?php echo htmlspecialchars(substr($linha["duracao"], 0, 5)); ?></td>
                             <td>
-                                <a href="Rotas.php?id=<?php echo $linha["id"]?>">Editar</a>
-                                <a href="excluir_rotas.php?id=<?php echo $linha["id"]; ?>">Excluir</a>
+                                <a href="cadastro_rotas.php?id=<?php echo $linha["id"]?>" class="btn btn-danger ">Editar</a>
+                                <a href="excluir_rotas.php?id=<?php echo $linha["id"]; ?>" class="btn btn-danger">Excluir</a>
+
                             </td>
                         </tr>
                     <?php } ?>

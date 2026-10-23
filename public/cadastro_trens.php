@@ -3,10 +3,10 @@
     include("../infra/conn.php");
     session_start();
 
-   //if(!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] = "adm"){
-        // header("Location: home.php");
-      //   exit();
-    //}
+    // if (!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] == "adm") {
+    //     header("Location: home.php");
+    //     exit();
+    // }
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $nome = $_POST["nome"];
@@ -76,12 +76,13 @@
                 <div class="cadastro-campo campo-rota">
                     <label for="rota">Rota:</label>
                     <select name="rota" id="rota">
-                        <?php
-                            $result = $conn->query("SELECT * FROM rotas");
-                            while($row = $result->fetch_assoc()){
-                                echo "<option value='".$row['id']."'>".$row['nome']."</option>";
-                            }
-                        ?>
+                        <?php if($result->num_rows > 0){?>
+                            <?php while($linha = $result->fetch_assoc()){?>
+                                <option value='". $linha[id] ."'>
+                                    <?php echo $linha["nome"]?>
+                                </option>
+                            <?php }?>
+                        <?php }else{ echo "<option>Nenhuma rota cadastrada</option>";}?>
                     </select>
                 </div>
                 <div class="cadastro-campo campo-modelo">
