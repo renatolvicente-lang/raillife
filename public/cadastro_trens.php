@@ -3,10 +3,12 @@
     include("../infra/conn.php");
     session_start();
 
-    // if (!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] == "adm") {
-    //     header("Location: home.php");
-    //     exit();
-    // }
+    if (!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] == "adm") {
+        header("Location: home.php");
+        exit();
+    }
+
+    $id = $_GET["id"] ?? null;
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $nome = $_POST["nome"];
@@ -16,14 +18,27 @@
         $modelo = $_POST["modelo"];
 
 
-        $sql = "INSERT INTO trens VALUES (?,?,?,?,?)";
+        if($id){
+            $sql = "UPDATE trens SET nome_trens=?, modelo=?, capacidade=?, ano_fabricacao=?, id_rotas=?";
+            $stmt = $conn->prepare($sql);
+            $stmt = bind_param("ssisi", $nome, $modelo, $capacidade, $fabricacao, $rota);
+            $stmt = execute();
 
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssss", $nome,$rota,$fabricacao,$capacidade,$modelo);
-        $stmt->execute();
+            header("Location: adm_trens.php");
+            exit();
+            
+        }else{
 
-        header("Location: adm_trens.php");
-        exit();
+            $sql = "INSERT INTO trens VALUES (?,?,?,?,?)";
+    
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("sisis", $nome,$rota,$fabricacao,$capacidade,$modelo);
+            $stmt->execute();
+    
+            header("Location: adm_trens.php");
+            exit();
+        }
+
     }
 ?>
 
