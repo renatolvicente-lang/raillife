@@ -1,8 +1,8 @@
 <?php
 
 include "../infra/conn.php";
- if(!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm"){
-         header("Location: home.php");
+  if(!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] = "adm"){
+        header("Location: home.php");
          exit();
     }
 session_start();
