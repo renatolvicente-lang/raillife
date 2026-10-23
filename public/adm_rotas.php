@@ -75,17 +75,18 @@
                 <h1>Lista de rotas:</h1>
             </div>
 
-                <div class="padding3">
+                <div class="padding2">
                 </div>
 
-                    <div>
+                    <div class="btn_trem">
                         <a href="Rotas.php"><button type="button" class="btn btn-danger">Nova rota</button></a>
                     </div>
         </div>
 
         <div>
 
-        <table  class="tabela">
+        <div class="tabela-wrap">
+            <table class="tabela">
                 <thead>
                     <tr>
                         <th class="tb_id">ID</th>
@@ -105,14 +106,14 @@
                             <td><?php echo htmlspecialchars($linha["destino"]); ?></td>
                             <td><?php echo htmlspecialchars(substr($linha["duracao"], 0, 5)); ?></td>
                             <td>
-                                <a href="Rotas.php?id=<?php echo $linha["id"]?>" class="btn btn-danger ">Editar</a>
-                                <a href="excluir_rotas.php?id=<?php echo $linha["id"]; ?>" class="btn btn-danger">Excluir</a>
-
+                                <a href="Rotas.php?id=<?php echo $linha["id"]?>">Editar</a>
+                                <a href="excluir_rotas.php?id=<?php echo $linha["id"]; ?>">Excluir</a>
                             </td>
                         </tr>
                     <?php } ?>
                 </tbody>
             </table>
+        </div>
 
 
         </div>
