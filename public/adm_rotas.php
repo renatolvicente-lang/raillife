@@ -4,8 +4,11 @@
 
     if(!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm"){
         header("Location: home.php");
+        exit();
     }
-    $result = $conn->query("SELECT * FROM usuarios");
+    $result = $conn->query("SELECT id, nome_rotas, origem, destino, tempo AS duracao FROM rotas");
+
+    //colocar pdo e puxar o trem no fetch_assoc
 
 
 ?>
@@ -89,11 +92,25 @@
                         <th>nome</th>
                         <th>Origem</th>
                         <th>Destino</th>
+                        <th>Duração</th>
                         <th class="tb_acoes">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <?php while ($linha = $result->fetch_assoc()) { ?>
+                        <tr>
+                            <td><?php echo (int) $linha["id"]; ?></td>
+                            <td><?php echo htmlspecialchars($linha["nome_rotas"]); ?></td>
+                            <td><?php echo htmlspecialchars($linha["origem"]); ?></td>
+                            <td><?php echo htmlspecialchars($linha["destino"]); ?></td>
+                            <td><?php echo htmlspecialchars(substr($linha["duracao"], 0, 5)); ?></td>
+                            <td>
+                                <a href="Rotas.php?id=<?php echo $linha["id"]?>" class="btn btn-danger ">Editar</a>
+                                <a href="excluir_rotas.php?id=<?php echo $linha["id"]; ?>" class="btn btn-danger">Excluir</a>
 
+                            </td>
+                        </tr>
+                    <?php } ?>
                 </tbody>
             </table>
 

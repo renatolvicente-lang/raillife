@@ -1,13 +1,29 @@
 <?php
 
 include "../infra/conn.php";
+ if(!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm"){
+         header("Location: home.php");
+         exit();
+    }
 session_start();
 
-$id = $_GET["id"];
 
-$sql = "DELETE FROM usuarios WHERE id = $id";
 
-$conn->query($sql);
+if(isset($_GET["id"])){
+    $id_exclusao = $_GET["id"];
+    $id_sessao = $_SESSION["id"];
+
+    if($id_exclusao != $id_sessao){
+
+        $sql = "DELETE FROM usuarios WHERE id = $id_exclusao";
+    
+        $conn->query($sql);
+    }
+}
+
+
+
+
 
 header("Location: adm_usuarios.php");
 exit();
