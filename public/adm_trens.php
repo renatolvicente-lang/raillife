@@ -92,9 +92,11 @@
                 <thead>
                     <tr>
                         <th class="tb_id">ID</th>
-                        <th>Rota</th>
                         <th>Nome</th>
-                        <th>Usuario</th>
+                        <th>Rota</th>
+                        <th>Usuário</th>
+                        <th>Modelo</th>
+                        <th>Fabricação</th>
                         <th class="tb_acoes">Ações</th>
                     </tr>
                 </thead>
@@ -112,14 +114,19 @@
                             <td>
                                 <?php echo $linha["nome_rotas"];?>
                             </td>
-                        
+
                             <td>
                                 <?php echo $linha["nome_usuarios"];?>
                             </td>
+                        
+                            <td>
+                                <?php echo $linha["ano_fabricacao"];?>
+                            </td>
                        
                             <td>
-                                <button id="btnAbrir">Editar</button>
-                                <a href="excluir_sensor.php?id=<?php echo $linha["id"]?>">Excluir</a>
+                                <a href="cadastro_trens.php?id=<?php echo $linha["id"]?>" class="btn btn-danger ">Editar</a>
+                                <a href="excluir_trens.php?id=<?php echo $linha["id"]; ?>" class="btn btn-danger">Excluir</a>
+
                             </td>
                         </tr>
                     <?php }?>

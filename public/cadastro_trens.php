@@ -3,27 +3,49 @@
     include("../infra/conn.php");
     session_start();
 
-    // if (!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] == "adm") {
-    //     header("Location: home.php");
-    //     exit();
-    // }
+    if (!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] == "adm") {
+        header("Location: home.php");
+        exit();
+    }
+
+
+    $id = $_GET["id"] ?? null;
+
+    $sql = "SELECT * FROM rotas";
+    $result = $conn->query($sql);
+    
+    $result_usuario = $conn->query("SELECT * FROM usuarios");
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $nome = $_POST["nome"];
         $rota = $_POST["rota"];
+        $usuario = $_POST["usuario"];
         $fabricacao = $_POST["fabricacao"];
         $capacidade = $_POST["capacidade"];
         $modelo = $_POST["modelo"];
 
 
-        $sql = "INSERT INTO trens VALUES (?,?,?,?,?)";
+        if($id){
+            $sql = "UPDATE trens SET nome_trens=?, modelo=?, capacidade=?, ano_fabricacao=?, id_rotas=? , id_usuarios=? WHERE id = $id";
+            $stmt = $conn->prepare($sql);
+            $stmt-> bind_param("ssisii", $nome, $modelo, $capacidade, $fabricacao, $rota, $usuario);
+            $stmt->execute();
 
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssss", $nome,$rota,$fabricacao,$capacidade,$modelo);
-        $stmt->execute();
+            header("Location: adm_trens.php");
+            exit();
+            
+        }else{
 
-        header("Location: adm_trens.php");
-        exit();
+            $sql = "INSERT INTO trens (nome_trens, modelo, capacidade, ano_fabricacao, id_rotas, id_usuarios)VALUES (?,?,?,?,?)";
+    
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("ssisii", $nome,$modelo, $capacidade, $fabricacao, $rota, $usuario);
+            $stmt->execute();
+    
+            header("Location: adm_trens.php");
+            exit();
+        }
+
     }
 ?>
 
@@ -63,6 +85,11 @@
     </header>
     
     <main class="cadastro-pagina">
+        
+        <div class="container_titulo">
+            <img src="../assets/logo.png" alt="logo site">
+        </div>
+
         <section class="cadastro-formulario">
         <form class="grid" method="POST">
                 <div class="cadastro-campo campo-nome">
@@ -70,19 +97,35 @@
                     <input type="text" id="nome" name="nome" placeholder="Nome do trem">
                 </div>
                 <div class="cadastro-campo campo-capacidade">
-                    <label for="capacidade">Capacidade:</label>
+                    <label for="capacidade">Capacidade(Kg):</label>
                     <input type="number" name="capacidade" id="capacidade" placeholder="Capacidade do trem">
                 </div>
                 <div class="cadastro-campo campo-rota">
                     <label for="rota">Rota:</label>
                     <select name="rota" id="rota">
+
                         <?php if($result->num_rows > 0){?>
                             <?php while($linha = $result->fetch_assoc()){?>
-                                <option value='". $linha[id] ."'>
-                                    <?php echo $linha["nome"]?>
+                                <option value="<?php echo $linha["id"]?>">
+                                    <?php echo $linha["nome_rotas"]?>
                                 </option>
                             <?php }?>
                         <?php }else{ echo "<option>Nenhuma rota cadastrada</option>";}?>
+
+                    </select>
+                </div>
+                <div class="cadastro-campo campo-usuario">
+                    <label for="usuario">Usuário:</label>
+                    <select name="usuario" id="usuario">
+
+                        <?php if($result_usuario->num_rows > 0){?>
+                            <?php while($linha = $result_usuario->fetch_assoc()){?>
+                                <option value="<?php echo $linha["id"]?>">
+                                    <?php echo $linha["nome_usuarios"]?>
+                                </option>
+                            <?php }?>
+                        <?php }else{ echo "<option>Nenhuma rota cadastrada</option>";}?>
+
                     </select>
                 </div>
                 <div class="cadastro-campo campo-modelo">
@@ -90,8 +133,8 @@
                     <input type="text" name="modelo" id="modelo" placeholder="Modelo do trem">
                 </div>
                 <div class="cadastro-campo campo-data">
-                    <label for="data">Data de fabricação:</label>
-                    <input type="date" name="data" id="data">
+                    <label for="fabricacao">Data de fabricação:</label>
+                    <input type="date" name="fabricacao" id="fabricacao">
                 </div>
                 <button type="submit" name="cadastrar">Cadastrar</button>
             </form>

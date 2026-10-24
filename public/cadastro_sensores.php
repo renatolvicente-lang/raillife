@@ -118,27 +118,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 </div>
 
                 <div class="cadastro-campo">
-                    <label for="status_sensor">Status do sensor</label>
-                    <select id="status_sensor" name="status_sensor">
-                        <option value="ativo" <?php echo ($status_sensor === 'ativo') ? 'selected' : ''; ?>>Ativo</option>
-                        <option value="desativado" <?php echo ($status_sensor === 'desativado') ? 'selected' : ''; ?>>Inativo</option>
-                        <option value="em instalacao" <?php echo ($status_sensor === 'em instalacao') ? 'selected' : ''; ?>>Em instalação</option>
-                    </select>
+                    <label for="rota">Rota:</label>
+                    <input type="text" id="rota" name="rota" placeholder="Digite a rota do sensor"
+                        value="<?php echo htmlspecialchars($rota ?? ''); ?>">
                 </div>
 
                 <div class="cadastro-campo">
-                    <label for="id_rotas">Rota:</label>
-                    <select id="id_rotas" name="id_rotas" required>
-                        <option value="">Selecione a rota</option>
-                        <?php if ($routeResult && $routeResult->num_rows > 0): ?>
-                            <?php while ($rota = $routeResult->fetch_assoc()): ?>
-                                <option value="<?php echo (int) $rota['id']; ?>" <?php echo (($id_rotas !== null && (string) $id_rotas === (string) $rota['id']) ? 'selected' : ''); ?>>
-                                    <?php echo htmlspecialchars($rota['nome_rotas']); ?>
-                                </option>
-                            <?php endwhile; ?>
-                        <?php else: ?>
-                            <option value="" disabled>Nenhuma rota cadastrada</option>
-                        <?php endif; ?>
+                    <label for="status">Status:</label>
+                    <select id="status" name="status" placeholder="digite o status do sensor">
+                        <option value="Ativo" <?php echo (isset($status) && $status === 'Ativo') ? 'selected' : ''; ?>>Ativo</option>
+                        <option value="Inativo" <?php echo (isset($status) && $status === 'Inativo') ? 'selected' : ''; ?>>Inativo</option>
                     </select>
                 </div>
 

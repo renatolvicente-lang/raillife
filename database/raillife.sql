@@ -4,7 +4,7 @@ use raillife;
 CREATE TABLE usuarios (
     
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  nome VARCHAR(100) NOT NULL,
+  nome_usuarios VARCHAR(100) NOT NULL,
   email VARCHAR(100) NOT NULL,
   senha VARCHAR(100) NOT NULL,
   cpf VARCHAR(14) NOT NULL,
@@ -45,6 +45,7 @@ CREATE TABLE trens (
   ano_fabricacao DATE NOT NULL,
   id_rotas INT NOT NULL,
   id_usuarios INT NOT NULL,
+  FOREIGN KEY (id_usuarios) REFERENCES usuarios(id),
   FOREIGN KEY (id_rotas) REFERENCES rotas(id)
 );
 
