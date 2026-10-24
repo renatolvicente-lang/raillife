@@ -108,10 +108,6 @@
                             </td>
                         
                             <td>
-                                <?php echo $linha["localizacao"];?>
-                            </td>
-                        
-                            <td>
                                 <?php echo $linha["tipo"];?>
                             </td>
                       
