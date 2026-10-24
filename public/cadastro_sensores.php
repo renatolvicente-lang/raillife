@@ -2,47 +2,47 @@
 require_once('../infra/conn.php');
 session_start();
 
- if (!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] == "adm") {
-        header("Location: home.php");
-         exit();
-    }
+if (!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] == "adm") {
+    header("Location: home.php");
+    exit();
+}
 
 $erro = "";
+$id = $_GET["id"] ?? null;
+$nome = $_POST['nome'] ?? '';
+$tipo = $_POST['tipo'] ?? '';
+$data_instalacao = $_POST['data_instalacao'] ?? '';
+$status_sensor = $_POST['status_sensor'] ?? 'ativo';
+$id_rotas = $_POST['id_rotas'] ?? null;
+$routeResult = $conn->query("SELECT id, nome_rotas FROM rotas ORDER BY nome_rotas");
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-
-    if ($id) {
-        $sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ?, cpf = ?, endereco = ?, cidade = ?, CEP = ?, data_nascimento = ?, atuacao = ? WHERE id = ?";
-        ;
-
-        $stmt = $conn->prepare($sql);
-
-        $stmt->bind_param('sssssssssi', $nome, $email, $senhaHash, $CPF, $endereco, $cidade, $CEP, $data_nascimento, $area_atuacao, $id);
-        $stmt->execute();
-        header("Location: ../public/adm_usuarios.php");
-        exit();
+    if (empty($nome) || empty($tipo) || empty($data_instalacao) || empty($id_rotas)) {
+        $erro = "Preencha nome, tipo, data de instalação e rota.";
     } else {
-        if ($erro == "") {
-            $sql = "INSERT INTO usuarios (nome, email, senha, CPF, endereco, cidade, CEP, data_nascimento, atuacao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-            $comando = $conn->prepare($sql);
-
-            $comando->bind_param("sssssssss", $nome, $email, $senhaHash, $CPF, $endereco, $cidade, $CEP, $data_nascimento, $area_atuacao);
+        if ($id) {
+            $sql = "UPDATE sensores SET nome = ?, tipo = ?, data_instalacao = ?, status_sensor = ?, id_rotas = ? WHERE id = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param('ssssis', $nome, $tipo, $data_instalacao, $status_sensor, $id_rotas, $id);
+            $stmt->execute();
+            header("Location: adm_sensores.php");
+            exit();
+        } else {
+            $comando = $conn->prepare("SELECT id FROM sensores WHERE nome = ?");
+            $comando->bind_param("s", $nome);
             $comando->execute();
 
-            header("Location: ../public/adm_usuarios.php");
-            exit();
+            if ($comando->get_result()->num_rows > 0) {
+                $erro = "Sensor já cadastrado.";
+            } else {
+                $sql = "INSERT INTO sensores (nome, tipo, data_instalacao, status_sensor, id_rotas) VALUES (?, ?, ?, ?, ?)";
+                $insert = $conn->prepare($sql);
+                $insert->bind_param("ssssi", $nome, $tipo, $data_instalacao, $status_sensor, $id_rotas);
+                $insert->execute();
+                header("Location: adm_sensores.php");
+                exit();
+            }
         }
-    }
-    if (empty($id) && $erro == "") {
-        $comando = $conn->prepare("SELECT id FROM usuarios WHERE email = ? OR CPF = ?");
-        $comando->bind_param("ss", $email, $CPF);
-        $comando->execute();
-        if ($comando->get_result()->num_rows > 0) {
-            $erro = "E-mail ou CPF já cadastrado.";
-        }
-        header("Location: ../public/adm_usuarios.php");
-        exit();
     }
 }
 ?>
@@ -118,15 +118,27 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 </div>
 
                 <div class="cadastro-campo">
-                    <label for="senha">Senha:</label>
-                    <input type="password" id="senha" name="senha" placeholder="Digite sua senha">
+                    <label for="status_sensor">Status do sensor</label>
+                    <select id="status_sensor" name="status_sensor">
+                        <option value="ativo" <?php echo ($status_sensor === 'ativo') ? 'selected' : ''; ?>>Ativo</option>
+                        <option value="desativado" <?php echo ($status_sensor === 'desativado') ? 'selected' : ''; ?>>Inativo</option>
+                        <option value="em instalacao" <?php echo ($status_sensor === 'em instalacao') ? 'selected' : ''; ?>>Em instalação</option>
+                    </select>
                 </div>
 
                 <div class="cadastro-campo">
-                    <label for="atuacao">Área de atuação:</label>
-                    <select id="atuacao" name="atuacao"">
-                     <option value=" Usuário Comum" <?php echo (isset($area_atuacao) && $area_atuacao === 'Usuário Comum') ? 'selected' : ''; ?>>Usuário Comum</option>
-                        <option value="ADM" <?php echo (isset($area_atuacao) && $area_atuacao === 'ADM') ? 'selected' : ''; ?>>ADM</option>
+                    <label for="id_rotas">Rota:</label>
+                    <select id="id_rotas" name="id_rotas" required>
+                        <option value="">Selecione a rota</option>
+                        <?php if ($routeResult && $routeResult->num_rows > 0): ?>
+                            <?php while ($rota = $routeResult->fetch_assoc()): ?>
+                                <option value="<?php echo (int) $rota['id']; ?>" <?php echo (($id_rotas !== null && (string) $id_rotas === (string) $rota['id']) ? 'selected' : ''); ?>>
+                                    <?php echo htmlspecialchars($rota['nome_rotas']); ?>
+                                </option>
+                            <?php endwhile; ?>
+                        <?php else: ?>
+                            <option value="" disabled>Nenhuma rota cadastrada</option>
+                        <?php endif; ?>
                     </select>
                 </div>
 

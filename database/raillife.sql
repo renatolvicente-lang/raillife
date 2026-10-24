@@ -31,7 +31,7 @@ CREATE TABLE sensores(
   nome VARCHAR(100) NOT NULL,
   tipo VARCHAR(100) NOT NULL,
   data_instalacao DATE NOT NULL,
-  status_sensor ENUM('ativo', 'desativado', 'em instalação'),
+  status_sensor ENUM('ativo', 'desativado', 'em instalacao'),
   id_rotas INT NOT NULL,
   FOREIGN KEY(id_rotas) REFERENCES rotas(id)
 );
