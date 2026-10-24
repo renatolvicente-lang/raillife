@@ -8,8 +8,6 @@
     }
     $result = $conn->query("SELECT id, nome_rotas, origem, destino, tempo AS duracao FROM rotas");
 
-    //colocar pdo e puxar o trem no fetch_assoc
-
 
 ?>
 
