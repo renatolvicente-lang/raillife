@@ -22,6 +22,8 @@ CREATE TABLE rotas(
   destino VARCHAR(100) NOT NULL,
   distancia INT NOT NULL,
   tempo TIME NOT NULL
+  id_trens INT NOT NULL,
+  FOREIGN KEY id_trens REFERENCES trens(id)
 );
 
 
