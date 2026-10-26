@@ -8,6 +8,8 @@
         exit();
     }
 
+        $result = $conn->query("SELECT * FROM sensores inner join rotas on sensores.id_rotas = rotas.id");
+ 
     $id = $_SESSION['id'] ?? null;
     $usuarioLogado = false;
 
@@ -20,7 +22,6 @@
         $usuarioLogado = $resultUsuario->fetch_assoc();
     }
 
-    $result = $conn->query("SELECT * FROM sensores");
 
 ?>
 
@@ -43,6 +44,7 @@
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
+<<<<<<< HEAD
             <div class="flex">
                 <img src="../assets/frifas.webp" alt="fotodeperfil" class="fotodeperfil">
 
@@ -65,6 +67,13 @@
         </div>
     </div>
 
+=======
+            <?php if (!empty($_SESSION["usuario"])) { ?>
+                <div class="identificacao-usuario">
+                    <?php echo "Bem vindo(a), " . htmlspecialchars($_SESSION["usuario"], ENT_QUOTES, 'UTF-8') . "!"; ?>
+                </div>
+            <?php } ?>
+>>>>>>> 7a2757157b87d2b7d30862be299d2086216549be
             <div class="dropdown mt-3">
                     <a href="adm_usuarios.php">cadastrar</a>
                     <br>
@@ -84,7 +93,7 @@
         </div>
 
         <nav class="nav_home">
-            <a href="home.php">Inicio</a>
+            <a href="home.php" class="ativado">Inicio</a>
             <a href="adm_sensores.php" class="ativado">Sensores</a>
             <a href="adm_trens.php">Trens</a>
             <a href="#">Relatorios</a>
@@ -140,7 +149,9 @@
                             <td>
                                 <?php echo $linha["nome"];?>
                             </td>
-                        
+                            <td>
+                                <?php echo $linha["nome_rotas"];?>
+                            </td>
                             <td>
                                 <?php echo $linha["tipo"];?>
                             </td>

@@ -63,7 +63,7 @@ $nome = $usuario !== false && !empty($usuario['nome']) ? htmlspecialchars($usuar
 
                     <?php if ($usuario !== false) { ?>
                 <div class="identificacao-usuario">
-                    <?php echo "Bem vindo(a), " . htmlspecialchars($usuario['nome'], ENT_QUOTES, 'UTF-8') . "!"; ?>
+                    <?php echo "Bem vindo(a), " . htmlspecialchars($usuario['nome_usuarios'], ENT_QUOTES, 'UTF-8') . "!"; ?>
                     <!-- Exibe o nome do usuário autenticado. A condição verifica se o registro foi encontrado no banco, evitando erros ao tentar imprimir dados vazios. -->
                 </div>
             <?php } ?>

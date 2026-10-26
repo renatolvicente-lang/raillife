@@ -3,22 +3,10 @@ require_once('../infra/conn.php');
 require_once('validar_cpf.php');
 session_start();
 
-         if (!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm") {
+        if (!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm") {
          header("Location: home.php");
          exit();
-     }
-
-    $id = $_SESSION['id'] ?? null;
-    $usuarioLogado = false;
-
-    if ($id !== null) {
-        $sql = "SELECT * FROM usuarios WHERE id = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-        $resultUsuario = $stmt->get_result();
-        $usuarioLogado = $resultUsuario->fetch_assoc();
-    }
+    }    
 
 $erro = "";
 $id = $_GET["id"] ?? null;
