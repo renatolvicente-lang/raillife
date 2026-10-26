@@ -26,13 +26,26 @@ if (isset($_GET["id"])) {
                 exit();
         }
 
+        $verificaTrens = $conn->prepare("SELECT id FROM trens WHERE id_rotas = ? LIMIT 1");
+        $verificaTrens->bind_param("i", $idRota);
+        $verificaTrens->execute();
+
+        if ($verificaTrens->get_result()->num_rows > 0) {
+            header("Location: adm_rotas.php?erro=rota_em_uso");
+            exit();
+        }
+
         $sql = "DELETE FROM rotas WHERE id = ?";
         $comando = $conn->prepare($sql);
         $comando->bind_param("i", $idRota);
-        $comando->execute();
-        
-}
 
+        try {
+                $comando->execute();
+        } catch (mysqli_sql_exception $e) {
+                header("Location: adm_rotas.php?erro=rota_em_uso");
+                exit();
+        }
+}
 
 header("Location: adm_rotas.php");
 exit();

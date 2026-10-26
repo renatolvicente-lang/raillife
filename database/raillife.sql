@@ -3,7 +3,7 @@ use raillife;
 
 CREATE TABLE usuarios (
     
-  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  id_usuarios INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   nome_usuarios VARCHAR(100) NOT NULL,
   email VARCHAR(100) NOT NULL,
   senha VARCHAR(100) NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE usuarios (
 );
 CREATE TABLE rotas(
 
-  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  id_rotas INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   nome_rotas VARCHAR(100) NOT NULL,
   origem VARCHAR(100) NOT NULL,
   destino VARCHAR(100) NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE rotas(
 
 CREATE TABLE sensores(
     
-  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  id_sensores INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   nome VARCHAR(100) NOT NULL,
   tipo VARCHAR(100) NOT NULL,
   data_instalacao DATE NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE sensores(
 
 CREATE TABLE trens (
     
-  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  id_trens INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   nome_trens VARCHAR(100) NOT NULL,
   modelo VARCHAR(100) NOT NULL,
   capacidade INT NOT NULL,
@@ -52,13 +52,17 @@ CREATE TABLE trens (
 
 CREATE TABLE relatorios (
     
-  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  id_relatorios INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   titulo VARCHAR(100) NOT NULL,
   descricao TEXT NOT NULL,
   data_criacao DATE NOT NULL,
   id_usuarios INT NOT NULL,
   FOREIGN KEY (id_usuarios) REFERENCES usuarios(id)
 );
+
+ALTER TABLE usuarios CHANGE id id_usuarios INT PRIMARY KEY AUTO_INCREMENT NOT NULL;
+ALTER TABLE trens CHANGE id id_trens INT PRIMARY KEY AUTO_INCREMENT NOT NULL;
+ALTER TABLE rotas CHANGE id id_rotas INT PRIMARY KEY AUTO_INCREMENT NOT NULL;
 
 INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `cpf`, `atuacao`, `endereco`, `cidade`, `cep`, `data_nascimento`) VALUES (NULL, 'admin', 'admin@gmail.com', 'admin1234', '14001484994', 'adm', 'Guia lopes', 'Joinville', '89940823', '2018-10-23');
 
