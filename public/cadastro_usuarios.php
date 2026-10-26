@@ -227,7 +227,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
                 <?php if ($usuarioLogado !== false) { ?>
                     <div class="identificacao-usuario">
-                        <?php echo "Bem vindo(a), " . htmlspecialchars($usuarioLogado['nome'], ENT_QUOTES, 'UTF-8') . "!"; ?>
+                        <?php echo "Bem vindo(a), " . htmlspecialchars($usuarioLogado['nome_usuarios'], ENT_QUOTES, 'UTF-8') . "!"; ?>
                     </div>
                 <?php } ?>
             </div>
