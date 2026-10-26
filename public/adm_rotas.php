@@ -39,7 +39,7 @@
         }
     } elseif (isset($_GET["erro"])) {
         if ($_GET["erro"] === "rota_em_uso") {
-            $erro = "Não é possível excluir esta rota, pois existem sensores associados a ela.";
+            $erro = "Não é possível excluir esta rota, pois existem sensores ou trens associados a ela.";
         } elseif ($_GET["erro"] === "rota_invalida") {
             $erro = "Não foi possível identificar a rota para exclusão.";
         }
