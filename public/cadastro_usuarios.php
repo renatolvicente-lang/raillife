@@ -6,23 +6,7 @@ session_start();
         if (!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm") {
          header("Location: home.php");
          exit();
-<<<<<<< HEAD
     }    
-=======
-     }
-
-    $id = $_SESSION['id'] ?? null;
-    $usuarioLogado = false;
-
-    if ($id !== null) {
-        $sql = "SELECT * FROM usuarios WHERE id = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-        $resultUsuario = $stmt->get_result();
-        $usuarioLogado = $resultUsuario->fetch_assoc();
-    }
->>>>>>> 162654e8a33fec7b625a779a819ae1e5379f60d0
 
 $erro = "";
 $id = $_GET["id"] ?? null;
