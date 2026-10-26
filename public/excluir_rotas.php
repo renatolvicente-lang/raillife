@@ -38,10 +38,14 @@ if (isset($_GET["id"])) {
         $sql = "DELETE FROM rotas WHERE id = ?";
         $comando = $conn->prepare($sql);
         $comando->bind_param("i", $idRota);
-        $comando->execute();
-        
-}
 
+        try {
+                $comando->execute();
+        } catch (mysqli_sql_exception $e) {
+                header("Location: adm_rotas.php?erro=rota_em_uso");
+                exit();
+        }
+}
 
 header("Location: adm_rotas.php");
 exit();

@@ -21,15 +21,29 @@
 
     $erro = "";
     if (isset($_GET["excluir"])) {
-        $idRota =$_GET["excluir"];
+        $idRota = $_GET["excluir"];
 
         if ($idRota !== false) {
-            $verificaSensores = $conn->prepare("SELECT id FROM sensores WHERE id_rotas = ?");
-            $verificaSensores->bind_param("i", $idRota);
-            $verificaSensores->execute();
+            $temDependencia = false;
 
-            if ($verificaSensores->get_result()->num_rows > 0) {
-                $erro = "Não é possível excluir esta rota, pois existem sensores associados a ela.";
+            $checks = [
+                "sensores" => "SELECT id FROM sensores WHERE id_rotas = ? LIMIT 1",
+                "trens" => "SELECT id FROM trens WHERE id_rotas = ? LIMIT 1"
+            ];
+
+            foreach ($checks as $tipo => $sqlCheck) {
+                $verifica = $conn->prepare($sqlCheck);
+                $verifica->bind_param("i", $idRota);
+                $verifica->execute();
+
+                if ($verifica->get_result()->num_rows > 0) {
+                    $temDependencia = true;
+                    break;
+                }
+            }
+
+            if ($temDependencia) {
+                $erro = "Não é possível excluir esta rota, pois existem sensores ou trens associados a ela.";
             } else {
                 header("Location: excluir_rotas.php?id=" . $idRota);
                 exit();
@@ -71,7 +85,7 @@
 
                 <?php if ($usuarioLogado !== false) { ?>
                     <div class="identificacao-usuario">
-                        <?php echo "Bem vindo(a), " . htmlspecialchars($usuarioLogado['nome_usuarios'], ENT_QUOTES, 'UTF-8') . "!"; ?>
+                        <?php echo "Bem vindo(a), " . htmlspecialchars($usuarioLogado['nome'], ENT_QUOTES, 'UTF-8') . "!"; ?>
                     </div>
                 <?php } ?>
             </div>
