@@ -3,7 +3,7 @@ require_once('../infra/conn.php');
 require_once('validar_cpf.php');
 session_start();
 
-         if (!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm") {
+    if (!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm") {
           header("Location: home.php");
           exit();
      }    
