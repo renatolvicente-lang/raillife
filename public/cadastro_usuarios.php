@@ -3,7 +3,7 @@ require_once('../infra/conn.php');
 require_once('validar_cpf.php');
 session_start();
 
-         if (!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm") {
+    if (!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm") {
           header("Location: home.php");
           exit();
      }    
@@ -261,7 +261,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </div>
 
         <nav class="nav_home">
-            <a href="home.php" class="ativado">Inicio</a>
+            <a href="home.php">Inicio</a>
             <a href="adm_sensores.php">Sensores</a>
             <a href="adm_trens.php">Trens</a>
             <a href="#">Relatorios</a>

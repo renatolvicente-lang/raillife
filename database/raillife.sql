@@ -60,6 +60,10 @@ CREATE TABLE relatorios (
   FOREIGN KEY (id_usuarios) REFERENCES usuarios(id)
 );
 
+ALTER TABLE usuarios CHANGE id id_usuarios INT PRIMARY KEY AUTO_INCREMENT NOT NULL;
+ALTER TABLE trens CHANGE id id_trens INT PRIMARY KEY AUTO_INCREMENT NOT NULL;
+ALTER TABLE rotas CHANGE id id_rotas INT PRIMARY KEY AUTO_INCREMENT NOT NULL;
+
 INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `cpf`, `atuacao`, `endereco`, `cidade`, `cep`, `data_nascimento`) VALUES (NULL, 'admin', 'admin@gmail.com', 'admin1234', '14001484994', 'adm', 'Guia lopes', 'Joinville', '89940823', '2018-10-23');
 
 INSERT INTO usuarios (nome,email, senha, cpf, atuacao, endereco, cidade, cep, data_nascimento) VALUES ('Renato', 'renato@teste.com', '123456','10412314212', 'adm', 'Rua Santo antonio', 'Joinville', '87216090', '2026-10-14'),

@@ -121,66 +121,12 @@ $nome = $usuario !== false && !empty($usuario['nome']) ? htmlspecialchars($usuar
 
             <h1><strong>Dashboard RAILLIFE</strong></h1>
             
-            <p>Acompanhe os principais dados da operação ferroviária em tempo real.</p>
-            <div class="hm_flex">
-                <div class='hm_card trens_ativos'>
-                    <div>
-                        <img src="../assets/icon_trem.png" alt="" class="icon_trem">
-                    </div>
-                    <div>
-                        <div class="">
-                            <h3>Trens Ativos</h3>
-                        </div>
-                        <div class=""></div>
-                    </div>
-                </div>
+            <h5>Acompanhe os principais dados da operação ferroviária em tempo real.</h5>
 
-                <div class="hm_card sensores">
-                    <div>
-                        <img src="../assets/sensor_icon.png" alt="" class="icon_trem">
-                    </div>
-                    <div>
-                        <div class="">
-                            <h3>Sensores Ativos</h3>
-                        </div>
-                        <div class=""></div>
-                    </div>
-                </div>
-                <div class="hm_card rotas_ativas">
-                    <div>
-                        <img src="../assets/rotas_icon.png" alt="" class="icon_trem">
-                    </div>
-                    <div>
-                        <div class="">
-                            <h3>Rotas Ativas</h3>
-                        </div>
-                        <div class=""></div>
-                    </div>
-                </div>
-                <div class="hm_card relatorios">
-                    <div>
-                        <img src="../assets/relatorios_icon.png" alt="a" class="icon_trem">
-                    </div>
-                    <div>
-                        <div class="">
-                            <h3>Relatórios</h3>
-                        </div>
-                        <div class=""></div>
-                    </div>
-                </div>
-            </div>
+            <div class="">
 
-        </section>
-        <section>
-            <div class="hm_flex">
-                <div class="hm_status status_trem">
-                </div>
-                <div class="hm_status status_sensores">
-                </div>
-                <div class="hm_status atividades">
-                </div>
             </div>
-        </section>
+            
 
     </main>
 
