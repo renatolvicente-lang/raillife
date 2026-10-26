@@ -44,11 +44,36 @@
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
+<<<<<<< HEAD
+            <div class="flex">
+                <img src="../assets/frifas.webp" alt="fotodeperfil" class="fotodeperfil">
+
+                <?php if ($usuarioLogado !== false) { ?>
+                    <div class="identificacao-usuario">
+                        <?php echo "Bem vindo(a), " . htmlspecialchars($usuarioLogado['nome'], ENT_QUOTES, 'UTF-8') . "!"; ?>
+                    </div>
+                <?php } ?>
+            </div>
+
+                <div class="dropdown mt-3">
+            <div class="textinhex">
+                <br>
+                <strong>
+                    Em um mundo onde cada segundo conta, o RailLife é o cérebro que mantém a malha ferroviária viva, pontual e segura.
+            </strong>
+            <br>
+            <br>
+            <p>Cuidar de uma malha ferroviária vai muito além de ajustar horários. O RailLife previne falhas antes que elas aconteçam, otimiza rotas em tempo real e economiza energia, transformando a complexidade dos trilhos em uma experiência leve, pontual e segura para todos. Sem um gerenciamento atento, a rotina para. Com o RailLife, a vida segue o seu trilho sem interrupções.</p>
+        </div>
+    </div>
+
+=======
             <?php if (!empty($_SESSION["usuario"])) { ?>
                 <div class="identificacao-usuario">
                     <?php echo "Bem vindo(a), " . htmlspecialchars($_SESSION["usuario"], ENT_QUOTES, 'UTF-8') . "!"; ?>
                 </div>
             <?php } ?>
+>>>>>>> 7a2757157b87d2b7d30862be299d2086216549be
             <div class="dropdown mt-3">
                     <a href="adm_usuarios.php">cadastrar</a>
                     <br>
