@@ -3,10 +3,10 @@ require_once('../infra/conn.php');
 require_once('validar_cpf.php');
 session_start();
 
-        if (!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm") {
-         header("Location: home.php");
-         exit();
-    }    
+         if (!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm") {
+          header("Location: home.php");
+          exit();
+     }    
 
 $erro = "";
 $id = $_GET["id"] ?? null;
@@ -31,7 +31,7 @@ if ($id && $_SERVER['REQUEST_METHOD'] === 'GET') {
     $result = $sql->get_result();
 
     if ($usuario = $result->fetch_assoc()) {
-        $nome = $usuario['nome'];
+        $nome = $usuario['nome_usuarios'];
         $email = $usuario['email'];
         $CPF = preg_replace('/\D/', '', $usuario['cpf']);
         $endereco = $usuario['endereco'];
@@ -168,7 +168,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
 
     if ($id) {
-        $sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ?, cpf = ?, endereco = ?, cidade = ?, cep = ?, data_nascimento = ?, atuacao = ? WHERE id = ?";
+        $sql = "UPDATE usuarios SET nome_usuarios = ?, email = ?, senha = ?, cpf = ?, endereco = ?, cidade = ?, cep = ?, data_nascimento = ?, atuacao = ? WHERE id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('sssssssssi', $nome, $email, $senhaHash, $CPF, $endereco, $cidade, $CEP, $data_nascimento, $area_atuacao, $id);
         $stmt->execute();
@@ -176,7 +176,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         exit();
     } else {
         if ($erro == "") {
-            $sql = "INSERT INTO usuarios (nome, email, senha, CPF, endereco, cidade, cep, data_nascimento, atuacao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO usuarios (nome_usuarios, email, senha, CPF, endereco, cidade, cep, data_nascimento, atuacao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             $comando = $conn->prepare($sql);
 

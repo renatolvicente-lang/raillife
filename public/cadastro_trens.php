@@ -37,10 +37,10 @@
             
         }else{
 
-            $sql = "INSERT INTO trens (nome_trens, modelo, capacidade, ano_fabricacao, id_rotas, id_usuarios)VALUES (?,?,?,?,?)";
+            $sql = "INSERT INTO trens (nome_trens, modelo, capacidade, ano_fabricacao, id_rotas, id_usuarios) VALUES (?, ?, ?, ?, ?, ?)";
     
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("ssisii", $nome,$modelo, $capacidade, $fabricacao, $rota, $usuario);
+            $stmt->bind_param("ssisii", $nome, $modelo, $capacidade, $fabricacao, $rota, $usuario);
             $stmt->execute();
     
             header("Location: adm_trens.php");

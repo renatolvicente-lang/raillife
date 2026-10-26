@@ -2,22 +2,22 @@
     include("../infra/conn.php");
     session_start();
 
-    if(!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm"){
-         header("Location: home.php");
-         exit();
-    }
+     if(!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm"){
+          header("Location: home.php");
+          exit();
+     }
 
-    $id = $_SESSION['id'] ?? null;
-    $usuarioLogado = false;
+     $id = $_SESSION['id'] ?? null;
+     $usuarioLogado = false;
 
-    if ($id !== null) {
-        $sql = "SELECT * FROM usuarios WHERE id = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-        $resultUsuario = $stmt->get_result();
-        $usuarioLogado = $resultUsuario->fetch_assoc();
-    }
+     if ($id !== null) {
+         $sql = "SELECT * FROM usuarios WHERE id = ?";
+         $stmt = $conn->prepare($sql);
+         $stmt->bind_param("i", $id);
+         $stmt->execute();
+         $resultUsuario = $stmt->get_result();
+         $usuarioLogado = $resultUsuario->fetch_assoc();
+     }
 
     function formatarCpf($cpf)
     {
@@ -158,7 +158,7 @@
                             </td>
                         
                             <td>
-                                <?php echo $linha["nome"];?>
+                                <?php echo $linha["nome_usuarios"];?>
                             </td>
                         
                             <td>
