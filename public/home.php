@@ -117,15 +117,55 @@ $nome = $usuario !== false && !empty($usuario['nome']) ? htmlspecialchars($usuar
     </header>
 
     <main class="mn_home">
-        <section class="">
 
+        <div class="repar1hm">
             <h1><strong>Dashboard RAILLIFE</strong></h1>
             
             <h5>Acompanhe os principais dados da operação ferroviária em tempo real.</h5>
 
-            <div class="">
+            <div class="padding3"></div>
 
+            <div class="quadadofofo">
+                    <h2>Trens em operação</h2>
+                    
             </div>
+
+                        <div class="padding3"></div>
+
+            <div class="quadadofofo">
+                    <h2>Sensores em operação</h2>
+                    
+                </div>
+
+
+                        <div class="padding3"></div>
+
+            <div class="quadadofofo">
+                    <h2>Rotas em operação</h2>
+                    
+            </div>  
+
+        </div>
+
+        <div class="repar2hm">
+
+            <div class="circuito-container">
+    <!-- Linha visível do circuito feita com SVG -->
+    <svg class="trilho" viewBox="0 0 500 300">
+      <path 
+        d="M 50,150 C 150,50 350,250 450,150 C 350,50 150,250 50,150 Z" 
+        fill="none" 
+        stroke="#444466" 
+        stroke-width="4" 
+        stroke-dasharray="6 6"
+      />
+    </svg>
+
+    <!-- Bolinha que percorre o circuito -->
+    <div class="bolinha"></div>
+  </div>
+
+        </div>
             
 
     </main>

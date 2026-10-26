@@ -104,9 +104,24 @@ body{
     background-color: #f8f9fa;
     position: relative;
     z-index: 2;
-
-
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
 }
+
+.repar1hm{
+    flex: 1.1;
+    min-width: 0;
+}
+
+.repar2hm{
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .hm_flex{
     display: flex;
     padding: 30px;
@@ -895,4 +910,68 @@ header {
     margin-bottom: 10px;
 }
 
+.quadadofofo {
+    height: 150px;
+    background-color: #c23232;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+}
+
+.quadadofofo h2 {
+    color: #fff;
+    margin-left: 30px;
+}
+
+.padding3 {
+    height: 30px;
+}
+
+/* circuito */
+
+
+    /* Container principal */
+    .circuito-container {
+      position: relative;
+      width: min(100%, 500px);
+      height: 300px;
+    }
+
+    /* SVG que desenha a linha do circuito */
+    .trilho {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* A Bolinha que vai percorrer o circuito */
+    .bolinha {
+      width: 20px;
+      height: 20px;
+      background-color: #00ff88;
+      border-radius: 50%;
+      position: absolute;
+      box-shadow: 0 0 12px #00ff88;
+
+      /* Define o caminho exato do circuito (mesmo 'd' do SVG) */
+      offset-path: path('M 50,150 C 150,50 350,250 450,150 C 350,50 150,250 50,150 Z');
+      
+      /* Animação que percorre a linha */
+      animation: percorrer 4s linear infinite;
+    }
+
+    /* Keyframes para mover a bolinha de 0% até 100% do caminho */
+    @keyframes percorrer {
+      0% {
+        offset-distance: 0%;
+      }
+      100% {
+        offset-distance: 100%;
+      }
+    }
 
