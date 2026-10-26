@@ -98,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </div>
 
         <nav class="nav_home">
-            <a href="home.php">Inicio</a>
+            <a href="home.php" class="ativado">Inicio</a>
             <a href="adm_sensores.php">Sensores</a>
             <a href="adm_trens.php">Trens</a>
             <a href="#">Relatorios</a>
