@@ -8,8 +8,8 @@
         exit();
     }
 
-    $result = $conn->query("SELECT * FROM sensores");
-
+    $result = $conn->query("SELECT * FROM sensores inner join rotas on sensores.id_rotas = rotas.id");
+    
 ?>
 
 
@@ -111,7 +111,9 @@
                             <td>
                                 <?php echo $linha["nome"];?>
                             </td>
-                        
+                            <td>
+                                <?php echo $linha["nome_rotas"];?>
+                            </td>
                             <td>
                                 <?php echo $linha["tipo"];?>
                             </td>
