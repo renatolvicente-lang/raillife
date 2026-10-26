@@ -6,9 +6,34 @@
         header("Location: login.php");
         exit();
     }
-    $result = $conn->query("SELECT id, nome_rotas, origem, destino, tempo AS duracao FROM rotas");
 
-    //colocar pdo e puxar o trem no fetch_assoc
+    $erro = "";
+    if (isset($_GET["excluir"])) {
+        $idRota =$_GET["excluir"];
+
+        if ($idRota !== false) {
+            $verificaSensores = $conn->prepare("SELECT id FROM sensores WHERE id_rotas = ?");
+            $verificaSensores->bind_param("i", $idRota);
+            $verificaSensores->execute();
+
+            if ($verificaSensores->get_result()->num_rows > 0) {
+                $erro = "Não é possível excluir esta rota, pois existem sensores associados a ela.";
+            } else {
+                header("Location: excluir_rotas.php?id=" . $idRota);
+                exit();
+            }
+        } else {
+            $erro = "Não foi possível identificar a rota para exclusão.";
+        }
+    } elseif (isset($_GET["erro"])) {
+        if ($_GET["erro"] === "rota_em_uso") {
+            $erro = "Não é possível excluir esta rota, pois existem sensores associados a ela.";
+        } elseif ($_GET["erro"] === "rota_invalida") {
+            $erro = "Não foi possível identificar a rota para exclusão.";
+        }
+    }
+
+    $result = $conn->query("SELECT id, nome_rotas, origem, destino, tempo AS duracao FROM rotas");
 
 
 ?>
@@ -85,6 +110,12 @@
 
         <div>
 
+        <?php if ($erro != "") { ?>
+                <div class="mensagem-erro">
+                    <?php echo $erro; ?>
+                </div>
+            <?php } ?>
+
         <div class="tabela-wrap">
             <table class="tabela">
                 <thead>
@@ -107,7 +138,7 @@
                             <td><?php echo htmlspecialchars(substr($linha["duracao"], 0, 5)); ?></td>
                             <td>
                                 <a href="cadastro_rotas.php?id=<?php echo $linha["id"]?>" class="btn btn-danger ">Editar</a>
-                                <a href="excluir_rotas.php?id=<?php echo $linha["id"]; ?>" class="btn btn-danger">Excluir</a>
+                                <a href="adm_rotas.php?excluir=<?php echo (int) $linha["id"]; ?>" class="btn btn-danger">Excluir</a>
 
                             </td>
                         </tr>

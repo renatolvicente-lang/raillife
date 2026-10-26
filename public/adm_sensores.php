@@ -108,10 +108,6 @@
                             </td>
                         
                             <td>
-                                <?php echo $linha["localizacao"];?>
-                            </td>
-                        
-                            <td>
                                 <?php echo $linha["tipo"];?>
                             </td>
                       
@@ -120,8 +116,8 @@
                             </td>
                        
                             <td>
-                                <button id="btnAbrir">Editar</button>
-                                <a href="excluir_sensor.php?id=<?php echo $linha["id"]?>">Excluir</a>
+                                <a href="cadastro_sensores.php?id=<?php echo $linha["id"]?>">Editar</a>
+                                <a href="excluir_sensores.php?id=<?php echo $linha["id"]?>">Excluir</a>
                             </td>
                         </tr>
                     <?php }?>

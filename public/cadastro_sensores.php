@@ -119,8 +119,17 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
                 <div class="cadastro-campo">
                     <label for="rota">Rota:</label>
-                    <input type="text" id="rota" name="rota" placeholder="Digite a rota do sensor"
-                        value="<?php echo htmlspecialchars($rota ?? ''); ?>">
+                    <select id="rota" name="id_rotas" required>
+                        <option value="" disabled <?php echo empty($id_rotas) ? 'selected' : ''; ?>>
+                            <?php echo $routeResult->num_rows > 0 ? 'Selecione uma rota' : 'Nenhuma rota cadastrada'; ?>
+                        </option>
+                        <?php while ($rota = $routeResult->fetch_assoc()) { ?>
+                            <option value="<?php echo (int) $rota['id']; ?>"
+                                <?php echo $id_rotas == $rota['id'] ? 'selected' : ''; ?>>
+                                <?php echo htmlspecialchars($rota['nome_rotas']); ?>
+                            </option>
+                        <?php } ?>
+                    </select>
                 </div>
 
                 <div class="cadastro-campo">
@@ -128,6 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     <select id="status" name="status" placeholder="digite o status do sensor">
                         <option value="Ativo" <?php echo (isset($status) && $status === 'Ativo') ? 'selected' : ''; ?>>Ativo</option>
                         <option value="Inativo" <?php echo (isset($status) && $status === 'Inativo') ? 'selected' : ''; ?>>Inativo</option>
+                        <option value="Manutenção" <?php echo (isset($status) && $status === 'Manutenção') ? 'selected' : ''; ?>>Manutenção</option>
                     </select>
                 </div>
 
