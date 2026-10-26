@@ -57,11 +57,29 @@ $nome = $usuario !== false && !empty($usuario['nome']) ? htmlspecialchars($usuar
         </div>
         <div class="offcanvas-body">
 
+<<<<<<< HEAD
             <?php if (!empty($_SESSION["usuario"])) { ?>
+=======
+<<<<<<< HEAD
+    <div class="dropdown mt-3">
+            <div class="textinhex">
+                <br>
+                <strong>
+                    Em um mundo onde cada segundo conta, o RailLife é o cérebro que mantém a malha ferroviária viva, pontual e segura.
+            </strong>
+            <br>
+            <br>
+            <p>Cuidar de uma malha ferroviária vai muito além de ajustar horários. O RailLife previne falhas antes que elas aconteçam, otimiza rotas em tempo real e economiza energia, transformando a complexidade dos trilhos em uma experiência leve, pontual e segura para todos. Sem um gerenciamento atento, a rotina para. Com o RailLife, a vida segue o seu trilho sem interrupções.</p>
+        </div>
+    </div>
+=======
+            <?php if ($usuario !== false) { ?>
+>>>>>>> 1d5c0eb48b234552f684be502c994dc997d63ab1
                 <div class="identificacao-usuario">
                     <?php echo "Bem vindo(a), " . htmlspecialchars($_SESSION["usuario"], ENT_QUOTES, 'UTF-8') . "!"; ?>
                 </div>
             <?php } ?>
+>>>>>>> 82c8c12f8340fa222af3043f4661fc0ac4f03643
 
             <div class="dropdown mt-3">
                 <div class="textinhex">
@@ -107,7 +125,9 @@ $nome = $usuario !== false && !empty($usuario['nome']) ? htmlspecialchars($usuar
 
     <main class="mn_home">
         <section class="">
-            <h1>Dashboard RAILLIFE</h1>
+
+            <h1><strong>Dashboard RAILLIFE</strong></h1>
+            
             <p>Acompanhe os principais dados da operação ferroviária em tempo real.</p>
             <div class="hm_flex">
                 <div class='hm_card trens_ativos'>

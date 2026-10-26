@@ -881,4 +881,9 @@ header {
     transform: translateY(-1px);
 }
 
+.textinhex {
+    text-align: justify;
+    max-width: 600px;
+    margin: 0 auto;
+}
 
