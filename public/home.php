@@ -149,15 +149,18 @@ $nome = $usuario !== false && !empty($usuario['nome']) ? htmlspecialchars($usuar
 
         <div class="repar2hm">
 
-            <div class="circuito-container">
-    <!-- Linha visível do circuito feita com SVG -->
-    <svg class="trilho" viewBox="0 0 500 300">
+<div class="circuito-container">
+    
+    <svg viewBox="0 0 500 500">
+      <!-- Traçado do circuito idêntico ao da imagem -->
       <path 
-        d="M 50,150 C 150,50 350,250 450,150 C 350,50 150,250 50,150 Z" 
+        id="circuito"
+        d="M 215,285 C 190,285 150,290 110,290 C 40,290 10,230 40,170 C 70,110 130,120 200,180 C 240,215 260,215 300,180 C 370,120 430,110 460,170 C 490,230 460,290 390,290 C 350,290 310,285 285,285 C 255,285 240,270 200,205 C 160,140 160,80 230,40 C 300,0 360,20 390,80 C 420,140 380,210 320,245 C 290,262 210,238 180,255 C 120,290 80,360 110,420 C 140,480 200,500 270,460 C 340,420 340,360 300,295 C 260,230 245,285 215,285 Z" 
         fill="none" 
-        stroke="#444466" 
-        stroke-width="4" 
-        stroke-dasharray="6 6"
+        stroke="#000000" 
+        stroke-width="3.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
       />
     </svg>
 
