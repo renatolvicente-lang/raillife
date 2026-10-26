@@ -7,9 +7,22 @@
         header("Location: login.php");
         exit();
     }
-
     $result = $conn->query("SELECT * FROM sensores inner join rotas on sensores.id_rotas = rotas.id");
-    
+
+    $id = $_SESSION['id'] ?? null;
+    $usuarioLogado = false;
+
+    if ($id !== null) {
+        $sql = "SELECT * FROM usuarios WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $resultUsuario = $stmt->get_result();
+        $usuarioLogado = $resultUsuario->fetch_assoc();
+    }
+
+    $result = $conn->query("SELECT * FROM sensores");
+
 ?>
 
 
