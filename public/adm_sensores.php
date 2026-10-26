@@ -8,7 +8,20 @@
         exit();
     }
 
-    $result = $conn->query("SELECT * FROM sensores");
+        $result = $conn->query("SELECT * FROM sensores inner join rotas on sensores.id_rotas = rotas.id");
+ 
+    $id = $_SESSION['id'] ?? null;
+    $usuarioLogado = false;
+
+    if ($id !== null) {
+        $sql = "SELECT * FROM usuarios WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $resultUsuario = $stmt->get_result();
+        $usuarioLogado = $resultUsuario->fetch_assoc();
+    }
+
 
 ?>
 
@@ -31,6 +44,11 @@
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
+            <?php if (!empty($_SESSION["usuario"])) { ?>
+                <div class="identificacao-usuario">
+                    <?php echo "Bem vindo(a), " . htmlspecialchars($_SESSION["usuario"], ENT_QUOTES, 'UTF-8') . "!"; ?>
+                </div>
+            <?php } ?>
             <div class="dropdown mt-3">
                     <a href="adm_usuarios.php">cadastrar</a>
                     <br>
@@ -50,7 +68,7 @@
         </div>
 
         <nav class="nav_home">
-            <a href="home.php">Inicio</a>
+            <a href="home.php" class="ativado">Inicio</a>
             <a href="adm_sensores.php" class="ativado">Sensores</a>
             <a href="adm_trens.php">Trens</a>
             <a href="#">Relatorios</a>
@@ -106,7 +124,9 @@
                             <td>
                                 <?php echo $linha["nome"];?>
                             </td>
-                        
+                            <td>
+                                <?php echo $linha["nome_rotas"];?>
+                            </td>
                             <td>
                                 <?php echo $linha["tipo"];?>
                             </td>
