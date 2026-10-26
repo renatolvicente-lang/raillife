@@ -34,11 +34,13 @@ if(!isset($_SESSION["usuario"])){
         </div>
         <div class="offcanvas-body">
 
+    <div class="dropdown mt-3">
             <div class="textinhex">
                 <strong>
                     Em um mundo onde cada segundo conta, o RailLife é o cérebro que mantém a malha ferroviária viva, pontual e segura.
             </strong>
         </div>
+    </div>
 
             <div class="dropdown mt-3">
                     <a href="adm_usuarios.php">cadastrar</a>
