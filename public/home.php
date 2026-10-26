@@ -33,6 +33,13 @@ if(!isset($_SESSION["usuario"])){
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
+
+            <div class="textinhex">
+                <strong>
+                    Em um mundo onde cada segundo conta, o RailLife é o cérebro que mantém a malha ferroviária viva, pontual e segura.
+            </strong>
+        </div>
+
             <div class="dropdown mt-3">
                     <a href="adm_usuarios.php">cadastrar</a>
                     <br>
