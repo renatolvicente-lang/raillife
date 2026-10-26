@@ -3,10 +3,32 @@ session_start();
 
 include("../infra/conn.php");
 
-
-if(!isset($_SESSION["usuario"])){
+// Verifica se existe usuário logado na sessão. Se não houver, redireciona para o login.
+// Isso evita acessar a página sem autenticação e impede o erro de tentar mostrar dados de alguém não logado.
+if (!isset($_SESSION["usuario"])) {
     header("Location: login.php");
+    exit();
 }
+
+// Busca o ID do usuário logado na sessão. O nome está em $_SESSION['usuario'], mas o ID está em $_SESSION['id'].
+// Essa linha corrige o problema de tentar usar o nome como identificador para buscar o registro no banco.
+$id = $_SESSION['id'] ?? null;
+$usuario = false;
+
+// Consulta o usuário pelo ID para recuperar o nome completo do cadastro.
+// Isso é necessário porque a sessão guarda o nome do usuário em uma variável separada e a página precisa do registro completo.
+if ($id !== null) {
+    $sql = "SELECT * FROM usuarios WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $usuario = $result->fetch_assoc();
+}
+
+// Garante que o nome será exibido com escaping para evitar problemas com caracteres especiais.
+// Também define um fallback para segurança caso o usuário não seja encontrado no banco.
+$nome = $usuario !== false && !empty($usuario['nome']) ? htmlspecialchars($usuario['nome'], ENT_QUOTES, 'UTF-8') : 'Usuário';
 
 ?>
 <!DOCTYPE html>
@@ -25,27 +47,62 @@ if(!isset($_SESSION["usuario"])){
 
 <body>
 
-   
+
 
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample">
         <div class="offcanvas-header">
-            <h3 class="offcanvas-title" id="offcanvasExampleLabel"> <img src="../assets/logo.png" alt="logo site"><strong>MENU</strong></h3>
+            <h3 class="offcanvas-title" id="offcanvasExampleLabel"> <img src="../assets/logo.png"
+                    alt="logo site"><strong>MENU</strong></h3>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
 
+<<<<<<< HEAD
+        <div class="flex">
+
+        <img src="../assets/frifas.webp" alt="fotodeperfil" class="fotodeperfil">
+
+                    <?php if ($usuario !== false) { ?>
+                <div class="identificacao-usuario">
+                    <?php echo "Bem vindo(a), " . htmlspecialchars($usuario['nome'], ENT_QUOTES, 'UTF-8') . "!"; ?>
+                    <!-- Exibe o nome do usuário autenticado. A condição verifica se o registro foi encontrado no banco, evitando erros ao tentar imprimir dados vazios. -->
+                </div>
+            <?php } ?>
+            
+            </div>
+
+
     <div class="dropdown mt-3">
             <div class="textinhex">
+                <br>
                 <strong>
                     Em um mundo onde cada segundo conta, o RailLife é o cérebro que mantém a malha ferroviária viva, pontual e segura.
             </strong>
+            <br>
+            <br>
+            <p>Cuidar de uma malha ferroviária vai muito além de ajustar horários. O RailLife previne falhas antes que elas aconteçam, otimiza rotas em tempo real e economiza energia, transformando a complexidade dos trilhos em uma experiência leve, pontual e segura para todos. Sem um gerenciamento atento, a rotina para. Com o RailLife, a vida segue o seu trilho sem interrupções.</p>
         </div>
     </div>
+=======
+            <?php if (!empty($_SESSION["usuario"])) { ?>
+                <div class="identificacao-usuario">
+                    <?php echo "Bem vindo(a), " . htmlspecialchars($_SESSION["usuario"], ENT_QUOTES, 'UTF-8') . "!"; ?>
+                </div>
+            <?php } ?>
+            <div class="dropdown mt-3">
+                <div class="textinhex">
+                    <strong>
+                        Em um mundo onde cada segundo conta, o RailLife é o cérebro que mantém a malha ferroviária viva,
+                        pontual e segura.
+                    </strong>
+                </div>
+            </div>
+>>>>>>> 0ca31277fe4e516e185b084646124ac82f3a85f6
 
             <div class="dropdown mt-3">
-                    <a href="adm_usuarios.php">cadastrar</a>
-                    <br>
-                    <a href="logout.php">desconectar</a>
+                <a href="adm_usuarios.php">cadastrar</a>
+                <br>
+                <a href="logout.php">desconectar</a>
             </div>
         </div>
     </div>
@@ -64,21 +121,22 @@ if(!isset($_SESSION["usuario"])){
             <a href="adm_trens.php">Trens</a>
             <a href="#">Relatorios</a>
             <a href="adm_rotas.php">Rotas</a>
-             
+
         </nav>
 
         <div class="margin_header">
-            <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
-        aria-controls="offcanvasExample">
-        <img src="../assets/menu button.png" alt="Menu">
-    </a>
-    </div>
+            <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                <img src="../assets/menu button.png" alt="Menu">
+            </a>
+        </div>
 
     </header>
 
     <main class="mn_home">
         <section class="">
-            <h1>Dashboard RAILLIFE</h1>
+
+            <h1><strong>Dashboard RAILLIFE</strong></h1>
+            
             <p>Acompanhe os principais dados da operação ferroviária em tempo real.</p>
             <div class="hm_flex">
                 <div class='hm_card trens_ativos'>
