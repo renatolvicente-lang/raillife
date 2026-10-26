@@ -3,13 +3,9 @@
 $host = "localhost";
 $user = "root";
 $password = "";
-$database = "raillife1";
+$database = "raillife";
 
-<<<<<<< HEAD
-$conn = new mysqli($host, $user, $password, $database, 3309);
-=======
-$conn = new mysqli($host, $user, $password, $database, 3373);
->>>>>>> f02ab2bef545ed6a55b90631e928113668a800fd
+$conn = new mysqli($host, $user, $password, $database);
 
 if(!$conn){
     die("Falha na conexão: ". $conn->connect_error());
