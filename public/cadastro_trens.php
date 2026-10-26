@@ -73,7 +73,7 @@
         <div class="offcanvas-body">
             <?php if (!empty($_SESSION["usuario"])) { ?>
                 <div class="identificacao-usuario">
-                    <?php echo "Bem vindo(a), " . htmlspecialchars($_SESSION["usuario"], ENT_QUOTES, 'UTF-8') . "!"; ?>
+                    <?php echo "Bem vindo(a), " . htmlspecialchars($_SESSION["nome_usuarios"], ENT_QUOTES, 'UTF-8') . "!"; ?>
                 </div>
             <?php } ?>
             <div class="dropdown mt-3">
