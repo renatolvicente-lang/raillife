@@ -98,10 +98,10 @@ body{
 }
 .mn_home{
     max-width: 1300px;
-    border-radius: 50px 50px 0 0;
+    border-radius: 50px;
     padding: 50px;
     margin: auto;
-    background-color: rgba(255, 255, 255, 0.356);
+    background-color: #f8f9fa;
     position: relative;
     z-index: 2;
 
@@ -894,4 +894,5 @@ header {
     object-fit: cover;
     margin-bottom: 10px;
 }
+
 
