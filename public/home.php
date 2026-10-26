@@ -57,6 +57,7 @@ $nome = $usuario !== false && !empty($usuario['nome']) ? htmlspecialchars($usuar
         </div>
         <div class="offcanvas-body">
 
+<<<<<<< HEAD
         <div class="flex">
 
         <img src="../assets/frifas.webp" alt="fotodeperfil" class="fotodeperfil">
@@ -82,6 +83,21 @@ $nome = $usuario !== false && !empty($usuario['nome']) ? htmlspecialchars($usuar
             <p>Cuidar de uma malha ferroviária vai muito além de ajustar horários. O RailLife previne falhas antes que elas aconteçam, otimiza rotas em tempo real e economiza energia, transformando a complexidade dos trilhos em uma experiência leve, pontual e segura para todos. Sem um gerenciamento atento, a rotina para. Com o RailLife, a vida segue o seu trilho sem interrupções.</p>
         </div>
     </div>
+=======
+            <?php if (!empty($_SESSION["usuario"])) { ?>
+                <div class="identificacao-usuario">
+                    <?php echo "Bem vindo(a), " . htmlspecialchars($_SESSION["usuario"], ENT_QUOTES, 'UTF-8') . "!"; ?>
+                </div>
+            <?php } ?>
+            <div class="dropdown mt-3">
+                <div class="textinhex">
+                    <strong>
+                        Em um mundo onde cada segundo conta, o RailLife é o cérebro que mantém a malha ferroviária viva,
+                        pontual e segura.
+                    </strong>
+                </div>
+            </div>
+>>>>>>> 0ca31277fe4e516e185b084646124ac82f3a85f6
 
             <div class="dropdown mt-3">
                 <a href="adm_usuarios.php">cadastrar</a>

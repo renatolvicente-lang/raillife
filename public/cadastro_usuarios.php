@@ -234,6 +234,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
+<<<<<<< HEAD
             <div class="flex">
                 <img src="../assets/frifas.webp" alt="fotodeperfil" class="fotodeperfil">
 
@@ -256,6 +257,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </div>
     </div>
 
+=======
+            <?php if (!empty($_SESSION["usuario"])) { ?>
+                <div class="identificacao-usuario">
+                    <?php echo "Bem vindo(a), " . htmlspecialchars($_SESSION["usuario"], ENT_QUOTES, 'UTF-8') . "!"; ?>
+                </div>
+            <?php } ?>
+>>>>>>> 0ca31277fe4e516e185b084646124ac82f3a85f6
             <div class="dropdown mt-3">
                     <a href="cadastro_usuarios.php">cadastrar</a>
                     <br>
