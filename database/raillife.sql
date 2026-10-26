@@ -3,7 +3,7 @@ use raillife;
 
 CREATE TABLE usuarios (
     
-  id_rotas INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  id_usuarios INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   nome_usuarios VARCHAR(100) NOT NULL,
   email VARCHAR(100) NOT NULL,
   senha VARCHAR(100) NOT NULL,
