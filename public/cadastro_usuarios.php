@@ -3,10 +3,10 @@ require_once('../infra/conn.php');
 require_once('validar_cpf.php');
 session_start();
 
-    // if (!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm") {
-    //       header("Location: home.php");
-    //       exit();
-    //  }    
+     if (!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm") {
+           header("Location: home.php");
+           exit();
+      }    
 
 $erro = "";
 $id = $_GET["id"] ?? null;
@@ -154,10 +154,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     if (empty($erro)) {
         if ($id) {
-            $stmtCheck = $conn->prepare("SELECT id FROM usuarios WHERE (email = ? OR CPF = ?) AND id != ?");
+            $stmtCheck = $conn->prepare("SELECT id_usuarios FROM usuarios WHERE (email = ? OR CPF = ?) AND id != ?");
             $stmtCheck->bind_param("ssi", $email, $CPF, $id);
         } else {
-            $stmtCheck = $conn->prepare("SELECT id FROM usuarios WHERE email = ? OR CPF = ?");
+            $stmtCheck = $conn->prepare("SELECT id_usuarios FROM usuarios WHERE email = ? OR CPF = ?");
             $stmtCheck->bind_param("ss", $email, $CPF);
         }
 
