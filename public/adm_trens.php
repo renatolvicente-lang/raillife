@@ -5,8 +5,8 @@
     session_start();
 
     if (!isset($_SESSION["usuario"])) {
-        header("Location: login.php");
-        exit();
+       header("Location: login.php");
+       exit();
     }
 
     $id = $_SESSION['id'] ?? null;
@@ -138,7 +138,7 @@
                     <?php while($linha  = $result->fetch_assoc()){?>
                         <tr>
                             <td>
-                                <?php echo $linha["id"];?>
+                                <?php echo $linha["id_trens"];?>
                             </td>
                         
                             <td>

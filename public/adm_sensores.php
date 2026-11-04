@@ -8,7 +8,7 @@
         exit();
     }
 
-        $result = $conn->query("SELECT * FROM sensores inner join rotas on sensores.id_rotas = rotas.id");
+        $result = $conn->query("SELECT * FROM sensores inner join rotas on sensores.id_rotas = rotas.id_rotas");
  
     $id = $_SESSION['id'] ?? null;
     $usuarioLogado = false;
