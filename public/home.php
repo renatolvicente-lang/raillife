@@ -18,7 +18,7 @@ $usuario = false;
 // Consulta o usuário pelo ID para recuperar o nome completo do cadastro.
 // Isso é necessário porque a sessão guarda o nome do usuário em uma variável separada e a página precisa do registro completo.
 if ($id !== null) {
-    $sql = "SELECT * FROM usuarios WHERE id = ?";
+    $sql = "SELECT * FROM usuarios WHERE id_usuarios = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id);
     $stmt->execute();

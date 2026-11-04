@@ -124,8 +124,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                             <?php echo $routeResult->num_rows > 0 ? 'Selecione uma rota' : 'Nenhuma rota cadastrada'; ?>
                         </option>
                         <?php while ($rota = $routeResult->fetch_assoc()) { ?>
-                            <option value="<?php echo (int) $rota['id']; ?>"
-                                <?php echo $id_rotas == $rota['id'] ? 'selected' : ''; ?>>
+                            <option value="<?php echo (int) $rota['id_rotas']; ?>"
+                                <?php echo $id_rotas == $rota['id_rotas'] ? 'selected' : ''; ?>>
                                 <?php echo htmlspecialchars($rota['nome_rotas']); ?>
                             </option>
                         <?php } ?>
@@ -141,7 +141,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     </select>
                 </div>
 
-                <button type="submit">Cadastrar Sensor</button>
+                <button type="submit">
+                    <?php echo $id ? 'Salvar Alterações' : 'Cadastrar'; ?>
+                </button>
 
             </form>
 

@@ -130,7 +130,7 @@
 
                         <?php if($result->num_rows > 0){?>
                             <?php while($linha = $result->fetch_assoc()){?>
-                                <option value="<?php echo $linha["id"]?>">
+                                <option value="<?php echo $linha["id_rotas"]?>">
                                     <?php echo $linha["nome_rotas"]?>
                                 </option>
                             <?php }?>
@@ -144,7 +144,7 @@
 
                         <?php if($result_usuario->num_rows > 0){?>
                             <?php while($linha = $result_usuario->fetch_assoc()){?>
-                                <option value="<?php echo $linha["id"]?>">
+                                <option value="<?php echo $linha["id_usuarios"]?>">
                                     <?php echo $linha["nome_usuarios"]?>
                                 </option>
                             <?php }?>
@@ -160,7 +160,9 @@
                     <label for="fabricacao">Data de fabricação:</label>
                     <input type="date" name="fabricacao" id="fabricacao">
                 </div>
-                <button type="submit" name="cadastrar">Cadastrar</button>
+                <button type="submit">
+                    <?php echo $id ? 'Salvar Alterações' : 'Cadastrar'; ?>
+                </button>
             </form>
                 
         </form>
