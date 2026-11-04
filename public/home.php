@@ -127,43 +127,45 @@ $nome = $usuario !== false && !empty($usuario['nome']) ? htmlspecialchars($usuar
 
             <div class="quadadofofo">
                     <h2>Trens em operação: </h2>
-                    <?php
-                        $sql = "SELECT * FROM trens";
-                        $result = $conn->query($sql);
-
-                        $qtd = $result->num_rows;
-
-                        echo $qtd;
-                    ?>
+                    <h2>
+                        <?php
+                            $sql = "SELECT * FROM trens";
+                            $result = $conn->query($sql);
+                            $qtd = $result->num_rows;
+                            echo $qtd;
+                        ?>
+                    </h2>
             </div>
 
                         <div class="padding3"></div>
 
             <div class="quadadofofo">
-                    <h2>Sensores em operação</h2>
-                    <?php
-                        $sql = "SELECT * FROM sensores";
-                        $result = $conn->query($sql);
-
-                        $qtd = $result->num_rows;
+                    <h2>Sensores em operação: </h2>
+                    <h2>
+                        <?php
+                            $sql = "SELECT * FROM sensores";
+                            $result = $conn->query($sql);
+                            $qtd = $result->num_rows;
                         
-                        echo $qtd;
-                    ?>
+                            echo $qtd;
+                        ?>
+                    </h2>
                 </div>
 
 
                         <div class="padding3"></div>
 
             <div class="quadadofofo">
-                    <h2>Rotas em operação</h2>
-                    <?php
-                        $sql = "SELECT * FROM rotas";
-                        $result = $conn->query($sql);
-
-                        $qtd = $result->num_rows;
+                    <h2>Rotas em operação: </h2>
+                    <h2>
+                        <?php
+                            $sql = "SELECT * FROM rotas";
+                            $result = $conn->query($sql);
+                            $qtd = $result->num_rows;
                         
-                        echo $qtd;
-                    ?>
+                            echo $qtd;
+                        ?>
+                    </h2>
             </div>  
 
         </div>
