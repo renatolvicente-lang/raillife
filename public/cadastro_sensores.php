@@ -8,22 +8,60 @@ if (!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] == "adm") {
 }
 
 $erro = "";
-$id = $_GET["id"] ?? null;
-$nome = $_POST['nome'] ?? '';
-$tipo = $_POST['tipo'] ?? '';
+$nome = trim($_POST['nome'] ?? '');
+$tipo = trim($_POST['tipo'] ?? '');
 $data_instalacao = $_POST['data_instalacao'] ?? '';
 $status_sensor = $_POST['status_sensor'] ?? 'ativo';
 $id_rotas = $_POST['id_rotas'] ?? null;
+$id = null;
+$editando = false;
+$podeSalvar = true;
+
 $routeResult = $conn->query("SELECT id_rotas, nome_rotas FROM rotas ORDER BY nome_rotas");
 
+if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['id'])) {
+    $id = filter_var($_GET['id'], FILTER_VALIDATE_INT);
+    if ($id === false || $id < 1) {
+        $erro = "Identificador do sensor inválido.";
+        $podeSalvar = false;
+    } else {
+        $stmt = $conn->prepare("SELECT id, nome, tipo, data_instalacao, status_sensor, id_rotas FROM sensores WHERE id = ?");
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $sensor = $stmt->get_result()->fetch_assoc();
+
+        if ($sensor === null) {
+            $erro = "Sensor não encontrado.";
+            $podeSalvar = false;
+        } else {
+            $editando = true;
+            $nome = $sensor['nome'];
+            $tipo = $sensor['tipo'];
+            $data_instalacao = $sensor['data_instalacao'];
+            $status_sensor = $sensor['status_sensor'];
+            $id_rotas = $sensor['id_rotas'];
+        }
+    }
+}
+
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    if (isset($_POST['id'])) {
+        $id = filter_var($_POST['id'], FILTER_VALIDATE_INT);
+        if ($id === false || $id < 1) {
+            $erro = "Identificador do sensor inválido.";
+            $podeSalvar = false;
+        } else {
+            $editando = true;
+        }
+    }
+
     if (empty($nome) || empty($tipo) || empty($data_instalacao) || empty($id_rotas)) {
         $erro = "Preencha nome, tipo, data de instalação e rota.";
     } else {
-        if ($id) {
+        if ($editando && $id !== null) {
             $sql = "UPDATE sensores SET nome = ?, tipo = ?, data_instalacao = ?, status_sensor = ?, id_rotas = ? WHERE id = ?";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param('ssssis', $nome, $tipo, $data_instalacao, $status_sensor, $id_rotas, $id);
+            $stmt->bind_param('ssssii', $nome, $tipo, $data_instalacao, $status_sensor, $id_rotas, $id);
             $stmt->execute();
             header("Location: adm_sensores.php");
             exit();
@@ -65,13 +103,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         <div class="logo_home">
             <a href="../index.php">
-            <img src="../assets/logo.png" alt="logo site">
+                <img src="../assets/logo.png" alt="logo site">
             </a>
         </div>
 
         <nav class="nav_home">
             <a href="home.php">Inicio</a>
-            <a href="adm_sensores.php" >Sensores</a>
+            <a href="adm_sensores.php">Sensores</a>
             <a href="adm_trens.php">Trens</a>
             <a href="#">Relatorios</a>
             <a href="adm_rotas.php">Rotas</a>
@@ -98,23 +136,26 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <?php } ?>
 
             <form class="grid" method="POST">
+                <?php if ($editando) { ?>
+                    <input type="hidden" name="id" value="<?php echo (int) $id; ?>">
+                <?php } ?>
 
                 <div class="cadastro-campo ">
                     <label for="nome">Nome sensor:</label>
                     <input type="text" id="nome" name="nome" placeholder="Digite o nome do sensor"
-                        value="<?php echo htmlspecialchars($nome ?? ''); ?>">
+                        value="<?php echo htmlspecialchars($nome ?? ''); ?>" required>
                 </div>
 
                 <div class="cadastro-campo">
                     <label for="tipo">Tipo do sensor:</label>
                     <input type="text" id="tipo" name="tipo" placeholder="Digite o tipo do sensor"
-                        value="<?php echo htmlspecialchars($tipo ?? ''); ?>">
+                        value="<?php echo htmlspecialchars($tipo ?? ''); ?>" required>
                 </div>
                 <div class="cadastro-campo">
                     <label for="data_instalacao">Data de Instalação:</label>
                     <input type="date" id="data_instalacao" name="data_instalacao"
                         placeholder="Digite a data de instalação"
-                        value="<?php echo htmlspecialchars($data_instalacao ?? ''); ?>">
+                        value="<?php echo htmlspecialchars($data_instalacao ?? ''); ?>" required>
                 </div>
 
                 <div class="cadastro-campo">
@@ -124,8 +165,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                             <?php echo $routeResult->num_rows > 0 ? 'Selecione uma rota' : 'Nenhuma rota cadastrada'; ?>
                         </option>
                         <?php while ($rota = $routeResult->fetch_assoc()) { ?>
-                            <option value="<?php echo (int) $rota['id_rotas']; ?>"
-                                <?php echo $id_rotas == $rota['id_rotas'] ? 'selected' : ''; ?>>
+                            <option value="<?php echo (int) $rota['id_rotas']; ?>" <?php echo (string) $id_rotas === (string) $rota['id_rotas'] ? 'selected' : ''; ?>>
                                 <?php echo htmlspecialchars($rota['nome_rotas']); ?>
                             </option>
                         <?php } ?>
@@ -133,16 +173,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 </div>
 
                 <div class="cadastro-campo">
-                    <label for="status">Status:</label>
-                    <select id="status" name="status" placeholder="digite o status do sensor">
-                        <option value="Ativo" <?php echo (isset($status) && $status === 'Ativo') ? 'selected' : ''; ?>>Ativo</option>
-                        <option value="Inativo" <?php echo (isset($status) && $status === 'Inativo') ? 'selected' : ''; ?>>Inativo</option>
-                        <option value="Manutenção" <?php echo (isset($status) && $status === 'Manutenção') ? 'selected' : ''; ?>>Manutenção</option>
+                    <label for="status_sensor">Status:</label>
+                    <select id="status_sensor" name="status_sensor" required>
+                        <option value="ativo" <?php echo ($status_sensor === 'ativo') ? 'selected' : ''; ?>>Ativo</option>
+                        <option value="desativado" <?php echo ($status_sensor === 'desativado') ? 'selected' : ''; ?>>Desativado</option>
+                        <option value="em instalação" <?php echo ($status_sensor === 'em instalação') ? 'selected' : ''; ?>>Em Instalação</option>
                     </select>
                 </div>
 
                 <button type="submit">
-                    <?php echo $id ? 'Salvar Alterações' : 'Cadastrar'; ?>
+                    <?php echo $editando ? 'Salvar Alterações' : 'Cadastrar'; ?>
                 </button>
 
             </form>
