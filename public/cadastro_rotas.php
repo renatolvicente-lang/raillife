@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     if ($erro === '') {
         if ($editando) {
-            $stmt = $conn->prepare("UPDATE rotas SET nome_rotas = ?, origem = ?, destino = ?, distancia = ?, tempo = ? WHERE id = ?");
+            $stmt = $conn->prepare("UPDATE rotas SET nome_rotas = ?, origem = ?, destino = ?, distancia = ?, tempo = ? WHERE id_rotas = ?");
             $stmt->bind_param('sssisi', $nome, $origem, $destino, $distanciaInt, $duracao, $id);
         } else {
             $stmt = $conn->prepare("INSERT INTO rotas (nome_rotas, origem, destino, distancia, tempo) VALUES (?, ?, ?, ?, ?)");
@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $podeSalvar = false;
     } else {
         $editando = true;
-        $stmt = $conn->prepare("SELECT nome_rotas, origem, destino, distancia, tempo FROM rotas WHERE id = ?");
+        $stmt = $conn->prepare("SELECT nome_rotas, origem, destino, distancia, tempo FROM rotas WHERE id_rotas = ?");
         $stmt->bind_param('i', $id);
         $stmt->execute();
         $rota = $stmt->get_result()->fetch_assoc();

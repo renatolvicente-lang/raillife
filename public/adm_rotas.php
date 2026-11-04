@@ -185,7 +185,6 @@
                             <td><?php echo htmlspecialchars($linha["origem"]); ?></td>
                             <td><?php echo htmlspecialchars($linha["destino"]); ?></td>
                             <td><?php echo htmlspecialchars(substr($linha["duracao"], 0, 5)); ?></td>
-                            <td><?php echo htmlspecialchars($linha["status"]); ?></td>
                             <td>
                                 <a href="cadastro_rotas.php?id=<?php echo $linha["id_rotas"]?>" class="btn btn-danger ">Editar</a>
                                 <a href="adm_rotas.php?excluir=<?php echo (int) $linha["id_rotas"]; ?>" class="btn btn-danger">Excluir</a>
