@@ -1,34 +1,29 @@
-CREATE  DATABASE raillife;
-use raillife;
+CREATE DATABASE raillife;
+USE raillife;
 
 CREATE TABLE usuarios (
-    
   id_usuarios INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   nome_usuarios VARCHAR(100) NOT NULL,
   email VARCHAR(100) NOT NULL,
   senha VARCHAR(100) NOT NULL,
   cpf VARCHAR(14) NOT NULL,
-  atuacao ENUM('adm', 'comum') NULL DEFAULT ('comum'),
+  atuacao ENUM('adm', 'comum') NULL DEFAULT 'comum',
   endereco VARCHAR(100) NOT NULL,
   cidade VARCHAR(100) NOT NULL,
   cep VARCHAR(8) NOT NULL,
   data_nascimento DATE NOT NULL
 );
-CREATE TABLE rotas(
 
+CREATE TABLE rotas (
   id_rotas INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   nome_rotas VARCHAR(100) NOT NULL,
   origem VARCHAR(100) NOT NULL,
   destino VARCHAR(100) NOT NULL,
   distancia INT NOT NULL,
-  tempo TIME NOT NULL,
-  id_trens INT NOT NULL,
-  FOREIGN KEY (id_trens) REFERENCES trens(id_trens)
+  tempo TIME NOT NULL
 );
 
-
-CREATE TABLE sensores(
-    
+CREATE TABLE sensores (
   id_sensores INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   nome VARCHAR(100) NOT NULL,
   tipo VARCHAR(100) NOT NULL,
@@ -39,7 +34,6 @@ CREATE TABLE sensores(
 );
 
 CREATE TABLE trens (
-    
   id_trens INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   nome_trens VARCHAR(100) NOT NULL,
   modelo VARCHAR(100) NOT NULL,
@@ -51,9 +45,7 @@ CREATE TABLE trens (
   FOREIGN KEY (id_rotas) REFERENCES rotas(id_rotas)
 );
 
-
 CREATE TABLE relatorios (
-    
   id_relatorios INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   titulo VARCHAR(100) NOT NULL,
   descricao TEXT NOT NULL,
