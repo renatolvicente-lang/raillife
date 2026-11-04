@@ -14,7 +14,7 @@ $tipo = $_POST['tipo'] ?? '';
 $data_instalacao = $_POST['data_instalacao'] ?? '';
 $status_sensor = $_POST['status_sensor'] ?? 'ativo';
 $id_rotas = $_POST['id_rotas'] ?? null;
-$routeResult = $conn->query("SELECT id, nome_rotas FROM rotas ORDER BY nome_rotas");
+$routeResult = $conn->query("SELECT id_rotas, nome_rotas FROM rotas ORDER BY nome_rotas");
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (empty($nome) || empty($tipo) || empty($data_instalacao) || empty($id_rotas)) {

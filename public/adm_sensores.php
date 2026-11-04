@@ -14,7 +14,7 @@
     $usuarioLogado = false;
 
     if ($id !== null) {
-        $sql = "SELECT * FROM usuarios WHERE id = ?";
+        $sql = "SELECT * FROM usuarios WHERE id_usuarios = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $id);
         $stmt->execute();
