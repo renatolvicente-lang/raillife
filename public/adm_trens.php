@@ -138,7 +138,7 @@
                     <?php while($linha  = $result->fetch_assoc()){?>
                         <tr>
                             <td>
-                                <?php echo $linha["id"];?>
+                                <?php echo $linha["id_trens"];?>
                             </td>
                         
                             <td>

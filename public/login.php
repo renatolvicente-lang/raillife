@@ -5,6 +5,7 @@ include "../infra/conn.php";
 session_start();
 
 
+$erro = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //Sem prepared Statement
@@ -38,26 +39,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($resultado->num_rows > 0) {
             $usuario = $resultado->fetch_assoc();
-            
-            if(password_verify($senha, $usuario["senha"])){
 
-                $_SESSION['id'] = $usuario["id"];   
+            if (password_verify($senha, $usuario["senha"])) {
+
+                $_SESSION['id'] = $usuario["id"];
                 $_SESSION['usuario'] = $usuario["nome_usuarios"];
                 $_SESSION['atuacao'] = $usuario["atuacao"];
-                
 
-                if($usuario["atuacao"] == "adm") {
+
+                if ($usuario["atuacao"] == "adm") {
                     header("Location: adm_usuarios.php");
                     exit();
-                }else{
+                } else {
                     header("Location: home.php");
                     exit();
                 }
             }
             //redireciona para a página certa baseada na área de atuação
-            
-        }else {
-            echo "Usuario não existe";
+
+        } else {
+            $erro = "Usuário ou senha inválidos.";
         }
         $stmt->close();
     } else {
@@ -83,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <header class="hd_home login-header">
 
-         <div class="logo_home">
+        <div class="logo_home">
             <a href="../index.php">
                 <img src="../assets/logo.png" alt="logo site">
             </a>
@@ -103,11 +104,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <main class="login-pagina">
 
         <section class="login-formulario">
-        <div class="login-logo">
-        <img src="../assets/Logo.png" alt="Logo do site">
-        </div>
+            <div class="login-logo">
+                <img src="../assets/Logo.png" alt="Logo do site">
+            </div>
 
             <form method="POST">
+
+                <?php if ($erro != "") { ?>
+                    <div class="mensagem-erro">
+                        <?php echo $erro; ?>
+                    </div>
+                <?php } ?>
 
                 <div class="login-campo campo-email">
                     <label for="email">Email:</label>
