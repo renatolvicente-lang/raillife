@@ -130,7 +130,7 @@
                         <th>Rota</th>
                         <th>Usuário</th>
                         <th>Modelo</th>
-                        <th>Fabricação</th>
+                        <th>Data de Fabricação</th>
                         <th class="tb_acoes">Ações</th>
                     </tr>
                 </thead>
@@ -152,6 +152,9 @@
                             <td>
                                 <?php echo $linha["nome_usuarios"];?>
                             </td>
+
+                            <td>
+                                <?php echo $linha["modelo"];?>
                         
                             <td>
                                 <?php echo $linha["ano_fabricacao"];?>
