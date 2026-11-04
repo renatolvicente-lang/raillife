@@ -60,7 +60,7 @@
     }
         $result = $conn->query("SELECT * FROM trens INNER JOIN rotas ON trens.id_rotas = rotas.id_rotas INNER JOIN usuarios ON trens.id_usuarios = usuarios.id_usuarios");
 
-    $result = $conn->query("SELECT id_rotas, nome_rotas, origem, destino, tempo AS duracao FROM rotas");
+    $result = $conn->query("SELECT id_rotas, nome_rotas, origem, destino, distancia, tempo AS duracao FROM rotas");
 
 
 ?>
@@ -173,6 +173,7 @@
                         <th>nome</th>
                         <th>Origem</th>
                         <th>Destino</th>
+                        <th>Distancia</th>
                         <th>Duração</th>
                         <th class="tb_acoes">Ações</th>
                     </tr>
@@ -184,7 +185,8 @@
                             <td><?php echo htmlspecialchars($linha["nome_rotas"]); ?></td>
                             <td><?php echo htmlspecialchars($linha["origem"]); ?></td>
                             <td><?php echo htmlspecialchars($linha["destino"]); ?></td>
-                            <td><?php echo htmlspecialchars(substr($linha["duracao"], 0, 5)); ?></td>
+                            <td><?php echo htmlspecialchars((string) ($linha["distancia"] ?? "")); ?></td>
+                            <td><?php echo htmlspecialchars(substr((string) ($linha["duracao"] ?? ""), 0, 5)); ?></td>
                             <td>
                                 <a href="cadastro_rotas.php?id=<?php echo $linha["id_rotas"]?>" class="btn btn-danger ">Editar</a>
                                 <a href="adm_rotas.php?excluir=<?php echo (int) $linha["id_rotas"]; ?>" class="btn btn-danger">Excluir</a>
