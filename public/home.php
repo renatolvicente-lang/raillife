@@ -18,7 +18,7 @@ $usuario = false;
 // Consulta o usuário pelo ID para recuperar o nome completo do cadastro.
 // Isso é necessário porque a sessão guarda o nome do usuário em uma variável separada e a página precisa do registro completo.
 if ($id !== null) {
-    $sql = "SELECT * FROM usuarios WHERE id = ?";
+    $sql = "SELECT * FROM usuarios WHERE id_usuarios = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id);
     $stmt->execute();
@@ -126,23 +126,46 @@ $nome = $usuario !== false && !empty($usuario['nome']) ? htmlspecialchars($usuar
             <div class="padding3"></div>
 
             <div class="quadadofofo">
-                    <h2>Trens em operação</h2>
-                    
+                    <h2>Trens em operação: </h2>
+                    <h2>
+                        <?php
+                            $sql = "SELECT * FROM trens";
+                            $result = $conn->query($sql);
+                            $qtd = $result->num_rows;
+                            echo $qtd;
+                        ?>
+                    </h2>
             </div>
 
                         <div class="padding3"></div>
 
             <div class="quadadofofo">
-                    <h2>Sensores em operação</h2>
-                    
+                    <h2>Sensores em operação: </h2>
+                    <h2>
+                        <?php
+                            $sql = "SELECT * FROM sensores";
+                            $result = $conn->query($sql);
+                            $qtd = $result->num_rows;
+                        
+                            echo $qtd;
+                        ?>
+                    </h2>
                 </div>
 
 
                         <div class="padding3"></div>
 
             <div class="quadadofofo">
-                    <h2>Rotas em operação</h2>
-                    
+                    <h2>Rotas em operação: </h2>
+                    <h2>
+                        <?php
+                            $sql = "SELECT * FROM rotas";
+                            $result = $conn->query($sql);
+                            $qtd = $result->num_rows;
+                        
+                            echo $qtd;
+                        ?>
+                    </h2>
             </div>  
 
         </div>

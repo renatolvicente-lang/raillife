@@ -26,7 +26,7 @@ if (isset($_GET["id"])) {
                 exit();
         }
 
-        $verificaTrens = $conn->prepare("SELECT id FROM trens WHERE id_rotas = ? LIMIT 1");
+        $verificaTrens = $conn->prepare("SELECT id_trens FROM trens WHERE id_rotas = ? LIMIT 1");
         $verificaTrens->bind_param("i", $idRota);
         $verificaTrens->execute();
 
@@ -35,7 +35,7 @@ if (isset($_GET["id"])) {
             exit();
         }
 
-        $sql = "DELETE FROM rotas WHERE id = ?";
+        $sql = "DELETE FROM rotas WHERE id_rotas = ?";
         $comando = $conn->prepare($sql);
         $comando->bind_param("i", $idRota);
 

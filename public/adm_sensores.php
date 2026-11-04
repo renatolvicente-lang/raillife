@@ -8,13 +8,13 @@
         exit();
     }
 
-        $result = $conn->query("SELECT * FROM sensores inner join rotas on sensores.id_rotas = rotas.id");
+        $result = $conn->query("SELECT * FROM sensores inner join rotas on sensores.id_rotas = rotas.id_rotas");
  
     $id = $_SESSION['id'] ?? null;
     $usuarioLogado = false;
 
     if ($id !== null) {
-        $sql = "SELECT * FROM usuarios WHERE id = ?";
+        $sql = "SELECT * FROM usuarios WHERE id_usuarios = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $id);
         $stmt->execute();
@@ -125,6 +125,7 @@
                     <tr>
                         <th class="tb_id">ID</th>
                         <th>nome</th>
+                        <th>Status</th>
                         <th>Rota</th>
                         <th>Tipo</th>
                         <th>Data de Cadastro</th>
@@ -140,6 +141,10 @@
                         
                             <td>
                                 <?php echo $linha["nome"];?>
+                            </td>
+
+                            <td>
+                                <?php echo $linha["status_sensor"];?>
                             </td>
                             <td>
                                 <?php echo $linha["nome_rotas"];?>
@@ -166,60 +171,7 @@
 
         </div>
 
-        </div>
-        <!--  -->
-        <div class="overlay" id="overlay">
-
-        <!-- Popup -->
-        <div class="popup">
-
-            <div class="icone">
-                📡
-            </div>
-
-            <h1>Adicionar Sensor</h1>
-
-            <form>
-
-                <div class="form-grid">
-
-                    <div class="campo">
-                        <label>Nome:</label>
-                        <input type="text" placeholder="Ex.: Sensor Norte">
-                    </div>
-
-                    <div class="campo">
-                        <label>Tipo:</label>
-                        <input type="text" placeholder="Ex.: Temperatura">
-                    </div>
-
-                    <div class="campo">
-                        <label>Rota:</label>
-                        <input type="text" placeholder="Ex.: Trilho do Norte">
-                    </div>
-
-                    <div class="campo">
-                        <label>Status:</label>
-                        <input type="text" placeholder="Ex.: Para instalação">
-                    </div>
-
-                    <div class="campo">
-                        <label>Data de instalação:</label>
-                        <input type="text" placeholder="Ex.: 19/01/2009">
-                    </div>
-
-                </div>
-
-                <button class="btnAdicionar" type="submit">
-                    Adicionar
-                </button>
-
-            </form>
-
-        </div>
-    </div>
-        
-        
+        </div>            
         
     </main>
 

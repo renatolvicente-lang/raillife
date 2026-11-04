@@ -58,6 +58,7 @@
             $erro = "Não foi possível identificar a rota para exclusão.";
         }
     }
+        $result = $conn->query("SELECT * FROM trens INNER JOIN rotas ON trens.id_rotas = rotas.id_rotas INNER JOIN usuarios ON trens.id_usuarios = usuarios.id_usuarios");
 
     $result = $conn->query("SELECT id_rotas, nome_rotas, origem, destino, tempo AS duracao FROM rotas");
 

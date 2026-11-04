@@ -11,7 +11,7 @@ $id = $_GET["id"];
 if(isset($id)){
 
 
-    $sql = "DELETE FROM trens WHERE id = ?";
+    $sql = "DELETE FROM trens WHERE id_trens = ?";
     $comando = $conn->prepare($sql);
     $comando->bind_param("i", $id);
     $comando->execute();

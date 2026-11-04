@@ -3,13 +3,14 @@ require_once('../infra/conn.php');
 require_once('validar_cpf.php');
 session_start();
 
-    if (!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm") {
-          header("Location: home.php");
-          exit();
-     }    
+     if (!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm") {
+           header("Location: home.php");
+           exit();
+      }    
 
 $erro = "";
 $id = $_GET["id"] ?? null;
+$nome = $email = $CPF = $endereco = $cidade = $data_nascimento = $CEP = '';
 $area_atuacao = "comum"; // Valor padrão para o campo de atuação
 
 function formatarCpf($cpf)
@@ -25,7 +26,7 @@ function formatarCpf($cpf)
 
 if ($id && $_SERVER['REQUEST_METHOD'] === 'GET') {
 
-    $sql = $conn->prepare("SELECT * FROM usuarios WHERE id = ?");
+    $sql = $conn->prepare("SELECT id_usuarios, nome_usuarios, email, cpf, endereco, cidade, cep, data_nascimento, atuacao FROM usuarios WHERE id_usuarios = ?");
     $sql->bind_param("i", $id);
     $sql->execute();
     $result = $sql->get_result();
@@ -154,10 +155,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     if (empty($erro)) {
         if ($id) {
-            $stmtCheck = $conn->prepare("SELECT id FROM usuarios WHERE (email = ? OR CPF = ?) AND id != ?");
+            $stmtCheck = $conn->prepare("SELECT id_usuarios FROM usuarios WHERE (email = ? OR cpf = ?) AND id_usuarios != ?");
             $stmtCheck->bind_param("ssi", $email, $CPF, $id);
         } else {
-            $stmtCheck = $conn->prepare("SELECT id FROM usuarios WHERE email = ? OR CPF = ?");
+            $stmtCheck = $conn->prepare("SELECT id_usuarios FROM usuarios WHERE email = ? OR cpf = ?");
             $stmtCheck->bind_param("ss", $email, $CPF);
         }
 
@@ -168,7 +169,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
 
     if ($id) {
-        $sql = "UPDATE usuarios SET nome_usuarios = ?, email = ?, senha = ?, cpf = ?, endereco = ?, cidade = ?, cep = ?, data_nascimento = ?, atuacao = ? WHERE id = ?";
+        $sql = "UPDATE usuarios SET nome_usuarios = ?, email = ?, senha = ?, cpf = ?, endereco = ?, cidade = ?, cep = ?, data_nascimento = ?, atuacao = ? WHERE id_usuarios = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('sssssssssi', $nome, $email, $senhaHash, $CPF, $endereco, $cidade, $CEP, $data_nascimento, $area_atuacao, $id);
         $stmt->execute();
@@ -188,7 +189,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         }
     }
     if (empty($id) && $erro == "") {
-        $comando = $conn->prepare("SELECT id FROM usuarios WHERE email = ? OR CPF = ?");
+        $comando = $conn->prepare("SELECT id_usuarios FROM usuarios WHERE email = ? OR cpf = ?");
         $comando->bind_param("ss", $email, $CPF);
         $comando->execute();
         if ($comando->get_result()->num_rows > 0) {
@@ -291,6 +292,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <?php } ?>
 
             <form class="grid" method="POST">
+                <?php if ($id) { ?>
+                    <input type="hidden" name="id" value="<?php echo (int) $id; ?>">
+                <?php } ?>
 
                 <div class="cadastro-campo campo-nome">
                     <label for="nome">Nome completo:</label>

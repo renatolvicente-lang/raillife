@@ -5,8 +5,8 @@
     session_start();
 
     if (!isset($_SESSION["usuario"])) {
-        header("Location: login.php");
-        exit();
+       header("Location: login.php");
+       exit();
     }
 
     $id = $_SESSION['id'] ?? null;
@@ -130,7 +130,7 @@
                         <th>Rota</th>
                         <th>Usuário</th>
                         <th>Modelo</th>
-                        <th>Fabricação</th>
+                        <th>Data de Fabricação</th>
                         <th class="tb_acoes">Ações</th>
                     </tr>
                 </thead>
@@ -138,7 +138,7 @@
                     <?php while($linha  = $result->fetch_assoc()){?>
                         <tr>
                             <td>
-                                <?php echo $linha["id"];?>
+                                <?php echo $linha["id_trens"];?>
                             </td>
                         
                             <td>
@@ -152,6 +152,9 @@
                             <td>
                                 <?php echo $linha["nome_usuarios"];?>
                             </td>
+
+                            <td>
+                                <?php echo $linha["modelo"];?>
                         
                             <td>
                                 <?php echo $linha["ano_fabricacao"];?>

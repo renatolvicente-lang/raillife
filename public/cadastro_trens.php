@@ -9,27 +9,43 @@
         exit();
     }
 
-
     $id = $_GET["id"] ?? null;
+    $nome = $modelo = $fabricacao = $capacidade = $rota = $usuario = '';
 
     $sql = "SELECT * FROM rotas";
     $result = $conn->query($sql);
     
     $result_usuario = $conn->query("SELECT * FROM usuarios");
 
-    if($_SERVER["REQUEST_METHOD"] == "POST"){
-        $nome = $_POST["nome"];
-        $rota = $_POST["rota"];
-        $usuario = $_POST["usuario"];
-        $fabricacao = $_POST["fabricacao"];
-        $capacidade = $_POST["capacidade"];
-        $modelo = $_POST["modelo"];
+    if ($id && $_SERVER['REQUEST_METHOD'] === 'GET') {
+        $stmt = $conn->prepare("SELECT id_trens, nome_trens, modelo, capacidade, ano_fabricacao, id_rotas, id_usuarios FROM trens WHERE id_trens = ?");
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $trem = $stmt->get_result()->fetch_assoc();
 
+        if ($trem) {
+            $nome = $trem['nome_trens'];
+            $modelo = $trem['modelo'];
+            $capacidade = $trem['capacidade'];
+            $fabricacao = $trem['ano_fabricacao'];
+            $rota = $trem['id_rotas'];
+            $usuario = $trem['id_usuarios'];
+        }
+    }
+
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        $id = isset($_POST['id']) ? filter_var($_POST['id'], FILTER_VALIDATE_INT) : null;
+        $nome = $_POST["nome"] ?? '';
+        $rota = $_POST["rota"] ?? '';
+        $usuario = $_POST["usuario"] ?? '';
+        $fabricacao = $_POST["fabricacao"] ?? '';
+        $capacidade = $_POST["capacidade"] ?? '';
+        $modelo = $_POST["modelo"] ?? '';
 
         if($id){
-            $sql = "UPDATE trens SET nome_trens=?, modelo=?, capacidade=?, ano_fabricacao=?, id_rotas=? , id_usuarios=? WHERE id = $id";
+            $sql = "UPDATE trens SET nome_trens=?, modelo=?, capacidade=?, ano_fabricacao=?, id_rotas=?, id_usuarios=? WHERE id_trens=?";
             $stmt = $conn->prepare($sql);
-            $stmt-> bind_param("ssisii", $nome, $modelo, $capacidade, $fabricacao, $rota, $usuario);
+            $stmt->bind_param("ssisiii", $nome, $modelo, $capacidade, $fabricacao, $rota, $usuario, $id);
             $stmt->execute();
 
             header("Location: adm_trens.php");
@@ -116,13 +132,17 @@
 
         <section class="cadastro-formulario">
         <form class="grid" method="POST">
+                <?php if ($id) { ?>
+                    <input type="hidden" name="id" value="<?php echo (int) $id; ?>">
+                <?php } ?>
+
                 <div class="cadastro-campo campo-nome">
                     <label for="nome">Nome:</label>
-                    <input type="text" id="nome" name="nome" placeholder="Nome do trem">
+                    <input type="text" id="nome" name="nome" placeholder="Nome do trem" value="<?php echo htmlspecialchars($nome); ?>">
                 </div>
                 <div class="cadastro-campo campo-capacidade">
                     <label for="capacidade">Capacidade(Kg):</label>
-                    <input type="number" name="capacidade" id="capacidade" placeholder="Capacidade do trem">
+                    <input type="number" name="capacidade" id="capacidade" placeholder="Capacidade do trem" value="<?php echo htmlspecialchars((string) $capacidade); ?>">
                 </div>
                 <div class="cadastro-campo campo-rota">
                     <label for="rota">Rota:</label>
@@ -130,8 +150,8 @@
 
                         <?php if($result->num_rows > 0){?>
                             <?php while($linha = $result->fetch_assoc()){?>
-                                <option value="<?php echo $linha["id"]?>">
-                                    <?php echo $linha["nome_rotas"]?>
+                                <option value="<?php echo (int) $linha["id_rotas"]?>" <?php echo (string) $rota === (string) $linha["id_rotas"] ? 'selected' : ''; ?>>
+                                    <?php echo htmlspecialchars($linha["nome_rotas"])?>
                                 </option>
                             <?php }?>
                         <?php }else{ echo "<option>Nenhuma rota cadastrada</option>";}?>
@@ -144,8 +164,8 @@
 
                         <?php if($result_usuario->num_rows > 0){?>
                             <?php while($linha = $result_usuario->fetch_assoc()){?>
-                                <option value="<?php echo $linha["id"]?>">
-                                    <?php echo $linha["nome_usuarios"]?>
+                                <option value="<?php echo (int) $linha["id_usuarios"]?>" <?php echo (string) $usuario === (string) $linha["id_usuarios"] ? 'selected' : ''; ?>>
+                                    <?php echo htmlspecialchars($linha["nome_usuarios"])?>
                                 </option>
                             <?php }?>
                         <?php }else{ echo "<option>Nenhuma rota cadastrada</option>";}?>
@@ -154,16 +174,16 @@
                 </div>
                 <div class="cadastro-campo campo-modelo">
                     <label for="modelo">Modelo:</label>
-                    <input type="text" name="modelo" id="modelo" placeholder="Modelo do trem">
+                    <input type="text" name="modelo" id="modelo" placeholder="Modelo do trem" value="<?php echo htmlspecialchars($modelo); ?>">
                 </div>
                 <div class="cadastro-campo campo-data">
                     <label for="fabricacao">Data de fabricação:</label>
-                    <input type="date" name="fabricacao" id="fabricacao">
+                    <input type="date" name="fabricacao" id="fabricacao" value="<?php echo htmlspecialchars($fabricacao); ?>">
                 </div>
-                <button type="submit" name="cadastrar">Cadastrar</button>
+                <button type="submit">
+                    <?php echo $id ? 'Salvar Alterações' : 'Cadastrar'; ?>
+                </button>
             </form>
-                
-        </form>
         </section>
     </main>
 
