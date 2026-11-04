@@ -79,9 +79,7 @@
     <main class="mn_apresentacao">
         <div class="card_apresentacao">
 
-            <div>
-
-
+            <div class="texto-apresentacao">
                 <br>
 
                 <h2><b>Monitoramento inteligente em tempo real</b></h2>
@@ -96,28 +94,31 @@
                         organizada em um painel de controle.
                     </h3>
                 </div>
+
+                <div class="weather-box">
+                    <div class="weather-header">
+                        <span class="weather-tag">Clima</span>
+                        <span class="weather-local">Joinville</span>
+                    </div>
+
+                    <?php
+                    $url = "https://api.open-meteo.com/v1/forecast?latitude=-26.3044&longitude=-48.8456&current=temperature_2m&timezone=auto";
+                    $mensagemTemperatura = "Não foi possível obter a temperatura atual.";
+
+                    $response = @file_get_contents($url);
+                    if ($response !== false) {
+                        $data = json_decode($response, true);
+
+                        if (isset($data['current']['temperature_2m'], $data['current_units']['temperature_2m'])) {
+                            $tempAtual = $data['current']['temperature_2m'];
+                            $unidade = $data['current_units']['temperature_2m'];
+                            $mensagemTemperatura = "A temperatura atual é de " . $tempAtual . $unidade;
+                        }
+                    }
+                    ?>
+                    <p class="temp_atual"><?php echo htmlspecialchars($mensagemTemperatura, ENT_QUOTES, 'UTF-8'); ?></p>
+                </div>
             </div>
-
-            <div class="espacamento_index">
-
-            </div>
-
-            <?php
-            $url = "https://api.open-meteo.com/v1/forecast?latitude=-26.3044&longitude=-48.8456&current=temperature_2m&timezone=auto";
-            $mensagemTemperatura = "Não foi possível obter a temperatura atual.";
-
-            $response = @file_get_contents($url);
-            if ($response !== false) {
-                $data = json_decode($response, true);
-
-                if (isset($data['current']['temperature_2m'], $data['current_units']['temperature_2m'])) {
-                    $tempAtual = $data['current']['temperature_2m'];
-                    $unidade = $data['current_units']['temperature_2m'];
-                    $mensagemTemperatura = "A temperatura atual em Joinville é de " . $tempAtual . $unidade;
-                }
-            }
-            ?>
-            <p class="temp_atual"><?php echo htmlspecialchars($mensagemTemperatura, ENT_QUOTES, 'UTF-8'); ?></p>
 
             <img src="assets/trem.png" alt="trem" class="trem">
 
