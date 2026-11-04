@@ -154,7 +154,7 @@
                     <?php while($linha  = $result->fetch_assoc()){?>
                         <tr>
                             <td>
-                                <?php echo $linha["id"];?>
+                                <?php echo $linha["id_usuarios"];?>
                             </td>
                         
                             <td>
@@ -174,8 +174,8 @@
                             </td>
                        
                             <td>
-                                <a href="cadastro_usuarios.php?id=<?php echo $linha["id"]?>" >Editar</a>
-                                <a href="excluir_usuarios.php?id=<?php echo $linha["id"]?>" onclick="return confirm('tem certeza que deseja apagar esse usuário?')">Excluir</a>
+                                <a href="cadastro_usuarios.php?id=<?php echo $linha["id_usuarios"]?>" >Editar</a>
+                                <a href="excluir_usuarios.php?id=<?php echo $linha["id_usuarios"]?>" onclick="return confirm('tem certeza que deseja apagar esse usuário?')">Excluir</a>
                             </td>
                         </tr>
                     <?php }?>
