@@ -45,7 +45,7 @@
         if($id){
             $sql = "UPDATE trens SET nome_trens=?, modelo=?, capacidade=?, ano_fabricacao=?, id_rotas=?, id_usuarios=? WHERE id_trens=?";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("ssisii", $nome, $modelo, $capacidade, $fabricacao, $rota, $usuario, $id);
+            $stmt->bind_param("ssisiii", $nome, $modelo, $capacidade, $fabricacao, $rota, $usuario, $id);
             $stmt->execute();
 
             header("Location: adm_trens.php");
