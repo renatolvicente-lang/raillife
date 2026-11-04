@@ -13,7 +13,7 @@
     $usuarioLogado = false;
 
     if ($id !== null) {
-        $sql = "SELECT * FROM usuarios WHERE id = ?";
+        $sql = "SELECT * FROM usuarios WHERE id_usuarios = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $id);
         $stmt->execute();
@@ -21,7 +21,7 @@
         $usuarioLogado = $resultUsuario->fetch_assoc();
     }
 
-    $result = $conn->query("SELECT * FROM trens INNER JOIN rotas ON trens.id_rotas = rotas.id INNER JOIN usuarios ON trens.id_usuarios = usuarios.id");
+    $result = $conn->query("SELECT * FROM trens INNER JOIN rotas ON trens.id_rotas = rotas.id_rotas INNER JOIN usuarios ON trens.id_usuarios = usuarios.id_usuarios");
 
 ?>
 
@@ -158,8 +158,8 @@
                             </td>
                        
                             <td>
-                                <a href="cadastro_trens.php?id=<?php echo $linha["id"]?>" class="btn btn-danger ">Editar</a>
-                                <a href="excluir_trens.php?id=<?php echo $linha["id"]; ?>" class="btn btn-danger">Excluir</a>
+                                <a href="cadastro_trens.php?id=<?php echo $linha["id_trens"]?>" class="btn btn-danger ">Editar</a>
+                                <a href="excluir_trens.php?id=<?php echo $linha["id_trens"]; ?>" class="btn btn-danger">Excluir</a>
 
                             </td>
                         </tr>

@@ -21,9 +21,9 @@ CREATE TABLE rotas(
   origem VARCHAR(100) NOT NULL,
   destino VARCHAR(100) NOT NULL,
   distancia INT NOT NULL,
-  tempo TIME NOT NULL
+  tempo TIME NOT NULL,
   id_trens INT NOT NULL,
-  FOREIGN KEY id_trens REFERENCES trens(id)
+  FOREIGN KEY id_trens REFERENCES trens(id_trens)
 );
 
 
@@ -35,7 +35,7 @@ CREATE TABLE sensores(
   data_instalacao DATE NOT NULL,
   status_sensor ENUM('ativo', 'desativado', 'em instalacao'),
   id_rotas INT NOT NULL,
-  FOREIGN KEY(id_rotas) REFERENCES rotas(id)
+  FOREIGN KEY(id_rotas) REFERENCES rotas(id_rotas)
 );
 
 CREATE TABLE trens (
@@ -47,8 +47,8 @@ CREATE TABLE trens (
   ano_fabricacao DATE NOT NULL,
   id_rotas INT NOT NULL,
   id_usuarios INT NOT NULL,
-  FOREIGN KEY (id_usuarios) REFERENCES usuarios(id),
-  FOREIGN KEY (id_rotas) REFERENCES rotas(id)
+  FOREIGN KEY (id_usuarios) REFERENCES usuarios(id_usuarios),
+  FOREIGN KEY (id_rotas) REFERENCES rotas(id_rotas)
 );
 
 
@@ -59,7 +59,7 @@ CREATE TABLE relatorios (
   descricao TEXT NOT NULL,
   data_criacao DATE NOT NULL,
   id_usuarios INT NOT NULL,
-  FOREIGN KEY (id_usuarios) REFERENCES usuarios(id)
+  FOREIGN KEY (id_usuarios) REFERENCES usuarios(id_usuarios)
 );
 
 ALTER TABLE usuarios DROP PRIMARY KEY, CHANGE id id_usuarios INT AUTO_INCREMENT NOT NULL PRIMARY KEY;

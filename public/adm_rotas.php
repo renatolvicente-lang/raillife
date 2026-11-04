@@ -11,7 +11,7 @@
     $usuarioLogado = false;
 
     if ($id !== null) {
-        $sql = "SELECT * FROM usuarios WHERE id = ?";
+        $sql = "SELECT * FROM usuarios WHERE id_usuarios = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $id);
         $stmt->execute();
@@ -28,7 +28,7 @@
 
             $checks = [
                 "sensores" => "SELECT id FROM sensores WHERE id_rotas = ? LIMIT 1",
-                "trens" => "SELECT id FROM trens WHERE id_rotas = ? LIMIT 1"
+                "trens" => "SELECT id_trens FROM trens WHERE id_rotas = ? LIMIT 1"
             ];
 
             foreach ($checks as $tipo => $sqlCheck) {
@@ -60,6 +60,7 @@
     }
         $result = $conn->query("SELECT * FROM trens INNER JOIN rotas ON trens.id_rotas = rotas.id INNER JOIN usuarios ON trens.id_usuarios = usuarios.id");
 
+    $result = $conn->query("SELECT id_rotas, nome_rotas, origem, destino, tempo AS duracao FROM rotas");
 
 
 ?>
@@ -179,15 +180,15 @@
                 <tbody>
                     <?php while ($linha = $result->fetch_assoc()) { ?>
                         <tr>
-                            <td><?php echo (int) $linha["id"]; ?></td>
+                            <td><?php echo (int) $linha["id_rotas"]; ?></td>
                             <td><?php echo htmlspecialchars($linha["nome_rotas"]); ?></td>
                             <td><?php echo htmlspecialchars($linha["origem"]); ?></td>
                             <td><?php echo htmlspecialchars($linha["destino"]); ?></td>
                             <td><?php echo htmlspecialchars(substr($linha["duracao"], 0, 5)); ?></td>
                             <td><?php echo htmlspecialchars($linha["status"]); ?></td>
                             <td>
-                                <a href="cadastro_rotas.php?id=<?php echo $linha["id"]?>" class="btn btn-danger ">Editar</a>
-                                <a href="adm_rotas.php?excluir=<?php echo (int) $linha["id"]; ?>" class="btn btn-danger">Excluir</a>
+                                <a href="cadastro_rotas.php?id=<?php echo $linha["id_rotas"]?>" class="btn btn-danger ">Editar</a>
+                                <a href="adm_rotas.php?excluir=<?php echo (int) $linha["id_rotas"]; ?>" class="btn btn-danger">Excluir</a>
 
                             </td>
                         </tr>
