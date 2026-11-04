@@ -23,7 +23,7 @@ CREATE TABLE rotas(
   distancia INT NOT NULL,
   tempo TIME NOT NULL,
   id_trens INT NOT NULL,
-  FOREIGN KEY id_trens REFERENCES trens(id_trens)
+  FOREIGN KEY (id_trens) REFERENCES trens(id_trens)
 );
 
 
@@ -35,7 +35,7 @@ CREATE TABLE sensores(
   data_instalacao DATE NOT NULL,
   status_sensor ENUM('ativo', 'desativado', 'em instalacao'),
   id_rotas INT NOT NULL,
-  FOREIGN KEY(id_rotas) REFERENCES rotas(id_rotas)
+  FOREIGN KEY (id_rotas) REFERENCES rotas(id_rotas)
 );
 
 CREATE TABLE trens (
