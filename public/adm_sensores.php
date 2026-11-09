@@ -88,7 +88,7 @@
             <a href="home.php">Inicio</a>
             <a href="adm_sensores.php" class="ativado">Sensores</a>
             <a href="adm_trens.php">Trens</a>
-            <a href="#">Relatorios</a>
+            <a href="relatorios.php">Relatórios</a>
             <a href="adm_rotas.php">Rotas</a>
         </nav>
 

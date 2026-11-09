@@ -103,7 +103,7 @@ $nome = $usuario !== false && !empty($usuario['nome']) ? htmlspecialchars($usuar
             <a href="home.php" class="ativado">Inicio</a>
             <a href="adm_sensores.php">Sensores</a>
             <a href="adm_trens.php">Trens</a>
-            <a href="#">Relatorios</a>
+            <a href="relatorios.php">Relatórios</a>
             <a href="adm_rotas.php">Rotas</a>
 
         </nav>

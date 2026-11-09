@@ -125,7 +125,7 @@
             <a href="home.php">Inicio</a>
             <a href="adm_sensores.php">Sensores</a>
             <a href="adm_trens.php">Trens</a>
-            <a href="#">Relatorios</a>
+            <a href="relatorios.php">Relatórios</a>
             <a href="adm_rotas.php" class="ativado">Rotas</a>
              
         </nav>

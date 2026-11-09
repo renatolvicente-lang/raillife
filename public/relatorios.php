@@ -58,7 +58,7 @@
             <a href="home.php" >Inicio</a>
             <a href="adm_sensores.php">Sensores</a>
             <a href="adm_trens.php">Trens</a>
-            <a href="relatorios.php"class="ativado">Relatorios</a>
+            <a href="relatorios.php"class="ativado">Relatórios</a>
             <a href="adm_rotas.php">Rotas</a>
 
         </nav>

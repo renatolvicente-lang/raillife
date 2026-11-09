@@ -57,7 +57,7 @@
             <a href="public/home.php">Inicio</a>
             <a href="public/adm_sensores.php">Sensores</a>
             <a href="public/adm_trens.php">Trens</a>
-            <a href="public/relatorios.php">Relatorios</a>
+            <a href="public/relatorios.php">Relatórios</a>
             <a href="public/adm_rotas.php">Rotas</a>
         </nav>
 
