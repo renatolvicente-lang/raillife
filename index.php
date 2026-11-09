@@ -119,6 +119,7 @@
                     <p class="temp_atual"><?php echo htmlspecialchars($mensagemTemperatura, ENT_QUOTES, 'UTF-8'); ?></p>
                 </div>
             </div>
+        
 
             <img src="assets/trem.png" alt="trem" class="trem">
 
