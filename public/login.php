@@ -105,7 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <section class="login-formulario">
             <div class="login-logo">
-                <img src="../assets/Logo.png" alt="Logo do site">
+                <img src="../assets/logo.png" alt="Logo do site">
             </div>
 
             <form method="POST">
