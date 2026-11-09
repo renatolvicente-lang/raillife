@@ -3,10 +3,10 @@ require_once('../infra/conn.php');
 require_once('validar_cpf.php');
 session_start();
 
-     if (!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm") {
-           header("Location: home.php");
-           exit();
-      }    
+if (!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm") {
+   header("Location: home.php");
+    exit();
+}
 
 $erro = "";
 $id = $_GET["id"] ?? null;
@@ -114,8 +114,17 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     // Validação do CEP
     if ($erro == "") {
-        if (strlen($cep_limpo) !== 8) {
-            $erro = "CEP inválido";
+        $url = "https://viacep.com.br/ws/{$cep_limpo}/json/";
+        $response = @file_get_contents($url);
+
+        if ($response === false) {
+            $erro = "Não foi possível consultar o CEP.";
+        } else {
+            $data = json_decode($response, true);
+
+            if (!is_array($data) || (isset($data['erro']) && $data['erro'])) {
+                $erro = "CEP não encontrado.";
+            }
         }
     }
 
@@ -219,7 +228,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample">
         <div class="offcanvas-header">
-            <h3 class="offcanvas-title" id="offcanvasExampleLabel"> <img src="../assets/logo.png" alt="logo site"><strong>MENU</strong></h3>
+            <h3 class="offcanvas-title" id="offcanvasExampleLabel"> <img src="../assets/logo.png"
+                    alt="logo site"><strong>MENU</strong></h3>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
@@ -233,22 +243,27 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <?php } ?>
             </div>
 
-                <div class="dropdown mt-3">
-            <div class="textinhex">
-                <br>
-                <strong>
-                    Em um mundo onde cada segundo conta, o RailLife é o cérebro que mantém a malha ferroviária viva, pontual e segura.
-            </strong>
-            <br>
-            <br>
-            <p>Cuidar de uma malha ferroviária vai muito além de ajustar horários. O RailLife previne falhas antes que elas aconteçam, otimiza rotas em tempo real e economiza energia, transformando a complexidade dos trilhos em uma experiência leve, pontual e segura para todos. Sem um gerenciamento atento, a rotina para. Com o RailLife, a vida segue o seu trilho sem interrupções.</p>
-        </div>
-    </div>
+            <div class="dropdown mt-3">
+                <div class="textinhex">
+                    <br>
+                    <strong>
+                        Em um mundo onde cada segundo conta, o RailLife é o cérebro que mantém a malha ferroviária viva,
+                        pontual e segura.
+                    </strong>
+                    <br>
+                    <br>
+                    <p>Cuidar de uma malha ferroviária vai muito além de ajustar horários. O RailLife previne falhas
+                        antes que elas aconteçam, otimiza rotas em tempo real e economiza energia, transformando a
+                        complexidade dos trilhos em uma experiência leve, pontual e segura para todos. Sem um
+                        gerenciamento atento, a rotina para. Com o RailLife, a vida segue o seu trilho sem interrupções.
+                    </p>
+                </div>
+            </div>
 
             <div class="dropdown mt-3">
-                    <a href="cadastro_usuarios.php">cadastrar</a>
-                    <br>
-                    <a href="logout.php">desconectar</a>
+                <a href="cadastro_usuarios.php">cadastrar</a>
+                <br>
+                <a href="logout.php">desconectar</a>
             </div>
         </div>
     </div>
@@ -267,15 +282,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <a href="adm_trens.php">Trens</a>
             <a href="#">Relatorios</a>
             <a href="adm_rotas.php">Rotas</a>
-             
+
         </nav>
 
         <div class="margin_header">
-            <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
-        aria-controls="offcanvasExample">
-        <img src="../assets/menu button.png" alt="Menu">
-    </a>
-    </div>
+            <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                <img src="../assets/menu button.png" alt="Menu">
+            </a>
+        </div>
 
     </header>
 
@@ -347,12 +361,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <div class="cadastro-campo campo-atuacao">
                     <label for="atuacao">Área de atuação:</label>
                     <select id="atuacao" name="atuacao">
-                        <option value="comum" <?php echo ($area_atuacao === 'comum') ? 'selected' : ''; ?>>Usuário Comum</option>
+                        <option value="comum" <?php echo ($area_atuacao === 'comum') ? 'selected' : ''; ?>>Usuário Comum
+                        </option>
                         <option value="adm" <?php echo ($area_atuacao === 'adm') ? 'selected' : ''; ?>>ADM</option>
                     </select>
                 </div>
 
-                
+
                 <button type="submit">
                     <?php echo $id ? 'Salvar Alterações' : 'Cadastrar'; ?>
                 </button>
@@ -367,7 +382,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <footer></footer>
 
     <img class="fixa" src="../assets/listras vermelho e cinza.png">
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"

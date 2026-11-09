@@ -95,33 +95,56 @@
                     </h3>
                 </div>
 
-                <div class="weather-box">
-                    <div class="weather-header">
-                        <span class="weather-tag">Clima</span>
-                        <span class="weather-local">Joinville</span>
+    
+                    <div class="idx_flex">
+                        <div class="weather-box">
+                            <div class="weather-header">
+                                <span class="weather-tag">Clima</span>
+                                <span class="weather-local">Joinville</span>
+                            </div>
+                            <?php
+                            $url = "https://api.open-meteo.com/v1/forecast?latitude=-26.3044&longitude=-48.8456&current=temperature_2m&timezone=auto";
+                            $mensagemTemperatura = "Não foi possível obter a temperatura atual.";
+                            $response = @file_get_contents($url);
+                            if ($response !== false) {
+                                $data = json_decode($response, true);
+                                if (isset($data['current']['temperature_2m'], $data['current_units']['temperature_2m'])) {
+                                    $tempAtual = $data['current']['temperature_2m'];
+                                    $unidade = $data['current_units']['temperature_2m'];
+                                    $mensagemTemperatura = "A temperatura atual é de " . $tempAtual . $unidade;
+                                }
+                            }
+                            ?>
+                            <p class="temp_atual"><?php echo htmlspecialchars($mensagemTemperatura, ENT_QUOTES, 'UTF-8'); ?></p>
+                        </div>
+                        
+                        <div class="weather-box">
+                            <div class="weather-header">
+                                <span class="weather-tag">Clima</span>
+                                <span class="weather-local">Joinville</span>
+                            </div>
+                            <?php
+                                $url = "https://api.open-meteo.com/v1/forecast?latitude=-26.3044&longitude=-48.8456&current=relative_humidity_2m&timezone=auto";
+                                $mensagemUmidade = "Não foi possível obter a umidade atual.";
+                                $response = @file_get_contents($url);
+                                if ($response !== false) {
+                                    $data = json_decode($response, true);
+                                    if (isset($data['current']['relative_humidity_2m'])) {
+                                        $umidadeAtual = $data['current']['relative_humidity_2m'];
+                                        $mensagemUmidade = "Umidade atual: " . $umidadeAtual . "%";
+                                    }
+                                }
+                            ?>
+                            <p class="temp_atual"><?php echo htmlspecialchars($mensagemUmidade, ENT_QUOTES, 'UTF-8'); ?></p>
+                        </div>
+                                        </div>
                     </div>
-
-                    <?php
-                    $url = "https://api.open-meteo.com/v1/forecast?latitude=-26.3044&longitude=-48.8456&current=temperature_2m&timezone=auto";
-                    $mensagemTemperatura = "Não foi possível obter a temperatura atual.";
-
-                    $response = @file_get_contents($url);
-                    if ($response !== false) {
-                        $data = json_decode($response, true);
-
-                        if (isset($data['current']['temperature_2m'], $data['current_units']['temperature_2m'])) {
-                            $tempAtual = $data['current']['temperature_2m'];
-                            $unidade = $data['current_units']['temperature_2m'];
-                            $mensagemTemperatura = "A temperatura atual é de " . $tempAtual . $unidade;
-                        }
-                    }
-                    ?>
-                    <p class="temp_atual"><?php echo htmlspecialchars($mensagemTemperatura, ENT_QUOTES, 'UTF-8'); ?></p>
-                </div>
+                    <img src="assets/Trem.png" alt="trem" class="trem">
             </div>
-        
+    
+                
 
-            <img src="assets/trem.png" alt="trem" class="trem">
+
 
 
 
