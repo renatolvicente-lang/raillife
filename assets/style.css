@@ -20,7 +20,35 @@ body{
 .offcanvas-body {
     border-radius: inherit;
 }
-
+.relatorios{
+    max-width: 1300px;
+    border-radius: 50px;
+    padding: 80px;
+    margin: auto;
+    background-color: #f8f9fa;
+    position: relative;
+    z-index: 2;
+    gap: 30px;
+    align-items: flex-start;
+}
+.relatorios div{
+}
+.volte{
+    display: inline-block;
+    padding: 8px 14px;
+    margin-right: 8px;
+    border-radius: 8px;
+    background-color: #c23232;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+.volte_ct{
+    margin-top: 30px;
+    text-align: center ;
+}
 /* Página Home*/
 
 .hd_home{
@@ -96,7 +124,7 @@ body{
 .nav_apresentacao a.ativado {
     color: #c23232 !important;
 }
-.mn_home{
+.mn_home {
     max-width: 1300px;
     border-radius: 50px;
     padding: 50px;
@@ -149,10 +177,7 @@ body{
     width: 40px;
 }
 /* Página de apresentação*/
-.breve{
-    
-    color: #c23232;
-}
+
 
 .trem{
     width: 540px;
