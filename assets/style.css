@@ -21,7 +21,7 @@ body{
     border-radius: inherit;
 }
 .relatorios{
-    max-width: 1300px;
+    max-width: 800px;
     border-radius: 50px;
     padding: 80px;
     margin: auto;
@@ -31,7 +31,8 @@ body{
     gap: 30px;
     align-items: flex-start;
 }
-.relatorios div{
+.trilho_descontinuado{
+    width: 400px;
 }
 .volte{
     display: inline-block;
