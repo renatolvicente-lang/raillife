@@ -13,3 +13,5 @@ O endpoint entrega condições atuais estimadas por modelos meteorológicos. Sã
 ## Validação de CEP
 
 O cadastro e a edição de usuários consultam o serviço gratuito ViaCEP no servidor. O CEP é normalizado para oito dígitos e uma resposta de CEP inexistente não permite salvar o registro.
+
+A validação diferencia um CEP inválido ou não encontrado de uma falha temporária de rede/API. Em ambos os casos o registro não é salvo; a mensagem orienta corrigir o CEP ou tentar novamente.
