@@ -34,6 +34,9 @@ function consultarCepViaCep(string $cep): string
     if (!is_array($data)) {
         return 'unavailable';
     }
+    if (!empty($data['erro'])) {
+        return 'invalid';
+    }
 
-    return !empty($data['erro']) ? 'invalid' : 'valid';
+    return isset($data['cep']) ? 'valid' : 'unavailable';
 }

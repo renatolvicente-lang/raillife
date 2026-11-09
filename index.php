@@ -98,7 +98,7 @@
     
                     <div class="idx_flex">
                         <?php
-                        $weatherUrl = "https://api.open-meteo.com/v1/forecast?latitude=-26.3044&longitude=-48.8456&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code&timezone=America%2FSao_Paulo";
+                        $weatherUrl = "https://api.open-meteo.com/v1/forecast?latitude=-26.3044&longitude=-48.8456&current=temperature_2m,relative_humidity_2m,apparent_temperature&timezone=America%2FSao_Paulo";
                         $weatherContext = stream_context_create(['http' => ['timeout' => 5, 'header' => "Accept: application/json\r\nUser-Agent: RailLife/1.0\r\n"]]);
                         $weatherResponse = @file_get_contents($weatherUrl, false, $weatherContext);
                         $weather = $weatherResponse !== false ? json_decode($weatherResponse, true) : null;
