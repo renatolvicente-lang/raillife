@@ -96,44 +96,44 @@
                 </div>
 
     
-                    <div class="idx_flex">
-                        <?php
-                        $weatherUrl = "https://api.open-meteo.com/v1/forecast?latitude=-26.3044&longitude=-48.8456&current=temperature_2m,relative_humidity_2m,apparent_temperature&timezone=America%2FSao_Paulo";
-                        $weatherContext = stream_context_create(['http' => ['timeout' => 5, 'header' => "Accept: application/json\r\nUser-Agent: RailLife/1.0\r\n"]]);
-                        $weatherResponse = @file_get_contents($weatherUrl, false, $weatherContext);
-                        $weather = $weatherResponse !== false ? json_decode($weatherResponse, true) : null;
-                        $current = is_array($weather) ? ($weather['current'] ?? null) : null;
-                        $weatherUnits = is_array($weather) ? ($weather['current_units'] ?? []) : [];
-                        $weatherReady = is_array($current) && isset($current['temperature_2m'], $current['relative_humidity_2m']);
-                        $weatherUpdated = $weatherReady ? substr((string) $current['time'], 11, 5) : '';
-                        ?>
-                        <section class="weather-box" aria-label="Condições climáticas em Joinville">
-                            <div class="weather-header">
-                                <span class="weather-tag">Clima agora</span>
-                                <span class="weather-local">Joinville, SC</span>
+               
+                <div class="idx_flex">
+                    <?php
+                    $weatherUrl = "https://api.open-meteo.com/v1/forecast?latitude=-26.3044&longitude=-48.8456&current=temperature_2m,relative_humidity_2m,apparent_temperature&timezone=America%2FSao_Paulo";
+                    $weatherContext = stream_context_create(['http' => ['timeout' => 5, 'header' => "Accept: application/json\r\nUser-Agent: RailLife/1.0\r\n"]]);
+                    $weatherResponse = @file_get_contents($weatherUrl, false, $weatherContext);
+                    $weather = $weatherResponse !== false ? json_decode($weatherResponse, true) : null;
+                    $current = is_array($weather) ? ($weather['current'] ?? null) : null;
+                    $weatherUnits = is_array($weather) ? ($weather['current_units'] ?? []) : [];
+                    $weatherReady = is_array($current) && isset($current['temperature_2m'], $current['relative_humidity_2m']);
+                    $weatherUpdated = $weatherReady ? substr((string) $current['time'], 11, 5) : '';
+                    ?>
+                    <section class="weather-box" aria-label="Condições climáticas em Joinville">
+                        <div class="weather-header">
+                            <span class="weather-tag">Clima agora</span>
+                            <span class="weather-local">Joinville, SC</span>
+                        </div>
+                        <?php if ($weatherReady) { ?>
+                            <p class="temp_atual">Clima: <?php echo htmlspecialchars((string) $current['temperature_2m'] . ($weatherUnits['temperature_2m'] ?? '°C'), ENT_QUOTES, 'UTF-8'); ?></p>
+                            <div class="weather-details">
+                                <span><b>Sensação:</b> <?php echo htmlspecialchars((string) ($current['apparent_temperature'] ?? '—') . ($weatherUnits['apparent_temperature'] ?? '°C'), ENT_QUOTES, 'UTF-8'); ?></span><br>
+                                <span><b>Umidade:</b> <?php echo htmlspecialchars((string) $current['relative_humidity_2m'] . '%', ENT_QUOTES, 'UTF-8'); ?></span>
                             </div>
-                            <?php if ($weatherReady) { ?>
-                                <p class="temp_atual"><?php echo htmlspecialchars((string) $current['temperature_2m'] . ($weatherUnits['temperature_2m'] ?? '°C'), ENT_QUOTES, 'UTF-8'); ?></p>
-                                <div class="weather-details">
-                                    <span>Sensação <?php echo htmlspecialchars((string) ($current['apparent_temperature'] ?? '—') . ($weatherUnits['apparent_temperature'] ?? '°C'), ENT_QUOTES, 'UTF-8'); ?></span>
-                                    <span>Umidade <?php echo htmlspecialchars((string) $current['relative_humidity_2m'] . '%', ENT_QUOTES, 'UTF-8'); ?></span>
-                                </div>
-                                <p class="weather-note">Estimativa meteorológica · atualizado às <?php echo htmlspecialchars($weatherUpdated, ENT_QUOTES, 'UTF-8'); ?></p>
-                            <?php } else { ?>
-                                <p class="temp_atual">Não foi possível obter as condições atuais.</p>
-                            <?php } ?>
-                        </section>
-                    </div>
-                    <img src="assets/Trem.png" alt="trem" class="trem">
+                            <p class="weather-note">Estimativa meteorológica · atualizado às <?php echo htmlspecialchars($weatherUpdated, ENT_QUOTES, 'UTF-8'); ?></p>
+                        <?php } else { ?>
+                            <p class="temp_atual">Não foi possível obter as condições atuais.</p>
+                        <?php } ?>
+                    </section>
+                </div>
             </div>
-    
-                
+                <img src="assets/Trem.png" alt="trem" class="trem">
+            </div>
+            
+            
+            
+            
+            
 
-
-
-
-
-        </div>
 
     </main>
 
