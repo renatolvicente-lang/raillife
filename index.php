@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/style.css">
-    <title>Página de apresentação</title>
+    <title>Página de apresentação - RailLife</title>
 </head>
 
 <body>
@@ -96,59 +96,44 @@
                 </div>
 
     
-                    <div class="idx_flex">
-                        <div class="weather-box">
-                            <div class="weather-header">
-                                <span class="weather-tag">Clima</span>
-                                <span class="weather-local">Joinville</span>
-                            </div>
-                            <?php
-                            $url = "https://api.open-meteo.com/v1/forecast?latitude=-26.3044&longitude=-48.8456&current=temperature_2m&timezone=auto";
-                            $mensagemTemperatura = "Não foi possível obter a temperatura atual.";
-                            $response = @file_get_contents($url);
-                            if ($response !== false) {
-                                $data = json_decode($response, true);
-                                if (isset($data['current']['temperature_2m'], $data['current_units']['temperature_2m'])) {
-                                    $tempAtual = $data['current']['temperature_2m'];
-                                    $unidade = $data['current_units']['temperature_2m'];
-                                    $mensagemTemperatura = "A temperatura atual é de " . $tempAtual . $unidade;
-                                }
-                            }
-                            ?>
-                            <p class="temp_atual"><?php echo htmlspecialchars($mensagemTemperatura, ENT_QUOTES, 'UTF-8'); ?></p>
+               
+                <div class="idx_flex">
+                    <?php
+                    $weatherUrl = "https://api.open-meteo.com/v1/forecast?latitude=-26.3044&longitude=-48.8456&current=temperature_2m,relative_humidity_2m,apparent_temperature&timezone=America%2FSao_Paulo";
+                    $weatherContext = stream_context_create(['http' => ['timeout' => 5, 'header' => "Accept: application/json\r\nUser-Agent: RailLife/1.0\r\n"]]);
+                    $weatherResponse = @file_get_contents($weatherUrl, false, $weatherContext);
+                    $weather = $weatherResponse !== false ? json_decode($weatherResponse, true) : null;
+                    $current = is_array($weather) ? ($weather['current'] ?? null) : null;
+                    $weatherUnits = is_array($weather) ? ($weather['current_units'] ?? []) : [];
+                    $weatherReady = is_array($current) && isset($current['temperature_2m'], $current['relative_humidity_2m']);
+                    $weatherUpdated = $weatherReady ? substr((string) $current['time'], 11, 5) : '';
+                    ?>
+                    <section class="weather-box" aria-label="Condições climáticas em Joinville">
+                        <div class="weather-header">
+                            <span class="weather-tag">Clima agora</span>
+                            <span class="weather-local">Joinville, SC</span>
                         </div>
-                        
-                        <div class="weather-box">
-                            <div class="weather-header">
-                                <span class="weather-tag">Clima</span>
-                                <span class="weather-local">Joinville</span>
+                        <?php if ($weatherReady) { ?>
+                            <p class="temp_atual">Clima: <?php echo htmlspecialchars((string) $current['temperature_2m'] . ($weatherUnits['temperature_2m'] ?? '°C'), ENT_QUOTES, 'UTF-8'); ?></p>
+                            <div class="weather-details">
+                                <span><b>Sensação:</b> <?php echo htmlspecialchars((string) ($current['apparent_temperature'] ?? '—') . ($weatherUnits['apparent_temperature'] ?? '°C'), ENT_QUOTES, 'UTF-8'); ?></span><br>
+                                <span><b>Umidade:</b> <?php echo htmlspecialchars((string) $current['relative_humidity_2m'] . '%', ENT_QUOTES, 'UTF-8'); ?></span>
                             </div>
-                            <?php
-                                $url = "https://api.open-meteo.com/v1/forecast?latitude=-26.3044&longitude=-48.8456&current=relative_humidity_2m&timezone=auto";
-                                $mensagemUmidade = "Não foi possível obter a umidade atual.";
-                                $response = @file_get_contents($url);
-                                if ($response !== false) {
-                                    $data = json_decode($response, true);
-                                    if (isset($data['current']['relative_humidity_2m'])) {
-                                        $umidadeAtual = $data['current']['relative_humidity_2m'];
-                                        $mensagemUmidade = "Umidade atual: " . $umidadeAtual . "%";
-                                    }
-                                }
-                            ?>
-                            <p class="temp_atual"><?php echo htmlspecialchars($mensagemUmidade, ENT_QUOTES, 'UTF-8'); ?></p>
-                        </div>
-                                        </div>
-                    </div>
-                    <img src="assets/Trem.png" alt="trem" class="trem">
+                            <p class="weather-note">Estimativa meteorológica · atualizado às <?php echo htmlspecialchars($weatherUpdated, ENT_QUOTES, 'UTF-8'); ?></p>
+                        <?php } else { ?>
+                            <p class="temp_atual">Não foi possível obter as condições atuais.</p>
+                        <?php } ?>
+                    </section>
+                </div>
             </div>
-    
-                
+                <img src="assets/Trem.png" alt="trem" class="trem">
+            </div>
+            
+            
+            
+            
+            
 
-
-
-
-
-        </div>
 
     </main>
 

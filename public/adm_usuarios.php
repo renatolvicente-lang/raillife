@@ -46,7 +46,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="../assets/style.css">
-    <title>Página do administrador</title>
+    <title>Página do administrador - RailLife</title>
 </head>
 <body>
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample">
@@ -128,7 +128,7 @@
             </div>
             
             <div>
-                <a href="cadastro_usuarios.php"><button type="button" class="btn btn-danger">Novo Usuario</button></a>
+                <a href="cadastro_usuarios.php"><button type="button" class="btn btn-primary">Novo Usuario</button></a>
             </div>
         </div>
         <div class="flex">

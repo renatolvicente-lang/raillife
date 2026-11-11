@@ -74,13 +74,13 @@
      <main class="relatorios">
         <div class="volte_ct">
             <h1>Página em desenvolvimento!</h1>
-            <h2>Esta página será lançada em <span class="ativado">breve</span>...</h2>
+            <h3>Esta página será lançada em <span class="ativado">breve</span>...</h3>
         </div>
         <div class="volte_ct">
             <img src="../assets/trilho_descontinuado.png" alt="Trilho descontinuado" class="trilho_descontinuado">
         </div>
         <div class="volte_ct">
-            <p>Clique abaixo para voltar a página anterior</p>
+            <p><b>Clique abaixo para voltar a página anterior</b></p>
             <a href="../index.php" class="volte">Voltar</a>
         </div>
      </main>
