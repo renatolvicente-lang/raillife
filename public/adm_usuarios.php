@@ -2,16 +2,16 @@
     include("../infra/conn.php");
     session_start();
 
-      if(!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm"){
-           header("Location: home.php");
-           exit();
-      }
+      //if(!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm"){
+          // header("Location: home.php");
+          // exit();
+      //}
 
      $id = $_SESSION['id'] ?? null;
      $usuarioLogado = false;
 
      if ($id !== null) {
-         $sql = "SELECT * FROM usuarios WHERE id = ?";
+         $sql = "SELECT * FROM usuarios WHERE id_usuarios = ?";
          $stmt = $conn->prepare($sql);
          $stmt->bind_param("i", $id);
          $stmt->execute();
@@ -46,7 +46,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="../assets/style.css">
-    <title>Página do administrador</title>
+    <title>Página do administrador - RailLife</title>
 </head>
 <body>
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample">
@@ -99,7 +99,7 @@
             <a href="home.php">Inicio</a>
             <a href="adm_sensores.php">Sensores</a>
             <a href="adm_trens.php">Trens</a>
-            <a href="#">Relatorios</a>
+            <a href="relatorios.php">Relatórios</a>
             <a href="adm_rotas.php">Rotas</a>
              
         </nav>
@@ -128,7 +128,7 @@
             </div>
             
             <div>
-                <a href="cadastro_usuarios.php"><button type="button" class="btn btn-danger">Novo Usuario</button></a>
+                <a href="cadastro_usuarios.php"><button type="button" class="btn btn-primary">Novo Usuario</button></a>
             </div>
         </div>
         <div class="flex">

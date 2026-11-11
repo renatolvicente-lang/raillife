@@ -20,7 +20,36 @@ body{
 .offcanvas-body {
     border-radius: inherit;
 }
-
+.relatorios{
+    max-width: 800px;
+    border-radius: 50px;
+    padding: 80px;
+    margin: auto;
+    background-color: #f8f9fa;
+    position: relative;
+    z-index: 2;
+    gap: 30px;
+    align-items: flex-start;
+}
+.trilho_descontinuado{
+    width: 400px;
+}
+.volte{
+    display: inline-block;
+    padding: 8px 14px;
+    margin-right: 8px;
+    border-radius: 8px;
+    background-color: #c23232;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+.volte_ct{
+    margin-top: 30px;
+    text-align: center ;
+}
 /* Página Home*/
 
 .hd_home{
@@ -96,7 +125,7 @@ body{
 .nav_apresentacao a.ativado {
     color: #c23232 !important;
 }
-.mn_home{
+.mn_home {
     max-width: 1300px;
     border-radius: 50px;
     padding: 50px;
@@ -150,9 +179,6 @@ body{
 }
 /* Página de apresentação*/
 
-.escrita_inicial{
-
-}
 
 .trem{
     width: 540px;
@@ -206,11 +232,12 @@ body{
     background: linear-gradient(135deg, #ffffff 0%, #f4f5f7 100%);
     border: 1px solid rgba(17, 24, 39, 0.06);
     border-radius: 22px;
-    box-shadow: 0 14px 30px rgba(17, 24, 39, 0.08);
+    box-shadow: 0 5px 30px rgba(17, 24, 39, 0.08);
     padding: 18px 20px;
     width: 260px;
     min-width: 220px;
     margin-top: 16px;
+    margin-left: 16px;
     flex-shrink: 0;
 }
 
@@ -457,6 +484,10 @@ body{
     width: 102%;
     height: auto;
     object-fit: contain;
+}
+.idx_flex{
+    display: flex;
+    padding: 20px;
 }
 
 /* Página de cadastro */
@@ -739,6 +770,7 @@ header {
 
 .escrita_sensor{
     height: 50px;
+    margin: 2px;
 }
 
 .espaco{
@@ -887,7 +919,8 @@ header {
 }
 
 .padding2{
-    width: 1070px;
+    width: 1040px;
+    margin: 20px;
 }
 
 .btn_trem {
@@ -1038,3 +1071,80 @@ header {
       position: relative; 
       margin-top: 70px;
     }
+<<<<<<< HEAD
+.weather-box {
+    position: relative;
+    overflow: hidden;
+    width: min(100%, 340px);
+    min-width: 250px;
+    margin: 16px;
+    padding: 22px 24px;
+    border: 1px solid rgba(194, 50, 50, 0.2);
+    border-radius: 20px;
+    background: linear-gradient(145deg, #fff 0%, #fff7f7 100%);
+    box-shadow: 0 12px 28px rgba(83, 31, 31, 0.12);
+}
+
+.weather-box::before {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 6px;
+    background: #c23232;
+    content: "";
+}
+
+.weather-header {
+    margin-bottom: 16px;
+}
+
+.weather-tag {
+    background: #c23232;
+    color: #fff;
+}
+
+.weather-local {
+    color: #3d3434;
+}
+
+.temp_atual {
+    margin: 0;
+    color: #9f2424;
+    font-size: clamp(2rem, 4vw, 2.7rem);
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+.weather-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.weather-details span {
+    padding: 7px 10px;
+    border-radius: 999px;
+    background: rgba(194, 50, 50, 0.09);
+    color: #5c3030;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.weather-note {
+    margin: 14px 0 0;
+    color: #716666;
+    font-size: 0.75rem;
+}
+
+@media (max-width: 600px) {
+    .weather-box {
+        min-width: 0;
+        margin: 12px 0;
+    }
+}
+
+.button-pr {
+    padding: 8px;
+}
+=======
+>>>>>>> d1ff4699eae70224f878cdc3cee680a488ddfab8

@@ -1,12 +1,13 @@
 <?php
 require_once('../infra/conn.php');
 require_once('validar_cpf.php');
+require_once('validar_cep.php');
 session_start();
 
-if (!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm") {
-    header("Location: home.php");
-    exit();
-}
+// if (!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm") {
+//     header("Location: home.php");
+//     exit();  
+// }
 
 $erro = "";
 $id = $_GET["id"] ?? null;
@@ -108,23 +109,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
 
     $cep_limpo = preg_replace('/\D/', '', $CEP);
-    if (strlen($cep_limpo) !== 8) {
-        $erro = "CEP inválido";
-    }
-
-    // Validação do CEP
-    if ($erro == "") {
-        $url = "https://viacep.com.br/ws/{$cep_limpo}/json/";
-        $response = @file_get_contents($url);
-
-        if ($response === false) {
-            $erro = "Não foi possível consultar o CEP.";
-        } else {
-            $data = json_decode($response, true);
-
-            if (!is_array($data) || (isset($data['erro']) && $data['erro'])) {
-                $erro = "CEP não encontrado.";
-            }
+    $CEP = $cep_limpo;
+    if ($erro === "") {
+        $resultadoCep = consultarCepViaCep($cep_limpo);
+        if ($resultadoCep === 'invalid') {
+            $erro = "CEP inválido ou não encontrado.";
+        } elseif ($resultadoCep === 'unavailable') {
+            $erro = "Não foi possível consultar o CEP agora. Tente novamente.";
         }
     }
 
@@ -177,7 +168,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         }
     }
 
-    if ($id) {
+    if ($id && $erro === "") {
         $sql = "UPDATE usuarios SET nome_usuarios = ?, email = ?, senha = ?, cpf = ?, endereco = ?, cidade = ?, cep = ?, data_nascimento = ?, atuacao = ? WHERE id_usuarios = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('sssssssssi', $nome, $email, $senhaHash, $CPF, $endereco, $cidade, $CEP, $data_nascimento, $area_atuacao, $id);
@@ -280,7 +271,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <a href="home.php">Inicio</a>
             <a href="adm_sensores.php">Sensores</a>
             <a href="adm_trens.php">Trens</a>
-            <a href="#">Relatorios</a>
+             <a href="relatorios.php">Relatórios</a>
             <a href="adm_rotas.php">Rotas</a>
 
         </nav>

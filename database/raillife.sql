@@ -57,6 +57,8 @@ CREATE TABLE relatorios (
 ALTER TABLE usuarios DROP PRIMARY KEY, CHANGE id id_usuarios INT AUTO_INCREMENT NOT NULL PRIMARY KEY;
 ALTER TABLE trens DROP PRIMARY KEY, CHANGE id id_trens INT AUTO_INCREMENT NOT NULL PRIMARY KEY;
 ALTER TABLE rotas DROP PRIMARY KEY, CHANGE id id_rotas INT AUTO_INCREMENT NOT NULL PRIMARY KEY;
+ALTER TABLE sensores DROP PRIMARY KEY, CHANGE id id_sensores INT AUTO_INCREMENT NOT NULL PRIMARY KEY;
+ALTER TABLE relatorios DROP PRIMARY KEY, CHANGE id id_relatorios INT AUTO_INCREMENT NOT NULL PRIMARY KEY;
 
 INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `cpf`, `atuacao`, `endereco`, `cidade`, `cep`, `data_nascimento`) VALUES (NULL, 'admin', 'admin@gmail.com', 'admin1234', '14001484994', 'adm', 'Guia lopes', 'Joinville', '89940823', '2018-10-23');
 

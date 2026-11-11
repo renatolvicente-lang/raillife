@@ -77,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/style.css">
-    <title>Login</title>
+    <title>Login - RailLife</title>
 </head>
 
 <body>
@@ -105,7 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <section class="login-formulario">
             <div class="login-logo">
-                <img src="../assets/Logo.png" alt="Logo do site">
+                <img src="../assets/logo.png" alt="Logo do site">
             </div>
 
             <form method="POST">

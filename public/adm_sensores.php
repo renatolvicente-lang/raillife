@@ -35,7 +35,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="../assets/style.css">
-    <title>Pagina de gerenciamento de sensores</title>
+    <title>Sensores - RailLife</title>
 </head>
 <body>
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample">
@@ -88,7 +88,7 @@
             <a href="home.php">Inicio</a>
             <a href="adm_sensores.php" class="ativado">Sensores</a>
             <a href="adm_trens.php">Trens</a>
-            <a href="#">Relatorios</a>
+            <a href="relatorios.php">Relatórios</a>
             <a href="adm_rotas.php">Rotas</a>
         </nav>
 
@@ -113,12 +113,12 @@
                 <div class="padding">
                 </div>
 
-                    <div>
-                        <a href="cadastro_sensores.php"><button type="button" class="btn btn-danger">Novo sensor</button></a>
+                    <div class="button-pr">
+                        <a href="cadastro_sensores.php"><button type="button" class="btn btn-primary">Novo sensor</button></a>
                     </div>
         </div>
 
-        <div>
+        <div class="tabela-wrap">
 
         <table  class="tabela">
                 <thead>
