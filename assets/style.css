@@ -529,23 +529,25 @@ header {
 
 .cadastro-pagina {
     width: 100%;
-    margin: 0 auto;
+    margin: 0 auto 50px;
+    padding: 20px 0 30px;
     position: relative;
     z-index: 2;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
 
 .cadastro-formulario {
-    width: min(840px, calc(100% - 32px));
+    width: min(900px, calc(100% - 32px));
     min-height: 418px;
-    background-color: #f8f9fa;
-    border-radius: 8px 8px 8px 8px;
-    padding: 25px 0 18px;
+    background: linear-gradient(180deg, #f9fafb 0%, #f3f4f6 100%);
+    border: 1px solid rgba(17, 24, 39, 0.06);
+    border-radius: 28px;
+    padding: 32px 28px 24px;
     margin: 0 auto;
     z-index: 2;
-    box-shadow: 0 100px 100px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.08);
     box-sizing: border-box;
 }
 
@@ -558,13 +560,13 @@ header {
 }
 
 .grid {
-    width: min(722px, calc(100% - 48px));
+    width: min(760px, 100%);
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 55px;
-    row-gap: 13px;
-    justify-items: center;
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+    gap: 20px 24px;
+    justify-items: stretch;
+    align-items: start;
 }
 
 /* Organização dos campos */
@@ -606,65 +608,93 @@ header {
 .cadastro-campo label {
     font-size: 14px;
     color: #333333;
-    margin-bottom: 5px;
-    font-weight: 500;
+    margin-bottom: 8px;
+    font-weight: 700;
     display: block;
     text-align: left;
     width: 100%;
 }
 
-.cadastro-campo input {
+.cadastro-campo input,
+.cadastro-campo select {
     width: 100%;
-    height: 40px;
+    height: 46px;
     box-sizing: border-box;
-    border: 1.5px solid #e40613;
-    border-radius: 4px;
-    padding: 0 10px;
+    border: 1.5px solid #d9d9d9;
+    border-radius: 12px;
+    padding: 0 14px;
     font-size: 16px;
     color: #222;
     background-color: #ffffff;
     outline: none;
     transition: all 0.2s ease;
     margin: 0 auto;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
 .cadastro-campo select {
-    width: 100%;
-    height: 40px;
-    box-sizing: border-box;
-    border: 1.5px solid #e40613;
-    border-radius: 4px;
-    padding: 10px 10px;
-    background-color: #fff;
+    padding: 0 12px;
 }
 
 .cadastro-campo input::placeholder {
-    color: #444444;
-    font-size: 16px;
+    color: #666666;
+    font-size: 15px;
 }
 
-.cadastro-campo input:focus {
-    border-color: #e26912;
-    box-shadow: 0 0 0 2px rgba(247, 104, 28, 0.15);
+.cadastro-campo input:focus,
+.cadastro-campo select:focus {
+    border-color: #c23232;
+    box-shadow: 0 0 0 3px rgba(194, 50, 50, 0.12);
 }
 
 .cadastro-formulario button {
     grid-column: 1 / 3;
     justify-self: center;
-    width: 290px;
-    height: 43px;
-    margin-top: 5px;
+    width: min(100%, 320px);
+    height: 46px;
+    margin-top: 10px;
     border: none;
-    border-radius: 4px;
+    border-radius: 12px;
     color: white;
     font-size: 16px;
+    font-weight: 700;
     cursor: pointer;
+    background: linear-gradient(135deg, #c23232 0%, #a11d1d 100%);
+    box-shadow: 0 12px 24px rgba(194, 50, 50, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
 }
 
 .cadastro-formulario button:hover {
-    
-    width: 350px;
-    transition: width 0.5s ease;
+    transform: translateY(-1px) scale(1.01);
+    box-shadow: 0 16px 28px rgba(194, 50, 50, 0.25);
+    filter: brightness(1.03);
+}
+
+@media (max-width: 700px) {
+    .cadastro-formulario {
+        padding: 24px 18px 18px;
+        border-radius: 24px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .campo-nome,
+    .campo-capacidade,
+    .campo-rota,
+    .campo-modelo,
+    .campo-data {
+        grid-column: auto;
+        grid-row: auto;
+        width: 100%;
+    }
+
+    .cadastro-formulario button {
+        grid-column: auto;
+        width: 100%;
+    }
 }
 
 .nav-login {
