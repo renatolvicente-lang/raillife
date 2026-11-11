@@ -128,7 +128,7 @@
             </div>
             
             <div>
-                <a href="cadastro_usuarios.php"><button type="button" class="btn btn-danger">Novo Usuario</button></a>
+                <a href="cadastro_usuarios.php"><button type="button" class="btn btn-primary">Novo Usuario</button></a>
             </div>
         </div>
         <div class="flex">

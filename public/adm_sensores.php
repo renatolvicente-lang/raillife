@@ -113,12 +113,12 @@
                 <div class="padding">
                 </div>
 
-                    <div>
-                        <a href="cadastro_sensores.php"><button type="button" class="btn btn-danger">Novo sensor</button></a>
+                    <div class="button-pr">
+                        <a href="cadastro_sensores.php"><button type="button" class="btn btn-primary">Novo sensor</button></a>
                     </div>
         </div>
 
-        <div>
+        <div class="tabela-wrap">
 
         <table  class="tabela">
                 <thead>

@@ -153,7 +153,7 @@
                 </div>
 
                     <div class="btn_trem">
-                        <a href="cadastro_rotas.php"><button type="button" class="btn btn-danger">Nova rota</button></a>
+                        <a href="cadastro_rotas.php"><button type="button" class="btn btn-primary">Nova rota</button></a>
                     </div>
         </div>
 

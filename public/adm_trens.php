@@ -116,11 +116,11 @@
                 </div>
 
                     <div class="btn_trem">
-                        <a href="cadastro_trens.php"><button type="button" class="btn btn-danger">Novo trem</button></a>
+                        <a href="cadastro_trens.php"><button type="button" class="btn btn-primary">Novo trem</button></a>
                     </div>
         </div>
 
-        <div>
+        <div class="tabela-wrap">
 
         <table  class="tabela">
                 <thead>
