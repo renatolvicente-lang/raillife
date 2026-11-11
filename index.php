@@ -7,8 +7,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/style.css">
+<<<<<<< HEAD
     <link rel="icon" type="image/png" href="assets/icon_trem.png">
     <title>Página de apresentação</title>
+=======
+    <title>Página de apresentação - RailLife</title>
+>>>>>>> a3f3a83ab834760a3024b34eabed1f56f0fab110
 </head>
 
 <body>

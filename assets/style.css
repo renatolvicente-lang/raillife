@@ -1153,6 +1153,7 @@ header {
 .button-pr {
     padding: 8px;
 }
+<<<<<<< HEAD
 
 .cadastro-formulario {
     width: min(840px, calc(100% - 32px));
@@ -1166,3 +1167,5 @@ header {
     box-sizing: border-box;
 }
 
+=======
+>>>>>>> a3f3a83ab834760a3024b34eabed1f56f0fab110
