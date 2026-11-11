@@ -59,7 +59,7 @@
             <a class="boom" href="home.php">Inicio</a>
             <a class="boom" href="adm_sensores.php">Sensores</a>
             <a class="boom" href="adm_trens.php">Trens</a>
-            <a class="boom-ativado" href="relatorios.php">Relatórios</a>
+            <a class="boom boom_ativado" href="relatorios.php">Relatórios</a>
             <a class="boom" href="adm_rotas.php">Rotas</a>
 
         </nav>

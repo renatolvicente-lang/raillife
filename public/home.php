@@ -92,7 +92,7 @@ $nome = $usuario !== false && !empty($usuario['nome']) ? htmlspecialchars($usuar
         </div>
 
         <nav class="nav_home">
-            <a class="boom-ativado" href="home.php">Inicio</a>
+            <a class="boom boom_ativado" href="home.php">Inicio</a>
             <a class="boom" href="adm_sensores.php">Sensores</a>
             <a class="boom" href="adm_trens.php">Trens</a>
             <a class="boom" href="relatorios.php">Relatórios</a>
@@ -181,6 +181,7 @@ $nome = $usuario !== false && !empty($usuario['nome']) ? htmlspecialchars($usuar
 
     <!-- Bolinha que percorre o circuito -->
     <div class="bolinha"></div>
+    <div class="bolinha2"></div>
   </div>
 
         </div>
