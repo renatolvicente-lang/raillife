@@ -72,12 +72,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="../assets/style.css">
-<<<<<<< HEAD
     <link rel="icon" type="image/png" href="../assets/icon_trem.png">
     <title>rotas</title>
-=======
-    <title>Rotas - RailLife</title>
->>>>>>> a3f3a83ab834760a3024b34eabed1f56f0fab110
 </head>
 <body>
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample">
