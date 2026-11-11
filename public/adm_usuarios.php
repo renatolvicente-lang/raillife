@@ -175,8 +175,8 @@
                             </td>
                        
                             <td>
-                                <a href="cadastro_usuarios.php?id=<?php echo $linha["id_usuarios"]?>" class="btn btn-warning">Editar</a>
-                                <a href="excluir_usuarios.php?id=<?php echo $linha["id_usuarios"]?>" class="btn btn-danger" onclick="return confirm('tem certeza que deseja apagar esse usuário?')">Excluir</a>
+                                <a href="cadastro_usuarios.php?id=<?php echo $linha["id_usuarios"]?>" >Editar</a>
+                                <a href="excluir_usuarios.php?id=<?php echo $linha["id_usuarios"]?>" onclick="return confirm('tem certeza que deseja apagar esse usuário?')">Excluir</a>
                             </td>
                         </tr>
                     <?php }?>

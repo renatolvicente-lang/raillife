@@ -667,19 +667,6 @@ header {
     filter: brightness(1.03);
 }
 
-.btn-warning {
-    background-color: #ffc107 !important;
-    border-color: #ffc107 !important;
-    color: #111 !important;
-}
-
-.btn-warning:hover,
-.btn-warning:focus {
-    background-color: #e0a800 !important;
-    border-color: #d39e00 !important;
-    color: #111 !important;
-}
-
 @media (max-width: 700px) {
     .cadastro-formulario {
         padding: 24px 18px 18px;

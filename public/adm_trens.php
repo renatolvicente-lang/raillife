@@ -161,7 +161,7 @@
                             </td>
                        
                             <td>
-                                <a href="cadastro_trens.php?id=<?php echo $linha["id_trens"]?>" class="btn btn-warning">Editar</a>
+                                <a href="cadastro_trens.php?id=<?php echo $linha["id_trens"]?>" class="btn btn-danger ">Editar</a>
                                 <a href="excluir_trens.php?id=<?php echo $linha["id_trens"]; ?>" class="btn btn-danger">Excluir</a>
 
                             </td>
