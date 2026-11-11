@@ -85,11 +85,11 @@
         </div>
 
         <nav class="nav_home">
-            <a href="home.php">Inicio</a>
-            <a href="adm_sensores.php">Sensores</a>
-            <a href="adm_trens.php" class="ativado">Trens</a>
-            <a href="relatorios.php">Relatórios</a>
-            <a href="adm_rotas.php">Rotas</a>
+            <a class="boom" href="home.php">Inicio</a>
+            <a class="boom" href="adm_sensores.php">Sensores</a>
+            <a class="boom-ativado" href="adm_trens.php">Trens</a>
+            <a class="boom" href="relatorios.php">Relatórios</a>
+            <a class="boom" href="adm_rotas.php">Rotas</a>
              
         </nav>
 

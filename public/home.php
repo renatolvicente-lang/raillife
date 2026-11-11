@@ -41,6 +41,7 @@ $nome = $usuario !== false && !empty($usuario['nome']) ? htmlspecialchars($usuar
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="../assets/style.css">
+    <link rel="icon" type="image/png" href="../assets/icon_trem.png">
 </head>
 
 <img class="fixa2" src="../assets/listras vermelho e cinza.png">
@@ -100,11 +101,11 @@ $nome = $usuario !== false && !empty($usuario['nome']) ? htmlspecialchars($usuar
         </div>
 
         <nav class="nav_home">
-            <a href="home.php" class="ativado">Inicio</a>
-            <a href="adm_sensores.php">Sensores</a>
-            <a href="adm_trens.php">Trens</a>
-            <a href="relatorios.php">Relatórios</a>
-            <a href="adm_rotas.php">Rotas</a>
+            <a class="boom-ativado" href="home.php">Inicio</a>
+            <a class="boom" href="adm_sensores.php">Sensores</a>
+            <a class="boom" href="adm_trens.php">Trens</a>
+            <a class="boom" href="relatorios.php">Relatórios</a>
+            <a class="boom" href="adm_rotas.php">Rotas</a>
 
         </nav>
 
