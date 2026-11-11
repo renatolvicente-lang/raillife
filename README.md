@@ -112,16 +112,24 @@ raillife/
    ```text
    http://localhost:8000
    ```
+# Configurar o servidor Local
+
+Caso ultilize o <b>XAMPP</b>:
+
+1. Copie a pasta do projeto para o diretório <b>htdocs</b>.
+2. Abra o painel de controle do <b>XAMPP</b>
+3. Inicie os serviços Apache e MySQL.
+4. Certifique-se de que ambos estejam funcionando corretamente.
 
 ## Roadmap
 
 - [x] Página de apresentação do projeto
 - [x] Páginas de administração de trens, sensores e rotas
-- [ ] Atualização do README
-- [ ] Refatoração das telas de cadastro e de login
-- [ ] Frontend e backend da tela de cadastro
-- [ ] Frontend e backend da tela de login
-- [ ] Frontend e backend da tela de gerenciamento de usuários
+- [x] Atualização do README
+- [x] Refatoração das telas de cadastro e de login
+- [x] Frontend e backend da tela de cadastro
+- [x] Frontend e backend da tela de login
+- [x] Frontend e backend da tela de gerenciamento de usuários
 - [ ] Módulo de relatórios
 
 ## Licença
