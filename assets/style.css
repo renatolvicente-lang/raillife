@@ -99,16 +99,7 @@ body{
     justify-content: center;
     min-width: 90px;
     text-align: center;
-    transition: transform 0.80s ease, color 0.70s ease, font-weight 0.18s ease;
 }
-
-.nav_home a:hover,
-.nav_home a.boom:hover,
-.nav_home a.boom-ativado:hover {
-    transform: scale(1.27);
-    color: #c23232;
-}
-
 .margin_header {
     display: flex;
     align-items: center;
@@ -124,14 +115,14 @@ body{
     justify-content: center;
     padding: 0 6px;
 }
-.boom-ativado{
+.ativado{
     font-weight: bolder;
     color: #c23232 !important;
-    text-decoration: none;
+    text-decoration: underline;
 }
 
-.nav_home a.boom-ativado,
-.nav_apresentacao a.boom-ativado {
+.nav_home a.ativado,
+.nav_apresentacao a.ativado {
     color: #c23232 !important;
 }
 .mn_home {
@@ -467,7 +458,7 @@ body{
     height: 43px;
     margin-top: 5px;
     border: none;
-    
+    background-color: #c23232;
     border-radius: 4px;
     color: white;
     font-size: 16px;
@@ -475,7 +466,7 @@ body{
 }
 
 .login-formulario button:hover {
-    
+    background-color: #a12a2a;
     width: 290px;
     transition: width 0.5s ease;
 }
@@ -541,7 +532,7 @@ header {
     width: min(840px, calc(100% - 32px));
     min-height: 418px;
     background-color: #f8f9fa;
-    border-radius: 8px 8px 8px 8px;
+    border-radius: 0 8px 8px 8px;
     padding: 25px 0 18px;
     margin: 0 auto;
     z-index: 2;
@@ -655,6 +646,7 @@ header {
     height: 43px;
     margin-top: 5px;
     border: none;
+    background-color: #c23232;
     border-radius: 4px;
     color: white;
     font-size: 16px;
@@ -662,7 +654,7 @@ header {
 }
 
 .cadastro-formulario button:hover {
-    
+    background-color: #a12a2a;
     width: 350px;
     transition: width 0.5s ease;
 }
@@ -682,7 +674,7 @@ header {
     height: 43px;
     margin-top: 5px;
     border: none;
-    
+    background-color: #c23232;
     border-radius: 4px;
     color: white;
     font-size: 16px;
@@ -1011,7 +1003,7 @@ header {
 }
 
 .quadadofofo {
-    height: 110px;
+    height: 15  0px;
     background-color: #c23232;
     border-radius: 20px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
@@ -1045,62 +1037,21 @@ header {
 
     /* A bolinha que percorre o circuito */
     .bolinha {
-    width: 34px;
-    height: 16px;
-    box-sizing: border-box;
+      width: 36px;
+      height: 16px;
+      background-color: #ffffff;
+      border: 2px solid #c23232;
+      border-radius: 40%;
+      position: absolute;
+      top: 0;
+      left: 0;
 
-    /* Corpo do trem */
-    background: #d9232e;
-    border: 1.5px solid #292929;
-    border-radius: 5px 9px 9px 5px;
-
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    /* Janela e acabamento */
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-
-    /* Trajetória original */
-    offset-path: path('M 215,285 C 190,285 150,290 110,290 C 40,290 10,230 40,170 C 70,110 130,120 200,180 C 240,215 260,215 300,180 C 370,120 430,110 460,170 C 490,230 460,290 390,290 C 350,290 285,285 285,285 C 255,285 240,270 200,205 C 180,140 180,80 230,40 C 300,0 360,20 390,80 C 420,140 380,210 320,245 C 290,262 210,238 180,255 C 120,290 80,360 110,420 C 140,480 200,500 270,460 C 338,430 340,360 300,315 C 240,279 200,285 215,285 Z');
-
-    /* Segue automaticamente as curvas */
-    offset-rotate: auto;
-    offset-anchor: center;
-
-    /* Movimento */
-    animation: moverBolinha 16s linear infinite;
-}
-
-/* Janela vista de cima */
-.bolinha::before {
-    content: "";
-    position: absolute;
-
-    width: 8px;
-    height: 7px;
-
-    background: #292f35;
-    border-radius: 2px;
-
-    top: 3px;
-    right: 7px;
-}
-
-/* Para-choque frontal */
-.bolinha::after {
-    content: "";
-    position: absolute;
-
-    width: 3px;
-    height: 9px;
-
-    background: #dedede;
-    border-radius: 2px;
-
-    right: -1px;
-    top: 2px;
-}
+      /* Mesma trajetória (d) do caminho SVG */
+      offset-path: path('M 215,285 C 190,285 150,290 110,290 C 40,290 10,230 40,170 C 70,110 130,120 200,180 C 240,215 260,215 300,180 C 370,120 430,110 460,170 C 490,230 460,290 390,290 C 350,290 285,285 285,285 C 255,285 240,270 200,205 C 180,140 180,80 230,40 C 300,0 360,20 390,80 C 420,140 380,210 320,245 C 290,262 210,238 180,255 C 120,290 80,360 110,420 C 140,480 200,500 270,460 C 338,430 340,360 300,315 C 240,279 200,285 215,285 Z');
+      
+      /* Animação contínua ao longo do trajeto */
+      animation: moverBolinha 16s linear infinite;
+    }
 
     @keyframes moverBolinha {
       0% {
@@ -1194,19 +1145,3 @@ header {
 .button-pr {
     padding: 8px;
 }
-<<<<<<< HEAD
-
-.cadastro-formulario {
-    width: min(840px, calc(100% - 32px));
-    min-height: 418px;
-    background-color: #f8f9fa;
-    border-radius: 8px 8px 8px 8px;
-    padding: 40px 0 18px;
-    margin: 0 auto;
-    z-index: 2;
-    box-shadow: 0 100px 100px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
-}
-
-=======
->>>>>>> a3f3a83ab834760a3024b34eabed1f56f0fab110
