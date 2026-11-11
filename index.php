@@ -7,7 +7,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/style.css">
-    <title>Página de apresentação - RailLife</title>
+    <link rel="icon" type="image/png" href="assets/icon_trem.png">
+    <title>Página de apresentação</title>
 </head>
 
 <body>
@@ -54,11 +55,11 @@
         </div>
 
         <nav class="nav_home">
-            <a href="public/home.php">Inicio</a>
-            <a href="public/adm_sensores.php">Sensores</a>
-            <a href="public/adm_trens.php">Trens</a>
-            <a href="public/relatorios.php">Relatórios</a>
-            <a href="public/adm_rotas.php">Rotas</a>
+            <a class="boom" href="public/home.php">Inicio</a>
+            <a class="boom" href="public/adm_sensores.php">Sensores</a>
+            <a class="boom" href="public/adm_trens.php">Trens</a>
+            <a class="boom" href="public/relatorios.php">Relatórios</a>
+            <a class="boom" href="public/adm_rotas.php">Rotas</a>
         </nav>
 
         <button class="menu_btn_home">

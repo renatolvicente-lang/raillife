@@ -208,6 +208,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/style.css">
+    <link rel="icon" type="image/png" href="../assets/icon_trem.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Cadastro</title>
@@ -252,7 +253,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             </div>
 
             <div class="dropdown mt-3">
-                <a href="cadastro_usuarios.php">cadastrar</a>
+                <a href="adm_usuarios.php">cadastrar</a>
                 <br>
                 <a href="logout.php">desconectar</a>
             </div>
@@ -268,11 +269,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </div>
 
         <nav class="nav_home">
-            <a href="home.php">Inicio</a>
-            <a href="adm_sensores.php">Sensores</a>
-            <a href="adm_trens.php">Trens</a>
-             <a href="relatorios.php">Relatórios</a>
-            <a href="adm_rotas.php">Rotas</a>
+            <a class="boom" href="home.php">Inicio</a>
+            <a class="boom" href="adm_sensores.php">Sensores</a>
+            <a class="boom" href="adm_trens.php">Trens</a>
+             <a class="boom" href="relatorios.php">Relatórios</a>
+            <a class="boom" href="adm_rotas.php">Rotas</a>
 
         </nav>
 
@@ -285,9 +286,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     </header>
 
     <main class="cadastro-pagina">
-        <div class="container_titulo">
-            <img src="../assets/logo.png" alt="logo site">
-        </div>
+        
         <section class="cadastro-formulario">
 
             <?php if ($erro != "") { ?>
@@ -359,7 +358,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 </div>
 
 
-                <button type="submit">
+                <button type="button" class="btn btn-success">
                     <?php echo $id ? 'Salvar Alterações' : 'Cadastrar'; ?>
                 </button>
 

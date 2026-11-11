@@ -3,20 +3,14 @@ session_start();
 
 include("../infra/conn.php");
 
-// Verifica se existe usuário logado na sessão. Se não houver, redireciona para o login.
-// Isso evita acessar a página sem autenticação e impede o erro de tentar mostrar dados de alguém não logado.
 if (!isset($_SESSION["usuario"])) {
     header("Location: login.php");
     exit();
 }
 
-// Busca o ID do usuário logado na sessão. O nome está em $_SESSION['usuario'], mas o ID está em $_SESSION['id'].
-// Essa linha corrige o problema de tentar usar o nome como identificador para buscar o registro no banco.
 $id = $_SESSION['id'] ?? null;
 $usuario = false;
 
-// Consulta o usuário pelo ID para recuperar o nome completo do cadastro.
-// Isso é necessário porque a sessão guarda o nome do usuário em uma variável separada e a página precisa do registro completo.
 if ($id !== null) {
     $sql = "SELECT * FROM usuarios WHERE id_usuarios = ?";
     $stmt = $conn->prepare($sql);
@@ -26,8 +20,6 @@ if ($id !== null) {
     $usuario = $result->fetch_assoc();
 }
 
-// Garante que o nome será exibido com escaping para evitar problemas com caracteres especiais.
-// Também define um fallback para segurança caso o usuário não seja encontrado no banco.
 $nome = $usuario !== false && !empty($usuario['nome']) ? htmlspecialchars($usuario['nome'], ENT_QUOTES, 'UTF-8') : 'Usuário';
 
 ?>
@@ -41,6 +33,7 @@ $nome = $usuario !== false && !empty($usuario['nome']) ? htmlspecialchars($usuar
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="../assets/style.css">
+    <link rel="icon" type="image/png" href="../assets/icon_trem.png">
 </head>
 
 <img class="fixa2" src="../assets/listras vermelho e cinza.png">
@@ -64,7 +57,6 @@ $nome = $usuario !== false && !empty($usuario['nome']) ? htmlspecialchars($usuar
                     <?php if ($usuario !== false) { ?>
                 <div class="identificacao-usuario">
                     <?php echo "Bem vindo(a), " . htmlspecialchars($usuario['nome_usuarios'], ENT_QUOTES, 'UTF-8') . "!"; ?>
-                    <!-- Exibe o nome do usuário autenticado. A condição verifica se o registro foi encontrado no banco, evitando erros ao tentar imprimir dados vazios. -->
                 </div>
             <?php } ?>
             
@@ -100,11 +92,11 @@ $nome = $usuario !== false && !empty($usuario['nome']) ? htmlspecialchars($usuar
         </div>
 
         <nav class="nav_home">
-            <a href="home.php" class="ativado">Inicio</a>
-            <a href="adm_sensores.php">Sensores</a>
-            <a href="adm_trens.php">Trens</a>
-            <a href="relatorios.php">Relatórios</a>
-            <a href="adm_rotas.php">Rotas</a>
+            <a class="boom-ativado" href="home.php">Inicio</a>
+            <a class="boom" href="adm_sensores.php">Sensores</a>
+            <a class="boom" href="adm_trens.php">Trens</a>
+            <a class="boom" href="relatorios.php">Relatórios</a>
+            <a class="boom" href="adm_rotas.php">Rotas</a>
 
         </nav>
 

@@ -520,23 +520,24 @@ header {
 
 .cadastro-pagina {
     width: 100%;
-    margin: 0 auto;
+    margin: 0 auto 50px;
+    padding: 20px 0 30px;
     position: relative;
     z-index: 2;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
 
 .cadastro-formulario {
-    width: min(840px, calc(100% - 32px));
+    width: min(900px, calc(100% - 32px));
     min-height: 418px;
     background-color: #f8f9fa;
     border-radius: 0 8px 8px 8px;
     padding: 25px 0 18px;
     margin: 0 auto;
     z-index: 2;
-    box-shadow: 0 100px 100px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.08);
     box-sizing: border-box;
 }
 
@@ -549,13 +550,13 @@ header {
 }
 
 .grid {
-    width: min(722px, calc(100% - 48px));
+    width: min(760px, 100%);
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 55px;
-    row-gap: 13px;
-    justify-items: center;
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+    gap: 20px 24px;
+    justify-items: stretch;
+    align-items: start;
 }
 
 /* Organização dos campos */
@@ -597,60 +598,61 @@ header {
 .cadastro-campo label {
     font-size: 14px;
     color: #333333;
-    margin-bottom: 5px;
-    font-weight: 500;
+    margin-bottom: 8px;
+    font-weight: 700;
     display: block;
     text-align: left;
     width: 100%;
 }
 
-.cadastro-campo input {
+.cadastro-campo input,
+.cadastro-campo select {
     width: 100%;
-    height: 40px;
+    height: 46px;
     box-sizing: border-box;
-    border: 1.5px solid #e40613;
-    border-radius: 4px;
-    padding: 0 10px;
+    border: 1.5px solid #d9d9d9;
+    border-radius: 12px;
+    padding: 0 14px;
     font-size: 16px;
     color: #222;
     background-color: #ffffff;
     outline: none;
     transition: all 0.2s ease;
     margin: 0 auto;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
 .cadastro-campo select {
-    width: 100%;
-    height: 40px;
-    box-sizing: border-box;
-    border: 1.5px solid #e40613;
-    border-radius: 4px;
-    padding: 10px 10px;
-    background-color: #fff;
+    padding: 0 12px;
 }
 
 .cadastro-campo input::placeholder {
-    color: #444444;
-    font-size: 16px;
+    color: #666666;
+    font-size: 15px;
 }
 
-.cadastro-campo input:focus {
-    border-color: #e26912;
-    box-shadow: 0 0 0 2px rgba(247, 104, 28, 0.15);
+.cadastro-campo input:focus,
+.cadastro-campo select:focus {
+    border-color: #c23232;
+    box-shadow: 0 0 0 3px rgba(194, 50, 50, 0.12);
 }
 
 .cadastro-formulario button {
     grid-column: 1 / 3;
     justify-self: center;
-    width: 290px;
-    height: 43px;
-    margin-top: 5px;
+    width: min(100%, 320px);
+    height: 46px;
+    margin-top: 10px;
     border: none;
     background-color: #c23232;
     border-radius: 4px;
     color: white;
     font-size: 16px;
+    font-weight: 700;
     cursor: pointer;
+    background: linear-gradient(135deg, #c23232 0%, #a11d1d 100%);
+    box-shadow: 0 12px 24px rgba(194, 50, 50, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
 }
 
 .cadastro-formulario button:hover {
@@ -1022,7 +1024,6 @@ header {
     height: 30px;
 }
 
-/* circuito */
 
 .circuito-container {
       position: relative;
@@ -1035,32 +1036,66 @@ header {
       height: 100%;
     }
 
-    /* A bolinha que percorre o circuito */
     .bolinha {
-      width: 36px;
-      height: 16px;
-      background-color: #ffffff;
-      border: 2px solid #c23232;
-      border-radius: 40%;
-      position: absolute;
-      top: 0;
-      left: 0;
+    width: 34px;
+    height: 16px;
+    box-sizing: border-box;
 
-      /* Mesma trajetória (d) do caminho SVG */
-      offset-path: path('M 215,285 C 190,285 150,290 110,290 C 40,290 10,230 40,170 C 70,110 130,120 200,180 C 240,215 260,215 300,180 C 370,120 430,110 460,170 C 490,230 460,290 390,290 C 350,290 285,285 285,285 C 255,285 240,270 200,205 C 180,140 180,80 230,40 C 300,0 360,20 390,80 C 420,140 380,210 320,245 C 290,262 210,238 180,255 C 120,290 80,360 110,420 C 140,480 200,500 270,460 C 338,430 340,360 300,315 C 240,279 200,285 215,285 Z');
-      
-      /* Animação contínua ao longo do trajeto */
-      animation: moverBolinha 16s linear infinite;
-    }
+    background: #d9232e;
+    border: 1.5px solid #292929;
+    border-radius: 5px 9px 9px 5px;
 
-    @keyframes moverBolinha {
-      0% {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+
+    offset-path: path('M 215,285 C 190,285 150,290 110,290 C 40,290 10,230 40,170 C 70,110 130,120 200,180 C 240,215 260,215 300,180 C 370,120 430,110 460,170 C 490,230 460,290 390,290 C 350,290 285,285 285,285 C 255,285 240,270 200,205 C 180,140 180,80 230,40 C 300,0 360,20 390,80 C 420,140 380,210 320,245 C 290,262 210,238 180,255 C 120,290 80,360 110,420 C 140,480 200,500 270,460 C 338,430 340,360 300,315 C 240,279 200,285 215,285 Z');
+
+    offset-rotate: auto;
+    offset-anchor: center;
+
+    animation: moverBolinha 16s linear infinite;
+}
+
+.bolinha::before {
+    content: "";
+    position: absolute;
+
+    width: 8px;
+    height: 7px;
+
+    background: #292f35;
+    border-radius: 2px;
+
+    top: 3px;
+    right: 7px;
+}
+
+.bolinha::after {
+    content: "";
+    position: absolute;
+
+    width: 3px;
+    height: 9px;
+
+    background: #dedede;
+    border-radius: 2px;
+
+    right: -1px;
+    top: 2px;
+}
+
+@keyframes moverBolinha {
+    from {
         offset-distance: 0%;
-      }
-      100% {
-        offset-distance: 100%;
-      }
     }
+
+    to {
+        offset-distance: 100%;
+    }
+}
 
     .repar2hm {
       flex: 1;
@@ -1071,7 +1106,6 @@ header {
       position: relative; 
       margin-top: 70px;
     }
-<<<<<<< HEAD
 .weather-box {
     position: relative;
     overflow: hidden;
@@ -1146,5 +1180,3 @@ header {
 .button-pr {
     padding: 8px;
 }
-=======
->>>>>>> d1ff4699eae70224f878cdc3cee680a488ddfab8
