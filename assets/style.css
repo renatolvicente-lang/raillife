@@ -651,12 +651,7 @@ header {
     height: 46px;
     margin-top: 10px;
     border: none;
-<<<<<<< HEAD
     border-radius: 12px;
-=======
-    background-color: #c23232;
-    border-radius: 4px;
->>>>>>> 176182e42b81f8df12703eab0fbe1aa0a7afd07b
     color: white;
     font-size: 16px;
     font-weight: 700;
@@ -667,10 +662,22 @@ header {
 }
 
 .cadastro-formulario button:hover {
-<<<<<<< HEAD
     transform: translateY(-1px) scale(1.01);
     box-shadow: 0 16px 28px rgba(194, 50, 50, 0.25);
     filter: brightness(1.03);
+}
+
+.btn-warning {
+    background-color: #ffc107 !important;
+    border-color: #ffc107 !important;
+    color: #111 !important;
+}
+
+.btn-warning:hover,
+.btn-warning:focus {
+    background-color: #e0a800 !important;
+    border-color: #d39e00 !important;
+    color: #111 !important;
 }
 
 @media (max-width: 700px) {
@@ -698,11 +705,6 @@ header {
         grid-column: auto;
         width: 100%;
     }
-=======
-    background-color: #a12a2a;
-    width: 350px;
-    transition: width 0.5s ease;
->>>>>>> 176182e42b81f8df12703eab0fbe1aa0a7afd07b
 }
 
 .nav-login {

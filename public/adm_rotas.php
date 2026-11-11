@@ -189,7 +189,7 @@
                             <td><?php echo htmlspecialchars((string) ($linha["distancia"] ?? "")); ?></td>
                             <td><?php echo htmlspecialchars(substr((string) ($linha["duracao"] ?? ""), 0, 5)); ?></td>
                             <td>
-                                <a href="cadastro_rotas.php?id=<?php echo $linha["id_rotas"]?>" class="btn btn-danger ">Editar</a>
+                                <a href="cadastro_rotas.php?id=<?php echo $linha["id_rotas"]?>" class="btn btn-warning">Editar</a>
                                 <a href="adm_rotas.php?excluir=<?php echo (int) $linha["id_rotas"]; ?>" class="btn btn-danger">Excluir</a>
 
                             </td>
