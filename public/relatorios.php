@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="../assets/style.css">
+    <link rel="icon" type="image/png" href="../assets/icon_trem.png">
 </head>
 <body>
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample">
@@ -55,11 +56,11 @@
         </div>
 
         <nav class="nav_home">
-            <a href="home.php" >Inicio</a>
-            <a href="adm_sensores.php">Sensores</a>
-            <a href="adm_trens.php">Trens</a>
-            <a href="relatorios.php"class="ativado">Relatórios</a>
-            <a href="adm_rotas.php">Rotas</a>
+            <a class="boom" href="home.php">Inicio</a>
+            <a class="boom" href="adm_sensores.php">Sensores</a>
+            <a class="boom" href="adm_trens.php">Trens</a>
+            <a class="boom-ativado" href="relatorios.php">Relatórios</a>
+            <a class="boom" href="adm_rotas.php">Rotas</a>
 
         </nav>
 
@@ -81,7 +82,7 @@
         </div>
         <div class="volte_ct">
             <p><b>Clique abaixo para voltar a página anterior</b></p>
-            <a href="../index.php" class="volte">Voltar</a>
+            <a href="cadastro_usuarios.php"><button type="button" class="btn btn-secondary">Voltar</button></a>
         </div>
      </main>
      <script src="../scripts/popup_up.js"></script>  

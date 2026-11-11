@@ -35,7 +35,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="../assets/style.css">
+<<<<<<< HEAD
+    <link rel="icon" type="image/png" href="../assets/icon_trem.png">
+    <title>Pagina de gerenciamento de sensores</title>
+=======
     <title>Sensores - RailLife</title>
+>>>>>>> a3f3a83ab834760a3024b34eabed1f56f0fab110
 </head>
 <body>
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample">
@@ -85,11 +90,11 @@
         </div>
 
         <nav class="nav_home">
-            <a href="home.php">Inicio</a>
-            <a href="adm_sensores.php" class="ativado">Sensores</a>
-            <a href="adm_trens.php">Trens</a>
-            <a href="relatorios.php">Relatórios</a>
-            <a href="adm_rotas.php">Rotas</a>
+            <a class="boom" href="home.php">Inicio</a>
+            <a class="boom-ativado" href="adm_sensores.php">Sensores</a>
+            <a class="boom" href="adm_trens.php">Trens</a>
+            <a class="boom" href="relatorios.php">Relatórios</a>
+            <a class="boom" href="adm_rotas.php">Rotas</a>
         </nav>
 
         <div class="margin_header">
