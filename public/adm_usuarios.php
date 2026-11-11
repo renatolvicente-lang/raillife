@@ -78,7 +78,7 @@
     </div>
 
             <div class="dropdown mt-3">
-                    <a href="cadastro_usuarios.php">cadastrar</a>
+                    <a href="adm_usuarios.php">cadastrar</a>
                     <br>
                     <a href="logout.php">desconectar</a>
             </div>
