@@ -770,6 +770,7 @@ header {
 
 .escrita_sensor{
     height: 50px;
+    margin: 2px;
 }
 
 .espaco{
@@ -918,7 +919,8 @@ header {
 }
 
 .padding2{
-    width: 1070px;
+    width: 1040px;
+    margin: 20px;
 }
 
 .btn_trem {
@@ -1138,4 +1140,8 @@ header {
         min-width: 0;
         margin: 12px 0;
     }
+}
+
+.button-pr {
+    padding: 8px;
 }
