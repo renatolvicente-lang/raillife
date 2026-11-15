@@ -6,7 +6,7 @@
 
 **Monitoramento inteligente e gerenciamento ferroviário em tempo real.**
 
-![Status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow)
+![Status](https://img.shields.io/badge/status-concluido-yellow)
 ![Licença](https://img.shields.io/badge/licen%C3%A7a-MIT-green)
 ![PHP](https://img.shields.io/badge/PHP-777BB4?logo=php&logoColor=white)
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-5-7952B3?logo=bootstrap&logoColor=white)
