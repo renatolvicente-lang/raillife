@@ -4,10 +4,10 @@
     session_start();
 
     
-        if (!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] == "adm") {
-        header("Location: home.php");
-        exit();
-    }
+    //     if (!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] == "adm") {
+    //     header("Location: home.php");
+    //     exit();
+    // }
 
     $id = $_GET["id"] ?? null;
     $nome = $modelo = $fabricacao = $capacidade = $rota = $usuario = '';
@@ -162,7 +162,7 @@
                     <label for="fabricacao">Data de fabricação:</label>
                     <input type="date" name="fabricacao" id="fabricacao" value="<?php echo htmlspecialchars($fabricacao); ?>">
                 </div>
-                <button type="button" class="btn btn-success">
+                <button type="submit" class="btn btn-success">
                     <?php echo $id ? 'Salvar Alterações' : 'Cadastrar'; ?>
                 </button>
             </form>

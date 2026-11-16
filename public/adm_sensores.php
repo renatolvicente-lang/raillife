@@ -3,10 +3,10 @@
     include("../infra/conn.php");
     session_start();
 
-    if (!isset($_SESSION["usuario"])) {
-        header("Location: login.php");
-        exit();
-    }
+    // if (!isset($_SESSION["usuario"])) {
+    //     header("Location: login.php");
+    //     exit();
+    // }
 
         $result = $conn->query("SELECT * FROM sensores inner join rotas on sensores.id_rotas = rotas.id_rotas");
  
@@ -137,7 +137,7 @@
                     <?php while($linha  = $result->fetch_assoc()){?>
                         <tr>
                             <td>
-                                <?php echo $linha["id"];?>
+                                <?php echo $linha["id_sensores"];?>
                             </td>
                         
                             <td>
@@ -159,8 +159,8 @@
                             </td>
                        
                             <td>
-                                <a href="cadastro_sensores.php?id=<?php echo $linha["id"]?>">Editar</a>
-                                <a href="excluir_sensores.php?id=<?php echo $linha["id"]?>">Excluir</a>
+                                <a href="cadastro_sensores.php?id_sensores=<?php echo $linha["id_sensores"]?>">Editar</a>
+                                <a href="excluir_sensores.php?id_sensores=<?php echo $linha["id_sensores"]?>">Excluir</a>
                             </td>
                         </tr>
                     <?php }?>

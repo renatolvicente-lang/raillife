@@ -3,21 +3,21 @@
 include "../infra/conn.php";
  
 session_start();
- if (!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] == "adm") {
-        header("Location: home.php");
-         exit();
-    }
+//  if (!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] == "adm") {
+//         header("Location: home.php");
+//          exit();
+//     }
 
 
-if (isset($_GET["id"])) {
-        $idRota = filter_var($_GET["id"], FILTER_VALIDATE_INT, ["options" => ["min_range" => 1]]);
+if (isset($_GET["id_rotas"])) {
+        $idRota = filter_var($_GET["id_rotas"], FILTER_VALIDATE_INT, ["options" => ["min_range" => 1]]);
 
         if ($idRota === false) {
                 header("Location: adm_rotas.php?erro=rota_invalida");
                 exit();
         }
 
-        $verificaSensores = $conn->prepare("SELECT id FROM sensores WHERE id_rotas = ? LIMIT 1");
+        $verificaSensores = $conn->prepare("SELECT id_sensores FROM sensores WHERE id_rotas = ? LIMIT 1");
         $verificaSensores->bind_param("i", $idRota);
         $verificaSensores->execute();
 

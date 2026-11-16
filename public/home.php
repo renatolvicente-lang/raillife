@@ -3,10 +3,10 @@ session_start();
 
 include("../infra/conn.php");
 
-if (!isset($_SESSION["usuario"])) {
-    header("Location: login.php");
-    exit();
-}
+// if (!isset($_SESSION["usuario"])) {
+//     header("Location: login.php");
+//     exit();
+// }
 
 $id = $_SESSION['id'] ?? null;
 $usuario = false;

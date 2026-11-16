@@ -10,7 +10,7 @@ session_start();
 // }
 
 $erro = "";
-$id = $_GET["id"] ?? null;
+$id = $_GET["id_usuarios"] ?? null;
 $nome = $email = $CPF = $endereco = $cidade = $data_nascimento = $CEP = '';
 $area_atuacao = "comum"; // Valor padrão para o campo de atuação
 
@@ -358,7 +358,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 </div>
 
 
-                <button type="button" class="btn btn-success">
+                <button type="submit" class="btn btn-success">
                     <?php echo $id ? 'Salvar Alterações' : 'Cadastrar'; ?>
                 </button>
 

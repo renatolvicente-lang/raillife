@@ -2,10 +2,10 @@
 require_once('../infra/conn.php');
 session_start();
 
-if (!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] == "adm") {
-    header("Location: home.php");
-    exit();
-}
+// if (!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] == "adm") {
+//     header("Location: home.php");
+//     exit();
+// }
 
 $erro = "";
 $nome = trim($_POST['nome'] ?? '');
@@ -59,14 +59,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $erro = "Preencha nome, tipo, data de instalação e rota.";
     } else {
         if ($editando && $id !== null) {
-            $sql = "UPDATE sensores SET nome = ?, tipo = ?, data_instalacao = ?, status_sensor = ?, id_rotas = ? WHERE id = ?";
+            $sql = "UPDATE sensores SET nome = ?, tipo = ?, data_instalacao = ?, status_sensor = ?, id_rotas = ? WHERE id_sensores = ?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param('ssssii', $nome, $tipo, $data_instalacao, $status_sensor, $id_rotas, $id);
             $stmt->execute();
             header("Location: adm_sensores.php");
             exit();
         } else {
-            $comando = $conn->prepare("SELECT id FROM sensores WHERE nome = ?");
+            $comando = $conn->prepare("SELECT id_sensores FROM sensores WHERE nome = ?");
             $comando->bind_param("s", $nome);
             $comando->execute();
 
@@ -181,7 +181,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     </select>
                 </div>
 
-                <button type="button" class="btn btn-success">
+                <button type="submit" class="btn btn-success">
                     <?php echo $editando ? 'Salvar Alterações' : 'Cadastrar'; ?>
                 </button>
 

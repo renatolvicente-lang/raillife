@@ -2,10 +2,10 @@
     include("../infra/conn.php");
     session_start();
 
-    if (!isset($_SESSION["usuario"])) {
-        header("Location: login.php");
-        exit();
-    }
+    // if (!isset($_SESSION["usuario"])) {
+    //     header("Location: login.php");
+    //     exit();
+    // }
 
     $id = $_SESSION['id'] ?? null;
     $usuarioLogado = false;
@@ -189,8 +189,8 @@
                             <td><?php echo htmlspecialchars((string) ($linha["distancia"] ?? "")); ?></td>
                             <td><?php echo htmlspecialchars(substr((string) ($linha["duracao"] ?? ""), 0, 5)); ?></td>
                             <td>
-                                <a href="cadastro_rotas.php?id=<?php echo $linha["id_rotas"]?>" class="btn btn-danger ">Editar</a>
-                                <a href="adm_rotas.php?excluir=<?php echo (int) $linha["id_rotas"]; ?>" class="btn btn-danger">Excluir</a>
+                                <a href="cadastro_rotas.php?id_rotas=<?php echo $linha["id_rotas"]?>" class="btn btn-danger ">Editar</a>
+                                <a href="excluir_rotas.php?id_rotas=<?php echo (int) $linha["id_rotas"]; ?>" class="btn btn-danger">Excluir</a>
 
                             </td>
                         </tr>
