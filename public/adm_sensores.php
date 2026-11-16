@@ -159,8 +159,8 @@
                             </td>
                        
                             <td>
-                                <a href="cadastro_sensores.php?id_sensores=<?php echo $linha["id_sensores"]?>">Editar</a>
-                                <a href="excluir_sensores.php?id_sensores=<?php echo $linha["id_sensores"]?>">Excluir</a>
+                                <a class="tabela_b" href="cadastro_sensores.php?id_sensores=<?php echo $linha["id_sensores"]?>">Editar</a>
+                                <a class="tabela_a" href="excluir_sensores.php?id_sensores=<?php echo $linha["id_sensores"]?>">Excluir</a>
                             </td>
                         </tr>
                     <?php }?>

@@ -161,7 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         value="<?php echo htmlspecialchars($duracao); ?>" required>
                 </div>
 
-                <button type="submit" class="btn btn-success">
+                <button type="submit">
                     <?php echo $id ? 'Salvar Alterações' : 'Cadastrar'; ?>
                 </button>
 
