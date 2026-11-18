@@ -39,9 +39,9 @@
             </div>
 
             <div class="dropdown mt-3">
-                <!-- <a href="public/cadastro_usuarios.php">cadastrar</a>
+                 <a href="public/cadastro_usuarios.php">cadastrar</a>
                     <br>
-                    <a href="logout.php">desconectar</a> -->
+                    <a href="logout.php">desconectar</a>
             </div>
         </div>
     </div>
