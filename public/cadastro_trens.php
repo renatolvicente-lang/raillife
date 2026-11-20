@@ -10,31 +10,39 @@
     // }
 
     $id = $_GET["id"] ?? null;
+    $erro = "";
+    $podeSalvar = true;
     $nome = $modelo = $fabricacao = $capacidade = $rota = $usuario = '';
 
     $sql = "SELECT * FROM rotas";
-    $result = $conn->query($sql);
+    $result_rotas = $conn->query($sql);
     
     $result_usuario = $conn->query("SELECT * FROM usuarios");
 
     if ($id && $_SERVER['REQUEST_METHOD'] === 'GET') {
-        $stmt = $conn->prepare("SELECT id_trens, nome_trens, modelo, capacidade, ano_fabricacao, id_rotas, id_usuarios FROM trens WHERE id_trens = ?");
-        $stmt->bind_param('i', $id);
-        $stmt->execute();
-        $trem = $stmt->get_result()->fetch_assoc();
+        $sql = $conn->prepare("SELECT id_trens, nome_trens, modelo, capacidade, ano_fabricacao, id_rotas, id_usuarios FROM trens WHERE id_trens = ?");
+        $sql->bind_param("i", $id);
+        $sql->execute();
+        $result = $sql->get_result();
 
-        if ($trem) {
+        if ($trem = $result->fetch_assoc()) {
             $nome = $trem['nome_trens'];
             $modelo = $trem['modelo'];
             $capacidade = $trem['capacidade'];
             $fabricacao = $trem['ano_fabricacao'];
             $rota = $trem['id_rotas'];
             $usuario = $trem['id_usuarios'];
+        } else {
+            $erro = "Trem não encontrado.";
+            $podeSalvar = false;
         }
+    } elseif ($id === false) {
+        $erro = "Identificador do trem inválido.";
+        $podeSalvar = false;
     }
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-        $id = isset($_POST['id']) ? filter_var($_POST['id'], FILTER_VALIDATE_INT) : null;
+        $id = $_POST['id'];
         $nome = $_POST["nome"] ?? '';
         $rota = $_POST["rota"] ?? '';
         $usuario = $_POST["usuario"] ?? '';
@@ -42,7 +50,10 @@
         $capacidade = $_POST["capacidade"] ?? '';
         $modelo = $_POST["modelo"] ?? '';
 
-        if($id){
+        if ($id === false) {
+            $erro = "Identificador do trem inválido.";
+            $podeSalvar = false;
+        } elseif ($id) {
             $sql = "UPDATE trens SET nome_trens=?, modelo=?, capacidade=?, ano_fabricacao=?, id_rotas=?, id_usuarios=? WHERE id_trens=?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("ssisiii", $nome, $modelo, $capacidade, $fabricacao, $rota, $usuario, $id);
@@ -113,8 +124,14 @@
         
 
         <section class="cadastro-formulario">
+            <?php if ($erro !== "") { ?>
+                <div class="mensagem-erro">
+                    <?php echo htmlspecialchars($erro); ?>
+                </div>
+            <?php } ?>
+
         <form class="grid" method="POST">
-                <?php if ($id) { ?>
+                <?php if ($id && $podeSalvar) { ?>
                     <input type="hidden" name="id" value="<?php echo (int) $id; ?>">
                 <?php } ?>
 
@@ -130,8 +147,8 @@
                     <label for="rota">Rota:</label>
                     <select name="rota" id="rota">
 
-                        <?php if($result->num_rows > 0){?>
-                            <?php while($linha = $result->fetch_assoc()){?>
+                        <?php if($result_rotas->num_rows > 0){?>
+                            <?php while($linha = $result_rotas->fetch_assoc()){?>
                                 <option value="<?php echo (int) $linha["id_rotas"]?>" <?php echo (string) $rota === (string) $linha["id_rotas"] ? 'selected' : ''; ?>>
                                     <?php echo htmlspecialchars($linha["nome_rotas"])?>
                                 </option>
@@ -162,7 +179,7 @@
                     <label for="fabricacao">Data de fabricação:</label>
                     <input type="date" name="fabricacao" id="fabricacao" value="<?php echo htmlspecialchars($fabricacao); ?>">
                 </div>
-                <button type="submit" class="btn btn-success">
+                <button type="submit" class="btn btn-success" <?php echo $podeSalvar ? '' : 'disabled'; ?>>
                     <?php echo $id ? 'Salvar Alterações' : 'Cadastrar'; ?>
                 </button>
             </form>

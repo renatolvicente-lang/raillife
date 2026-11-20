@@ -11,6 +11,7 @@ session_start();
 
 $erro = "";
 $id = $_GET["id_usuarios"] ?? null;
+$podeSalvar = true;
 $nome = $email = $CPF = $endereco = $cidade = $data_nascimento = $CEP = '';
 $area_atuacao = "comum";
 
@@ -27,7 +28,6 @@ function formatarCpf($cpf)
 }
 
 if ($id && $_SERVER['REQUEST_METHOD'] === 'GET') {
-
     $sql = $conn->prepare("SELECT id_usuarios, nome_usuarios, email, cpf, endereco, cidade, cep, data_nascimento, atuacao FROM usuarios WHERE id_usuarios = ?");
     $sql->bind_param("i", $id);
     $sql->execute();
@@ -44,17 +44,14 @@ if ($id && $_SERVER['REQUEST_METHOD'] === 'GET') {
         $CEP = preg_replace('/\D/', '', $usuario['cep']);
     } else {
         $erro = "Usuário não encontrado.";
+        $podeSalvar = false;
     }
-
-
-
-
-
-
+} elseif ($id === false) {
+    $erro = "Identificador do usuário inválido.";
+    $podeSalvar = false;
 }
 
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    //Verificando se tem um id na url
+if ($podeSalvar && $_SERVER['REQUEST_METHOD'] == "POST") {
     $usuario = null;
 
     $nome = $_POST['nome'];
@@ -178,7 +175,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         exit();
     } else {
         if ($erro == "") {
-            $sql = "INSERT INTO usuarios (nome_usuarios, email, senha, CPF, endereco, cidade, cep, data_nascimento, atuacao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO usuarios (nome_usuarios, email, senha, cpf, endereco, cidade, cep, data_nascimento, atuacao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             $comando = $conn->prepare($sql);
 
@@ -229,7 +226,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <div class="flex">
                 <img src="../assets/frifas.webp" alt="fotodeperfil" class="fotodeperfil">
 
-                <?php if ($usuarioLogado !== false) { ?>
+                <?php if (!empty($usuarioLogado)) { ?>
                     <div class="identificacao-usuario">
                         <?php echo "Bem vindo(a), " . htmlspecialchars($usuarioLogado['nome_usuarios'], ENT_QUOTES, 'UTF-8') . "!"; ?>
                     </div>
@@ -297,7 +294,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <?php } ?>
 
             <form class="grid" method="POST">
-                <?php if ($id) { ?>
+                <?php if ($id && $podeSalvar) { ?>
                     <input type="hidden" name="id" value="<?php echo (int) $id; ?>">
                 <?php } ?>
 
@@ -359,7 +356,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 </div>
 
 
-                <button type="submit" class="btn btn-success">
+                <button type="submit" class="btn btn-success" <?php echo $podeSalvar ? '' : 'disabled'; ?>>
                     <?php echo $id ? 'Salvar Alterações' : 'Cadastrar'; ?>
                 </button>
 

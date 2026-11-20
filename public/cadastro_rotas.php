@@ -13,13 +13,35 @@ $origem = trim($_POST['origem'] ?? '');
 $destino = trim($_POST['destino'] ?? '');
 $distancia = $_POST['distancia'] ?? '';
 $duracao = $_POST['duracao'] ?? '';
-$id = null;
+$id = $_GET['id_rotas'] ?? $_GET['id'] ?? null;
 $editando = false;
 $podeSalvar = true;
 
+if ($id && $_SERVER['REQUEST_METHOD'] === 'GET') {
+    $sql = $conn->prepare("SELECT id_rotas, nome_rotas, origem, destino, distancia, tempo FROM rotas WHERE id_rotas = ?");
+    $sql->bind_param("i", $id);
+    $sql->execute();
+    $result = $sql->get_result();
+
+    if ($rota = $result->fetch_assoc()) {
+        $editando = true;
+        $nome = $rota['nome_rotas'];
+        $origem = $rota['origem'];
+        $destino = $rota['destino'];
+        $distancia = $rota['distancia'];
+        $duracao = substr($rota['tempo'], 0, 5);
+    } else {
+        $erro = "Rota não encontrada.";
+        $podeSalvar = false;
+    }
+} elseif ($id === false) {
+    $erro = "Identificador da rota inválido.";
+    $podeSalvar = false;
+}
+
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (isset($_POST['id'])) {
-        $id = filter_var($_POST['id'], FILTER_VALIDATE_INT);
+        $id = $_POST['id'];
         if ($id === false || $id < 1) {
             $erro = "Identificador da rota inválido.";
             $podeSalvar = false;
@@ -48,29 +70,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $stmt->execute();
         header("Location: adm_rotas.php");
         exit();
-    }
-} elseif (isset($_GET['id'])) {
-    $id = filter_var($_GET['id'], FILTER_VALIDATE_INT);
-    if ($id === false || $id < 1) {
-        $erro = "Identificador da rota inválido.";
-        $podeSalvar = false;
-    } else {
-        $editando = true;
-        $stmt = $conn->prepare("SELECT nome_rotas, origem, destino, distancia, tempo FROM rotas WHERE id_rotas = ?");
-        $stmt->bind_param('i', $id);
-        $stmt->execute();
-        $rota = $stmt->get_result()->fetch_assoc();
-
-        if ($rota === null) {
-            $erro = "Rota não encontrada.";
-            $podeSalvar = false;
-        } else {
-            $nome = $rota['nome_rotas'];
-            $origem = $rota['origem'];
-            $destino = $rota['destino'];
-            $distancia = $rota['distancia'];
-            $duracao = substr($rota['tempo'], 0, 5);
-        }
     }
 }
 ?>
@@ -161,8 +160,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         value="<?php echo htmlspecialchars($duracao); ?>" required>
                 </div>
 
-                <button type="submit">
-                    <?php echo $id ? 'Salvar Alterações' : 'Cadastrar'; ?>
+                <button type="submit" <?php echo $podeSalvar ? '' : 'disabled'; ?>>
+                    <?php echo $editando ? 'Salvar Alterações' : 'Cadastrar'; ?>
                 </button>
 
 

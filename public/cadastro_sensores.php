@@ -13,52 +13,52 @@ $tipo = trim($_POST['tipo'] ?? '');
 $data_instalacao = $_POST['data_instalacao'] ?? '';
 $status_sensor = $_POST['status_sensor'] ?? 'ativo';
 $id_rotas = $_POST['id_rotas'] ?? null;
-$id = null;
+$id = $_GET['id_sensores'] ?? $_GET['id'] ?? null;
 $editando = false;
 $podeSalvar = true;
 
 $routeResult = $conn->query("SELECT id_rotas, nome_rotas FROM rotas ORDER BY nome_rotas");
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['id'])) {
-    $id = filter_var($_GET['id'], FILTER_VALIDATE_INT);
-    if ($id === false || $id < 1) {
-        $erro = "Identificador do sensor inválido.";
-        $podeSalvar = false;
-    } else {
-        $stmt = $conn->prepare("SELECT id, nome, tipo, data_instalacao, status_sensor, id_rotas FROM sensores WHERE id = ?");
-        $stmt->bind_param('i', $id);
-        $stmt->execute();
-        $sensor = $stmt->get_result()->fetch_assoc();
 
-        if ($sensor === null) {
-            $erro = "Sensor não encontrado.";
-            $podeSalvar = false;
-        } else {
-            $editando = true;
-            $nome = $sensor['nome'];
-            $tipo = $sensor['tipo'];
-            $data_instalacao = $sensor['data_instalacao'];
-            $status_sensor = $sensor['status_sensor'];
-            $id_rotas = $sensor['id_rotas'];
-        }
+if ($id && $_SERVER['REQUEST_METHOD'] === 'GET') {
+    $sql = $conn->prepare("SELECT id_sensores, nome, tipo, data_instalacao, status_sensor, id_rotas FROM sensores WHERE id_sensores = ?");
+    $sql->bind_param("i", $id);
+    $sql->execute();
+    $result = $sql->get_result();
+
+    if ($sensor = $result->fetch_assoc()) {
+        $editando = true;
+        $nome = $sensor['nome'];
+        $tipo = $sensor['tipo'];
+        $data_instalacao = $sensor['data_instalacao'];
+        $status_sensor = $sensor['status_sensor'];
+        $id_rotas = $sensor['id_rotas'];
+    } else {
+        $erro = "Sensor não encontrado.";
+        $podeSalvar = false;
     }
+} elseif ($id === false) {
+    $erro = "Identificador do sensor inválido.";
+    $podeSalvar = false;
 }
 
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    if (isset($_POST['id'])) {
-        $id = filter_var($_POST['id'], FILTER_VALIDATE_INT);
-        if ($id === false || $id < 1) {
-            $erro = "Identificador do sensor inválido.";
-            $podeSalvar = false;
-        } else {
-            $editando = true;
-        }
+//if ($_SERVER['REQUEST_METHOD'] == "POST") {
+  //  if (isset($_POST['id'])) {
+    //    $id = filter_var($_POST['id'], FILTER_VALIDATE_INT);
+      //  if ($id === false || $id < 1) {
+        //    $erro = "Identificador do sensor inválido.";
+         //   $podeSalvar = false;
+        //} else {
+         //   $editando = true;
+        //}
+    //}
+
+    if ($podeSalvar && (empty($nome) || empty($tipo) || empty($data_instalacao) || empty($id_rotas))) {
+        $erro = "Preencha nome, tipo, data de instalação e rota.";
     }
 
-    if (empty($nome) || empty($tipo) || empty($data_instalacao) || empty($id_rotas)) {
-        $erro = "Preencha nome, tipo, data de instalação e rota.";
-    } else {
-        if ($editando && $id !== null) {
+    if ($erro === "") {
+        if ($editando) {
             $sql = "UPDATE sensores SET nome = ?, tipo = ?, data_instalacao = ?, status_sensor = ?, id_rotas = ? WHERE id_sensores = ?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param('ssssii', $nome, $tipo, $data_instalacao, $status_sensor, $id_rotas, $id);
@@ -82,7 +82,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             }
         }
     }
-}
 ?>
 
 <!DOCTYPE html>
@@ -177,11 +176,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     <select id="status_sensor" name="status_sensor" required>
                         <option value="ativo" <?php echo ($status_sensor === 'ativo') ? 'selected' : ''; ?>>Ativo</option>
                         <option value="desativado" <?php echo ($status_sensor === 'desativado') ? 'selected' : ''; ?>>Desativado</option>
-                        <option value="em instalação" <?php echo ($status_sensor === 'em instalação') ? 'selected' : ''; ?>>Em Instalação</option>
+                        <option value="em instalacao" <?php echo ($status_sensor === 'em instalacao') ? 'selected' : ''; ?>>Em Instalação</option>
                     </select>
                 </div>
 
-                <button type="submit" class="btn btn-success">
+                <button type="submit" class="btn btn-success" <?php echo $podeSalvar ? '' : 'disabled'; ?>>
                     <?php echo $editando ? 'Salvar Alterações' : 'Cadastrar'; ?>
                 </button>
 
