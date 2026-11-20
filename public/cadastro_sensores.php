@@ -42,16 +42,16 @@ if ($id && $_SERVER['REQUEST_METHOD'] === 'GET') {
     $podeSalvar = false;
 }
 
-//if ($_SERVER['REQUEST_METHOD'] == "POST") {
-  //  if (isset($_POST['id'])) {
-    //    $id = filter_var($_POST['id'], FILTER_VALIDATE_INT);
-      //  if ($id === false || $id < 1) {
-        //    $erro = "Identificador do sensor inválido.";
-         //   $podeSalvar = false;
-        //} else {
-         //   $editando = true;
-        //}
-    //}
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['id'])) {
+        $id = $_POST['id'];
+        if ($id === false) {
+            $erro = "Identificador do sensor inválido.";
+            $podeSalvar = false;
+        } else {
+            $editando = true;
+        }
+    }
 
     if ($podeSalvar && (empty($nome) || empty($tipo) || empty($data_instalacao) || empty($id_rotas))) {
         $erro = "Preencha nome, tipo, data de instalação e rota.";
@@ -82,6 +82,7 @@ if ($id && $_SERVER['REQUEST_METHOD'] === 'GET') {
             }
         }
     }
+}
 ?>
 
 <!DOCTYPE html>
