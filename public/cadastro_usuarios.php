@@ -4,6 +4,8 @@ require_once('validar_cpf.php');
 require_once('validar_cep.php');
 session_start();
 
+$usuarioLogado = $_SESSION['usuario'] ?? '';
+
 // if (!isset($_SESSION["usuario"]) || $_SESSION["atuacao"] != "adm") {
 //     header("Location: home.php");
 //     exit();  
@@ -226,9 +228,9 @@ if ($podeSalvar && $_SERVER['REQUEST_METHOD'] == "POST") {
             <div class="flex">
                 <img src="../assets/frifas.webp" alt="fotodeperfil" class="fotodeperfil">
 
-                <?php if (!empty($usuarioLogado)) { ?>
+                <?php if ($usuarioLogado !== '') { ?>
                     <div class="identificacao-usuario">
-                        <?php echo "Bem vindo(a), " . htmlspecialchars($usuarioLogado['nome_usuarios'], ENT_QUOTES, 'UTF-8') . "!"; ?>
+                        <?php echo "Bem-vindo(a), " . htmlspecialchars($usuarioLogado, ENT_QUOTES, 'UTF-8') . "!"; ?>
                     </div>
                 <?php } ?>
             </div>

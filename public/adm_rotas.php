@@ -2,22 +2,12 @@
     include("../infra/conn.php");
     session_start();
 
+    $usuarioLogado = $_SESSION['usuario'] ?? '';
+
     // if (!isset($_SESSION["usuario"])) {
     //     header("Location: login.php");
     //     exit();
     // }
-
-    $id = $_SESSION['id'] ?? null;
-    $usuarioLogado = false;
-
-    if ($id !== null) {
-        $sql = "SELECT * FROM usuarios WHERE id_usuarios = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-        $resultUsuario = $stmt->get_result();
-        $usuarioLogado = $resultUsuario->fetch_assoc();
-    }
 
     $erro = "";
     if (isset($_GET["excluir"])) {
@@ -85,9 +75,9 @@
             <div class="flex">
                 <img src="../assets/frifas.webp" alt="fotodeperfil" class="fotodeperfil">
 
-                <?php if ($usuarioLogado !== false) { ?>
+                <?php if ($usuarioLogado !== '') { ?>
                     <div class="identificacao-usuario">
-                        <?php echo "Bem vindo(a), " . htmlspecialchars($usuarioLogado['nome'], ENT_QUOTES, 'UTF-8') . "!"; ?>
+                        <?php echo "Bem-vindo(a), " . htmlspecialchars($usuarioLogado, ENT_QUOTES, 'UTF-8') . "!"; ?>
                     </div>
                 <?php } ?>
             </div>

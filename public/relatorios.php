@@ -1,3 +1,8 @@
+<?php
+session_start();
+
+$usuarioLogado = $_SESSION['usuario'] ?? '';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,9 +24,9 @@
             <div class="flex">
                 <img src="../assets/frifas.webp" alt="fotodeperfil" class="fotodeperfil">
 
-                <?php if ($usuarioLogado !== false) { ?>
+                <?php if ($usuarioLogado !== '') { ?>
                     <div class="identificacao-usuario">
-                        <?php echo "Bem vindo(a), " . htmlspecialchars($usuarioLogado['nome_usuarios'], ENT_QUOTES, 'UTF-8') . "!"; ?>
+                        <?php echo "Bem-vindo(a), " . htmlspecialchars($usuarioLogado, ENT_QUOTES, 'UTF-8') . "!"; ?>
                     </div>
                 <?php } ?>
             </div>
