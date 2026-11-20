@@ -15,7 +15,7 @@ if(isset($_GET["id"])){
 
     if($id_exclusao != $id_sessao){
 
-        $sql = "DELETE FROM usuarios WHERE id = $id_exclusao";
+        $sql = "DELETE FROM usuarios WHERE id_usuarios = $id_exclusao";
     
         $conn->query($sql);
     }

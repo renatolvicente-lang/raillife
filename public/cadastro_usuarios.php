@@ -12,7 +12,8 @@ session_start();
 $erro = "";
 $id = $_GET["id_usuarios"] ?? null;
 $nome = $email = $CPF = $endereco = $cidade = $data_nascimento = $CEP = '';
-$area_atuacao = "comum"; // Valor padrão para o campo de atuação
+$area_atuacao = "comum";
+
 
 function formatarCpf($cpf)
 {
