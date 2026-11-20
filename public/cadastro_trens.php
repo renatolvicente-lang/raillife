@@ -173,7 +173,7 @@
                 </div>
                 <div class="cadastro-campo campo-modelo">
                     <label for="modelo">Modelo:</label>
-                    <input type="text" name="modelo" id="modelo" placeholder="Modelo do trem" value="<?php echo htmlspecialchars($modelo); ?>">
+                    <input type="text" name="modelo" id="modelo" placeholder="Modelo do trem" value="<?php echo htmlspecialchars($modelo); ?>" required>
                 </div>
                 <div class="cadastro-campo campo-data">
                     <label for="fabricacao">Data de fabricação:</label>
