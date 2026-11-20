@@ -169,6 +169,7 @@ if ($podeSalvar && $_SERVER['REQUEST_METHOD'] == "POST") {
         if ($stmtCheck->get_result()->num_rows > 0) {
             $erro = "E-mail ou CPF já cadastrado por outro usuário.";
         }
+        
     }
 
     if ($id && $erro === "") {
