@@ -136,6 +136,9 @@ if ($podeSalvar && $_SERVER['REQUEST_METHOD'] == "POST") {
     }
 
     //validação de senha
+    if($id && empty($senha)){
+        $senhaHash = null;
+    }
     if (empty($senha)) {
         $erro = "O campo senha é obrigatório.";
     } else if (strlen($senha) < 8) {
@@ -169,12 +172,20 @@ if ($podeSalvar && $_SERVER['REQUEST_METHOD'] == "POST") {
     }
 
     if ($id && $erro === "") {
-        $sql = "UPDATE usuarios SET nome_usuarios = ?, email = ?, senha = ?, cpf = ?, endereco = ?, cidade = ?, cep = ?, data_nascimento = ?, atuacao = ? WHERE id_usuarios = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param('sssssssssi', $nome, $email, $senhaHash, $CPF, $endereco, $cidade, $CEP, $data_nascimento, $area_atuacao, $id);
-        $stmt->execute();
-        header("Location: ../public/adm_usuarios.php");
-        exit();
+        if($senhaHash !== null){
+            $sql = "UPDATE usuarios SET nome_usuarios = ?, email = ?, senha = ?, cpf = ?, endereco = ?, cidade = ?, cep = ?, data_nascimento = ?, atuacao = ? WHERE id_usuarios = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param('sssssssssi', $nome, $email, $senhaHash, $CPF, $endereco, $cidade, $CEP, $data_nascimento, $area_atuacao, $id);
+            $stmt->execute();
+            header("Location: ../public/adm_usuarios.php");
+            exit();
+        }else{
+            $sql = "UPDATE usuarios SET nome_usuarios = ?, email = ?, cpf = ?, endereco = ?, cidade = ?, cep = ?, data_nascimento = ?, atuacao = ? WHERE id_usuarios = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param('sssssssssi', $nome, $email, $CPF, $endereco, $cidade, $CEP, $data_nascimento, $area_atuacao, $id);
+            $stmt->execute();
+            header("Location: ../public/adm_usuarios.php");
+        }
     } else {
         if ($erro == "") {
             $sql = "INSERT INTO usuarios (nome_usuarios, email, senha, cpf, endereco, cidade, cep, data_nascimento, atuacao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
